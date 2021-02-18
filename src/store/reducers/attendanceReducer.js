@@ -2,10 +2,16 @@ const initialState = {
     students: [],
     loading: false,
     error: {},
+    res:{},
 }
 
 const attendanceReducer = (state = initialState, action) => {
     switch (action.type) {
+        case "ADD_RES":
+            return {
+                ...state,
+                res: action.payload
+            };
         case "MARK_ATTENDANCE_REQUEST":
             return {
                 ...state,

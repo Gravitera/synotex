@@ -11,7 +11,7 @@ import { CustomHeader } from '../../../components/Header';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import { Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { useSelector, useDispatch } from 'react-redux';
 const { height, width } = Dimensions.get('window');
 
 const vh = height / 100;
@@ -20,14 +20,17 @@ const ratio = (width - 40) / 534;
 let windowHeight = 220;
 
 const ResponseView = (props) => {
-
+   
+    const storeData = useSelector((store) => store);
+    console.log("store",storeData)
+    console.log("props : ",props)
 
   return (
     <>
       <View style={styles.container}>
         {/* <CustomHeader title={'측정 결과'} /> */}
         <View style={{ alignItems: 'center', flex: 1 }}>
-          <Image style={{ width: width, height: height - windowHeight, zIndex: 0 }} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + props.route.params.FrontImage }} />
+          <Image style={{ width: width, height: height - windowHeight, zIndex: 0 }} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + storeData.attendanceReducer.res.FrontImage }} />
           <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
             <View style={styles.buttonOver}>
               <Text style={styles.text}>측정사진이 마음에 들지 않으시면 재촬영{"\n"}

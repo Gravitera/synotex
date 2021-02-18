@@ -3,7 +3,12 @@ import {getStorageItem, setStorageItem} from '../../utils';
 import {onSnackbar} from '../actions/layoutActions';
 
 // Mark Attendance
-
+export const addRes = (data) => {
+    return {
+      type: 'ADD_RES',
+      payload: data,
+    };
+  };
 export const markAttendanceReq = () => {
   return {
     type: 'MARK_ATTENDANCE_REQUEST',

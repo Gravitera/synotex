@@ -43,9 +43,9 @@ let windowHeight = 220;
 
 const { windowwidth, windowheight } = Dimensions.get("window");
 
-const guide_sound = new Sound('./../../../assets/images/guide_voice.mp3', Sound.MAIN_BUNDLE);
-const AI_measurement_sound = new Sound('./../../../assets/images/AI_measurement_voice.mp3', Sound.MAIN_BUNDLE);
-const button_beep = new Sound('./../../../assets/images/button_beep.mp3', Sound.MAIN_BUNDLE);
+const guide_sound = new Sound('guide_voice.mp3', Sound.MAIN_BUNDLE);
+const AI_measurement_sound = new Sound('AI_measurement_voice.mp3', Sound.MAIN_BUNDLE);
+const button_beep = new Sound('button_beep.mp3', Sound.MAIN_BUNDLE);
 
 const ScannerView = (props) => {
   // console.log('SCANNER VIEW PROPS', props.students);
@@ -183,6 +183,8 @@ const ScannerView = (props) => {
         MaskSize: props.MaskSize
       }
       */
+     console.log(props)
+     console.log(resp)
       console.log(" =========== onNext data    ", props.resp);
       props.onNext(props.resp);
     },13000);

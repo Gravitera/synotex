@@ -37,6 +37,7 @@ var overallsize = '';
 
 const RecommendationView = (props) => {
 
+    console.log("reco props",props)
   const [data, setData] = useState({
     dataSets: [{
       values: [{ value: 100 }, { value: 110 }, { value: 105 }, { value: 115 }, { value: 110 }],

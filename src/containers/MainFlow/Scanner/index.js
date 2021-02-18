@@ -6,8 +6,9 @@ import Geocoder from 'react-native-geocoding';
 import {
   studentsOfSingleBus,
   markAttendance,
+  addRes,
 } from '../../../store/actions/attendanceActions';
-
+import { useSelector, useDispatch } from 'react-redux';
 import { connect } from 'react-redux';
 import { onSnackbar } from '../../../store/actions/layoutActions';
 import { getStorageItem, setStorageItem } from '../../../utils';
@@ -15,6 +16,9 @@ import moment, { utc } from 'moment';
 import _ from 'react-native-google-places';
 
 const Scanner = (props) => {
+  const dispatch = useDispatch();
+  const storeProfile = useSelector((store) => store);
+
   const [loading, setLoading] = useState(false);
   const [bus, setBusId] = useState('');
   const [onboardStudents, setOnboardStudents] = useState({});
@@ -58,7 +62,7 @@ const Scanner = (props) => {
     // }, 2000);
   };
 
-  const onNext = (resp) => {
+  const onNext = () => {
     console.log(" =================================================================== ");
     console.log(" =================================================================== ");
     console.log(" =================================================================== ");
@@ -112,10 +116,7 @@ const Scanner = (props) => {
         console.log(" res.FaceWidth   ", res.FaceWidth);
         setLoading(false);
 
-        setResp({
-          ...resp,
-          ...res
-        })
+        setResp({"frontImage":res.FrontImage})
         /*
         setFaceWidth(res.FaceWidth);
         setFaceHeight(res.FaceHeight);
@@ -125,12 +126,17 @@ const Scanner = (props) => {
         setMaskSize(res.MaskSize);
         */
 
+       
 
-        console.log(" ========== res type  ======= ", typeof res);
+       console.log(" ========== res type  ======= ", typeof res);
+       console.log(" ========== res type  ======= ", res);
         console.log(" ========== setResponse ======  ", FaceWidth);
         console.log(" ========== setResponse ======  ", FaceHeight);
         console.log(" ========== setResponse ======  ", FaceWidthPercent);
 //        props.navigation.navigate("scanner2", res)
+
+dispatch(addRes(res))
+        console.log("finish res")
       })
       .catch((err) => {
         setLoading(false);
@@ -302,7 +308,7 @@ const Scanner = (props) => {
   return <ScannerView {...viewProps} />;
 };
 const mapStateToProps = (state) => {
-  // console.log("SCANEER STATE", state.attendanceReducer?.onboardStudents)
+  console.log("SCANEER STATE", state.attendanceReducer?.onboardStudents)
   return {
     open: state.layoutReducer.snackbarState,
     message: state.layoutReducer.snackbarMessage,
