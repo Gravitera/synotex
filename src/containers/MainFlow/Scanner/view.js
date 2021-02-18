@@ -17,7 +17,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import axios from 'axios';
-import Sound from 'react-native-sound';
+//import Sound from 'react-native-sound';
+const Sound = require('react-native-sound')
 
 // import theme from '../../../../theme';
 // import { ScrollView } from 'react-native-gesture-handler';
@@ -27,6 +28,9 @@ import theme from '../../../../theme';
 // import { color, font } from '../../../../theme'
 const { height, width } = Dimensions.get('window');
 const frame = require('./../../../assets/images/white_facial_guideline.png');
+const star_sparkling = require('./../../../assets/images/loading_sparkle.gif');
+const blue_check_mark = require('./../../../assets/images/check_blue_mark.gif');
+const rotating_blue_mask = require('./../../../assets/images/rotating_blue_mask.gif')
 
 const vh = height / 100;
 const vw = width / 100;
@@ -39,7 +43,9 @@ let windowHeight = 220;
 
 const { windowwidth, windowheight } = Dimensions.get("window");
 
-const sound = new Sound('guide_voice.mp3', Sound.MAIN_BUNDLE);
+const guide_sound = new Sound('./../../../assets/images/guide_voice.mp3', Sound.MAIN_BUNDLE);
+const AI_measurement_sound = new Sound('./../../../assets/images/AI_measurement_voice.mp3', Sound.MAIN_BUNDLE);
+const button_beep = new Sound('./../../../assets/images/button_beep.mp3', Sound.MAIN_BUNDLE);
 
 const ScannerView = (props) => {
   // console.log('SCANNER VIEW PROPS', props.students);
@@ -60,6 +66,10 @@ const ScannerView = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [recog, setRecog] = useState(false);
   const [startRecog, setStartRecog] = useState(false);
+  var [resp, setResp] = useState({});
+
+  var [state, setState] = useState(0);
+
 
   const cameraRef = useRef(null);
 
@@ -72,7 +82,7 @@ const ScannerView = (props) => {
       const options = { quality: 0.5, base64: true };
       const data = await cameraRef.current.takePictureAsync(options);
       // console.log(data.base64)
-      props.sendFaceData(data.base64)
+      await props.sendFaceData(data.base64)
       // setPicture(data.uri);
     }
   };
@@ -111,9 +121,76 @@ const ScannerView = (props) => {
     }
   };
 
+  const tempfunc = async () => {
+    console.log(" ========= current state   before click  ", state);
+    setState(1);
+    guide_sound.play((success) => {
+      console.log("success");
+    });
+    console.log(" ========= current state   after click  ", state);
+    setTimeout(() => {
+      setState(2);
+      console.log(" ========= current state   after wait  ", state);
+    }, 1000);
 
+    setTimeout(() => {
+      setState(3);
+      button_beep.play((success) => {
+        console.log("success");
+      })
+      console.log(" ========= current state   after wait  blue_three ", state);
+    },2000);
+    setTimeout(() => {
+      setState(4);
+      button_beep.play((success) => {
+        console.log("success");
+      })
+      console.log(" ========= current state   after wait  blue_two ", state);
+    },3000);
+    setTimeout(() => {
+      setState(5);
+      button_beep.play((success) => {
+        console.log("success");
+      })
+      console.log(" ========= current state   after wait  blue_one ", state);
+    },4000);
+    setTimeout(() => {
+      setState(6);
+      console.log(" ========= current state   after wait  initial take photo ", state);
+      takePicture();
+    },5000);
 
-  sound.play();
+    setTimeout(() => {
+      setState(7);
+      AI_measurement_sound.play((success) => {
+        console.log("success");
+      })
+      console.log(" ========= current state   after wait  show star-like sparkling ", state);
+    },10000);
+    setTimeout(() => {
+      setState(8);
+      console.log(" ========= current state   after wait  show blue-check-mark ", state);
+    },12000);
+
+    setTimeout(() => {
+      /*
+      const data = {
+        FaceWidth: props.FaceWidth,
+        FaceHeight: props.FaceHeight,
+        FaceWidthPercent: props.FaceWidthPercent,
+        FaceHeightPercent: props.FaceHeightPercent,
+        FrontImage: props.FrontImage,
+        MaskSize: props.MaskSize
+      }
+      */
+      console.log(" =========== onNext data    ", props.resp);
+      props.onNext(props.resp);
+    },13000);
+
+  };
+
+  console.log(" ============ current state before return   ", state);
+
 
   return (
     <>
@@ -123,6 +200,7 @@ const ScannerView = (props) => {
           style={styles.preview}
           type={RNCamera.Constants.Type.front}
           flashMode={RNCamera.Constants.FlashMode.off}
+          playSoundOnCapture={false}
           androidCameraPermissionOptions={{
             title: 'Permission to use camera',
             message: 'We need your permission to use your camera',
@@ -161,10 +239,31 @@ const ScannerView = (props) => {
           </View>
         </View>*/}
 
-
+        {state != 7 && state != 8 && state != 6?
         <View style={styles.frameContainer}>
           <Image resizeMode={'contain'} style={styles.frame} source={frame} />
         </View>
+        :
+        null}
+        {state == 6 ?
+        <View style={styles.frameContainer}>
+          <Image resizeMode={'contain'} style={styles.frame} source={rotating_blue_mask} />
+        </View>
+        :
+        null}
+        {state == 7 ?
+        <View style={styles.frameContainer}>
+          <Image resizeMode={'contain'} style={styles.frame} source={star_sparkling} />
+        </View>
+        :
+        null}
+        {state == 8 ?
+        <View style={styles.frameContainer}>
+          <Image resizeMode={'contain'} style={styles.frame} source={frame} />
+        </View>
+        :
+        null}
+        {state == 0 ?
         <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
           <View style={styles.buttonOver}>
             <Text style={styles.text}>팔을 쭉 뻗어서 가이드라인에 얼굴을 맞춰주세요.</Text>
@@ -175,21 +274,132 @@ const ScannerView = (props) => {
               <Image stype={{ width: 100, height: 100, marginLeft: 0 }} source={require("./../../../assets/images/selfie2.png")} />
             </View>
           </View>
-          <TouchableOpacity onPress={props.onNext}>
+          <TouchableOpacity onPress={tempfunc}>
             <View style={{ width: windowwidth, height: 50, backgroundColor: '#2E76EE', marginTop: 20, justifyContent: 'center' }}>
               <View style={{ justifyContent: 'center', marginLeft: "35%" }}>
-                <Text style={{ fontWeight: "bold" }}>사진 촬영 시작하기</Text>
+                <Text style={{ fontWeight: "bold", color: "white" }}>사진 촬영 시작하기</Text>
               </View>
             </View>
           </TouchableOpacity>
         </View>
+        : 
+        null }
+        {state == 1 ?
+        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+          <View style={styles.buttonOver}>
+            <Text style={styles.text}>팔을 쭉 뻗어서 가이드라인에 얼굴을 맞춰주세요.</Text>
+          </View>
+          <View style={{ marginTop: 10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+              <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/photo_selfie.png")} />
+              <Image stype={{ width: 100, height: 100, marginLeft: 0 }} source={require("./../../../assets/images/selfie2.png")} />
+            </View>
+          </View>
+          <View></View>
+        </View>
+        : 
+        null }
+        {state == 2 ?
+        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+          <View style={styles.buttonOver}>
+            <Text style={styles.text}>촬영이 시작되면 가이드라인을 따라 {'\n'}
+                                    얼굴을 돌려주세요.</Text>
+          </View>
+          <View style={{ marginTop: 10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
 
-
-
-
-
-
-
+            </View>
+          </View>
+          <View></View>
+        </View>
+        : 
+        null }
+        {state == 3 ?
+        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+          <View style={styles.buttonOver}>
+            <Text style={styles.text}>촬영이 시작되면 가이드라인을 따라 {'\n'}
+                                    얼굴을 돌려주세요.</Text>
+          </View>
+          <View style={{ marginTop: 10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/blue_three.png")} />
+            </View>
+          </View>
+          <View></View>
+        </View>
+        : 
+        null }
+        {state == 4 ?
+        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+          <View style={styles.buttonOver}>
+            <Text style={styles.text}>촬영이 시작되면 가이드라인을 따라 {'\n'}
+                                    얼굴을 돌려주세요.</Text>
+          </View>
+          <View style={{ marginTop: 10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/blue_two.png")} />
+            </View>
+          </View>
+          <View></View>
+        </View>
+        : 
+        null }
+        {state == 5 ?
+        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+          <View style={styles.buttonOver}>
+            <Text style={styles.text}>촬영이 곧 시작 됩니다. {'\n'}
+                              가이드라인을 따라 얼굴을 돌려주세요.</Text>
+          </View>
+          <View style={{ marginTop: 10 }}>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/blue_one.png")} />
+            </View>
+          </View>
+          <View></View>
+        </View>
+        : 
+        null }
+        {state == 6 ?
+        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+        <View style={{justifyContent:"center"}}>
+          <Text style={styles.text}>촬영이 시작 되었습니다 {'\n'}
+                            가이드라인을 따라 얼굴을 돌려주세요.</Text>
+        </View>
+        <View style={{ marginTop: 10 }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          </View>
+        </View>
+        <View></View>
+      </View>
+        : 
+        null }  
+        {state == 7 ?
+        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+        <View style={{justifyContent:"center"}}>
+          <Text style={styles.text}>인공지능이 분석 중입니다. {'\n'}
+                                      잠시만 기다려 주세요.</Text>
+        </View>
+        <View style={{ marginTop: 10 }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          </View>
+        </View>
+        <View></View>
+      </View>
+        : 
+        null }
+        {state == 8 ?
+        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+        <View style={{justifyContent:"center"}}>
+          <Text style={styles.text}>완료 되었습니다</Text>
+        </View>
+        <View style={{ marginTop: 10 }}>
+          <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+          </View>
+        </View>
+        <View></View>
+      </View>
+        : 
+        null }
 
 
 
@@ -706,6 +916,10 @@ const styles = StyleSheet.create({
   buttonOver: {
     width: width - 40,
     zIndex: 120
+  },
+  buttonOver2: {
+    width: width - 40,
+    zIndex: 160
   },
   text: {
     fontFamily: theme.font.bold,

@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import { onSnackbar } from '../../../store/actions/layoutActions';
 import { getStorageItem, setStorageItem } from '../../../utils';
 import moment, { utc } from 'moment';
+import _ from 'react-native-google-places';
 
 const Scanner = (props) => {
   const [loading, setLoading] = useState(false);
@@ -21,6 +22,15 @@ const Scanner = (props) => {
   const [actionImage, setActionImage] = useState();
   const [onboardCount, setOnboardCount] = useState(0);
   const [busIdentity, setBusIdentity] = useState('');
+
+  const [resp, setResp] = useState({});
+
+  var [FaceWidth, setFaceWidth] = useState(100);
+  var [FaceHeight, setFaceHeight] = useState(100);
+  var [FaceWidthPercent, setFaceWidthPercent] = useState(100);
+  var [FaceHeightPercent, setFaceHeightPercent] = useState(100);
+  var [FrontImage, setFrontImage] = useState('');
+  var [MaskSize, setMaskSize] = useState('');
 
   // useEffect(() => {
   //   (async () => {
@@ -48,18 +58,40 @@ const Scanner = (props) => {
     // }, 2000);
   };
 
-  const onNext = () => {
+  const onNext = (resp) => {
     console.log(" =================================================================== ");
     console.log(" =================================================================== ");
     console.log(" =================================================================== ");
-    console.log(" =================================================================== ");
-    props.navigation.navigate("scanner2", props.route.params)
+    console.log(" =================================================================== ", resp);
+    props.navigation.navigate("response", resp)
 
   }
 
   const sendFaceData = (image) => {
-    setLoading(true);
+    setLoading(false);
 
+    /*
+    const resp_val = await fetch('http://52.79.235.238:3030/submit',{
+      mode: 'no-cors',
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify(
+        {
+          ...props.route.params,
+          "FrontImage": image
+        })
+    });
+
+    setLoading(false);
+    setResponse(res);
+    */
+
+    console.log(" ============= sendFaceData activated =========== ");
+    
     fetch('http://52.79.235.238:3030/submit', {
       mode: 'no-cors',
       method: 'POST',
@@ -77,8 +109,28 @@ const Scanner = (props) => {
       .then((res) => res.json())
       .then((res) => {
         console.log('SUCCESS =>', res);
+        console.log(" res.FaceWidth   ", res.FaceWidth);
         setLoading(false);
-        props.navigation.navigate("scanner2", res)
+
+        setResp({
+          ...resp,
+          ...res
+        })
+        /*
+        setFaceWidth(res.FaceWidth);
+        setFaceHeight(res.FaceHeight);
+        setFaceWidthPercent(res.FaceWidthPercent);
+        setFaceHeightPercent(res.FaceHeightPercent);
+        setFrontImage(res.FrontImage);
+        setMaskSize(res.MaskSize);
+        */
+
+
+        console.log(" ========== res type  ======= ", typeof res);
+        console.log(" ========== setResponse ======  ", FaceWidth);
+        console.log(" ========== setResponse ======  ", FaceHeight);
+        console.log(" ========== setResponse ======  ", FaceWidthPercent);
+//        props.navigation.navigate("scanner2", res)
       })
       .catch((err) => {
         setLoading(false);
@@ -87,6 +139,7 @@ const Scanner = (props) => {
         );
         console.log('ERROR =>', err);
       });
+    
   };
 
   const sendLocation = (image) => {
@@ -238,6 +291,12 @@ const Scanner = (props) => {
     action,
     actionImage,
     onboardCount,
+    FaceWidth,
+    FaceHeight,
+    FaceWidthPercent,
+    FaceHeightPercent,
+    FrontImage,
+    MaskSize
   };
 
   return <ScannerView {...viewProps} />;

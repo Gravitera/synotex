@@ -26,6 +26,8 @@ const IntroView = (props) => {
   return (
     <>
       <View style={styles.container}>
+
+        {/* intro_contain_back.png  */}
         <ImageBackground source={require("./../../../assets/images/intro_contain_back.png")}  style={{width:width,height:height,  
           alignItems: 'center',
     justifyContent: 'center'}}>
@@ -34,13 +36,16 @@ const IntroView = (props) => {
         
         {/* <Image style={styles.logo}  source={{uri :'https://i.imgur.com/bsIlxZ6_d.webp?maxwidth=1520&fidelity=grand'}} /> */}
         <Image source={require("./../../../assets/images/intro_logo.png")} style={styles.logo}>
-          
+
+        
         </Image>
           {/* <Image style={styles.logo}  source={require("./../../../assets/images/intro_logo.png")} /> */}
           
           
           <ImageBackground style={{width:248,height:264}}  source={require("./../../../assets/images/intro_back.png")} >
         
+
+          {/* intro_mask.png 80  */}
           <Image style={{marginLeft:10,marginTop:80,width:264,height:206}}  source={require("./../../../assets/images/intro_mask.png")} />
           
           </ImageBackground>
