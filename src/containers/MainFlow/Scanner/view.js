@@ -39,7 +39,7 @@ let windowHeight = 220;
 
 const { windowwidth, windowheight } = Dimensions.get("window");
 
-const sound = new Sound('./../../../assets/images/guide_voice.mp3', Sound.MAIN_BUNDLE);
+const sound = new Sound('guide_voice.mp3', Sound.MAIN_BUNDLE);
 
 const ScannerView = (props) => {
   // console.log('SCANNER VIEW PROPS', props.students);
