@@ -9,6 +9,7 @@ import {
   SafeAreaView,
   ScrollView,
   TouchableOpacity,
+  ImageBackground
 } from 'react-native';
 
 import { List, DataTable, ActivityIndicator, Button } from 'react-native-paper';
@@ -29,7 +30,7 @@ import theme from '../../../../theme';
 const { height, width } = Dimensions.get('window');
 const frame = require('./../../../assets/images/white_facial_guideline.png');
 const star_sparkling = require('./../../../assets/images/loading_sparkle.gif');
-const blue_check_mark = require('./../../../assets/images/check_blue_mark.gif');
+const blue_check_mark = require('./../../../assets/images/blue_check_mark.gif');
 const rotating_blue_mask = require('./../../../assets/images/rotating_blue_mask.gif')
 
 const vh = height / 100;
@@ -44,7 +45,7 @@ let windowHeight = 220;
 const { windowwidth, windowheight } = Dimensions.get("window");
 
 const guide_sound = new Sound('guide_voice.mp3', Sound.MAIN_BUNDLE);
-const AI_measurement_sound = new Sound('AI_measurement_voice.mp3', Sound.MAIN_BUNDLE);
+const AI_measurement_sound = new Sound('ai_measurement_voice.mp3', Sound.MAIN_BUNDLE);
 const button_beep = new Sound('button_beep.mp3', Sound.MAIN_BUNDLE);
 
 const ScannerView = (props) => {
@@ -70,6 +71,8 @@ const ScannerView = (props) => {
 
   var [state, setState] = useState(0);
 
+  const [selfie, setSelfie] = useState('');
+
 
   const cameraRef = useRef(null);
 
@@ -81,6 +84,11 @@ const ScannerView = (props) => {
       console.log("camera 2", camera)
       const options = { quality: 0.5, base64: true };
       const data = await cameraRef.current.takePictureAsync(options);
+
+
+      setSelfie(data.base64);
+
+
       // console.log(data.base64)
       await props.sendFaceData(data.base64)
       // setPicture(data.uri);
@@ -139,26 +147,26 @@ const ScannerView = (props) => {
         console.log("success");
       })
       console.log(" ========= current state   after wait  blue_three ", state);
-    },2000);
+    },4000);
     setTimeout(() => {
       setState(4);
       button_beep.play((success) => {
         console.log("success");
       })
       console.log(" ========= current state   after wait  blue_two ", state);
-    },3000);
+    },5000);
     setTimeout(() => {
       setState(5);
       button_beep.play((success) => {
         console.log("success");
       })
       console.log(" ========= current state   after wait  blue_one ", state);
-    },4000);
+    },6000);
     setTimeout(() => {
       setState(6);
       console.log(" ========= current state   after wait  initial take photo ", state);
       takePicture();
-    },5000);
+    },7000);
 
     setTimeout(() => {
       setState(7);
@@ -166,11 +174,11 @@ const ScannerView = (props) => {
         console.log("success");
       })
       console.log(" ========= current state   after wait  show star-like sparkling ", state);
-    },10000);
+    },12000);
     setTimeout(() => {
       setState(8);
       console.log(" ========= current state   after wait  show blue-check-mark ", state);
-    },12000);
+    },14000);
 
     setTimeout(() => {
       /*
@@ -187,7 +195,7 @@ const ScannerView = (props) => {
      console.log(resp)
       console.log(" =========== onNext data    ", props.resp);
       props.onNext(props.resp);
-    },13000);
+    },16000);
 
   };
 
@@ -254,14 +262,18 @@ const ScannerView = (props) => {
         :
         null}
         {state == 7 ?
+
         <View style={styles.frameContainer}>
           <Image resizeMode={'contain'} style={styles.frame} source={star_sparkling} />
         </View>
+
+
+
         :
         null}
         {state == 8 ?
         <View style={styles.frameContainer}>
-          <Image resizeMode={'contain'} style={styles.frame} source={frame} />
+          <Image resizeMode={'contain'} style={styles.frame} source={blue_check_mark} />
         </View>
         :
         null}
@@ -277,11 +289,9 @@ const ScannerView = (props) => {
             </View>
           </View>
           <TouchableOpacity onPress={tempfunc}>
-            <View style={{ width: windowwidth, height: 50, backgroundColor: '#2E76EE', marginTop: 20, justifyContent: 'center' }}>
-              <View style={{ justifyContent: 'center', marginLeft: "35%" }}>
-                <Text style={{ fontWeight: "bold", color: "white" }}>사진 촬영 시작하기</Text>
-              </View>
-            </View>
+            <ImageBackground source={require("./../../../assets/images/bottom_button.png")}  style={{width:width,height:50, marginTop:15,alignItems: 'center',justifyContent: 'center'}}>
+              <Text style={{ fontWeight: "bold", color: "white" }}>사진 촬영 시작하기</Text>
+            </ImageBackground>
           </TouchableOpacity>
         </View>
         : 

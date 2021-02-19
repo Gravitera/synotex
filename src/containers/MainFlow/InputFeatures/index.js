@@ -75,7 +75,7 @@ const InputFeatures = (props) => {
       "Gender": gender
     };
 
-    if (scannerProps.weight == 0 || scannerProps.weight == "0") {
+    if (scannerProps.Weight == 0 || scannerProps.Weight == "0") {
       scannerProps.Precision = false;
     }
 

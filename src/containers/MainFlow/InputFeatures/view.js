@@ -22,6 +22,21 @@ const InputFeaturesView = (props) => {
   const navigation = useNavigation()
 
   const gender = '녀';
+  const [male, setMale] = useState(false);
+  const [female, setFemale] = useState(false);
+
+  const maleClick = () => {
+    setMale(true);
+    setFemale(false);
+    props.setGender("Male");
+  };
+
+  const femaleClick = () => {
+    setMale(false);
+    setFemale(true);
+    props.setGender("Female");
+  }
+
 
 
   return (
@@ -30,18 +45,51 @@ const InputFeaturesView = (props) => {
         <CustomBackForwardButtonHeader title={'입력 정보'} backFunction={navigation.goBack} forwardFunction={props.onNext} />
         <ScrollView style={{ flex: 1, marginTop: 64, paddingTop: 24 }}>
           <Text style={styles.heading}>성별을 선택하여 주세요.</Text>
+          {male == false && female == false ?
           <View style={{ width: width - 40, marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, marginBottom: 48 }}>
-            <TouchableOpacity style={{ width: '50%' }} onPress={() => props.setGender('Male')}>
-              <Image style={{ width: (width - 40) / 2, height: (width - 40) / 2 }} resizeMode="contain" source={require(`./../../../assets/images/male.png`)} />
+              <TouchableOpacity style={{ width: '50%' }} onPress={maleClick}>
+                <Image style={{ width: (width - 40) / 2, height: (width - 40) / 2 }} resizeMode="contain" source={require(`./../../../assets/images/male.png`)} />
 
-              <Text style={{ color: props.gender === "Male" ? 'white' : "#000", textDecorationLine: props.gender === 'Male' ? "underline" : 'none', textAlign: 'center', marginTop: -46, fontWeight: 'bold' }}>남성</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={{ width: '50%' }} onPress={() => props.setGender('Female')}>
-              <Image style={{ width: (width - 40) / 2, height: (width - 40) / 2 }} resizeMode="contain" source={require(`./../../../assets/images/female.png`)} />
+                {/*<Text style={{ color: props.gender === "Male" ? 'white' : "#000", textDecorationLine: props.gender === 'Male' ? "underline" : 'none', textAlign: 'center', marginTop: -46, fontWeight: 'bold' }}>남성</Text>*/}
+              </TouchableOpacity>
+              <TouchableOpacity style={{ width: '50%' }} onPress={femaleClick}>
+                <Image style={{ width: (width - 40) / 2, height: (width - 40) / 2 }} resizeMode="contain" source={require(`./../../../assets/images/female.png`)} />
 
-              <Text style={{ color: props.gender === 'Female' ? "#fff" : '#000', textDecorationLine: props.gender === 'Female' ? "underline" : 'none', marginTop: -46, textAlign: 'center', fontWeight: 'bold' }}>여성</Text>
-            </TouchableOpacity>
+                {/*<Text style={{ color: props.gender === 'Female' ? "#fff" : '#000', textDecorationLine: props.gender === 'Female' ? "underline" : 'none', marginTop: -46, textAlign: 'center', fontWeight: 'bold' }}>여성</Text>*/}
+              </TouchableOpacity>
           </View>
+          :
+          null }
+          {male == true && female == false ?
+          <View style={{ width: width - 40, marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, marginBottom: 48 }}>
+              <TouchableOpacity style={{ width: '50%' }} onPress={maleClick}>
+                <Image style={{ width: (width - 40) / 2, height: (width - 40) / 2 }} resizeMode="contain" source={require(`./../../../assets/images/male_clicked.png`)} />
+
+                {/*<Text style={{ color: props.gender === "Male" ? 'white' : "#000", textDecorationLine: props.gender === 'Male' ? "underline" : 'none', textAlign: 'center', marginTop: -46, fontWeight: 'bold' }}>남성</Text>*/}
+              </TouchableOpacity>
+              <TouchableOpacity style={{ width: '50%' }} onPress={femaleClick}>
+                <Image style={{ width: (width - 40) / 2, height: (width - 40) / 2 }} resizeMode="contain" source={require(`./../../../assets/images/female.png`)} />
+
+                {/*<Text style={{ color: props.gender === 'Female' ? "#fff" : '#000', textDecorationLine: props.gender === 'Female' ? "underline" : 'none', marginTop: -46, textAlign: 'center', fontWeight: 'bold' }}>여성</Text>*/}
+              </TouchableOpacity>
+          </View>
+          :
+          null }
+          {male == false && female == true ?
+          <View style={{ width: width - 40, marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', marginTop: 10, marginBottom: 48 }}>
+              <TouchableOpacity style={{ width: '50%' }} onPress={maleClick}>
+                <Image style={{ width: (width - 40) / 2, height: (width - 40) / 2 }} resizeMode="contain" source={require(`./../../../assets/images/male.png`)} />
+
+                {/*<Text style={{ color: props.gender === "Male" ? 'white' : "#000", textDecorationLine: props.gender === 'Male' ? "underline" : 'none', textAlign: 'center', marginTop: -46, fontWeight: 'bold' }}>남성</Text>*/}
+              </TouchableOpacity>
+              <TouchableOpacity style={{ width: '50%' }} onPress={femaleClick}>
+                <Image style={{ width: (width - 40) / 2, height: (width - 40) / 2 }} resizeMode="contain" source={require(`./../../../assets/images/female_clicked.png`)} />
+
+                {/*<Text style={{ color: props.gender === 'Female' ? "#fff" : '#000', textDecorationLine: props.gender === 'Female' ? "underline" : 'none', marginTop: -46, textAlign: 'center', fontWeight: 'bold' }}>여성</Text>*/}
+              </TouchableOpacity>
+          </View>
+          :
+          null }
 
 
           <View style={styles.inputBox}>

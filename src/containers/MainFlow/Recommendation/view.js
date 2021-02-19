@@ -20,6 +20,10 @@ import { RadarChart } from 'react-native-charts-wrapper';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
+import { useSelector, useDispatch } from 'react-redux';
+
+const Sound = require('react-native-sound');
+
 const { height, width } = Dimensions.get('window');
 
 const vh = height / 100;
@@ -35,7 +39,17 @@ var whitemasktext = '';
 var blackmasktext = '';
 var overallsize = '';
 
+const AI_large = new Sound('ai_large.mp3', Sound.MAIN_BUNDLE);
+const AI_medium = new Sound('ai_medium.mp3', Sound.MAIN_BUNDLE);
+const AI_small = new Sound('ai_small.mp3', Sound.MAIN_BUNDLE);
+const AI_kids = new Sound('ai_kids.mp3', Sound.MAIN_BUNDLE);
+
 const RecommendationView = (props) => {
+
+
+  const storeData = useSelector((store) => store);
+
+  var maskImage = "M";
 
     console.log("reco props",props)
   const [data, setData] = useState({
@@ -76,13 +90,13 @@ const RecommendationView = (props) => {
   });
   const [legend, setLegend] = useState({
     enabled: false,
-    textSize: 14,
+    textSize: 28,
     form: 'CIRCLE',
     wordWrapEnabled: true
   })
   const [selectedEntry, setSelectedEntry] = useState(null)
   const [xAxis, setXAxis] = useState({
-    valueFormatter: ['얼굴길이', '이마길이', '인중길이', '코길이', '볼길이']
+    valueFormatter: ['얼굴길이 (%)', '이마길이 (%)', '인중길이 (%)', '코길이 (%)', '볼길이 (%)']
   })
   // useEffect(() => {
   //   setData({
@@ -139,11 +153,11 @@ const RecommendationView = (props) => {
     console.log(event.nativeEvent)
   }
 
-  if (props.route.params?.MaskSize.toLowerCase() == "xs") {
-    let faceheightpercent = String(parseInt(parseFloat(props.route.params?.FaceHeightPercent))) + "mm";
-    let faceheight = String(parseInt(parseFloat(props.route.params?.FaceHeight))) + "mm";
-    let facewidthpercent = String(parseInt(parseFloat(props.route.params?.FaceWidthPercent))) + "mm";
-    let facewidth = String(parseInt(parseFloat(props.route.params?.FaceWidth))) + "mm";
+  if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "xs") {
+    let faceheightpercent = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeightPercent))) + "mm";
+    let faceheight = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeight))) + "mm";
+    let facewidthpercent = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidthPercent))) + "mm";
+    let facewidth = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidth))) + "mm";
     tableData = [
       ['얼굴길이(mm)', faceheightpercent, faceheight, '키즈(XS)'],
       ['얼굴넓이(mm)', facewidthpercent, facewidth, '키즈(XS)']
@@ -151,14 +165,15 @@ const RecommendationView = (props) => {
     whitemasktext = "화이트키즈(XS)";
     blackmasktext = "블랙키즈(XS)";
     overallsize = "키즈(XS)";
+    maskImage = "XS";
 
 
   }
-  if (props.route.params?.MaskSize.toLowerCase() == "s") {
-    let faceheightpercent = String(parseInt(parseFloat(props.route.params?.FaceHeightPercent))) + "mm"
-    let faceheight = String(parseInt(parseFloat(props.route.params?.FaceHeight))) + "mm"
-    let facewidthpercent = String(parseInt(parseFloat(props.route.params?.FaceWidthPercent))) + "mm"
-    let facewidth = String(parseInt(parseFloat(props.route.params?.FaceWidth))) + "mm"
+  if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "s") {
+    let faceheightpercent = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeightPercent))) + "mm"
+    let faceheight = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeight))) + "mm"
+    let facewidthpercent = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidthPercent))) + "mm"
+    let facewidth = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidth))) + "mm"
     tableData = [
       ['얼굴길이(mm)', faceheightpercent, faceheight, '소형(S)'],
       ['얼굴넓이(mm)', facewidthpercent, facewidth, '소형(S)']
@@ -166,12 +181,13 @@ const RecommendationView = (props) => {
     whitemasktext = "화이트소형(S)";
     blackmasktext = "블랙소형(S)";
     overallsize = "소형(S)";
+    maskImage = "S";
   }
-  if (props.route.params?.MaskSize.toLowerCase() == "m") {
-    let faceheightpercent = String(parseInt(parseFloat(props.route.params?.FaceHeightPercent))) + "mm"
-    let faceheight = String(parseInt(parseFloat(props.route.params?.FaceHeight))) + "mm"
-    let facewidthpercent = String(parseInt(parseFloat(props.route.params?.FaceWidthPercent))) + "mm"
-    let facewidth = String(parseInt(parseFloat(props.route.params?.FaceWidth))) + "mm"
+  if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "m") {
+    let faceheightpercent = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeightPercent))) + "mm"
+    let faceheight = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeight))) + "mm"
+    let facewidthpercent = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidthPercent))) + "mm"
+    let facewidth = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidth))) + "mm"
     tableData = [
       ['얼굴길이(mm)', faceheightpercent, faceheight, '중형(M)'],
       ['얼굴넓이(mm)', facewidthpercent, facewidth, '중형(M)']
@@ -179,12 +195,13 @@ const RecommendationView = (props) => {
     whitemasktext = "화이트중형(M)";
     blackmasktext = "블랙중형(M)";
     overallsize = "중형(M)";
+    maskImage = "M";
   }
-  if (props.route.params?.MaskSize.toLowerCase() == "l") {
-    let faceheightpercent = String(parseInt(parseFloat(props.route.params?.FaceHeightPercent))) + "mm"
-    let faceheight = String(parseInt(parseFloat(props.route.params?.FaceHeight))) + "mm"
-    let facewidthpercent = String(parseInt(parseFloat(props.route.params?.FaceWidthPercent))) + "mm"
-    let facewidth = String(parseInt(parseFloat(props.route.params?.FaceWidth))) + "mm"
+  if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "l") {
+    let faceheightpercent = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeightPercent))) + "mm"
+    let faceheight = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeight))) + "mm"
+    let facewidthpercent = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidthPercent))) + "mm"
+    let facewidth = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidth))) + "mm"
     tableData = [
       ['얼굴길이(mm)', faceheightpercent, faceheight, '대형(L)'],
       ['얼굴넓이(mm)', facewidthpercent, facewidth, '대형(L)']
@@ -192,6 +209,40 @@ const RecommendationView = (props) => {
     whitemasktext = "화이트대형(L)";
     blackmasktext = "블랙대형(L)";
     overallsize = "대형(L)";
+    maskImage = "L";
+  }
+
+  console.log(" =================================== MaskSize in Recomm =============== ", storeData.attendanceReducer.res.MaskSize);
+
+  if (storeData.attendanceReducer.res.MaskSize == "XS"){
+      AI_kids.play((success) => {
+        console.log("success");
+      });
+
+  }
+
+  if (storeData.attendanceReducer.res.MaskSize == "S"){
+
+      AI_small.play((success) => {
+        console.log("success");
+      });
+
+  }
+
+  if (storeData.attendanceReducer.res.MaskSize == "M"){
+
+      AI_medium.play((success) => {
+        console.log("success");
+      });
+
+  }
+
+  if (storeData.attendanceReducer.res.MaskSize == "L"){
+
+      AI_large.play((success) => {
+        console.log("success");
+      });
+
   }
 
 
@@ -229,7 +280,7 @@ const RecommendationView = (props) => {
               <Text> selected entry</Text>
               <Text> {selectedEntry}</Text>
             </View> */}
-            <View style={{ height: 300, backgroundColor: theme.color.light, marginVertical: 40, padding: 20, borderRadius: 10 }}>
+            <View style={{ height: 300, backgroundColor: theme.color.light, marginVertical: 40, padding: 3, borderRadius: 10 }}>
 
               <RadarChart
                 style={styles.chart}
@@ -244,7 +295,7 @@ const RecommendationView = (props) => {
                 webLineWidthInner={2}
                 webAlpha={255}
                 webColor={processColor("grey")}
-                webColorInner={processColor("black")}
+                webColorInner={processColor("grey")}
 
                 skipWebLineCount={0}
                 onSelect={handleSelect}
@@ -253,6 +304,34 @@ const RecommendationView = (props) => {
 
             </View>
             {/* <Image style={{ width: width - 40, height: 489 * ratio, marginVertical: 40, borderRadius: 5 }} resizeMode="contain" source={require('./../../../assets/images/graph.png')} /> */}
+            {maskImage == "XS" ?
+            <View style={styles.gallery}>
+              <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%82%A4%EC%A6%88-50%EB%A7%A4/27/category/1/display/2/")} style={styles.maskButton}>
+                <View style={styles.buttonCont}>
+
+                  <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/white.png`)} />
+                  <Text style={styles.prodText}>
+                    ePTFE 필터마스크{'\n'}
+                    {whitemasktext}{'\n'}
+                  ￦ 25,000원
+                </Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%82%A4%EC%A6%88-50%EB%A7%A4/27/category/1/display/2/")} style={styles.maskButton}>
+                <View style={styles.buttonCont}>
+
+                  <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/white.png`)} />
+                  <Text style={styles.prodText}>
+                    ePTFE 필터마스크{'\n'}
+                    {blackmasktext}{'\n'}
+                  ￦ 25,000원
+                </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+            : null}
+            {maskImage == "S" || maskImage == "M" || maskImage == "L" ?
             <View style={styles.gallery}>
               <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-50%EB%A7%A4/31/category/1/display/2/")} style={styles.maskButton}>
                 <View style={styles.buttonCont}>
@@ -278,6 +357,7 @@ const RecommendationView = (props) => {
                 </View>
               </TouchableOpacity>
             </View>
+            : null}
           </Animatable.View>
           {/* <Text style={styles.header}>추천상품</Text> */}
           {/* {
