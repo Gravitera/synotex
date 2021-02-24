@@ -1,8 +1,13 @@
 import { StackActions } from '@react-navigation/core'
 import React, { useEffect } from 'react'
-import { View, Image } from 'react-native'
+import { View, Image, Dimensions } from 'react-native'
 import theme from '../../../theme'
 import { getStorageItem, setStorageItem } from '../../utils'
+
+const { height, width } = Dimensions.get('window');
+
+const vh = height / 100;
+const vw = width / 100;
 
 const Splash = (props) => {
 
@@ -30,13 +35,17 @@ const Splash = (props) => {
 
 
     })()
-  }, [])
+  }, []); 
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: theme.color.light }}>
-      <Image style={{ width: 150, height: 150 }} source={require("../../assets/images/logo.png")} />
+    <>
+    <View style={{width:width,height:height,alignItems: 'center',justifyContent: 'center', backgroundColor: "white"}}>
+      <View style={{ flex: 1, justifyContent: 'center', resizeMode: "contain", alignItems: 'center', backgroundColor: "white"}}>
+        <Image style={{ width: 350, height: 350, flex:1, resizeMode: "contain"}} source={require("./../../assets/images/logo.png")} />
+      </View>
     </View>
-  )
+    </>
+  );
 }
 
 export default Splash

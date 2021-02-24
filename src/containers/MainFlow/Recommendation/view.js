@@ -412,15 +412,17 @@ const RecommendationView = (props) => {
             : null}
           </Animatable.View>
 
+          <Animatable.View animation="slideInUp" direction="alternate">
           <View style={styles.headerContainer}>
             <TouchableOpacity style={styles.header2} onPress={() => props.navigation.navigate('intro2')} > 
               <ImageBackground style={{width:194,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
                 <Text style={{color:'#214A84'}}>
-                  시노텍스 마스크 가상착용하기 
+                  시노텍스 마스크 가상착용
                 </Text>
               </ImageBackground>
             </TouchableOpacity>
           </View>
+          </Animatable.View>
 
           <Animatable.View animation="slideInUp" direction="alternate">
             <View style={styles.headerContainer}>

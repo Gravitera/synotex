@@ -26,9 +26,12 @@ const IntroView2 = (props) => {
   }, 1000); 
   return (
     <>
-      <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:width,height:height,alignItems: 'center',justifyContent: 'center'}}>
+
+
+     <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:width,height:height,alignItems: 'center',justifyContent: 'center'}}>
+
           <Image resizeMode="contain" source={require("./../../../assets/images/Intro2_image.png")} style={styles.logo}></Image>
-      </ImageBackground>
+  </ImageBackground>
 
 
     </>
