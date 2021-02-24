@@ -4,7 +4,8 @@ import {
   View,
   Text,
   Dimensions,
-  processColor
+  processColor,
+  ImageBackground
 } from 'react-native';
 import theme from '../../../../theme';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -35,9 +36,19 @@ var tableData = [
   ['얼굴넓이(mm)', '40mm', '40mm', '소형(S)']
 ]
 
+const tableHead2 = ['', '얼굴넓이', '얼굴길이', '아래턱넓이', '머리둘레', '사이즈'];
+var tableData2 = [
+  ['평균', '10mm', '10mm', '10mm', '10mm', '소형(XS)'],
+  ['당신', '10mm', '10mm', '10mm', '10mm', '소형(XS)'],
+  ['%', '10mm', '10mm', '10mm', '10mm', '소형(XS)'],
+]
+
+
+/*
 var whitemasktext = '';
 var blackmasktext = '';
 var overallsize = '';
+*/
 
 const AI_large = new Sound('ai_large.mp3', Sound.MAIN_BUNDLE);
 const AI_medium = new Sound('ai_medium.mp3', Sound.MAIN_BUNDLE);
@@ -48,13 +59,13 @@ const RecommendationView = (props) => {
 
 
   const storeData = useSelector((store) => store);
-
+/*
   var maskImage = "M";
-
+  */
     console.log("reco props",props)
   const [data, setData] = useState({
     dataSets: [{
-      values: [{ value: 100 }, { value: 110 }, { value: 105 }, { value: 115 }, { value: 110 }],
+      values: [{ value: storeData.attendanceReducer.res.Pentagram.FaceHeight }, { value: storeData.attendanceReducer.res.Pentagram.HeadHeight }, { value: storeData.attendanceReducer.res.Pentagram.HeadWidth }, { value: storeData.attendanceReducer.res.Pentagram.ChinWidth }, { value: storeData.attendanceReducer.res.Pentagram.HeadRound }],
       label: 'DS 1',
       config: {
         color: processColor('#FF8C9D'),
@@ -65,6 +76,7 @@ const RecommendationView = (props) => {
         lineWidth: 2
       }
     },
+
       // {
       //   values: [{ value: 115 }, { value: 100 }, { value: 105 }, { value: 110 }, { value: 120 }],
       //   label: 'DS 2',
@@ -96,8 +108,9 @@ const RecommendationView = (props) => {
   })
   const [selectedEntry, setSelectedEntry] = useState(null)
   const [xAxis, setXAxis] = useState({
-    valueFormatter: ['얼굴길이 (%)', '이마길이 (%)', '인중길이 (%)', '코길이 (%)', '볼길이 (%)']
+    valueFormatter: ['얼굴수직길이 (%)', '머리수직길이 (%)', '머리너비 (%)', '아래턱사이너비 (%)', '머리둘레 (%)']
   })
+
   // useEffect(() => {
   //   setData({
   //     $set: {
@@ -153,6 +166,59 @@ const RecommendationView = (props) => {
     console.log(event.nativeEvent)
   }
 
+  let MaskSize_Korean = "키즈(XS)";
+  let whitemasktext = "화이트키즈(XS)";
+  let blackmasktext = "블랙키즈(XS)";
+  let overallsize = "키즈(XS)";
+  let maskImage = "XS";
+  if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "s"){
+    MaskSize_Korean = "소형(S)";
+    whitemasktext = "화이트소형(S)";
+    blackmasktext = "블랙소형(S)";
+    overallsize = "소형(S)";
+    maskImage = "S";
+  }
+  if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "m"){
+    MaskSize_Korean = "중형(M)";
+    whitemasktext = "화이트중형(M)";
+    blackmasktext = "블랙중형(M)";
+    overallsize = "중형(M)";
+    maskImage = "M";
+  }
+  if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "l"){
+    MaskSize_Korean = "대형(L)";
+    whitemasktext = "화이트대형(L)";
+    blackmasktext = "블랙대형(L)";
+    overallsize = "대형(L)";
+    maskImage = "L";
+  }
+  let FaceHeightPercent_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeightPercent))) + "mm";
+  let FaceHeight_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeight))) + "mm";
+  let FaceWidthPercent_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidthPercent))) + "mm";
+  let FaceWidth_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidth))) + "mm";
+  let ChinWidthAverage_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.PentagramAverage.ChinWidth))) + "mm";
+  let HeadRoundAverage_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.PentagramAverage.HeadRound))) + "mm";
+  let ChinWidthPredicted_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.PentagramPredicted.ChinWidth))) + "mm";
+  let HeadRoundPredicted_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.PentagramPredicted.HeadRound))) + "mm";
+  let FaceWidth_pst = String(Math.trunc(parseFloat(storeData.attendanceReducer.res.FaceWidth)/parseFloat(storeData.attendanceReducer.res.FaceWidthPercent)*100*100)/100)+"%";
+  let FaceHeight_pst = String(storeData.attendanceReducer.res.Pentagram.FaceHeight)+"%";
+  let ChinWidth_pst = String(storeData.attendanceReducer.res.Pentagram.ChinWidth)+"%";
+  let HeadRound_pst = String(storeData.attendanceReducer.res.Pentagram.HeadRound)+"%";
+  tableData = [
+    ['얼굴길이(mm)', FaceHeightPercent_str, FaceHeight_str, MaskSize_Korean],
+    ['얼굴넓이(mm)', FaceWidthPercent_str, FaceWidth_str, MaskSize_Korean]
+  ];
+
+  tableData2 = [
+    ['평균', FaceWidthPercent_str,FaceHeightPercent_str, ChinWidthAverage_str, HeadRoundAverage_str, MaskSize_Korean],
+    ['당신', FaceWidth_str, FaceHeight_str, ChinWidthPredicted_str, HeadRoundPredicted_str, MaskSize_Korean],
+    ['%', FaceWidth_pst, FaceHeight_pst, ChinWidth_pst, HeadRound_pst, MaskSize_Korean],
+  ]
+
+
+
+
+  /*
   if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "xs") {
     let faceheightpercent = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeightPercent))) + "mm";
     let faceheight = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeight))) + "mm";
@@ -206,11 +272,21 @@ const RecommendationView = (props) => {
       ['얼굴길이(mm)', faceheightpercent, faceheight, '대형(L)'],
       ['얼굴넓이(mm)', facewidthpercent, facewidth, '대형(L)']
     ]
+    tableData2 = [
+      ['평균', facewidthpercent,faceheightpercent, storeData.attendanceReducer.res.PentagramAverage.ChinWidth, storeData.attendanceReducer.res.PentagramAverage.HeadRound, '대형(L)'],
+      ['당신', facewidth, faceheight, storeData.attendanceReducer.res.PentagramPredicted.ChinWidth, storeData.attendanceReducer.res.PentagramPredicted.HeadRound, '대형(L)'],
+      ['%', '10mm', '10mm', '10mm', '10mm', '대형(L)'],
+    ]
+
     whitemasktext = "화이트대형(L)";
     blackmasktext = "블랙대형(L)";
     overallsize = "대형(L)";
     maskImage = "L";
   }
+  */
+
+
+
 
   console.log(" =================================== MaskSize in Recomm =============== ", storeData.attendanceReducer.res.MaskSize);
 
@@ -246,8 +322,6 @@ const RecommendationView = (props) => {
   }
 
 
-
-
   return (
     <>
       <View style={styles.container}>
@@ -272,37 +346,15 @@ const RecommendationView = (props) => {
             </Table>
           </Animatable.View>
 
+          <Animatable.View animation="slideInUp" direction="alternate">
+            <View style={styles.headerContainer}>
 
-
+              {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
+              <Text style={styles.header2}>시노텍스 마스크 바로구매</Text>
+            </View>
+          </Animatable.View>
 
           <Animatable.View animation="slideInUp" direction="alternate">
-            {/* <View style={{ height: 80 }}>
-              <Text> selected entry</Text>
-              <Text> {selectedEntry}</Text>
-            </View> */}
-            <View style={{ height: 300, backgroundColor: theme.color.light, marginVertical: 40, padding: 3, borderRadius: 10 }}>
-
-              <RadarChart
-                style={styles.chart}
-                data={data}
-                xAxis={xAxis}
-                yAxis={{ drawLabels: true }}
-                chartDescription={{ text: '' }}
-                legend={legend}
-                drawWeb={true}
-
-                webLineWidth={2}
-                webLineWidthInner={2}
-                webAlpha={255}
-                webColor={processColor("grey")}
-                webColorInner={processColor("grey")}
-
-                skipWebLineCount={0}
-                onSelect={handleSelect}
-                onChange={(event) => console.log(event.nativeEvent)}
-              />
-
-            </View>
             {/* <Image style={{ width: width - 40, height: 489 * ratio, marginVertical: 40, borderRadius: 5 }} resizeMode="contain" source={require('./../../../assets/images/graph.png')} /> */}
             {maskImage == "XS" ?
             <View style={styles.gallery}>
@@ -359,6 +411,76 @@ const RecommendationView = (props) => {
             </View>
             : null}
           </Animatable.View>
+
+          <View style={styles.headerContainer}>
+            <TouchableOpacity style={styles.header2} onPress={() => props.navigation.navigate('intro2')} > 
+              <ImageBackground style={{width:194,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
+                <Text style={{color:'#214A84'}}>
+                  시노텍스 마스크 가상착용하기 
+                </Text>
+              </ImageBackground>
+            </TouchableOpacity>
+          </View>
+
+          <Animatable.View animation="slideInUp" direction="alternate">
+            <View style={styles.headerContainer}>
+
+              {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
+              <Text style={styles.header3}>당신의 인체 치수를 가진 사람들의 평균 얼굴규격 입니다.</Text>
+            </View>
+          </Animatable.View>
+
+          <Animatable.View animation="slideInUp" direction="alternate">
+            <Table borderStyle={{ borderWidth: 1, borderColor: '#dfdfdf', backgroundColor: theme.color.light, marginBottom: 24 }}>
+              <Row data={tableHead2} style={styles.head} textStyle={styles.text} />
+              <Rows data={tableData2} style={{ backgroundColor: theme.color.light }} textStyle={styles.text} />
+            </Table>
+          </Animatable.View>
+
+        
+
+
+          <Animatable.View animation="slideInUp" direction="alternate">
+            {/* <View style={{ height: 80 }}>
+              <Text> selected entry</Text>
+              <Text> {selectedEntry}</Text>
+            </View> */}
+            <View style={{ height: 300, backgroundColor: theme.color.light, marginVertical: 40, padding: 3, borderRadius: 10 }}>
+
+              <RadarChart
+                style={styles.chart}
+                data={data}
+                xAxis={xAxis}
+                yAxis={{ drawLabels: true }}
+                chartDescription={{ text: '' }}
+                legend={legend}
+                drawWeb={true}
+
+                webLineWidth={2}
+                webLineWidthInner={2}
+                webAlpha={255}
+                webColor={processColor("grey")}
+                webColorInner={processColor("grey")}
+
+                skipWebLineCount={0}
+                onSelect={handleSelect}
+                onChange={(event) => console.log(event.nativeEvent)}
+              />
+
+            </View>
+          </Animatable.View>
+
+
+          <Animatable.View animation="slideInUp" direction="alternate">
+            <View style={styles.headerContainer}>
+
+              {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
+              <Text style={styles.header3}>당신이 선호하는 마스크 크기가 아니라면 선택해주세요.</Text>
+            </View>
+          </Animatable.View>
+
+          
+
           {/* <Text style={styles.header}>추천상품</Text> */}
           {/* {
             props.route.params?.MaskSize.toLowerCase() === 'xs'
@@ -424,6 +546,16 @@ const styles = StyleSheet.create({
     marginTop: 10,
     color: theme.color.light,
     marginBottom: 30,
+  },
+  header2: {
+    marginTop: 30,
+    color: theme.color.light,
+    marginBottom: 10,
+  },
+  header3: {
+    marginTop: 30,
+    color: theme.color.light,
+    marginBottom: 10,
   },
   gallery: {
     flexDirection: 'row',

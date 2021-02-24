@@ -94,6 +94,7 @@ const InputFeatures = (props) => {
       setShoeSize('')
       setShoeSizeUnit('mm')
       setGender('Male')
+      console.log(" =========== scanner props   ", scannerProps);
       props.navigation.navigate("scanner", scannerProps)
     }
   }

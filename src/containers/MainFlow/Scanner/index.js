@@ -144,6 +144,38 @@ dispatch(addRes(res))
           err.message
         );
         console.log('ERROR =>', err);
+        const temp = {
+          FrontImage: '',
+          FaceWidth: 110,
+          FaceHeight: 120,
+          FaceWidthPercent: 115,
+          FaceHeightPercent: 125,
+          MaskSize: "L",
+          Pentagram: {
+            FaceHeight: 101,
+            HeadHeight: 105,
+            HeadWidth: 98,
+            ChinWidth: 99,
+            HeadRound: 110,
+          },
+          PentagramAverage: {
+            FaceHeight: 102,
+            HeadHeight: 115,
+            HeadWidth: 99,
+            ChinWidth: 100,
+            HeadRound: 111,
+          },
+          PentagramPredicted: {
+            FaceHeight: 101,
+            HeadHeight: 105,
+            HeadWidth: 98,
+            ChinWidth: 99,
+            HeadRound: 110,
+          }
+        }
+
+        console.log(" ============= dispatch temp   ", temp);
+        dispatch(addRes(temp));
       });
     
   };

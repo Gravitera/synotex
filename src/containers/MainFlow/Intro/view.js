@@ -35,10 +35,10 @@ const IntroView = (props) => {
         
         
         {/* <Image style={styles.logo}  source={{uri :'https://i.imgur.com/bsIlxZ6_d.webp?maxwidth=1520&fidelity=grand'}} /> */}
-        <Image source={require("./../../../assets/images/intro_logo.png")} style={styles.logo}>
 
-        
-        </Image>
+          <Image source={require("./../../../assets/images/intro_logo.png")} style={styles.logo}>
+          </Image>
+
           {/* <Image style={styles.logo}  source={require("./../../../assets/images/intro_logo.png")} /> */}
           
           
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
   logo:{
     marginLeft:20,
     width:184,
-    height:51
+    height:51,
+    marginBottom: 65
   },
   container: {
     width:width,
