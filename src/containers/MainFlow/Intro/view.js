@@ -27,6 +27,7 @@ const IntroView = (props) => {
     <>
       <View style={styles.container}>
 
+
         {/* intro_contain_back.png  */}
         <ImageBackground source={require("./../../../assets/images/intro_contain_back.png")}  style={{width:width,height:height,  
           alignItems: 'center',
