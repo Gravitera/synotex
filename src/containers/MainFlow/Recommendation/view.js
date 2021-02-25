@@ -413,7 +413,7 @@ const RecommendationView = (props) => {
           </Animatable.View>
 
           <View style={styles.headerContainer}>
-            <TouchableOpacity style={styles.header2} onPress={() => props.navigation.navigate('intro2')} > 
+            <TouchableOpacity style={styles.header2} onPress={() => props.navigation.navigate('ArCamera')} > 
               <ImageBackground style={{width:194,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
                 <Text style={{color:'#214A84'}}>
                   시노텍스 마스크 가상착용하기 

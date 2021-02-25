@@ -32,6 +32,7 @@ import InputFeatures from './InputFeatures';
 import Response from './Response';
 import Recommendation from './Recommendation';
 import IntroView2 from './Intro2';
+import ArCamera from './ArCamera';
 // import { requestLocationPermission } from './../../utils'
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -130,6 +131,7 @@ const MainFlow = (props) => {
         <Stack.Screen name="response" component={Response} />
         <Stack.Screen name="recommendation" component={Recommendation} />
         <Stack.Screen name="intro2" component={IntroView2} />
+        <Stack.Screen name="ArCamera" component={ArCamera} />
         {/* <Stack.Screen name="feedback" component={Feedback} /> */}
         {/* <Stack.Screen name="ResetPassword" component={ResetPasswordEmail} /> */}
         {/* <Stack.Screen name="ResetOldPassword" component={ResetOldPassword} />
