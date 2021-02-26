@@ -89,9 +89,9 @@ public class RNTDeepAR extends FrameLayout implements AREventListener, SurfaceHo
     @Override
     protected void onDetachedFromWindow() {
         super.onDetachedFromWindow();
-//        deepAr.setAREventListener(null);
-//        deepAr.release();
-//        deepAr = null;
+        deepAr.setAREventListener(null);
+        deepAr.release();
+        deepAr = null;
     }
 
 
@@ -377,9 +377,9 @@ public class RNTDeepAR extends FrameLayout implements AREventListener, SurfaceHo
 
     @Override
     public void surfaceDestroyed(SurfaceHolder holder) {
-        if (deepAr != null) {
-            deepAr.setRenderSurface(null, 0, 0);
-        }
+//        if (deepAr != null) {
+//            deepAr.setRenderSurface(null, 0, 0);
+//        }
     }
 
     private String saveToInternalStorage(Bitmap bitmapImage){
