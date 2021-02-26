@@ -228,7 +228,7 @@ public class RNTDeepAR extends FrameLayout implements AREventListener, SurfaceHo
 
     public void resume() {
         if (deepAr == null) {
-            return;
+            init();
         }
 
         deepAr.setPaused(false);

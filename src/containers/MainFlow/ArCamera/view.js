@@ -34,21 +34,16 @@ class ArCameraView extends React.Component {
           this.setState({ permissionsGranted: false, showPermsAlert: true });
         }
       })
-      if (this.deepARView) {
-        this.deepARView.resume();
-        console.log("state:::",this.deepARView.state)
-      }
+      
       
     }
   }
 
-//   didAppear() {
-//     if (this.deepARView) {
-        
-//         this.deepARView.resume();
-//         console.log("state:::",this.deepARView.state)
-//       }
-//   }
+  didAppear() {
+    if (this.deepARView) {
+        this.deepARView.resume();
+      }
+  }
 
   willDisappear(){
     if (this.deepARView) {
@@ -76,24 +71,15 @@ class ArCameraView extends React.Component {
       }
   }
 
-  onChangeEffect = (direction) => {
+  onChangeEffect = (idxNumber) => {
     if (!this.deepARView) {
+        console.log("view didnt load")
       return
     }
 
-    const { currentEffectIndex } = this.state
-    var newIndex = direction > 0 ? currentEffectIndex + 1 : currentEffectIndex - 1
-    if ( newIndex >= effectsData.length ) {
-      newIndex = 0
-    }
-    if (newIndex < 0) {
-      newIndex = effectsData.length - 1
-    }
-
-    const newEffect = effectsData[newIndex]
+    const newEffect = effectsData[idxNumber]
     this.deepARView.switchEffect(newEffect.name, 'effect')
 
-    this.setState({ currentEffectIndex: newIndex })
 
   }
 
@@ -140,11 +126,11 @@ class ArCameraView extends React.Component {
        
         <View style={styles.bottomBtnContainer}>
 
-            <TouchableOpacity style={{flex: 1, alignItems: 'center'}} onPress={ () => this.onChangeEffect(-1) }>
-              <View style={styles.prevContainer}><Text style={styles.prev}>Previous</Text></View>
+            <TouchableOpacity style={{flex: 1, alignItems: 'center'}} onPress={ () => this.onChangeEffect(0) }>
+              <View style={styles.prevContainer}><Text style={styles.prev}>흰색</Text></View>
             </TouchableOpacity>
             <TouchableOpacity style={{flex: 1, alignItems: 'center'}}  onPress={ () => this.onChangeEffect(1) }>
-              <View style={styles.nextContainer}><Text style={styles.next}>Next</Text></View>
+              <View style={styles.nextContainer}><Text style={styles.next}>검정색</Text></View>
             </TouchableOpacity>
   
         </View>
