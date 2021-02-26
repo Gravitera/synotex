@@ -109,8 +109,6 @@ class ArCameraView extends React.Component {
     const { width } = Dimensions.get('window')
 
     const effect = effectsData[currentEffectIndex]
-    // const screenshotImg = require('../../assets/images/screenshot.png')
-    // const cameraSwitchImg = require('../../assets/images/camera.png')
 
     return (
       <View style={styles.container}>
