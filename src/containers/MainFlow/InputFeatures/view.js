@@ -135,7 +135,7 @@ const InputFeaturesView = (props) => {
               <View style={styles.rightField}>
                 <Picker
                   selectedValue={props.heightUnit}
-                  style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 }}
+                  style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 ,height: 44} } itemStyle={{height: 44}}
                   onValueChange={(itemValue, itemIndex) =>
                     props.setHeightUnit(itemValue)
                   }
@@ -165,7 +165,7 @@ const InputFeaturesView = (props) => {
               <View style={styles.rightField}>
                 <Picker
                   selectedValue={props.weightUnit}
-                  style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 }}
+                  style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 ,height: 44} } itemStyle={{height: 44}}
                   onValueChange={(itemValue, itemIndex) =>
                     props.setWeightUnit(itemValue)
                   }
@@ -190,7 +190,7 @@ const InputFeaturesView = (props) => {
               <View style={styles.rightField}>
                 <Picker
                   selectedValue={props.shoeSizeUnit}
-                  style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 }}
+                  style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 ,height: 44} } itemStyle={{height: 44}}
                   onValueChange={(itemValue, itemIndex) =>
                     props.setShoeSizeUnit(itemValue)
                   }

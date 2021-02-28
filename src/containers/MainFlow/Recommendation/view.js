@@ -22,6 +22,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
+import { Platform } from 'react-native';
 
 const Sound = require('react-native-sound');
 
@@ -412,7 +413,8 @@ const RecommendationView = (props) => {
             : null}
           </Animatable.View>
 
-          <Animatable.View animation="slideInUp" direction="alternate">
+            {Platform.OS == 'android' ? 
+            <Animatable.View animation="slideInUp" direction="alternate">
           <View style={styles.headerContainer}>
             <TouchableOpacity style={styles.header2} onPress={() => props.navigation.navigate('ArCamera')} > 
               <ImageBackground style={{width:194,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
@@ -422,7 +424,9 @@ const RecommendationView = (props) => {
               </ImageBackground>
             </TouchableOpacity>
           </View>
-          </Animatable.View>
+          </Animatable.View> 
+          : null}
+          
 
           <Animatable.View animation="slideInUp" direction="alternate">
             <View style={styles.headerContainer}>
@@ -447,88 +451,71 @@ const RecommendationView = (props) => {
               <Text> selected entry</Text>
               <Text> {selectedEntry}</Text>
             </View> */}
-            <View style={{ height: 300, backgroundColor: theme.color.light, marginVertical: 40, padding: 3, borderRadius: 10 }}>
-
+            {Platform.OS == 'android' ? 
+              <View style={{ height: 300, backgroundColor: theme.color.light, marginVertical: 40, padding: 3, borderRadius: 10 }}>
               <RadarChart
-                style={styles.chart}
-                data={data}
-                xAxis={xAxis}
-                yAxis={{ drawLabels: true }}
-                chartDescription={{ text: '' }}
-                legend={legend}
-                drawWeb={true}
-
-                webLineWidth={2}
-                webLineWidthInner={2}
-                webAlpha={255}
-                webColor={processColor("grey")}
-                webColorInner={processColor("grey")}
-
-                skipWebLineCount={0}
-                onSelect={handleSelect}
-                onChange={(event) => console.log(event.nativeEvent)}
-              />
-
-            </View>
+                  style={styles.chart}
+                  data={data}
+                  xAxis={xAxis}
+                  yAxis={{ drawLabels: true }}
+                  chartDescription={{ text: '' }}
+                  legend={legend}
+                  drawWeb={true}
+  
+                  webLineWidth={2}
+                  webLineWidthInner={2}
+                  webAlpha={255}
+                  webColor={processColor("grey")}
+                  webColorInner={processColor("grey")}
+  
+                  skipWebLineCount={0}
+                  onSelect={handleSelect}
+                  onChange={(event) => console.log(event.nativeEvent)}
+                />
+              </View>
+               : null}
+            
           </Animatable.View>
-
 
           <Animatable.View animation="slideInUp" direction="alternate">
-            <View style={styles.headerContainer}>
-
-              {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
-              <Text style={styles.header3}>당신이 선호하는 마스크 크기가 아니라면 선택해주세요.</Text>
-            </View>
-          </Animatable.View>
-
-          
-
-          {/* <Text style={styles.header}>추천상품</Text> */}
-          {/* {
-            props.route.params?.MaskSize.toLowerCase() === 'xs'
-              ?
-              <View style={styles.gallery}>
-                <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%82%A4%EC%A6%88-50%EB%A7%A4/27/category/1/display/2/")} style={{ flex: 1 }}>
-                  <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/Mask/White/xs/xs.png`)} />
+          <View style={styles.headerContainer}>
+          <Text style={styles.header3}>당신이 선호하는 마스크 크기가 아니라면 선택해주세요.</Text>
+          </View>
+          <View style={styles.gallery} >
+                <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%82%A4%EC%A6%88-50%EB%A7%A4/27/category/1/display/2/")} >
+                <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
+                <Text style={{color:'#214A84', fontSize:20}}>
+                  XS
+                </Text>
+              </ImageBackground>
                 </TouchableOpacity>
- 
-                <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%82%A4%EC%A6%88-50%EB%A7%A4/27/category/1/display/2/")} style={{ flex: 1 }}>
-                  <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/Mask/Black/xs/xs.png`)} />
-                </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-%EB%8B%A8%ED%92%88/29/category/1/display/2/")} >
+                  <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
+                <Text style={{color:'#214A84', fontSize:20}}>
+                  S
+                </Text>
+              </ImageBackground>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-%EB%8B%A8%ED%92%88/29/category/1/display/2/")} >
+                    <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
+                <Text style={{color:'#214A84', fontSize:20}}>
+                  M
+                </Text>
+              </ImageBackground>
+                    </TouchableOpacity>
+
+                    <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-%EB%8B%A8%ED%92%88/29/category/1/display/2/")} >
+                      <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
+                <Text style={{color:'#214A84', fontSize:20}}>
+                  L
+                </Text>
+              </ImageBackground>
+                      </TouchableOpacity>
               </View>
-              : props.route.params?.MaskSize.toLowerCase() === 's'
-                ?
-                <View style={styles.gallery}>
-                  <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-%EB%8B%A8%ED%92%88/29/category/1/display/2/")} style={{ flex: 1 }}>
-                    <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/Mask/White/s/s.png`)} />
-                  </TouchableOpacity>
-                  <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%EB%B8%94%EB%9E%99-%EB%8B%A8%ED%92%88/30/category/1/display/2/")} style={{ flex: 1 }}>
-                    <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/Mask/Black/s/s.png`)} />
-                  </TouchableOpacity>
-                </View>
-                : props.route.params?.MaskSize.toLowerCase() === 'm'
-                  ?
-                  <View style={styles.gallery}>
-                    <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-%EB%8B%A8%ED%92%88/29/category/1/display/2/")} style={{ flex: 1 }}>
-                      <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/Mask/White/m/m.png`)} />
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%EB%B8%94%EB%9E%99-%EB%8B%A8%ED%92%88/30/category/1/display/2/")} style={{ flex: 1 }}>
-                      <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/Mask/Black/m/m.png`)} />
-                    </TouchableOpacity>
-                  </View>
-                  : props.route.params?.MaskSize.toLowerCase() === 'l'
-                    ?
-                    <View style={styles.gallery}>
-                      <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-%EB%8B%A8%ED%92%88/29/category/1/display/2/")} style={{ flex: 1 }}>
-                        <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/Mask/White/m/m.png`)} />
-                      </TouchableOpacity>
-                      <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%EB%B8%94%EB%9E%99-%EB%8B%A8%ED%92%88/30/category/1/display/2/")} style={{ flex: 1 }}>
-                        <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/Mask/Black/m/m.png`)} />
-                      </TouchableOpacity>
-                    </View>
-                    : null
-          } */}
-
+              <View style={styles.gallery, {marginBottom:70}} />
+              </Animatable.View>
         </ScrollView>
       </View>
     </>

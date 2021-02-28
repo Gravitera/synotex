@@ -124,10 +124,10 @@ class ArCameraView extends React.Component {
        
         <View style={styles.bottomBtnContainer}>
 
-            <TouchableOpacity style={{flex: 1, alignItems: 'center'}} onPress={ () => this.onChangeEffect(0) }>
+            <TouchableOpacity style={{flex: 0.5, alignItems: 'center'}} onPress={ () => this.onChangeEffect(0) }>
               <View style={styles.prevContainer}><Text style={styles.prev}>흰색</Text></View>
             </TouchableOpacity>
-            <TouchableOpacity style={{flex: 1, alignItems: 'center'}}  onPress={ () => this.onChangeEffect(1) }>
+            <TouchableOpacity style={{flex: 0.5, alignItems: 'center'}}  onPress={ () => this.onChangeEffect(1) }>
               <View style={styles.nextContainer}><Text style={styles.next}>검정색</Text></View>
             </TouchableOpacity>
   
