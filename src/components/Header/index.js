@@ -6,6 +6,9 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import { getStorageItem } from '../../utils';
+import { Dimensions } from "react-native";
+
+const { height, width } = Dimensions.get('window');
 
 const CustomDrawerButtonHeader = (props) => {
   // console.log('{{====', props);
@@ -38,6 +41,20 @@ const CustomDrawerButtonHeader = (props) => {
 };
 
 const CustomBackButtonHeader = (props) => {
+  return (
+    <View style={styles.headerContainer2}>
+      <TouchableOpacity
+        style={styles.drawerTrigger}
+        onPress={() => props.backFunction()}>
+        <IonIcon name="chevron-back" size={24} color="#fff" />
+      </TouchableOpacity>
+      <Text style={styles.heading}>{props.title}</Text>
+      <View style={{ width: 66 }} />
+    </View>
+  );
+};
+
+const CustomBackButtonHeader2 = (props) => {
   return (
     <View style={styles.headerContainer}>
       <TouchableOpacity
@@ -77,7 +94,7 @@ const CustomBackForwardButtonHeader = (props) => {
   );
 };
 
-export { CustomDrawerButtonHeader, CustomBackButtonHeader, CustomBackForwardButtonHeader, CustomHeader };
+export { CustomDrawerButtonHeader, CustomBackButtonHeader, CustomBackForwardButtonHeader, CustomHeader, CustomBackButtonHeader2};
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -88,6 +105,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     zIndex: 200,
+  },
+  headerContainer2: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: theme.color.bg,
+    alignItems: 'center',
+    position: 'absolute',
+    width: '100%',
+    zIndex: 200
   },
   drawerTrigger: {
     // backgroundColor: 'green',

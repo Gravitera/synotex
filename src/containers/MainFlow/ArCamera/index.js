@@ -4,6 +4,7 @@ import ArCameraView from './view';
 
 const ArCamera = (props) => {
 
+
   const viewProps = {
     ...props
   };

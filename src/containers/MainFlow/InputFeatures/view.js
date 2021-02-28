@@ -147,9 +147,12 @@ const InputFeaturesView = (props) => {
             </View>
           </View>
 
-          <Text style={styles.heading}>더 정확한 측정을 원하신다면 아래사항을 입력하여 주세요.</Text>
+          <Text style={styles.heading}>개인정보 보호법에 따라 신체정보는 저장되지 않습니다.</Text>
+          {/*<Text style={styles.heading}>더 정확한 측정을 원하신다면 아래사항을 입력하여 주세요.</Text>*/}
 
-          <View style={{ ...styles.inputBox, marginBottom: 86 }}>
+
+
+          {/*<View style={{ ...styles.inputBox, marginBottom: 86 }}>
 
 
             <View style={styles.nestedFields}>
@@ -201,7 +204,7 @@ const InputFeaturesView = (props) => {
                 </Picker>
               </View>
             </View>
-          </View>
+          </View>*/}
 
 
         </ScrollView>

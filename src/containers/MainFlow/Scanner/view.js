@@ -47,6 +47,7 @@ const { windowwidth, windowheight } = Dimensions.get("window");
 const guide_sound = new Sound('guide_voice.mp3', Sound.MAIN_BUNDLE);
 const AI_measurement_sound = new Sound('ai_measurement_voice.mp3', Sound.MAIN_BUNDLE);
 const button_beep = new Sound('button_beep.mp3', Sound.MAIN_BUNDLE);
+const turnFace = new Sound("turnface.mp3", Sound.MAIN_BUNDLE);
 
 const ScannerView = (props) => {
   // console.log('SCANNER VIEW PROPS', props.students);
@@ -163,10 +164,18 @@ const ScannerView = (props) => {
       console.log(" ========= current state   after wait  blue_one ", state);
     },6000);
     setTimeout(() => {
-      setState(6);
+  //    setState(6);
       console.log(" ========= current state   after wait  initial take photo ", state);
       takePicture();
     },7000);
+
+    setTimeout(() => {
+      console.log(" ============ play turn your face sound ");
+      setState(6);
+      turnFace.play((success) => {
+        console.log("success");
+      })
+    }, 8000);
 
     setTimeout(() => {
       setState(7);
@@ -174,11 +183,11 @@ const ScannerView = (props) => {
         console.log("success");
       })
       console.log(" ========= current state   after wait  show star-like sparkling ", state);
-    },12000);
+    },13000);
     setTimeout(() => {
       setState(8);
       console.log(" ========= current state   after wait  show blue-check-mark ", state);
-    },14000);
+    },15000);
 
     setTimeout(() => {
       /*

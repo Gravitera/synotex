@@ -2,7 +2,11 @@ import * as React from 'react'
 import { StyleSheet, View, Button, Platform, PermissionsAndroid, Dimensions, TouchableOpacity, Text, Image} from 'react-native'
 import DeepARView from './../../../components/ArCameraUtil/DeepARView';
 import { effectsData } from './../../../components/ArCameraUtil/effectsData';
-import {slideTransitionDefinition } from './../../../components/ArCameraUtil/simplenavigator/TransitionDefinitions'
+import {slideTransitionDefinition } from './../../../components/ArCameraUtil/simplenavigator/TransitionDefinitions';
+import { CustomBackButtonHeader2, CustomDrawerButtonHeader } from '../../../components/Header';
+
+
+
 
 class ArCameraView extends React.Component {
 
@@ -112,12 +116,15 @@ class ArCameraView extends React.Component {
 
     return (
       <View style={styles.container}>
-        <DeepARView 
-            onEventSent={this.onEventSent}
-            ref={ ref => this.deepARView = ref }
-            style={{width: width, height: '100%'}}
-          />
-
+        <View style={{flex:1}}>
+          <CustomBackButtonHeader2 backFunction={this.props.navigation.goBack} title={'가상착용'} />
+          <DeepARView 
+              onEventSent={this.onEventSent}
+              ref={ ref => this.deepARView = ref }
+              style={{width: width, height: '100%'}}
+            />
+        </View>
+        
         {/* <TouchableOpacity style={styles.cameraSwitchContainer} onPress={ () => this.switchCamera() }>
           <Image style={styles.camera} source={cameraSwitchImg} />
         </TouchableOpacity> */}
@@ -125,10 +132,33 @@ class ArCameraView extends React.Component {
         <View style={styles.bottomBtnContainer}>
 
             <TouchableOpacity style={{flex: 0.5, alignItems: 'center'}} onPress={ () => this.onChangeEffect(0) }>
-              <View style={styles.prevContainer}><Text style={styles.prev}>흰색</Text></View>
+            <View style={styles.buttonCont}>
+
+              <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/white.png`)} />
+              <Text style={styles.prodText}>
+                ePTFE 필터마스크{'\n'}
+                흰색 마스크
+              </Text>
+            </View>
+
+              {/*<View style={styles.prevContainer}><Text style={styles.prev}>흰색</Text></View>*/}
+
+
             </TouchableOpacity>
             <TouchableOpacity style={{flex: 0.5, alignItems: 'center'}}  onPress={ () => this.onChangeEffect(1) }>
-              <View style={styles.nextContainer}><Text style={styles.next}>검정색</Text></View>
+
+            <View style={styles.buttonCont}>
+
+              <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/black.png`)} />
+              <Text style={styles.prodText}>
+                ePTFE 필터마스크{'\n'}
+                블랙 마스크
+              </Text>
+            </View>
+
+              {/*<View style={styles.nextContainer}><Text style={styles.next}>검정색</Text></View>*/}
+
+
             </TouchableOpacity>
   
         </View>
@@ -215,6 +245,26 @@ const styles = StyleSheet.create({
   camera: {
     width: '100%',
     height: '100%',
+  },
+  buttonCont: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    height: 80,
+    width: "80%",
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 2,
+  },
+  galleryImage: {
+    width: 47.75,
+    height: 76,
+    marginBottom: 60,
+  },
+  prodText: {
+    fontSize: 12,
+    height: 76,
+    textAlignVertical: 'center',
+    marginLeft: 8
   }
 })
 

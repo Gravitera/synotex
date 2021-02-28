@@ -58,6 +58,8 @@ const AI_kids = new Sound('ai_kids.mp3', Sound.MAIN_BUNDLE);
 
 const RecommendationView = (props) => {
 
+  const [feedbacksent, setfeedbacksent] = useState(0);
+
 
   const storeData = useSelector((store) => store);
 /*
@@ -286,7 +288,44 @@ const RecommendationView = (props) => {
   }
   */
 
+  const sendFeedbackXS = async () => {
+    const data = {
+      ID: 100,  // storeData.attendanceReducer.res.ID
+      MaskSize: "XS"
+    };
+    setfeedbacksent(1);
+    await props.sendFeedback(data);
+    
+  }
 
+  const sendFeedbackS = async () => {
+    const data = {
+      ID: 100,  // storeData.attendanceReducer.res.ID
+      MaskSize: "S"
+    };
+    setfeedbacksent(1);
+    await props.sendFeedback(data);
+    
+  }
+
+  const sendFeedbackM = async () => {
+    const data = {
+      ID: 100,  // storeData.attendanceReducer.res.ID
+      MaskSize: "M"
+    };
+    setfeedbacksent(1);
+    await props.sendFeedback(data);
+    
+  }
+
+  const sendFeedbackL = async () => {
+    const data = {
+      ID: 100,  // storeData.attendanceReducer.res.ID
+      MaskSize: "L"
+    };
+    setfeedbacksent(1);
+    await props.sendFeedback(data);
+  }
 
 
   console.log(" =================================== MaskSize in Recomm =============== ", storeData.attendanceReducer.res.MaskSize);
@@ -477,12 +516,13 @@ const RecommendationView = (props) => {
             
           </Animatable.View>
 
+          {feedbacksent == 0 ?
           <Animatable.View animation="slideInUp" direction="alternate">
           <View style={styles.headerContainer}>
           <Text style={styles.header3}>당신이 선호하는 마스크 크기가 아니라면 선택해주세요.</Text>
           </View>
           <View style={styles.gallery} >
-                <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%82%A4%EC%A6%88-50%EB%A7%A4/27/category/1/display/2/")} >
+                <TouchableOpacity onPress={sendFeedbackXS} >
                 <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
                 <Text style={{color:'#214A84', fontSize:20}}>
                   XS
@@ -490,7 +530,7 @@ const RecommendationView = (props) => {
               </ImageBackground>
                 </TouchableOpacity>
 
-                <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-%EB%8B%A8%ED%92%88/29/category/1/display/2/")} >
+                <TouchableOpacity onPress={sendFeedbackS} >
                   <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
                 <Text style={{color:'#214A84', fontSize:20}}>
                   S
@@ -498,7 +538,7 @@ const RecommendationView = (props) => {
               </ImageBackground>
                   </TouchableOpacity>
 
-                  <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-%EB%8B%A8%ED%92%88/29/category/1/display/2/")} >
+                  <TouchableOpacity onPress={sendFeedbackM} >
                     <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
                 <Text style={{color:'#214A84', fontSize:20}}>
                   M
@@ -506,7 +546,7 @@ const RecommendationView = (props) => {
               </ImageBackground>
                     </TouchableOpacity>
 
-                    <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-%EB%8B%A8%ED%92%88/29/category/1/display/2/")} >
+                    <TouchableOpacity onPress={sendFeedbackL} >
                       <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
                 <Text style={{color:'#214A84', fontSize:20}}>
                   L
@@ -514,8 +554,12 @@ const RecommendationView = (props) => {
               </ImageBackground>
                       </TouchableOpacity>
               </View>
-              <View style={styles.gallery, {marginBottom:70}} />
-              </Animatable.View>
+            <View style={styles.gallery, {marginBottom:70}} />
+            </Animatable.View>
+            : null }
+
+
+
         </ScrollView>
       </View>
     </>
