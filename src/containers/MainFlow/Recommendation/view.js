@@ -55,6 +55,7 @@ const AI_large = new Sound('ai_large.mp3', Sound.MAIN_BUNDLE);
 const AI_medium = new Sound('ai_medium.mp3', Sound.MAIN_BUNDLE);
 const AI_small = new Sound('ai_small.mp3', Sound.MAIN_BUNDLE);
 const AI_kids = new Sound('ai_kids.mp3', Sound.MAIN_BUNDLE);
+const turnface = new Sound("turnface.mp3", Sound.MAIN_BUNDLE);
 
 const RecommendationView = (props) => {
 
@@ -290,7 +291,7 @@ const RecommendationView = (props) => {
 
   const sendFeedbackXS = async () => {
     const data = {
-      ID: 100,  // storeData.attendanceReducer.res.ID
+      ID: storeData.attendanceReducer.res.ID,  // storeData.attendanceReducer.res.ID
       MaskSize: "XS"
     };
     setfeedbacksent(1);
@@ -300,7 +301,7 @@ const RecommendationView = (props) => {
 
   const sendFeedbackS = async () => {
     const data = {
-      ID: 100,  // storeData.attendanceReducer.res.ID
+      ID: storeData.attendanceReducer.res.ID,  // storeData.attendanceReducer.res.ID
       MaskSize: "S"
     };
     setfeedbacksent(1);
@@ -310,7 +311,7 @@ const RecommendationView = (props) => {
 
   const sendFeedbackM = async () => {
     const data = {
-      ID: 100,  // storeData.attendanceReducer.res.ID
+      ID: storeData.attendanceReducer.res.ID,  // storeData.attendanceReducer.res.ID
       MaskSize: "M"
     };
     setfeedbacksent(1);
@@ -320,7 +321,7 @@ const RecommendationView = (props) => {
 
   const sendFeedbackL = async () => {
     const data = {
-      ID: 100,  // storeData.attendanceReducer.res.ID
+      ID: storeData.attendanceReducer.res.ID,  // storeData.attendanceReducer.res.ID
       MaskSize: "L"
     };
     setfeedbacksent(1);
@@ -330,14 +331,14 @@ const RecommendationView = (props) => {
 
   console.log(" =================================== MaskSize in Recomm =============== ", storeData.attendanceReducer.res.MaskSize);
 
-  if (storeData.attendanceReducer.res.MaskSize == "XS"){
+  if (storeData.attendanceReducer.res.MaskSize == "XS" && feedbacksent == 0){
       AI_kids.play((success) => {
         console.log("success");
       });
 
   }
 
-  if (storeData.attendanceReducer.res.MaskSize == "S"){
+  if (storeData.attendanceReducer.res.MaskSize == "S" && feedbacksent == 0){
 
       AI_small.play((success) => {
         console.log("success");
@@ -345,7 +346,7 @@ const RecommendationView = (props) => {
 
   }
 
-  if (storeData.attendanceReducer.res.MaskSize == "M"){
+  if (storeData.attendanceReducer.res.MaskSize == "M" && feedbacksent == 0){
 
       AI_medium.play((success) => {
         console.log("success");
@@ -353,12 +354,18 @@ const RecommendationView = (props) => {
 
   }
 
-  if (storeData.attendanceReducer.res.MaskSize == "L"){
+  if (storeData.attendanceReducer.res.MaskSize == "L" && feedbacksent == 0){
 
       AI_large.play((success) => {
         console.log("success");
       });
 
+  }
+
+  if (feedbacksent == 1){
+    turnface.play((success) => {
+      console.log("success");
+    })
   }
 
 

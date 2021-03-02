@@ -31,8 +31,8 @@ const Application = (props) => {
     <NavigationContainer>
       <Stack.Navigator headerMode="none" initialRouteName="MainFlow">
         {/* {!props.user ? ( */}
-        {/* <Stack.Screen name="Splash" component={Splash} />
-        <Stack.Screen name="AuthFlow" component={AuthFlow} /> */}
+        <Stack.Screen name="Splash" component={Splash}/>
+        {/*<Stack.Screen name="AuthFlow" component={AuthFlow} /> */}
         <Stack.Screen name="MainFlow" component={MainFlow} />
         {/* ) : (
             <> */}

@@ -4,8 +4,9 @@ import RecommendationView from './view';
 
 const Recommendation = (props) => {
 
-  const sendFeedback = (data) => {
+  const sendFeedback = async (data) => {
     setLoading(false);
+    console.log(" =============== sendFeedback data    ", data);
     
     fetch('http://52.79.235.238:3030/feedback', {
       mode: 'no-cors',

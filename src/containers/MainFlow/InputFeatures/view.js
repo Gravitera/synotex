@@ -11,99 +11,218 @@ import { ScrollView } from 'react-native';
 import { TextInput } from 'react-native';
 import { Dimensions } from 'react-native';
 import { Touchable } from 'react-native';
-import { TouchableOpacity, ImageBackground } from 'react-native';
+import { TouchableOpacity, ImageBackground, TouchableNativeFeedback } from 'react-native';
 import { ceil } from 'react-native-reanimated';
 import Button from '../../../components/Button';
 import { Image } from 'react-native';
+import { Keyboard, Alert } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 const { width, height } = Dimensions.get("window")
 
 
 const InputFeaturesView = (props) => {
   const navigation = useNavigation()
 
-  const gender = '녀';
+  
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
+  const [currheight, setcurrheight] = useState(0);
+  const [currheightlen, setcurrheightlen] = useState(0);
+  const [currage, setcurrage] = useState(0);
+  const [curragelen, setcurragelen] = useState(0);
+  const [currgender, setcurrgender] = useState("None");
+  const [buttonclicked, setbuttonclicked] = useState(false);
 
   const maleClick = () => {
-    setMale(true);
-    setFemale(false);
-    props.setGender("Male");
+    if (male == false && female == true){
+      setMale(true);
+      setFemale(false);
+      setcurrgender("Male");
+      props.setGender("Male");
+    }
+    if (male == true && female == false){
+      setMale(false);
+      setcurrgender("None");
+      props.setGender("None");
+    }
+    if (male == false && female == false){
+      setMale(true);
+      setcurrgender("Male");
+      props.setGender("Male");
+    }
+
   };
 
   const femaleClick = () => {
-    setMale(false);
-    setFemale(true);
-    props.setGender("Female");
+    if (female == false && male == true){
+      setFemale(true);
+      setMale(false);
+      setcurrgender("Female");
+      props.setGender("Female");
+    }
+    if (female == true && male == false){
+      setFemale(false);
+      setcurrgender("None");
+      props.setGender("None");
+    }
+    if (female == false && male == false){
+      setFemale(true);
+      setcurrgender("Female");
+      props.setGender("Female");
+    }
   }
 
+  const onChange2 = (data) => {
+    props.onChange(data);
+    const { text, name } = data;
+    // console.log(data)
+    if (name === 'age') {
+      var curr_age = parseInt(text);
+      setcurrage(curr_age);
+      console.log(" ========== age length " , `${curr_age}`.length);
+      if (`${curr_age}`.length == 1){
+        setcurragelen(1);
+      }
+      if (`${curr_age}`.length == 2){
+        setcurragelen(1);
+      }
+    } else if (name === 'height') {
+      var curr_height = parseInt(text);
+      setcurrheight(curr_height);
+      console.log(" ========== height length " , `${curr_height}`.length);
+      if (`${curr_height}`.length == 2){
+        setcurrheightlen(2);
+      }
+      if (`${curr_height}`.length == 3){
+        setcurrheightlen(3);
+      }
+    };
+  };
+
+  const male_kor = "남자";
+  const female_kor = "여자";
+  const none_kor = "무입력";
+
+  const screentouched = () => {
+    setbuttonclicked(false);
+  }
+
+  const setbuttonclickedfunc = () => {
+    Keyboard.dismiss();
+    var heightstatus = true;
+    if (currheight == 0 || currheight == "0"){
+      heightstatus = false;
+    }
+    var agestatus = true;
+    if (!currage || currage == undefined || currage == ''){
+      agestatus = false;
+    }
+
+    if (heightstatus && agestatus){
+      setbuttonclicked(true);
+    }else{
+      alert("필수입력값을 확인해 주세요");
+    }
+  }
 
 
   return (
     <>
-      <View style={styles.container}>
+      {buttonclicked == true ? 
+      <View style={{position:"absolute", marginTop: height*0.31, marginLeft: width*0.215, width: width*0.6, height: height*0.4, backgroundColor: "#D2D2D2", zIndex: 50, borderRadius: 20}}>
+          <View style={{position:"absolute", alignItems:"center", justifyContent:"center", backgroundColor:"#565656",width:"100%",height:"15%", borderTopLeftRadius: 20, borderTopRightRadius:20}}>
+            <Text style={{fontWeight: "bold", color: "white" }}>입력정보를 확인해주세요</Text>
+          </View>
+            <View style={{flex:1, flexDirection:"row", justifyContent: "center", resizeMode: "contain"}}>
+
+              {currgender == "Male" || currgender == "Female" ? 
+              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "-5%"}}>성별  :</Text>
+              :
+              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "3%"}}>성별  :</Text>
+              }
+              <Text style={{fontWeight: "bold", color: "#393939", fontSize: 20, marginTop: "30%", marginLeft: "10%"}}>{currgender == "Male" ? male_kor : currgender == "Female" ? female_kor : currgender == "None" ? none_kor : null}</Text>
+            </View>
+            <View style={{flex:1, flexDirection:"row", justifyContent: "center", resizeMode: "contain", marginTop: "-85%"}}>
+              
+              {curragelen == 2 ?
+              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "-11%"}}>나이  :</Text>
+              :
+              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "-13%"}}>나이  :</Text>
+              }
+              <Text style={{fontWeight: "bold", color: "#393939", fontSize: 20, marginTop: "30%", marginLeft: "10%"}}>{currage}</Text>
+            </View>
+            <View style={{flex:1, flexDirection:"row", justifyContent: "center", resizeMode: "contain", marginTop: "-85%"}}>
+
+              {currheightlen == 3 ?
+              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "8%"}}>신장  :</Text>
+              :
+              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "4%"}}>신장  :</Text>
+              }
+              <Text style={{fontWeight: "bold", color: "#393939", fontSize: 20, marginTop: "30%", marginLeft: "10%"}}>{currheight} cm</Text>
+            </View>
+
+
+          <TouchableNativeFeedback onPress={props.onNext}>
+          <View style={{position:"absolute", alignItems:"center", justifyContent:"center", backgroundColor:"#0D3A71", width: "100%",height:"15%",marginTop:"109%", borderBottomLeftRadius:20, borderBottomRightRadius:20}}>
+            <Text style={{fontWeight: "bold", color: "white" }}>맞으시다면 여기를 클릭해주세요</Text>
+          </View>
+          </TouchableNativeFeedback>
+      </View>
+      : null }
+
+
+      <TouchableNativeFeedback onPress={() => screentouched()}>
+      <View style={styles.container} onResponderGrant = { () => screentouched() }>
         <CustomBackForwardButtonHeader title={'입력 정보'} backFunction={navigation.goBack} forwardFunction={props.onNext} />
         <ScrollView style={{ flex: 1, marginTop: 64, paddingTop: 24 }}>
           <Text style={styles.heading}></Text>
-          {male == false && female == false ?
+
+
           <View style={{justifyContent: "center", alignItems: 'center', width: width*1.155}}>
           <View style={{ width: width, marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 20}}>
+
+
+              {male == false ?
               <TouchableOpacity style={{ width: '50%' }} onPress={maleClick}>
                 <ImageBackground style={{ width: (width - 40) / 2.5, height: (width - 40) / 2.5}} resizeMode="contain" source={require(`./../../../assets/images/male.png`)} >
                   <Text  style={{marginLeft: width*0.15, marginTop:width*0.26, fontWeight:"bold", color: "white"}} >남성</Text>
                 </ImageBackground>
                 {/*<Text style={{ color: props.gender === "Male" ? 'white' : "#000", textDecorationLine: props.gender === 'Male' ? "underline" : 'none', textAlign: 'center', marginTop: -46, fontWeight: 'bold' }}>남성</Text>*/}
               </TouchableOpacity>
-              <TouchableOpacity style={{ width: '50%' }} onPress={femaleClick}>
-                <ImageBackground style={{ width: (width - 40) / 2.5, height: (width - 40) / 2.5}} resizeMode="contain" source={require(`./../../../assets/images/female.png`)} >
-                <Text style={{marginLeft: width*0.15, marginTop: width*0.26,fontWeight:"bold", color: "white"}}>여성</Text>
-                </ImageBackground>
-                {/*<Text style={{ color: props.gender === 'Female' ? "#fff" : '#000', textDecorationLine: props.gender === 'Female' ? "underline" : 'none', marginTop: -46, textAlign: 'center', fontWeight: 'bold' }}>여성</Text>*/}
-              </TouchableOpacity>
-          </View>
-          </View>
-          :
-          null }
-          {male == true && female == false ?
-          <View style={{justifyContent: "center", alignItems: 'center', width: width*1.155}}>
-          <View style={{ width: width, marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 20}}>
+              :null}
+
+              {male == true ?
               <TouchableOpacity style={{ width: '50%' }} onPress={maleClick}>
                 <ImageBackground style={{ width: (width - 40) / 2.5, height: (width - 40) / 2.5}} resizeMode="contain" source={require(`./../../../assets/images/male_clicked.png`)} >
-                <Text style={{marginLeft: width*0.15, marginTop:width*0.26, fontWeight:"bold", color: "white"}}>남성</Text>
+                  <Text  style={{marginLeft: width*0.15, marginTop:width*0.26, fontWeight:"bold", color: "white"}} >남성</Text>
                 </ImageBackground>
                 {/*<Text style={{ color: props.gender === "Male" ? 'white' : "#000", textDecorationLine: props.gender === 'Male' ? "underline" : 'none', textAlign: 'center', marginTop: -46, fontWeight: 'bold' }}>남성</Text>*/}
               </TouchableOpacity>
+              :null}
+
+
+              {female == false?
               <TouchableOpacity style={{ width: '50%' }} onPress={femaleClick}>
                 <ImageBackground style={{ width: (width - 40) / 2.5, height: (width - 40) / 2.5}} resizeMode="contain" source={require(`./../../../assets/images/female.png`)} >
                 <Text style={{marginLeft: width*0.15, marginTop: width*0.26,fontWeight:"bold", color: "white"}}>여성</Text>
                 </ImageBackground>
                 {/*<Text style={{ color: props.gender === 'Female' ? "#fff" : '#000', textDecorationLine: props.gender === 'Female' ? "underline" : 'none', marginTop: -46, textAlign: 'center', fontWeight: 'bold' }}>여성</Text>*/}
               </TouchableOpacity>
-          </View>
-          </View>
-          :
-          null }
-          {male == false && female == true ?
-          <View style={{justifyContent: "center", alignItems: 'center', width: width*1.155}}>
-          <View style={{ width: width, marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 20}}>
-              <TouchableOpacity style={{ width: '50%' }} onPress={maleClick}>
-                <ImageBackground style={{ width: (width - 40) / 2.5, height: (width - 40) / 2.5}} resizeMode="contain" source={require(`./../../../assets/images/male.png`)} >
-                <Text  style={{marginLeft: width*0.15, marginTop:width*0.26, fontWeight:"bold", color: "white"}}>남성</Text>
-                </ImageBackground>
-                {/*<Text style={{ color: props.gender === "Male" ? 'white' : "#000", textDecorationLine: props.gender === 'Male' ? "underline" : 'none', textAlign: 'center', marginTop: -46, fontWeight: 'bold' }}>남성</Text>*/}
-              </TouchableOpacity>
+              :null}
+              {female == true?
               <TouchableOpacity style={{ width: '50%' }} onPress={femaleClick}>
                 <ImageBackground style={{ width: (width - 40) / 2.5, height: (width - 40) / 2.5}} resizeMode="contain" source={require(`./../../../assets/images/female_clicked.png`)} >
                 <Text style={{marginLeft: width*0.15, marginTop: width*0.26,fontWeight:"bold", color: "white"}}>여성</Text>
                 </ImageBackground>
                 {/*<Text style={{ color: props.gender === 'Female' ? "#fff" : '#000', textDecorationLine: props.gender === 'Female' ? "underline" : 'none', marginTop: -46, textAlign: 'center', fontWeight: 'bold' }}>여성</Text>*/}
               </TouchableOpacity>
+              :null}
+
           </View>
           </View>
-          :
-          null }
 
 
+    
           <View style={styles.inputBox}>
 
             <Text style="label">나이 (필수)</Text>
@@ -114,11 +233,25 @@ const InputFeaturesView = (props) => {
               error={props.ageError.error}
               onBlur={props.onBlur}
               value={props.age}
-              onChangeText={text => props.onChange({ text, name: "age" })}
+              onChangeText={text => onChange2({ text, name: "age" })}
               keyboardType="numeric"
             />
             <View style={{ ...styles.nestedFields, borderTopColor: theme.color.secondary, borderTopWidth: 1, paddingTop: 18 }}>
-              <View style={styles.leftField}>
+            <View style={styles.leftField}>
+
+              <Text style="label">신장 (필수)</Text>
+              <TextInput
+                // style={{width: '100%'}}
+                label="Height"
+                error={props.heightError.error}
+                errorText={props.heightError.message}
+                onBlur={props.onBlur}
+                value={props.height}
+                onChangeText={text => onChange2({ text, name: "height" })}
+                keyboardType="numeric"
+              />
+              </View>
+              {/*<View style={styles.leftField}>
 
                 <Text style="label">신장 (필수)</Text>
                 <TextInput
@@ -131,7 +264,7 @@ const InputFeaturesView = (props) => {
                   onChangeText={text => props.onChange({ text, name: "height" })}
                   keyboardType="numeric"
                 />
-              </View>
+              </View>*/}
               <View style={styles.rightField}>
                 <Picker
                   selectedValue={props.heightUnit}
@@ -210,9 +343,11 @@ const InputFeaturesView = (props) => {
         </ScrollView>
         <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
 
-          <Button style={{ width: '100%' }} onPress={props.onNext} label="측정 시작하기" />
+          {/*<Button style={{ width: '100%' }} onPress={props.onNext} label="측정 시작하기" />*/}
+          <Button style={{ width: '100%' }} onPress={() => setbuttonclickedfunc()} label="측정 시작하기" />
         </View>
       </View>
+      </TouchableNativeFeedback>
 
     </>
   );
