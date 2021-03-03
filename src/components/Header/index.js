@@ -94,7 +94,25 @@ const CustomBackForwardButtonHeader = (props) => {
   );
 };
 
-export { CustomDrawerButtonHeader, CustomBackButtonHeader, CustomBackForwardButtonHeader, CustomHeader, CustomBackButtonHeader2};
+const CustomBackForwardButtonHeader2 = (props) => {
+  return (
+    <View style={styles.headerContainer}>
+      <TouchableOpacity
+        style={styles.drawerTrigger}
+        onPress={() => props.backFunction()}>
+        <IonIcon name="chevron-back" size={24} color="#fff" />
+      </TouchableOpacity>
+      <Text style={styles.heading2}>{props.title}</Text>
+      <TouchableOpacity
+        style={styles.drawerTrigger}
+        onPress={() => props.forwardFunction()}>
+        <Text style={styles.heading}>처음화면</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export { CustomDrawerButtonHeader, CustomBackButtonHeader, CustomBackForwardButtonHeader, CustomHeader, CustomBackButtonHeader2, CustomBackForwardButtonHeader2};
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -132,6 +150,13 @@ const styles = StyleSheet.create({
   },
   heading: {
 
+    fontFamily: theme.font.bold,
+    fontSize: 18,
+    fontWeight: '600',
+    color: theme.color.light,
+  },
+  heading2: {
+    marginLeft: 35,
     fontFamily: theme.font.bold,
     fontSize: 18,
     fontWeight: '600',

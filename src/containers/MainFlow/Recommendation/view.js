@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import theme from '../../../../theme';
 import { ScrollView } from 'react-native-gesture-handler';
-import { CustomBackButtonHeader, CustomDrawerButtonHeader } from '../../../components/Header';
+import { CustomBackButtonHeader, CustomDrawerButtonHeader, CustomBackForwardButtonHeader2 } from '../../../components/Header';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import { Image } from 'react-native';
 import { TouchableOpacity } from 'react-native';
@@ -55,7 +55,7 @@ const AI_large = new Sound('ai_large.mp3', Sound.MAIN_BUNDLE);
 const AI_medium = new Sound('ai_medium.mp3', Sound.MAIN_BUNDLE);
 const AI_small = new Sound('ai_small.mp3', Sound.MAIN_BUNDLE);
 const AI_kids = new Sound('ai_kids.mp3', Sound.MAIN_BUNDLE);
-const turnface = new Sound("turnface.mp3", Sound.MAIN_BUNDLE);
+const feedbackvoice = new Sound("feedbackvoice.mp3", Sound.MAIN_BUNDLE);
 
 const RecommendationView = (props) => {
 
@@ -289,43 +289,43 @@ const RecommendationView = (props) => {
   }
   */
 
-  const sendFeedbackXS = async () => {
+  const sendFeedbackXS = () => {
     const data = {
       ID: storeData.attendanceReducer.res.ID,  // storeData.attendanceReducer.res.ID
       MaskSize: "XS"
     };
     setfeedbacksent(1);
-    await props.sendFeedback(data);
+    props.sendFeedback(data);
     
   }
 
-  const sendFeedbackS = async () => {
+  const sendFeedbackS = () => {
     const data = {
       ID: storeData.attendanceReducer.res.ID,  // storeData.attendanceReducer.res.ID
       MaskSize: "S"
     };
     setfeedbacksent(1);
-    await props.sendFeedback(data);
+    props.sendFeedback(data);
     
   }
 
-  const sendFeedbackM = async () => {
+  const sendFeedbackM = () => {
     const data = {
       ID: storeData.attendanceReducer.res.ID,  // storeData.attendanceReducer.res.ID
       MaskSize: "M"
     };
     setfeedbacksent(1);
-    await props.sendFeedback(data);
+    props.sendFeedback(data);
     
   }
 
-  const sendFeedbackL = async () => {
+  const sendFeedbackL = () => {
     const data = {
       ID: storeData.attendanceReducer.res.ID,  // storeData.attendanceReducer.res.ID
       MaskSize: "L"
     };
     setfeedbacksent(1);
-    await props.sendFeedback(data);
+    props.sendFeedback(data);
   }
 
 
@@ -363,7 +363,7 @@ const RecommendationView = (props) => {
   }
 
   if (feedbacksent == 1){
-    turnface.play((success) => {
+    feedbackvoice.play((success) => {
       console.log("success");
     })
   }
@@ -373,9 +373,12 @@ const RecommendationView = (props) => {
     <>
       <View style={styles.container}>
         {/* <CustomBackButtonHeader backFunction={() => props.navigation.navigate('input')} title={'측정결과'} /> */}
-        <CustomBackButtonHeader backFunction={() => props.navigation.dispatch(
+        {/*<CustomBackButtonHeader backFunction={() => props.navigation.dispatch(
           StackActions.pop(3)
         )} title={'측정결과'} />
+        */}
+
+        <CustomBackForwardButtonHeader2 title={"측정결과"} backFunction={() => props.navigation.dispatch(StackActions.pop(3))} forwardFunction={() => props.navigation.navigate('intro')} />
         <ScrollView style={styles.cardContainer}>
 
           <Animatable.View animation="slideInUp" direction="alternate">

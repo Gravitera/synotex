@@ -4,8 +4,10 @@ import RecommendationView from './view';
 
 const Recommendation = (props) => {
 
-  const sendFeedback = async (data) => {
-    setLoading(false);
+
+
+  const sendFeedback = (data) => {
+
     console.log(" =============== sendFeedback data    ", data);
     
     fetch('http://52.79.235.238:3030/feedback', {
@@ -25,10 +27,10 @@ const Recommendation = (props) => {
       .then((res) => res.json())
       .then((res) => {
         console.log('SUCCESS =>', res);
-        setLoading(false);
+
       })
       .catch((err) => {
-        setLoading(false);
+
         console.log('ERROR =>', err);
       });
 
