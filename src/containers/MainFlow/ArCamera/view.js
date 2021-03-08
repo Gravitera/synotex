@@ -16,7 +16,10 @@ class ArCameraView extends React.Component {
     this.state = {
       permissionsGranted: Platform.OS === 'ios',
       currentEffectIndex: 0,
-      switchCameraInProgress: false
+      switchCameraInProgress: false,
+      MaskColorClicked: false,
+      MaskColor: "Black",
+      MaskSize: "M"
     }
   }
 
@@ -106,6 +109,129 @@ class ArCameraView extends React.Component {
       this.deepARView.switchCamera();
     }
   }
+
+  whiteColorClicked = () => {
+    console.log(" white mask clicked ");
+    this.setState({MaskColorClicked  : true});
+    this.setState({MaskColor : "White"});
+    
+  }
+
+  blackColorClicked = () => {
+    console.log(" black mask clicked ");
+    this.setState({MaskColorClicked  :true});
+    this.setState({MaskColor : "Black"});
+  }
+
+  XSclicked = () => {
+    
+    if(this.state.MaskColor == "White"){
+        if(this.state.MaskSize == "XS"){
+            this.onChangeEffect(4)
+        } else if(this.state.MaskSize == "S"){
+            this.onChangeEffect(3)
+        } else if(this.state.MaskSize == "M"){
+            this.onChangeEffect(2)
+        } else if(this.state.MaskSize == "L"){
+            this.onChangeEffect(1)
+        }
+    
+    } else {
+        if(this.state.MaskSize == "XS"){
+            this.onChangeEffect(12)
+        } else if(this.state.MaskSize == "S"){
+            this.onChangeEffect(11)
+        } else if(this.state.MaskSize == "M"){
+            this.onChangeEffect(10)
+        } else if(this.state.MaskSize == "L"){
+            this.onChangeEffect(9)
+        }
+    
+    }
+    
+
+  }
+  Sclicked = () => {
+
+    if(this.state.MaskColor == "White"){
+        if(this.state.MaskSize == "XS"){
+            this.onChangeEffect(5)
+        } else if(this.state.MaskSize == "S"){
+            this.onChangeEffect(4)
+        } else if(this.state.MaskSize == "M"){
+            this.onChangeEffect(3)
+        } else if(this.state.MaskSize == "L"){
+            this.onChangeEffect(2)
+        }
+    
+    } else {
+        if(this.state.MaskSize == "XS"){
+            this.onChangeEffect(13)
+        } else if(this.state.MaskSize == "S"){
+            this.onChangeEffect(12)
+        } else if(this.state.MaskSize == "M"){
+            this.onChangeEffect(11)
+        } else if(this.state.MaskSize == "L"){
+            this.onChangeEffect(10)
+        }
+    
+    }
+
+  }
+  Mclicked = () => {
+
+    if(this.state.MaskColor == "White"){
+        if(this.state.MaskSize == "XS"){
+            this.onChangeEffect(6)
+        } else if(this.state.MaskSize == "S"){
+            this.onChangeEffect(5)
+        } else if(this.state.MaskSize == "M"){
+            this.onChangeEffect(4)
+        } else if(this.state.MaskSize == "L"){
+            this.onChangeEffect(3)
+        }
+    
+    } else {
+        if(this.state.MaskSize == "XS"){
+            this.onChangeEffect(14)
+        } else if(this.state.MaskSize == "S"){
+            this.onChangeEffect(13)
+        } else if(this.state.MaskSize == "M"){
+            this.onChangeEffect(12)
+        } else if(this.state.MaskSize == "L"){
+            this.onChangeEffect(11)
+        }
+    
+    }
+  }
+  Lclicked = () => {
+
+    if(this.state.MaskColor == "White"){
+        if(this.state.MaskSize == "XS"){
+            this.onChangeEffect(7)
+        } else if(this.state.MaskSize == "S"){
+            this.onChangeEffect(6)
+        } else if(this.state.MaskSize == "M"){
+            this.onChangeEffect(5)
+        } else if(this.state.MaskSize == "L"){
+            this.onChangeEffect(4)
+        }
+    
+    } else {
+        if(this.state.MaskSize == "XS"){
+            this.onChangeEffect(15)
+        } else if(this.state.MaskSize == "S"){
+            this.onChangeEffect(14)
+        } else if(this.state.MaskSize == "M"){
+            this.onChangeEffect(13)
+        } else if(this.state.MaskSize == "L"){
+            this.onChangeEffect(12)
+        }
+    
+    }
+
+  }
+
         
   render() {
 
@@ -128,10 +254,30 @@ class ArCameraView extends React.Component {
         {/* <TouchableOpacity style={styles.cameraSwitchContainer} onPress={ () => this.switchCamera() }>
           <Image style={styles.camera} source={cameraSwitchImg} />
         </TouchableOpacity> */}
+
+
+        {!this.state.MaskColorClicked ?
+        <View style={styles.bottomTextContainer2}>
+            <Text style={{ color: 'white', textShadowColor:'grey' }}>
+                원하시는 마스크 색상을 클릭해주세요
+            </Text>
+        </View>
+        :
+        null}
+
+        {!this.state.MaskColorClicked ?
+        <View style={styles.bottomTextContainer1}>
+            <Text style={{ color: 'white', textShadowColor:'grey' }}>
+                사이즈별 가상착용시 실제나온 측정값과 상이할수 있습니다
+            </Text>
+        </View>
+        :
+        null}
+        
        
         <View style={styles.bottomBtnContainer}>
 
-            <TouchableOpacity style={{flex: 0.5, alignItems: 'center'}} onPress={ () => this.onChangeEffect(0) }>
+            <TouchableOpacity style={{flex: 0.5, alignItems: 'center'}} onPress={ () => this.whiteColorClicked() }>
             <View style={styles.buttonCont}>
 
               <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/white.png`)} />
@@ -145,23 +291,121 @@ class ArCameraView extends React.Component {
 
 
             </TouchableOpacity>
-            <TouchableOpacity style={{flex: 0.5, alignItems: 'center'}}  onPress={ () => this.onChangeEffect(1) }>
-
+            <TouchableOpacity style={{flex: 0.5, alignItems: 'center'}}  onPress={ () => this.blackColorClicked() }>
             <View style={styles.buttonCont}>
-
               <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/black.png`)} />
               <Text style={styles.prodText}>
                 ePTFE 필터마스크{'\n'}
                 블랙 마스크
               </Text>
             </View>
-
               {/*<View style={styles.nextContainer}><Text style={styles.next}>검정색</Text></View>*/}
-
-
             </TouchableOpacity>
-  
+
         </View>
+
+        {this.state.MaskColorClicked && this.state.MaskColor == "White" ? 
+        <View style={styles.bottomBtnContainer1}>
+        <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.XSclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText1}>
+              XS
+              </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.Sclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText1}>
+              S
+              </Text>
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont1}  onPress={ () => this.Mclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText1}>
+              M
+              </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.Lclicked() }>
+              <View style={{justifyContent: "center"}}>
+                <Text style={styles.prodText1}>
+                  L
+                </Text>
+              </View>
+            </TouchableOpacity>
+        </View>
+        </View>
+        :
+        null}
+
+      {this.state.MaskColorClicked && this.state.MaskColor == "Black" ? 
+        <View style={styles.bottomBtnContainer2}>
+        <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.XSclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText2}>
+              XS
+              </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Sclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText2}>
+              S
+              </Text>
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont2}  onPress={ () => this.Mclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText2}>
+              M
+              </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Lclicked() }>
+              <View style={{justifyContent: "center"}}>
+                <Text style={styles.prodText2}>
+                  L
+                </Text>
+              </View>
+            </TouchableOpacity>
+        </View>
+        </View>
+        :
+        null}
+
+
+          {/*
+        <View style={styles.bottomBtnContainer21}>
+        <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.onChangeEffect(4) }>
+                <Text style={styles.prodText1}>
+                블랙 XS
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.onChangeEffect(5) }>
+              <Text style={styles.prodText}>
+                블랙 S
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.onChangeEffect(6) }>
+              <Text style={styles.prodText1}>
+                블랙 M
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont1}  onPress={ () => this.onChangeEffect(7) }>
+              <Text style={styles.prodText1}>
+                블랙 L
+              </Text>
+            </TouchableOpacity>
+        </View>
+        </View>
+          */}
+            
+  
+      
       </View>
     )
   }
@@ -200,7 +444,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: '100%',
     bottom: 100,
-    height: 50
+    height: 50,
+    marginBottom: "3%"
   },
   nextContainer: {
     flex: 1,
@@ -265,7 +510,170 @@ const styles = StyleSheet.create({
     height: 76,
     textAlignVertical: 'center',
     marginLeft: 8
-  }
+  },
+  container1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  deepARView1: {
+    position: 'absolute',
+    width: '100%',
+    height: '100%'
+  },
+  titleContainer1: {
+    position: 'absolute',
+    top: 100,
+    width: '50%',
+    backgroundColor: 'white',
+    borderRadius:4,
+    backgroundColor: 'white'
+  },
+  title1: {
+    flex: 1,
+    textAlign:'center',
+    fontSize: 20
+  },
+  bottomTextContainer1: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    bottom: 130,
+    height: 50,
+    marginBottom: "-20%"
+  },
+  bottomBtnContainer1: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    bottom: 80,
+    height: 50,
+    marginBottom: "-12.5%"
+  },
+
+  bottomBtnContainer2: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    bottom: 80,
+    height: 50,
+    marginBottom: "-12.5%"
+  },
+
+  bottomBtnContainer21: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    bottom: 10,
+    height: 50
+  },
+  nextContainer1: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius:4,
+    backgroundColor: 'white'
+  },
+  prevContainer1: {
+    flex: 1,
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius:4,
+    backgroundColor: 'white'
+  },
+  next1: {
+    textAlign:'center',
+    fontSize: 28
+  },
+  prev1: {
+    textAlign:'center',
+    fontSize: 28
+  },
+
+  screenshotContainer1: {},
+  screenshot1: {
+    width: 70,
+    height: 70
+  },
+
+  cameraSwitchContainer1: {
+    position: 'absolute',
+    width: 50,
+    height: 40,
+    right: 20,
+    top:  50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  camera1: {
+    width: '100%',
+    height: '100%',
+  },
+  buttonCont1: {
+    backgroundColor: "white",
+    borderRadius: 10,
+    height: 50,
+    width: 80,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 2,
+    margin:10
+  },
+  buttonCont2: {
+    backgroundColor: "black",
+    borderRadius: 10,
+    height: 50,
+    width: 80,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    padding: 2,
+    margin:10
+  },
+  galleryImage1: {
+    width: 47.75,
+    height: 76,
+    marginBottom: 60,
+  },
+  prodText1: {
+    fontSize: 12,
+    height: 50,
+    textAlignVertical: 'center',
+    marginLeft: 8
+  },
+  prodText2: {
+    fontSize: 12,
+    height: 50,
+    textAlignVertical: 'center',
+    marginLeft: 8,
+    backgroundColor: "black",
+    color: "white"
+  },
+  bottomTextContainer2: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '100%',
+    bottom: 130,
+    height: 50,
+    marginBottom: "12%"
+  },
 })
 
 export default ArCameraView;
+
+
+
+
+

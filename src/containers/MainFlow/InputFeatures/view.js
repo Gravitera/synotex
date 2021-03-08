@@ -17,6 +17,8 @@ import Button from '../../../components/Button';
 import { Image } from 'react-native';
 import { Keyboard, Alert } from 'react-native';
 import * as Animatable from 'react-native-animatable';
+import { BackHandler } from 'react-native';
+
 const { width, height } = Dimensions.get("window")
 
 
@@ -124,6 +126,13 @@ const InputFeaturesView = (props) => {
       alert("필수입력값을 확인해 주세요");
     }
   }
+  
+  const backbuttonhandler = () => {
+    navigation.navigate("intro2");
+  }
+
+  BackHandler.addEventListener("hardwareBackPress", backbuttonhandler);
+  
 
 
   return (
@@ -133,15 +142,18 @@ const InputFeaturesView = (props) => {
           <View style={{position:"absolute", alignItems:"center", justifyContent:"center", backgroundColor:"#565656",width:"100%",height:"15%", borderTopLeftRadius: 20, borderTopRightRadius:20}}>
             <Text style={{fontWeight: "bold", color: "white" }}>입력정보를 확인해주세요</Text>
           </View>
+          
             <View style={{flex:1, flexDirection:"row", justifyContent: "center", resizeMode: "contain"}}>
 
               {currgender == "Male" || currgender == "Female" ? 
-              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "-5%"}}>성별  :</Text>
+              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "-5%"}}></Text>
               :
-              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "3%"}}>성별  :</Text>
+              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "3%"}}></Text>
               }
-              <Text style={{fontWeight: "bold", color: "#393939", fontSize: 20, marginTop: "30%", marginLeft: "10%"}}>{currgender == "Male" ? male_kor : currgender == "Female" ? female_kor : currgender == "None" ? none_kor : null}</Text>
+              <Text style={{fontWeight: "bold", color: "#393939", fontSize: 20, marginTop: "30%", marginLeft: "10%"}}></Text>
             </View>
+            {/*{currgender == "Male" ? male_kor : currgender == "Female" ? female_kor : currgender == "None" ? none_kor : null*/}
+            
             <View style={{flex:1, flexDirection:"row", justifyContent: "center", resizeMode: "contain", marginTop: "-85%"}}>
               
               {curragelen == 2 ?
@@ -173,7 +185,7 @@ const InputFeaturesView = (props) => {
 
       <TouchableNativeFeedback onPress={() => screentouched()}>
       <View style={styles.container} onResponderGrant = { () => screentouched() }>
-        <CustomBackForwardButtonHeader title={'입력 정보'} backFunction={navigation.goBack} forwardFunction={props.onNext} />
+        <CustomBackForwardButtonHeader title={'입력 정보'} backFunction={() => {navigation.navigate("intro")}} forwardFunction={props.onNext} />
         <ScrollView style={{ flex: 1, marginTop: 64, paddingTop: 24 }}>
           <Text style={styles.heading}></Text>
 
@@ -280,7 +292,7 @@ const InputFeaturesView = (props) => {
             </View>
           </View>
 
-          <Text style={styles.heading}>개인정보 보호법에 따라 신체정보는 저장되지 않습니다.</Text>
+          <Text style={styles.heading}>시노텍스는 개인정보 보호법에 따라 신체정보를 저장하지 않습니다.</Text>
           {/*<Text style={styles.heading}>더 정확한 측정을 원하신다면 아래사항을 입력하여 주세요.</Text>*/}
 
 

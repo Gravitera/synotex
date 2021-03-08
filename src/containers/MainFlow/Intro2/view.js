@@ -1,11 +1,11 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {
   StyleSheet,
   View,
   Text,
   Dimensions,
   Image,
-  ImageBackground
+  ImageBackground,
 } from 'react-native';
 import theme from '../../../../theme';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -21,9 +21,15 @@ const vw = width / 100;
 
 const IntroView2 = (props) => {
 
-  setTimeout(() => {
-    props.navigation.navigate('input'); //this.props.navigation.navigate('Login')
-  }, 1000); 
+    useEffect(() => {
+        setTimeout(() => {
+          props.navigation.navigate("input");
+        },750);
+      });
+
+//   setTimeout(() => {
+//     props.navigation.navigate('input'); //this.props.navigation.navigate('Login')
+//   }, 1000); 
   return (
     <>
 
