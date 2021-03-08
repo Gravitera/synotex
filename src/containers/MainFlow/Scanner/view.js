@@ -130,6 +130,10 @@ const ScannerView = (props) => {
     }
   };
 
+  const runFacemesh2 = async (e) => {
+    console.log(" ======================== face detected !!!! from Scanner ");
+  };
+
   const tempfunc = async () => {
     console.log(" ========= current state   before click  ", state);
     setState(1);
@@ -214,12 +218,14 @@ const ScannerView = (props) => {
   return (
     <>
       <View style={styles.container}>
+       
         <RNCamera
           ref={cameraRef}
           style={styles.preview}
           type={RNCamera.Constants.Type.front}
           flashMode={RNCamera.Constants.FlashMode.off}
           playSoundOnCapture={false}
+
           androidCameraPermissionOptions={{
             title: 'Permission to use camera',
             message: 'We need your permission to use your camera',
@@ -227,17 +233,16 @@ const ScannerView = (props) => {
             buttonNegative: 'Cancel',
           }}
 
-        // onFacesDetected={runFacemesh}
+         onFacesDetected={runFacemesh2}
         // videoStabilizationMode="cinematic"
-        // faceDetectionClassifications={
-        //   RNCamera.Constants.FaceDetection.Classifications.all
-        // }
-        // faceDetectionLandmarks={
-        //   RNCamera.Constants.FaceDetection.Landmarks.all
-        // }
-        // faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
-        // onCameraReady={startRecording}
+         faceDetectionClassifications={
+           RNCamera.Constants.FaceDetection.Classifications.all
+         }
+         faceDetectionLandmarks={RNCamera.Constants.FaceDetection.Landmarks.all }
+         faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
+//          onCameraReady={startRecording}
         />
+  
         {/* <CustomDrawerButtonHeader title={'About'} /> */}
 
 

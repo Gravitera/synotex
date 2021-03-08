@@ -465,7 +465,7 @@ const RecommendationView = (props) => {
             {Platform.OS == 'android' ? 
             <Animatable.View animation="slideInUp" direction="alternate">
           <View style={styles.headerContainer}>
-            <TouchableOpacity style={styles.header2} onPress={() => props.navigation.navigate('ArCamera',{maskSize: storeData.attendanceReducer.res.MaskSize})} > 
+            <TouchableOpacity style={styles.header2} onPress={() => props.navigation.navigate('ArCamera',{MaskSize: storeData.attendanceReducer.res.MaskSize})} > 
               <ImageBackground style={{width:194,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
                 <Text style={{color:'#214A84'}}>
                   시노텍스 마스크 가상착용

@@ -4,7 +4,7 @@ import DeepARView from './../../../components/ArCameraUtil/DeepARView';
 import { effectsData } from './../../../components/ArCameraUtil/effectsData';
 import {slideTransitionDefinition } from './../../../components/ArCameraUtil/simplenavigator/TransitionDefinitions';
 import { CustomBackButtonHeader2, CustomDrawerButtonHeader } from '../../../components/Header';
-
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
@@ -19,7 +19,10 @@ class ArCameraView extends React.Component {
       switchCameraInProgress: false,
       MaskColorClicked: false,
       MaskColor: "Black",
-      MaskSize: this.props.navigation.getParam('maskSize')
+      MaskSize: "S",
+  //    MaskSize: this.storeData.attendanceReducer.res.MaskSize
+  //    MaskSize: this.props.navigation.getParam('MaskSize')
+      MaskSize: this.props.route.params.MaskSize
     }
 
   }
@@ -45,6 +48,7 @@ class ArCameraView extends React.Component {
       
       
     }
+    console.log(" ======================== this.state in componentDidMount   ", this.state.MaskSize);
   }
 
   didAppear() {
@@ -113,15 +117,20 @@ class ArCameraView extends React.Component {
 
   whiteColorClicked = () => {
     console.log(" white mask clicked ");
+    console.log(" ========= ");
+    console.log(" ===================== this.state   ", this.state.Maskcolor);
     this.setState({MaskColorClicked  : true});
     this.setState({MaskColor : "White"});
+    console.log(" ======================== this.state   ", this.state.MaskSize);
     
   }
 
   blackColorClicked = () => {
     console.log(" black mask clicked ");
+    console.log(" ===================== this.state   ", this.state.Maskcolor);
     this.setState({MaskColorClicked  :true});
     this.setState({MaskColor : "Black"});
+    console.log(" ======================== this.state   ", this.state.MaskSize); 
   }
 
   XSclicked = () => {
@@ -240,7 +249,6 @@ class ArCameraView extends React.Component {
     const { width } = Dimensions.get('window')
 
     const effect = effectsData[currentEffectIndex]
-
     return (
       <View style={styles.container}>
         <View style={{flex:1}}>

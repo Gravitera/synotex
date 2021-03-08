@@ -137,50 +137,8 @@ const InputFeaturesView = (props) => {
 
   return (
     <>
-      {buttonclicked == true ? 
-      <View style={{position:"absolute", marginTop: height*0.31, marginLeft: width*0.215, width: width*0.6, height: height*0.4, backgroundColor: "#D2D2D2", zIndex: 50, borderRadius: 20}}>
-          <View style={{position:"absolute", alignItems:"center", justifyContent:"center", backgroundColor:"#565656",width:"100%",height:"15%", borderTopLeftRadius: 20, borderTopRightRadius:20}}>
-            <Text style={{fontWeight: "bold", color: "white" }}>입력정보를 확인해주세요</Text>
-          </View>
-          
-            <View style={{flex:1, flexDirection:"row", justifyContent: "center", resizeMode: "contain"}}>
-
-              {currgender == "Male" || currgender == "Female" ? 
-              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "-5%"}}></Text>
-              :
-              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "3%"}}></Text>
-              }
-              <Text style={{fontWeight: "bold", color: "#393939", fontSize: 20, marginTop: "30%", marginLeft: "10%"}}></Text>
-            </View>
-            {/*{currgender == "Male" ? male_kor : currgender == "Female" ? female_kor : currgender == "None" ? none_kor : null*/}
-            
-            <View style={{flex:1, flexDirection:"row", justifyContent: "center", resizeMode: "contain", marginTop: "-85%"}}>
-              
-              {curragelen == 2 ?
-              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "-11%"}}>나이  :</Text>
-              :
-              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "-13%"}}>나이  :</Text>
-              }
-              <Text style={{fontWeight: "bold", color: "#393939", fontSize: 20, marginTop: "30%", marginLeft: "10%"}}>{currage}</Text>
-            </View>
-            <View style={{flex:1, flexDirection:"row", justifyContent: "center", resizeMode: "contain", marginTop: "-85%"}}>
-
-              {currheightlen == 3 ?
-              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "8%"}}>신장  :</Text>
-              :
-              <Text style={{fontWeight: "bold", color: "#3A3A3A", fontSize: 20, marginTop: "30%", marginLeft: "4%"}}>신장  :</Text>
-              }
-              <Text style={{fontWeight: "bold", color: "#393939", fontSize: 20, marginTop: "30%", marginLeft: "10%"}}>{currheight} cm</Text>
-            </View>
-
-
-          <TouchableNativeFeedback onPress={props.onNext}>
-          <View style={{position:"absolute", alignItems:"center", justifyContent:"center", backgroundColor:"#0D3A71", width: "100%",height:"15%",marginTop:"109%", borderBottomLeftRadius:20, borderBottomRightRadius:20}}>
-            <Text style={{fontWeight: "bold", color: "white" }}>맞으시다면 여기를 클릭해주세요</Text>
-          </View>
-          </TouchableNativeFeedback>
-      </View>
-      : null }
+    
+  
 
 
       <TouchableNativeFeedback onPress={() => screentouched()}>
@@ -356,7 +314,7 @@ const InputFeaturesView = (props) => {
         <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
 
           {/*<Button style={{ width: '100%' }} onPress={props.onNext} label="측정 시작하기" />*/}
-          <Button style={{ width: '100%' }} onPress={() => setbuttonclickedfunc()} label="측정 시작하기" />
+          <Button style={{ width: '100%' }} onPress={props.onNext} label="측정 시작하기" />
         </View>
       </View>
       </TouchableNativeFeedback>

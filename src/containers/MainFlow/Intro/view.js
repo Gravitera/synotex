@@ -64,7 +64,7 @@ const IntroView = (props) => {
         </ImageBackground>
         </TouchableOpacity>
 
-        <TouchableOpacity style={{marginBottom:24,width:194,height:35}} onPress={() => props.navigation.navigate('ArCamera')} > 
+        <TouchableOpacity style={{marginBottom:24,width:194,height:35}} onPress={() => props.navigation.navigate('ArCamera2')} > 
         <ImageBackground style={{width:194,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
           <Text style={{color:'#214A84'}}>
             시노텍스 마스크 가상착용

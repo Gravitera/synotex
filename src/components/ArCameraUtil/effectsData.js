@@ -12,6 +12,10 @@ export var effectsData = [
     title: 'white_xs'
   },
   {
+    name: 'white_s',
+    title: 'white_s'
+  },
+  {
     name: 'white_m',
     title: 'white_m',
   },
@@ -38,6 +42,10 @@ export var effectsData = [
   {
     name: 'black_xs',
     title: 'black_xs'
+  },
+  {
+    name: 'black_s',
+    title: 'black_s'
   },
   {
     name: 'black_m',
