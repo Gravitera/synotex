@@ -466,7 +466,7 @@ const RecommendationView = (props) => {
             <Animatable.View animation="slideInUp" direction="alternate">
           <View style={styles.headerContainer}>
             <TouchableOpacity style={styles.header2} onPress={() => props.navigation.navigate('ArCamera',{MaskSize: storeData.attendanceReducer.res.MaskSize})} > 
-              <ImageBackground style={{width:350,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button_recommendation.png")} >
+              <ImageBackground style={{width:194,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
                 <Text style={{color:'#214A84'}}>
                   시노텍스 마스크 가상착용
                 </Text>
@@ -478,7 +478,7 @@ const RecommendationView = (props) => {
           
 
           <Animatable.View animation="slideInUp" direction="alternate">
-            <View style={styles.headerContainer, {marginTop: "30%"}}>
+            <View style={styles.headerContainer}>
 
               {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
               <Text style={styles.header3}>당신의 인체 치수를 가진 사람들의 평균 얼굴규격 입니다.</Text>
@@ -528,68 +528,46 @@ const RecommendationView = (props) => {
 
           {feedbacksent == 0 ?
           <Animatable.View animation="slideInUp" direction="alternate">
-
-          <View style={{marginTop:"-185%"}}>
-
-
           <View style={styles.headerContainer}>
-          <Text style={styles.header3}>선호하는 사이즈를 눌러주시면 알고리즘이 더 정확해집니다</Text>
+          <Text style={styles.header3}>당신이 선호하는 마스크 크기가 아니라면 선택해주세요.</Text>
           </View>
           <View style={styles.gallery} >
                 <TouchableOpacity onPress={sendFeedbackXS} >
-                {/*<ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >*/}
-                
-                <View style={{backgroundColor:"white", height:"25%", width: "85%", justifyContent: "center", borderRadius:10}}>
-                <Text style={{color:'#214A84', fontSize:17, marginLeft: "9%"}}>
-                  XS (키즈)
+                <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
+                <Text style={{color:'#214A84', fontSize:20}}>
+                  XS
                 </Text>
-                </View>
-
-              {/*</ImageBackground>*/}
+              </ImageBackground>
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={sendFeedbackS} >
-                {/*<ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >*/}
-                
-                <View style={{backgroundColor:"white", height:"25%", width: "85%", justifyContent: "center", borderRadius:10}}>
-                <Text style={{color:'#214A84', fontSize:17, marginLeft: "9%"}}>
-                  S (소형)
+                  <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
+                <Text style={{color:'#214A84', fontSize:20}}>
+                  S
                 </Text>
-                </View>
-
-              {/*</ImageBackground>*/}
+              </ImageBackground>
                   </TouchableOpacity>
 
                   <TouchableOpacity onPress={sendFeedbackM} >
-                                    {/*<ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >*/}
-                
-                <View style={{backgroundColor:"white", height:"25%", width: "85%", justifyContent: "center", borderRadius:10}}>
-                <Text style={{color:'#214A84', fontSize:17, marginLeft: "9%"}}>
-                  M (중형)
+                    <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
+                <Text style={{color:'#214A84', fontSize:20}}>
+                  M
                 </Text>
-                </View>
-
-              {/*</ImageBackground>*/}
+              </ImageBackground>
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={sendFeedbackL} >
-                {/*<ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >*/}
-                
-                <View style={{backgroundColor:"white", height:"25%", width: "85%", justifyContent: "center", borderRadius:10}}>
-                <Text style={{color:'#214A84', fontSize:17, marginLeft: "9%"}}>
-                  L (대형)
+                      <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
+                <Text style={{color:'#214A84', fontSize:20}}>
+                  L
                 </Text>
-                </View>
-
-              {/*</ImageBackground>*/}
+              </ImageBackground>
                       </TouchableOpacity>
               </View>
-
-
-              </View>
-
-          </Animatable.View>
+            <View style={styles.gallery, {marginBottom:70}} />
+            </Animatable.View>
             : null }
+
 
 
         </ScrollView>

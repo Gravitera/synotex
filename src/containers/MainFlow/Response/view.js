@@ -39,11 +39,20 @@ const ResponseView = (props) => {
             <View style={{ marginTop: 4 }}>
               <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                 <TouchableOpacity onPress={() => props.navigation.navigate("input")}>
-                  <Image style={{ width: 98, height: 121, marginRight: 15 }} source={require("./../../../assets/images/refresh.png")} />
+                  <View style={{resizeMode: "contain", justifyContent:"center"}}>
+                  {/*<Image style={{ width: 98, height: 121, marginRight: 15 }} source={require("./../../../assets/images/refresh.png")} />*/}
+                  <Image style={{ width: 95, height: 95, marginRight: "15%" }} source={require("./../../../assets/images/refresh.png")} />
+                  
+                  </View>
+                  <Text style={styles.text2}>재촬영</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={props.onNext}>
 
-                  <Image style={{ width: 98, height: 121, marginLeft: 15 }} source={require("./../../../assets/images/result.png")} />
+                  {/*<Image style={{ width: 98, height: 121, marginLeft: 15 }} source={require("./../../../assets/images/result.png")} />*/}
+                    <View style={{justifyContent:"center", resizeMode: "contain"}}>
+                      <Image style={{ width: 95, height: 95, marginLeft: "5%"}} source={require("./../../../assets/images/result.png")} />
+                    </View>
+                    <Text style={styles.text3}>측정 결과</Text>
                 </TouchableOpacity>
               </View>
 
@@ -107,6 +116,26 @@ const styles = StyleSheet.create({
     textAlignVertical: 'center',
     width,
     marginVertical: 20
+  },
+  text2: {
+    fontFamily: theme.font.bold,
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 12,
+    fontWeight: '600',
+    textAlignVertical: 'center',
+    marginLeft:"-40%",
+    marginTop: "6%"
+  },
+  text3: {
+    fontFamily: theme.font.bold,
+    color: 'black',
+    textAlign: 'center',
+    fontSize: 12,
+    fontWeight: '600',
+    textAlignVertical: 'center',
+    marginLeft: "-5%",
+    marginTop: "8%"
   }
 });
 
