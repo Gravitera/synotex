@@ -383,22 +383,8 @@ const RecommendationView = (props) => {
         <CustomBackForwardButtonHeader2 title={"측정결과"} backFunction={() => props.navigation.dispatch(StackActions.pop(3))} forwardFunction={() => props.navigation.navigate('intro')} />
         <ScrollView style={styles.cardContainer}>
 
-          <Animatable.View animation="slideInUp" direction="alternate">
-            <View style={styles.headerContainer}>
 
-              {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
-              <Text style={styles.header}>당신의 추천 사이즈는 {overallsize} 입니다.</Text>
-            </View>
-          </Animatable.View>
-
-          <Animatable.View animation="slideInUp" direction="alternate">
-            <Table borderStyle={{ borderWidth: 1, borderColor: '#dfdfdf', backgroundColor: theme.color.light, marginBottom: 24 }}>
-              <Row data={tableHead} style={styles.head} textStyle={styles.text} />
-              <Rows data={tableData} style={{ backgroundColor: theme.color.light }} textStyle={styles.text} />
-            </Table>
-          </Animatable.View>
-
-          <Animatable.View animation="slideInUp" direction="alternate">
+        <Animatable.View animation="slideInUp" direction="alternate">
             <View style={styles.headerContainer}>
 
               {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
@@ -477,16 +463,42 @@ const RecommendationView = (props) => {
           </View>
           </Animatable.View> 
           : null}
-          
 
           <Animatable.View animation="slideInUp" direction="alternate">
-            <View style={styles.headerContainer, {marginTop: "0%"}}>
+            <View style={styles.headerContainer}>
 
               {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
-              <Text style={styles.header3}>당신의 인체 치수를 가진 사람들의 평균 얼굴규격 입니다.</Text>
+              <Text style={styles.header}>당신의 추천 사이즈는 {overallsize} 입니다.</Text>
+              
             </View>
           </Animatable.View>
 
+          <Animatable.View animation="slideInUp" direction="alternate">
+            <View style={styles.headerContainer}>
+
+              {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
+              <Text style={styles.header}>측정결과에 따른 평균 얼굴규격을 확인해보세요</Text>
+              
+            </View>
+          </Animatable.View>
+
+          
+          <Animatable.View animation="slideInUp" direction="alternate">
+            <Table borderStyle={{ borderWidth: 1, borderColor: '#dfdfdf', backgroundColor: theme.color.light, marginBottom: 24 }}>
+              <Row data={tableHead} style={styles.head} textStyle={styles.text} />
+              <Rows data={tableData} style={{ backgroundColor: theme.color.light }} textStyle={styles.text} />
+            </Table>
+          </Animatable.View>
+
+          <Animatable.View animation="slideInUp" direction="alternate">
+            <View style={styles.headerContainer}>
+
+              {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
+              <Text style={styles.header4}>  </Text>
+              
+            </View>
+          </Animatable.View>
+          
           <Animatable.View animation="slideInUp" direction="alternate">
             <Table borderStyle={{ borderWidth: 1, borderColor: '#dfdfdf', backgroundColor: theme.color.light, marginBottom: 24 }}>
               <Row data={tableHead2} style={styles.head} textStyle={styles.text} />
@@ -535,7 +547,7 @@ const RecommendationView = (props) => {
 
 
           <View style={styles.headerContainer}>
-          <Text style={styles.header3}>선호하는 사이즈를 눌러주시면 알고리즘이 더 정확해집니다</Text>
+          <Text style={styles.header3}>착용 사이즈가 다를경우 아래 중 하나을 선택해주세요</Text>
           </View>
           <View style={styles.gallery} >
                 <TouchableOpacity onPress={sendFeedbackXS} style={{marginTop:"0%"}}>
@@ -621,6 +633,11 @@ const styles = StyleSheet.create({
   },
   header3: {
     marginTop: 30,
+    color: theme.color.light,
+    marginBottom: 10,
+  },
+  header4: {
+    marginTop: 10,
     color: theme.color.light,
     marginBottom: 10,
   },

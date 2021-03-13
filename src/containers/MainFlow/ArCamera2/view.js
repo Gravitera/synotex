@@ -246,28 +246,28 @@ class ArCameraView extends React.Component {
         <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.XSclicked() }>
             <View style={{justifyContent: "center"}}>
               <Text style={styles.prodText1}>
-              XS
+              키즈(XS)
               </Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.Sclicked() }>
             <View style={{justifyContent: "center"}}>
               <Text style={styles.prodText1}>
-              S
+              스몰(S)
               </Text>
             </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonCont1}  onPress={ () => this.Mclicked() }>
             <View style={{justifyContent: "center"}}>
               <Text style={styles.prodText1}>
-              M
+              미디움(M)
               </Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.Lclicked() }>
               <View style={{justifyContent: "center"}}>
                 <Text style={styles.prodText1}>
-                  L
+                  라지(L)
                 </Text>
               </View>
             </TouchableOpacity>
@@ -282,28 +282,28 @@ class ArCameraView extends React.Component {
         <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.XSclicked() }>
             <View style={{justifyContent: "center"}}>
               <Text style={styles.prodText2}>
-              XS
+              키즈(XS)
               </Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Sclicked() }>
             <View style={{justifyContent: "center"}}>
               <Text style={styles.prodText2}>
-              S
+              스몰(S)
               </Text>
             </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonCont2}  onPress={ () => this.Mclicked() }>
             <View style={{justifyContent: "center"}}>
               <Text style={styles.prodText2}>
-              M
+              미디움(M)
               </Text>
               </View>
             </TouchableOpacity>
             <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Lclicked() }>
               <View style={{justifyContent: "center"}}>
                 <Text style={styles.prodText2}>
-                  L
+                라지(L)
                 </Text>
               </View>
             </TouchableOpacity>
@@ -584,14 +584,12 @@ const styles = StyleSheet.create({
   prodText1: {
     fontSize: 12,
     height: 50,
-    textAlignVertical: 'center',
-    marginLeft: 8
+    textAlignVertical: 'center'
   },
   prodText2: {
     fontSize: 12,
     height: 50,
     textAlignVertical: 'center',
-    marginLeft: 8,
     backgroundColor: "black",
     color: "white"
   },

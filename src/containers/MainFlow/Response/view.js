@@ -33,8 +33,8 @@ const ResponseView = (props) => {
           <Image style={{ width: width, height: height - windowHeight, zIndex: 0 }} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + storeData.attendanceReducer.res.FrontImage }} />
           <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
             <View style={styles.buttonOver}>
-              <Text style={styles.text}>측정사진이 마음에 들지 않으시면 재촬영{"\n"}
-            측정사진이 맘에 드신다면 측정결과 확인 버튼을 눌러주세요.</Text>
+              <Text style={styles.text}>재측정을 원하시는경우는 재촬영 버튼을 눌러주시거나{"\n"}
+            결과을 확인하실려면 측정결과 버튼을 눌러주세요</Text>
             </View>
             <View style={{ marginTop: 4 }}>
               <View style={{ flexDirection: 'row', justifyContent: 'center' }}>

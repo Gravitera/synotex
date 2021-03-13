@@ -75,7 +75,7 @@ public class RNTDeepAR extends FrameLayout implements AREventListener, SurfaceHo
         addView(view);
 
         deepAr = new DeepAR(getContext());
-        deepAr.setLicenseKey("bea715f0164ccd03a48fc71c4ee90a2ae487eac53f77e3126fa5bee3b89a23766417eb88a739deb8");
+        deepAr.setLicenseKey("8ebf20a5dbec390cc9ac715f107fbf222c2296050f6fd647a2054aecd5b995353a815e806f9ca278");
         deepAr.initialize(this.getContext(), this);
         setupDeepAR();
 
