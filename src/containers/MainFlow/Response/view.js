@@ -34,7 +34,7 @@ const ResponseView = (props) => {
           <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
             <View style={styles.buttonOver}>
               <Text style={styles.text}>재측정을 원하시는경우는 재촬영 버튼을 눌러주시거나{"\n"}
-            결과을 확인하실려면 측정결과 버튼을 눌러주세요</Text>
+            결과을 확인하시려면 측정결과 버튼을 눌러주세요</Text>
             </View>
             <View style={{ marginTop: 4 }}>
               <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
