@@ -18,7 +18,6 @@ import { Image } from 'react-native';
 import { Keyboard, Alert } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { BackHandler } from 'react-native';
-import { Linking } from 'react-native';
 
 const { width, height } = Dimensions.get("window")
 
@@ -148,10 +147,52 @@ const InputFeaturesView = (props) => {
         <ScrollView style={{ flex: 1, marginTop: 64, paddingTop: 24 }}>
           <Text style={styles.heading}></Text>
 
-          <Image resizeMode="contain" source={require("./../../../assets/images/inputfeaturestop.png")} style={{marginLeft: "-9.25%", marginTop:"1%", width: "120%"}}></Image>
-          <View style={{marginTop:"12%"}}>
+
+          <View style={{justifyContent: "center", alignItems: 'center', width: width*1.155}}>
+          <View style={{ width: width, marginHorizontal: 20, flexDirection: 'row', justifyContent: 'space-between', marginTop: 5, marginBottom: 20}}>
+
+
+              {male == false ?
+              <TouchableOpacity style={{ width: '50%' }} onPress={maleClick}>
+                <ImageBackground style={{ width: (width - 40) / 2.5, height: (width - 40) / 2.5}} resizeMode="contain" source={require(`./../../../assets/images/male.png`)} >
+                  <Text  style={{marginLeft: width*0.15, marginTop:width*0.26, fontWeight:"bold", color: "white"}} >남성</Text>
+                </ImageBackground>
+                {/*<Text style={{ color: props.gender === "Male" ? 'white' : "#000", textDecorationLine: props.gender === 'Male' ? "underline" : 'none', textAlign: 'center', marginTop: -46, fontWeight: 'bold' }}>남성</Text>*/}
+              </TouchableOpacity>
+              :null}
+
+              {male == true ?
+              <TouchableOpacity style={{ width: '50%' }} onPress={maleClick}>
+                <ImageBackground style={{ width: (width - 40) / 2.5, height: (width - 40) / 2.5}} resizeMode="contain" source={require(`./../../../assets/images/male_clicked.png`)} >
+                  <Text  style={{marginLeft: width*0.15, marginTop:width*0.26, fontWeight:"bold", color: "white"}} >남성</Text>
+                </ImageBackground>
+                {/*<Text style={{ color: props.gender === "Male" ? 'white' : "#000", textDecorationLine: props.gender === 'Male' ? "underline" : 'none', textAlign: 'center', marginTop: -46, fontWeight: 'bold' }}>남성</Text>*/}
+              </TouchableOpacity>
+              :null}
+
+
+              {female == false?
+              <TouchableOpacity style={{ width: '50%' }} onPress={femaleClick}>
+                <ImageBackground style={{ width: (width - 40) / 2.5, height: (width - 40) / 2.5}} resizeMode="contain" source={require(`./../../../assets/images/female.png`)} >
+                <Text style={{marginLeft: width*0.15, marginTop: width*0.26,fontWeight:"bold", color: "white"}}>여성</Text>
+                </ImageBackground>
+                {/*<Text style={{ color: props.gender === 'Female' ? "#fff" : '#000', textDecorationLine: props.gender === 'Female' ? "underline" : 'none', marginTop: -46, textAlign: 'center', fontWeight: 'bold' }}>여성</Text>*/}
+              </TouchableOpacity>
+              :null}
+              {female == true?
+              <TouchableOpacity style={{ width: '50%' }} onPress={femaleClick}>
+                <ImageBackground style={{ width: (width - 40) / 2.5, height: (width - 40) / 2.5}} resizeMode="contain" source={require(`./../../../assets/images/female_clicked.png`)} >
+                <Text style={{marginLeft: width*0.15, marginTop: width*0.26,fontWeight:"bold", color: "white"}}>여성</Text>
+                </ImageBackground>
+                {/*<Text style={{ color: props.gender === 'Female' ? "#fff" : '#000', textDecorationLine: props.gender === 'Female' ? "underline" : 'none', marginTop: -46, textAlign: 'center', fontWeight: 'bold' }}>여성</Text>*/}
+              </TouchableOpacity>
+              :null}
 
           </View>
+          </View>
+
+
+    
           <View style={styles.inputBox}>
 
             <Text style="label">나이 (필수)</Text>
@@ -209,9 +250,7 @@ const InputFeaturesView = (props) => {
             </View>
           </View>
 
-          <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/member/privacy.html")} style={{}}>
-            <Text style={styles.heading}>개인정보 보호방침 보러가기</Text>
-          </TouchableOpacity>
+          <Text style={styles.heading}>시노텍스는 개인정보 보호법에 따라 신체정보를 저장하지 않습니다.</Text>
           {/*<Text style={styles.heading}>더 정확한 측정을 원하신다면 아래사항을 입력하여 주세요.</Text>*/}
 
 

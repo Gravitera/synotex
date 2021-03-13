@@ -22,9 +22,6 @@
 		F5B5C45F25EA2A1700EA2457 /* RNTDeepARViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B5C45D25EA2A1700EA2457 /* RNTDeepARViewManager.m */; };
 		F5B5C46025EA2A1700EA2457 /* RNTDeepAR.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B5C45E25EA2A1700EA2457 /* RNTDeepAR.m */; };
 		F5B5C4E725EA2BBF00EA2457 /* effects in Resources */ = {isa = PBXBuildFile; fileRef = F5B5C4E625EA2BBF00EA2457 /* effects */; };
-		5B57DF61580843D2B130EC1A /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E87D36599D334C28AB4C63F3 /* Roboto-Light.ttf */; };
-		A24ABBEB746C4207920D73FE /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 338675052F55460E91842415 /* Roboto-Thin.ttf */; };
-		32B19883843448D68B723D38 /* SyneTactile-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B4E76ED004AA999B73662 /* SyneTactile-Regular.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,9 +95,6 @@
 		F5B5C4E625EA2BBF00EA2457 /* effects */ = {isa = PBXFileReference; lastKnownFileType = folder; path = effects; sourceTree = "<group>"; };
 		FB1811C10435475990FC4BB9 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		FE90AC422921A9EFDF14870A /* libPods-frontOffice.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-frontOffice.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E87D36599D334C28AB4C63F3 /* Roboto-Light.ttf */ = {isa = PBXFileReference; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		338675052F55460E91842415 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; name = "Roboto-Thin.ttf"; path = "../src/assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		2F0B4E76ED004AA999B73662 /* SyneTactile-Regular.ttf */ = {isa = PBXFileReference; name = "SyneTactile-Regular.ttf"; path = "../src/assets/fonts/SyneTactile-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,9 +185,6 @@
 				17E2D1CA40624B4C9607FCD1 /* Octicons.ttf */,
 				971820DA60354BDBBE196924 /* SimpleLineIcons.ttf */,
 				AA3E7705D6054E63B1E5CC4B /* Zocial.ttf */,
-				E87D36599D334C28AB4C63F3 /* Roboto-Light.ttf */,
-				338675052F55460E91842415 /* Roboto-Thin.ttf */,
-				2F0B4E76ED004AA999B73662 /* SyneTactile-Regular.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -346,9 +337,6 @@
 				ED4F251302BF4A06814051D6 /* Nunito-Regular.ttf in Resources */,
 				02975BDD5DBC4606849E7FAD /* Nunito-SemiBold.ttf in Resources */,
 				F5B5C4E725EA2BBF00EA2457 /* effects in Resources */,
-				5B57DF61580843D2B130EC1A /* Roboto-Light.ttf in Resources */,
-				A24ABBEB746C4207920D73FE /* Roboto-Thin.ttf in Resources */,
-				32B19883843448D68B723D38 /* SyneTactile-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
