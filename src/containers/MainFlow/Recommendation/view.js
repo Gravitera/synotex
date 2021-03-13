@@ -300,6 +300,7 @@ const RecommendationView = (props) => {
   }
 
   const sendFeedbackS = () => {
+
     const data = {
       ID: storeData.attendanceReducer.res.ID,  // storeData.attendanceReducer.res.ID
       MaskSize: "S"
@@ -309,7 +310,8 @@ const RecommendationView = (props) => {
     
   }
 
-  const sendFeedbackM = () => {
+  const sendFeedbackM = async() => {
+    console.log(" ========== feedback pressed ")
     const data = {
       ID: storeData.attendanceReducer.res.ID,  // storeData.attendanceReducer.res.ID
       MaskSize: "M"
@@ -466,7 +468,7 @@ const RecommendationView = (props) => {
             <Animatable.View animation="slideInUp" direction="alternate">
           <View style={styles.headerContainer}>
             <TouchableOpacity style={styles.header2} onPress={() => props.navigation.navigate('ArCamera',{MaskSize: storeData.attendanceReducer.res.MaskSize})} > 
-              <ImageBackground style={{width:194,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
+              <ImageBackground style={{width:350,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button_recommendation.png")} >
                 <Text style={{color:'#214A84'}}>
                   시노텍스 마스크 가상착용
                 </Text>
@@ -478,7 +480,7 @@ const RecommendationView = (props) => {
           
 
           <Animatable.View animation="slideInUp" direction="alternate">
-            <View style={styles.headerContainer}>
+            <View style={styles.headerContainer, {marginTop: "0%"}}>
 
               {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
               <Text style={styles.header3}>당신의 인체 치수를 가진 사람들의 평균 얼굴규격 입니다.</Text>
@@ -528,47 +530,69 @@ const RecommendationView = (props) => {
 
           {feedbacksent == 0 ?
           <Animatable.View animation="slideInUp" direction="alternate">
+
+          <View style={{marginTop:"-5%"}}>
+
+
           <View style={styles.headerContainer}>
-          <Text style={styles.header3}>당신이 선호하는 마스크 크기가 아니라면 선택해주세요.</Text>
+          <Text style={styles.header3}>선호하는 사이즈를 눌러주시면 알고리즘이 더 정확해집니다</Text>
           </View>
           <View style={styles.gallery} >
-                <TouchableOpacity onPress={sendFeedbackXS} >
-                <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
-                <Text style={{color:'#214A84', fontSize:20}}>
-                  XS
+                <TouchableOpacity onPress={sendFeedbackXS} style={{marginTop:"0%"}}>
+                {/*<ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >*/}
+                
+                <View style={{backgroundColor:"white", height:"40%", width: "85%", justifyContent: "center", borderRadius:10}}>
+                <Text style={{color:'#214A84', fontSize:17, marginLeft: "9%"}}>
+                  XS (키즈)
                 </Text>
-              </ImageBackground>
+                </View>
+
+              {/*</ImageBackground>*/}
                 </TouchableOpacity>
 
                 <TouchableOpacity onPress={sendFeedbackS} >
-                  <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
-                <Text style={{color:'#214A84', fontSize:20}}>
-                  S
+                {/*<ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >*/}
+                
+                <View style={{backgroundColor:"white", height:"40%", width: "85%", justifyContent: "center", borderRadius:10}}>
+                <Text style={{color:'#214A84', fontSize:17, marginLeft: "9%"}}>
+                  S (소형)
                 </Text>
-              </ImageBackground>
+                </View>
+
+              {/*</ImageBackground>*/}
                   </TouchableOpacity>
 
                   <TouchableOpacity onPress={sendFeedbackM} >
-                    <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
-                <Text style={{color:'#214A84', fontSize:20}}>
-                  M
+                                    {/*<ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >*/}
+                
+                <View style={{backgroundColor:"white", height:"40%", width: "85%", justifyContent: "center", borderRadius:10}}>
+                <Text style={{color:'#214A84', fontSize:17, marginLeft: "9%"}}>
+                  M (중형)
                 </Text>
-              </ImageBackground>
+                </View>
+
+              {/*</ImageBackground>*/}
                     </TouchableOpacity>
 
                     <TouchableOpacity onPress={sendFeedbackL} >
-                      <ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
-                <Text style={{color:'#214A84', fontSize:20}}>
-                  L
+                {/*<ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >*/}
+                
+                <View style={{backgroundColor:"white", height:"40%", width: "85%", justifyContent: "center", borderRadius:10}}>
+                <Text style={{color:'#214A84', fontSize:17, marginLeft: "9%"}}>
+                  L (대형)
                 </Text>
-              </ImageBackground>
+                </View>
+
+              {/*</ImageBackground>*/}
                       </TouchableOpacity>
               </View>
-            <View style={styles.gallery, {marginBottom:70}} />
-            </Animatable.View>
+
+
+              </View>
+
+          </Animatable.View>
             : null }
-
-
+          <View style={{marginTop: "15%"}}></View>
 
         </ScrollView>
       </View>

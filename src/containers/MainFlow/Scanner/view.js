@@ -12,6 +12,8 @@ import {
   ImageBackground
 } from 'react-native';
 
+//import { Camera, Permissions, FaceDetector, DangerZone } from 'expo';
+
 import { List, DataTable, ActivityIndicator, Button } from 'react-native-paper';
 import { RNCamera } from 'react-native-camera';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -242,6 +244,25 @@ const ScannerView = (props) => {
          faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
 //          onCameraReady={startRecording}
         />
+
+
+
+
+          {/*<Camera 
+            style={{ flex: 1 }} 
+            type={Camera.Constants.Type} 
+            onFacesDetected={this.state.faceDetecting ? this.handleFacesDetected : undefined }
+            onFaceDetectionError={this.handleFaceDetectionError}
+            faceDetectorSettings={{
+              mode: FaceDetector.Constants.Mode.fast,
+              detectLandmarks: FaceDetector.Constants.Mode.none,
+              runClassifications: FaceDetector.Constants.Mode.none,
+            }}
+            ref={cameraRef}
+          >*/}
+
+
+
   
         {/* <CustomDrawerButtonHeader title={'About'} /> */}
 
