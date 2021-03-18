@@ -14,9 +14,11 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		32B19883843448D68B723D38 /* SyneTactile-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0B4E76ED004AA999B73662 /* SyneTactile-Regular.ttf */; };
 		5B57DF61580843D2B130EC1A /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E87D36599D334C28AB4C63F3 /* Roboto-Light.ttf */; };
+		6A111EF4305060C2E0D6B257 /* libPods-frontOffice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2276C1995AB5546F99B626BA /* libPods-frontOffice.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		A24ABBEB746C4207920D73FE /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 338675052F55460E91842415 /* Roboto-Thin.ttf */; };
 		ED4F251302BF4A06814051D6 /* Nunito-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1EDD7703BE104EA382C5209D /* Nunito-Regular.ttf */; };
+		EE20AB300E80B36D99562FAD /* libPods-frontOffice-frontOfficeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 70A99A01964C79FDAA02F7B0 /* libPods-frontOffice-frontOfficeTests.a */; };
 		F4BAE97416434BD097226E7A /* Nunito-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64A73D0CA2C249F38E87FC8F /* Nunito-Bold.ttf */; };
 		F550707F25FD0CD700EF9BCE /* black_3xs in Resources */ = {isa = PBXBuildFile; fileRef = F550706F25FD0CD700EF9BCE /* black_3xs */; };
 		F550708025FD0CD700EF9BCE /* white_m in Resources */ = {isa = PBXBuildFile; fileRef = F550707025FD0CD700EF9BCE /* white_m */; };
@@ -38,6 +40,20 @@
 		F55070CF25FD0FDD00EF9BCE /* DeepAR.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5B5C45425EA2A0A00EA2457 /* DeepAR.framework */; };
 		F5B5C45F25EA2A1700EA2457 /* RNTDeepARViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B5C45D25EA2A1700EA2457 /* RNTDeepARViewManager.m */; };
 		F5B5C46025EA2A1700EA2457 /* RNTDeepAR.m in Sources */ = {isa = PBXBuildFile; fileRef = F5B5C45E25EA2A1700EA2457 /* RNTDeepAR.m */; };
+		F5DEDB552603468B009000CE /* AI_measurement_voice.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB472603468B009000CE /* AI_measurement_voice.mp3 */; };
+		F5DEDB562603468B009000CE /* guide_voice.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB482603468B009000CE /* guide_voice.mp3 */; };
+		F5DEDB572603468B009000CE /* guide_voice - 복사본.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB492603468B009000CE /* guide_voice - 복사본.mp3 */; };
+		F5DEDB582603468B009000CE /* button_beep.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB4A2603468B009000CE /* button_beep.mp3 */; };
+		F5DEDB592603468B009000CE /* AI_kids.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB4B2603468B009000CE /* AI_kids.mp3 */; };
+		F5DEDB5A2603468B009000CE /* AI_measurement_voice - 복사본.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB4C2603468B009000CE /* AI_measurement_voice - 복사본.mp3 */; };
+		F5DEDB5B2603468B009000CE /* AI_small.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB4D2603468B009000CE /* AI_small.mp3 */; };
+		F5DEDB5C2603468B009000CE /* feedbackvoice.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB4E2603468B009000CE /* feedbackvoice.mp3 */; };
+		F5DEDB5D2603468B009000CE /* before_photo_voice.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB4F2603468B009000CE /* before_photo_voice.mp3 */; };
+		F5DEDB5E2603468B009000CE /* AI_medium.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB502603468B009000CE /* AI_medium.mp3 */; };
+		F5DEDB5F2603468B009000CE /* turnface.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB512603468B009000CE /* turnface.mp3 */; };
+		F5DEDB602603468B009000CE /* before_photo_voice - 복사본.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB522603468B009000CE /* before_photo_voice - 복사본.mp3 */; };
+		F5DEDB612603468B009000CE /* AI_large.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB532603468B009000CE /* AI_large.mp3 */; };
+		F5DEDB622603468B009000CE /* button_beep - 복사본.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = F5DEDB542603468B009000CE /* button_beep - 복사본.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +95,7 @@
 		13D2F373ADD6407ABC569167 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		17E2D1CA40624B4C9607FCD1 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
 		1EDD7703BE104EA382C5209D /* Nunito-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Nunito-Regular.ttf"; path = "../src/assets/fonts/Nunito-Regular.ttf"; sourceTree = "<group>"; };
+		2276C1995AB5546F99B626BA /* libPods-frontOffice.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-frontOffice.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F0B4E76ED004AA999B73662 /* SyneTactile-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SyneTactile-Regular.ttf"; path = "../src/assets/fonts/SyneTactile-Regular.ttf"; sourceTree = "<group>"; };
 		338675052F55460E91842415 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Thin.ttf"; path = "../src/assets/fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		4C6D9DD35B453568A4DF493C /* Pods-frontOffice-frontOfficeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontOffice-frontOfficeTests.release.xcconfig"; path = "Target Support Files/Pods-frontOffice-frontOfficeTests/Pods-frontOffice-frontOfficeTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -87,6 +104,7 @@
 		669D94B4D8274A3C82A42273 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		6836D3E083ED315492E85A5E /* Pods-frontOffice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-frontOffice.debug.xcconfig"; path = "Target Support Files/Pods-frontOffice/Pods-frontOffice.debug.xcconfig"; sourceTree = "<group>"; };
 		68A915B083F94C0FA1141171 /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		70A99A01964C79FDAA02F7B0 /* libPods-frontOffice-frontOfficeTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-frontOffice-frontOfficeTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75F317C141A044A185B7A847 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		7ABE95DF69A74E179E87B679 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		7EBE479BA87347929B241235 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
@@ -121,6 +139,20 @@
 		F5B5C45C25EA2A1700EA2457 /* RNTDeepAR.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RNTDeepAR.h; path = frontOffice/RNTDeepAR.h; sourceTree = "<group>"; };
 		F5B5C45D25EA2A1700EA2457 /* RNTDeepARViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNTDeepARViewManager.m; path = frontOffice/RNTDeepARViewManager.m; sourceTree = "<group>"; };
 		F5B5C45E25EA2A1700EA2457 /* RNTDeepAR.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RNTDeepAR.m; path = frontOffice/RNTDeepAR.m; sourceTree = "<group>"; };
+		F5DEDB472603468B009000CE /* AI_measurement_voice.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = AI_measurement_voice.mp3; path = audio/AI_measurement_voice.mp3; sourceTree = "<group>"; };
+		F5DEDB482603468B009000CE /* guide_voice.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = guide_voice.mp3; path = audio/guide_voice.mp3; sourceTree = "<group>"; };
+		F5DEDB492603468B009000CE /* guide_voice - 복사본.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "guide_voice - 복사본.mp3"; path = "audio/guide_voice - 복사본.mp3"; sourceTree = "<group>"; };
+		F5DEDB4A2603468B009000CE /* button_beep.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = button_beep.mp3; path = audio/button_beep.mp3; sourceTree = "<group>"; };
+		F5DEDB4B2603468B009000CE /* AI_kids.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = AI_kids.mp3; path = audio/AI_kids.mp3; sourceTree = "<group>"; };
+		F5DEDB4C2603468B009000CE /* AI_measurement_voice - 복사본.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "AI_measurement_voice - 복사본.mp3"; path = "audio/AI_measurement_voice - 복사본.mp3"; sourceTree = "<group>"; };
+		F5DEDB4D2603468B009000CE /* AI_small.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = AI_small.mp3; path = audio/AI_small.mp3; sourceTree = "<group>"; };
+		F5DEDB4E2603468B009000CE /* feedbackvoice.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = feedbackvoice.mp3; path = audio/feedbackvoice.mp3; sourceTree = "<group>"; };
+		F5DEDB4F2603468B009000CE /* before_photo_voice.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = before_photo_voice.mp3; path = audio/before_photo_voice.mp3; sourceTree = "<group>"; };
+		F5DEDB502603468B009000CE /* AI_medium.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = AI_medium.mp3; path = audio/AI_medium.mp3; sourceTree = "<group>"; };
+		F5DEDB512603468B009000CE /* turnface.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = turnface.mp3; path = audio/turnface.mp3; sourceTree = "<group>"; };
+		F5DEDB522603468B009000CE /* before_photo_voice - 복사본.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "before_photo_voice - 복사본.mp3"; path = "audio/before_photo_voice - 복사본.mp3"; sourceTree = "<group>"; };
+		F5DEDB532603468B009000CE /* AI_large.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = AI_large.mp3; path = audio/AI_large.mp3; sourceTree = "<group>"; };
+		F5DEDB542603468B009000CE /* button_beep - 복사본.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = "button_beep - 복사본.mp3"; path = "audio/button_beep - 복사본.mp3"; sourceTree = "<group>"; };
 		F5E74AD525FD1940006C893E /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = frontOffice/Info.plist; sourceTree = SOURCE_ROOT; };
 		FB1811C10435475990FC4BB9 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -130,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE20AB300E80B36D99562FAD /* libPods-frontOffice-frontOfficeTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +171,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F55070CF25FD0FDD00EF9BCE /* DeepAR.framework in Frameworks */,
+				6A111EF4305060C2E0D6B257 /* libPods-frontOffice.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +198,20 @@
 		13B07FAE1A68108700A75B9A /* frontOffice */ = {
 			isa = PBXGroup;
 			children = (
+				F5DEDB4B2603468B009000CE /* AI_kids.mp3 */,
+				F5DEDB532603468B009000CE /* AI_large.mp3 */,
+				F5DEDB4C2603468B009000CE /* AI_measurement_voice - 복사본.mp3 */,
+				F5DEDB472603468B009000CE /* AI_measurement_voice.mp3 */,
+				F5DEDB502603468B009000CE /* AI_medium.mp3 */,
+				F5DEDB4D2603468B009000CE /* AI_small.mp3 */,
+				F5DEDB522603468B009000CE /* before_photo_voice - 복사본.mp3 */,
+				F5DEDB4F2603468B009000CE /* before_photo_voice.mp3 */,
+				F5DEDB542603468B009000CE /* button_beep - 복사본.mp3 */,
+				F5DEDB4A2603468B009000CE /* button_beep.mp3 */,
+				F5DEDB4E2603468B009000CE /* feedbackvoice.mp3 */,
+				F5DEDB492603468B009000CE /* guide_voice - 복사본.mp3 */,
+				F5DEDB482603468B009000CE /* guide_voice.mp3 */,
+				F5DEDB512603468B009000CE /* turnface.mp3 */,
 				F5B5C45C25EA2A1700EA2457 /* RNTDeepAR.h */,
 				F5B5C45E25EA2A1700EA2457 /* RNTDeepAR.m */,
 				F5B5C45B25EA2A1700EA2457 /* RNTDeepARViewManager.h */,
@@ -183,6 +231,8 @@
 			children = (
 				F5B5C45425EA2A0A00EA2457 /* DeepAR.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				2276C1995AB5546F99B626BA /* libPods-frontOffice.a */,
+				70A99A01964C79FDAA02F7B0 /* libPods-frontOffice-frontOfficeTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -380,27 +430,41 @@
 				F550708025FD0CD700EF9BCE /* white_m in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				F550708C25FD0CD700EF9BCE /* black_2xs in Resources */,
+				F5DEDB622603468B009000CE /* button_beep - 복사본.mp3 in Resources */,
+				F5DEDB5E2603468B009000CE /* AI_medium.mp3 in Resources */,
+				F5DEDB552603468B009000CE /* AI_measurement_voice.mp3 in Resources */,
+				F5DEDB5B2603468B009000CE /* AI_small.mp3 in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				F550708725FD0CD700EF9BCE /* white_3xs in Resources */,
 				F550708225FD0CD700EF9BCE /* white_l in Resources */,
 				F550708425FD0CD700EF9BCE /* white_2xs in Resources */,
+				F5DEDB5D2603468B009000CE /* before_photo_voice.mp3 in Resources */,
 				F550707F25FD0CD700EF9BCE /* black_3xs in Resources */,
+				F5DEDB5C2603468B009000CE /* feedbackvoice.mp3 in Resources */,
 				F550708625FD0CD700EF9BCE /* black_s in Resources */,
 				F4BAE97416434BD097226E7A /* Nunito-Bold.ttf in Resources */,
 				F550708825FD0CD700EF9BCE /* white_xs in Resources */,
+				F5DEDB582603468B009000CE /* button_beep.mp3 in Resources */,
 				F550708D25FD0CD700EF9BCE /* black_m in Resources */,
+				F5DEDB602603468B009000CE /* before_photo_voice - 복사본.mp3 in Resources */,
 				F550708925FD0CD700EF9BCE /* white_s in Resources */,
 				F550708B25FD0CD700EF9BCE /* white_2xl in Resources */,
 				ED4F251302BF4A06814051D6 /* Nunito-Regular.ttf in Resources */,
+				F5DEDB5A2603468B009000CE /* AI_measurement_voice - 복사본.mp3 in Resources */,
+				F5DEDB562603468B009000CE /* guide_voice.mp3 in Resources */,
 				F550708E25FD0CD700EF9BCE /* black_l in Resources */,
 				02975BDD5DBC4606849E7FAD /* Nunito-SemiBold.ttf in Resources */,
 				F550708125FD0CD700EF9BCE /* white_xl in Resources */,
 				5B57DF61580843D2B130EC1A /* Roboto-Light.ttf in Resources */,
+				F5DEDB572603468B009000CE /* guide_voice - 복사본.mp3 in Resources */,
 				F550708A25FD0CD700EF9BCE /* black_xs in Resources */,
 				F550708525FD0CD700EF9BCE /* black_2xl in Resources */,
+				F5DEDB592603468B009000CE /* AI_kids.mp3 in Resources */,
+				F5DEDB612603468B009000CE /* AI_large.mp3 in Resources */,
 				A24ABBEB746C4207920D73FE /* Roboto-Thin.ttf in Resources */,
 				32B19883843448D68B723D38 /* SyneTactile-Regular.ttf in Resources */,
 				F550708325FD0CD700EF9BCE /* black_xl in Resources */,
+				F5DEDB5F2603468B009000CE /* turnface.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
