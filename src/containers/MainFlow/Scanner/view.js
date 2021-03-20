@@ -237,11 +237,11 @@ const ScannerView = (props) => {
 
          onFacesDetected={runFacemesh2}
         // videoStabilizationMode="cinematic"
-        //  faceDetectionClassifications={
-        //    RNCamera.Constants.FaceDetection.Classifications.all
-        //  }
-        //  faceDetectionLandmarks={RNCamera.Constants.FaceDetection.Landmarks.all }
-        //  faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
+         faceDetectionClassifications={
+           RNCamera.Constants.FaceDetection.Classifications.all
+         }
+         faceDetectionLandmarks={RNCamera.Constants.FaceDetection.Landmarks.all }
+         faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
 //          onCameraReady={startRecording}
         />
 
