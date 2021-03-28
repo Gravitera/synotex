@@ -13,22 +13,30 @@
 @implementation RNTDeepAR {
   CGRect _frame;
   ARView* _arview;
+  CameraController* _cameraController;
   UIImageView* _backgroundView;
 }
 
 
 -(instancetype)init {
   if ((self = [super init])) {
-    _arview = [[ARView alloc] init];
-    
+//    _arview = [[ARView alloc] init];
+    _arview = [[ARView alloc] initWithFrame:[UIScreen mainScreen].bounds];
     // Set your app licence key for iOS project here (created through developer.deepar.ai)
     [_arview setLicenseKey:@"880135c4ea71ffe7fef203c8a76c45c501b254bd35f0ae7093a7d6efbe9499d4996d7cdb85eced8d"];
     
     _arview.delegate = self;
     [self addSubview:_arview];
     
+    _cameraController = [[CameraController alloc] init];
+    _cameraController.arview = _arview;
     
+    [_arview initialize];
+    [_cameraController startCamera];
 //    UIInterfaceOrientation orientation = [[UIApplication sharedApplication] statusBarOrientation];
+//    [self setupDeepARViewFrame];
+//    [_arview initialize];
+    
 //    [_arview initializeWithCaptureSessionPreset:AVCaptureSessionPreset1280x720 orientation:orientation cameraPosition:AVCaptureDevicePositionFront];
   }
   
