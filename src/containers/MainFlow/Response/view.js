@@ -12,6 +12,11 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import { Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector, useDispatch } from 'react-redux';
+
+import { SafeAreaView, StatusBar } from "react-native";
+import { Fragment } from 'react';
+
+
 const { height, width } = Dimensions.get('window');
 
 const vh = height / 100;
@@ -27,49 +32,55 @@ const ResponseView = (props) => {
 
   return (
     <>
-      <View style={styles.container}>
-        {/* <CustomHeader title={'측정 결과'} /> */}
-        <View style={{ alignItems: 'center', flex: 1 }}>
-          <Image style={{ width: width, height: height - windowHeight, zIndex: 0 }} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + storeData.attendanceReducer.res.FrontImage }} />
-          <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-            <View style={styles.buttonOver}>
-              <Text style={styles.text}>재측정을 원하시는경우는 재촬영 버튼을 눌러주시거나{"\n"}
-            결과을 확인하시려면 측정결과 버튼을 눌러주세요</Text>
-            </View>
-            <View style={{ marginTop: 4 }}>
-              <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                <TouchableOpacity onPress={() => props.navigation.navigate("input")}>
-                  <View style={{resizeMode: "contain", justifyContent:"center"}}>
-                  {/*<Image style={{ width: 98, height: 121, marginRight: 15 }} source={require("./../../../assets/images/refresh.png")} />*/}
-                  <Image style={{ width: 95, height: 95, marginRight: "15%" }} source={require("./../../../assets/images/refresh.png")} />
-                  
+
+        <Fragment>
+          <SafeAreaView style={{ flex: 0, backgroundColor: "#0D3A71" }} />
+          <StatusBar barStyle="light-content" />
+            <View style={styles.container}>
+              {/* <CustomHeader title={'측정 결과'} /> */}
+              <View style={{ alignItems: 'center', flex: 1 }}>
+                <Image style={{ width: width, height: height - windowHeight, zIndex: 0 }} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + storeData.attendanceReducer.res.FrontImage }} />
+                <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+                  <View style={styles.buttonOver}>
+                    <Text style={styles.text}>재측정을 원하시는경우는 재촬영 버튼을 눌러주시거나{"\n"}
+                  결과을 확인하시려면 측정결과 버튼을 눌러주세요</Text>
                   </View>
-                  <Text style={styles.text2}>재촬영</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={props.onNext}>
+                  <View style={{ marginTop: 4 }}>
+                    <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                      <TouchableOpacity onPress={() => props.navigation.navigate("input")}>
+                        <View style={{resizeMode: "contain", justifyContent:"center"}}>
+                        {/*<Image style={{ width: 98, height: 121, marginRight: 15 }} source={require("./../../../assets/images/refresh.png")} />*/}
+                        <Image style={{ width: 95, height: 95, marginRight: "15%" }} source={require("./../../../assets/images/refresh.png")} />
+                        
+                        </View>
+                        <Text style={styles.text2}>재촬영</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity onPress={props.onNext}>
 
-                  {/*<Image style={{ width: 98, height: 121, marginLeft: 15 }} source={require("./../../../assets/images/result.png")} />*/}
-                    <View style={{justifyContent:"center", resizeMode: "contain"}}>
-                      <Image style={{ width: 95, height: 95, marginLeft: "5%"}} source={require("./../../../assets/images/result.png")} />
+                        {/*<Image style={{ width: 98, height: 121, marginLeft: 15 }} source={require("./../../../assets/images/result.png")} />*/}
+                          <View style={{justifyContent:"center", resizeMode: "contain"}}>
+                            <Image style={{ width: 95, height: 95, marginLeft: "5%"}} source={require("./../../../assets/images/result.png")} />
+                          </View>
+                          <Text style={styles.text3}>측정 결과</Text>
+                      </TouchableOpacity>
                     </View>
-                    <Text style={styles.text3}>측정 결과</Text>
-                </TouchableOpacity>
-              </View>
 
-              {/* <TouchableOpacity style={styles.progressButton} onPress={props.onNext}>
-              <View>
-                <Text style={styles.heading}>AI 자동인식 을 통한 열굴 치수확인</Text>
-                <Text style={styles.paragraph}>얼굴 치수에 따른 추천 마스크 사이즈을 확인해주세요</Text>
+                    {/* <TouchableOpacity style={styles.progressButton} onPress={props.onNext}>
+                    <View>
+                      <Text style={styles.heading}>AI 자동인식 을 통한 열굴 치수확인</Text>
+                      <Text style={styles.paragraph}>얼굴 치수에 따른 추천 마스크 사이즈을 확인해주세요</Text>
+                    </View>
+                    <View>
+                      <Icon name="chevron-forward" size={42} color={theme.color.secondary} />
+                    </View>
+                  </TouchableOpacity> */}
+                  </View>
+                </View>
+
               </View>
-              <View>
-                <Icon name="chevron-forward" size={42} color={theme.color.secondary} />
-              </View>
-            </TouchableOpacity> */}
             </View>
-          </View>
 
-        </View>
-      </View>
+          </Fragment>
     </>
   );
 };

@@ -20,6 +20,13 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
 import axios from 'axios';
+
+
+import { SafeAreaView, StatusBar } from "react-native";
+import { Fragment } from 'react';
+
+
+
 //import Sound from 'react-native-sound';
 const Sound = require('react-native-sound')
 
@@ -219,581 +226,592 @@ const ScannerView = (props) => {
 
   return (
     <>
-      <View style={styles.container}>
-       
-        <RNCamera
-          ref={cameraRef}
-          style={styles.preview}
-          type={RNCamera.Constants.Type.front}
-          flashMode={RNCamera.Constants.FlashMode.off}
-          playSoundOnCapture={false}
 
-          androidCameraPermissionOptions={{
-            title: 'Permission to use camera',
-            message: 'We need your permission to use your camera',
-            buttonPositive: 'Ok',
-            buttonNegative: 'Cancel',
-          }}
+      <Fragment>
+          <SafeAreaView style={{ flex: 0, backgroundColor: "#0D3A71" }} />
+          <StatusBar barStyle="light-content" />
 
-         onFacesDetected={runFacemesh2}
-        // videoStabilizationMode="cinematic"
-        //  faceDetectionClassifications={
-        //    RNCamera.Constants.FaceDetection.Classifications.all
-        //  }
-        //  faceDetectionLandmarks={RNCamera.Constants.FaceDetection.Landmarks.all }
-        //  faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
-//          onCameraReady={startRecording}
-        />
+        
+                  <View style={styles.container}>
+                  
+                    <RNCamera
+                      ref={cameraRef}
+                      style={styles.preview}
+                      type={RNCamera.Constants.Type.front}
+                      flashMode={RNCamera.Constants.FlashMode.off}
+                      playSoundOnCapture={false}
 
+                      androidCameraPermissionOptions={{
+                        title: 'Permission to use camera',
+                        message: 'We need your permission to use your camera',
+                        buttonPositive: 'Ok',
+                        buttonNegative: 'Cancel',
+                      }}
 
-
-
-          {/*<Camera 
-            style={{ flex: 1 }} 
-            type={Camera.Constants.Type} 
-            onFacesDetected={this.state.faceDetecting ? this.handleFacesDetected : undefined }
-            onFaceDetectionError={this.handleFaceDetectionError}
-            faceDetectorSettings={{
-              mode: FaceDetector.Constants.Mode.fast,
-              detectLandmarks: FaceDetector.Constants.Mode.none,
-              runClassifications: FaceDetector.Constants.Mode.none,
-            }}
-            ref={cameraRef}
-          >*/}
+                    onFacesDetected={runFacemesh2}
+                    // videoStabilizationMode="cinematic"
+                    faceDetectionClassifications={
+                      RNCamera.Constants.FaceDetection.Classifications.all
+                    }
+                    faceDetectionLandmarks={RNCamera.Constants.FaceDetection.Landmarks.all }
+                    faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
+            //          onCameraReady={startRecording}
+                    />
 
 
 
-  
-        {/* <CustomDrawerButtonHeader title={'About'} /> */}
 
-
-        {/*<View style={styles.frameContainer}>
-          <Image resizeMode={'contain'} style={styles.frame} source={frame} />
-        </View>
-        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-          <View style={styles.buttonOver}>
-            <Text style={styles.text}>측정사진이 마음에 들지 않으시면 재촬영{"\n"}
-            측정사진이 맘에 드신다면 측정결과 확인 버튼을 눌러주세요.</Text>
-          </View>
-          <View style={{ marginTop: 10 }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-              <TouchableOpacity onPress={takePicture}>
-                <Image style={{ width: 103, height: 103 }} source={require("./../../../assets/images/shutter.png")} />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>*/}
-
-        {state != 7 && state != 8 && state != 6?
-        <View style={styles.frameContainer}>
-          <Image resizeMode={'contain'} style={styles.frame} source={frame} />
-        </View>
-        :
-        null}
-        {state == 6 ?
-        <View style={styles.frameContainer}>
-          <Image resizeMode={'contain'} style={styles.frame} source={rotating_blue_mask} />
-        </View>
-        :
-        null}
-        {state == 7 ?
-
-        <View style={styles.frameContainer}>
-          <Image resizeMode={'contain'} style={styles.frame} source={star_sparkling} />
-        </View>
+                      {/*<Camera 
+                        style={{ flex: 1 }} 
+                        type={Camera.Constants.Type} 
+                        onFacesDetected={this.state.faceDetecting ? this.handleFacesDetected : undefined }
+                        onFaceDetectionError={this.handleFaceDetectionError}
+                        faceDetectorSettings={{
+                          mode: FaceDetector.Constants.Mode.fast,
+                          detectLandmarks: FaceDetector.Constants.Mode.none,
+                          runClassifications: FaceDetector.Constants.Mode.none,
+                        }}
+                        ref={cameraRef}
+                      >*/}
 
 
 
-        :
-        null}
-        {state == 8 ?
-        <View style={styles.frameContainer}>
-          <Image resizeMode={'contain'} style={styles.frame} source={blue_check_mark} />
-        </View>
-        :
-        null}
-        {state == 0 ?
-        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-          <View style={styles.buttonOver}>
-            <Text style={styles.text}>팔을 쭉 뻗어서 가이드라인에 얼굴을 맞춰주세요.</Text>
-          </View>
-          <View style={{ marginTop: 10 }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-              <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/photo_selfie.png")} />
-              <Image stype={{ width: 100, height: 100, marginLeft: 0 }} source={require("./../../../assets/images/selfie2.png")} />
-            </View>
-          </View>
-          <TouchableOpacity onPress={tempfunc}>
-            <ImageBackground source={require("./../../../assets/images/bottom_button.png")}  style={{width:width,height:50, marginTop:15,alignItems: 'center',justifyContent: 'center'}}>
-              <Text style={{ fontWeight: "bold", color: "white" }}>사진 촬영 시작하기</Text>
-            </ImageBackground>
-          </TouchableOpacity>
-        </View>
-        : 
-        null }
-        {state == 1 ?
-        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-          <View style={styles.buttonOver}>
-            <Text style={styles.text}>팔을 쭉 뻗어서 가이드라인에 얼굴을 맞춰주세요.</Text>
-          </View>
-          <View style={{ marginTop: 10 }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-              <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/photo_selfie.png")} />
-              <Image stype={{ width: 100, height: 100, marginLeft: 0 }} source={require("./../../../assets/images/selfie2.png")} />
-            </View>
-          </View>
-          <View></View>
-        </View>
-        : 
-        null }
-        {state == 2 ?
-        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-          <View style={styles.buttonOver}>
-            <Text style={styles.text}>촬영이 시작되면 가이드라인을 따라 {'\n'}
-                                    얼굴을 돌려주세요.</Text>
-          </View>
-          <View style={{ marginTop: 10 }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-
-            </View>
-          </View>
-          <View></View>
-        </View>
-        : 
-        null }
-        {state == 3 ?
-        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-          <View style={styles.buttonOver}>
-            <Text style={styles.text}>촬영이 시작되면 가이드라인을 따라 {'\n'}
-                                    얼굴을 돌려주세요.</Text>
-          </View>
-          <View style={{ marginTop: 10 }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/blue_three.png")} />
-            </View>
-          </View>
-          <View></View>
-        </View>
-        : 
-        null }
-        {state == 4 ?
-        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-          <View style={styles.buttonOver}>
-            <Text style={styles.text}>촬영이 시작되면 가이드라인을 따라 {'\n'}
-                                    얼굴을 돌려주세요.</Text>
-          </View>
-          <View style={{ marginTop: 10 }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/blue_two.png")} />
-            </View>
-          </View>
-          <View></View>
-        </View>
-        : 
-        null }
-        {state == 5 ?
-        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-          <View style={styles.buttonOver}>
-            <Text style={styles.text}>촬영이 곧 시작 됩니다. {'\n'}
-                              가이드라인을 따라 얼굴을 돌려주세요.</Text>
-          </View>
-          <View style={{ marginTop: 10 }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-                <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/blue_one.png")} />
-            </View>
-          </View>
-          <View></View>
-        </View>
-        : 
-        null }
-        {state == 6 ?
-        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-        <View style={{justifyContent:"center"}}>
-          <Text style={styles.text}>촬영이 시작 되었습니다 {'\n'}
-                            가이드라인을 따라 얼굴을 돌려주세요.</Text>
-        </View>
-        <View style={{ marginTop: 10 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          </View>
-        </View>
-        <View></View>
-      </View>
-        : 
-        null }  
-        {state == 7 ?
-        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-        <View style={{justifyContent:"center"}}>
-          <Text style={styles.text}>인공지능이 분석 중입니다. {'\n'}
-                                      잠시만 기다려 주세요.</Text>
-        </View>
-        <View style={{ marginTop: 10 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          </View>
-        </View>
-        <View></View>
-      </View>
-        : 
-        null }
-        {state == 8 ?
-        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-        <View style={{justifyContent:"center"}}>
-          <Text style={styles.text}>완료 되었습니다</Text>
-        </View>
-        <View style={{ marginTop: 10 }}>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-          </View>
-        </View>
-        <View></View>
-      </View>
-        : 
-        null }
+              
+                    {/* <CustomDrawerButtonHeader title={'About'} /> */}
 
 
+                    {/*<View style={styles.frameContainer}>
+                      <Image resizeMode={'contain'} style={styles.frame} source={frame} />
+                    </View>
+                    <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+                      <View style={styles.buttonOver}>
+                        <Text style={styles.text}>측정사진이 마음에 들지 않으시면 재촬영{"\n"}
+                        측정사진이 맘에 드신다면 측정결과 확인 버튼을 눌러주세요.</Text>
+                      </View>
+                      <View style={{ marginTop: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+                          <TouchableOpacity onPress={takePicture}>
+                            <Image style={{ width: 103, height: 103 }} source={require("./../../../assets/images/shutter.png")} />
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    </View>*/}
 
-        {/* <View
-          style={{
-            justifyContent: 'center',
-            backgroundColor: 'white',
-            width: width - 40,
-            marginTop: 20,
-            borderRadius: 10,
-            marginLeft: 20,
-            paddingVertical: 20,
-            zIndex: 100
-          }}>
-          <Text style={{ textAlign: 'center', color: '#000' }}>
-            경계 상자에면 정렬
-          </Text>
-        </View> */}
-        {/* <View
-          style={{
-            position: 'absolute',
-            right: 0,
-            height,
-            justifyContent: 'center',
-            zIndex: 100,
-          }}>
-          {!picture && (
-            <Pressable
-              disabled={props.loading || picture}
-              onPress={takePicture}
-              style={{
-                ...styles.capture,
-                borderColor: props.loading ? '#fff6' : '#fff',
-              }}>
-              <Icon
-                name="camera-alt"
-                size={60}
-                color={props.loading ? '#fff6' : '#fff'}
-              />
-            </Pressable>
-          )}
-        </View> */}
-        {/* <View style={styles.displayKids}>
-          <List.Accordion
-            title={`        Total: ${props.students.length
-              }          On Board: ${props.onboardCount && props.onboardCount > 0
-                ? props.onboardCount
-                : 0
-              }`}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              borderRadius: 20,
-            }}
-            titleStyle={{
-              color: 'black',
-              fontWeight: 'normal',
-              fontWeight: 'bold',
-              textAlign: 'center',
-            }}>
-            {props.students.length > 0 ? (
-              <View style={styles.collapsible}>
-                <DataTable
-                  style={{
-                    backgroundColor: 'white',
-                    width: 550,
-                    marginLeft: -120,
-                  }}>
-                  <DataTable.Header
-                    style={{
-                      backgroundColor: '#5CA8D6',
-                      color: '#FFFFFF',
-                      paddingHorizontal: -30,
-                    }}>
-                    <DataTable.Title style={{ ...styles.tableheading }}>
-                      <Text style={{ fontSize: 16, color: '#fff' }}>No</Text>
-                    </DataTable.Title>
-                    <DataTable.Title style={{ ...styles.tableheading }}>
-                      <Text style={{ fontSize: 16, color: '#fff' }}>Name</Text>
-                    </DataTable.Title>
-                    <DataTable.Title style={{ ...styles.tableheading }}>
-                      <Text style={{ fontSize: 16, color: '#fff' }}>
-                        Check In
-                      </Text>
-                    </DataTable.Title>
-                    <DataTable.Title style={{ ...styles.tableheading }}>
-                      <Text style={{ fontSize: 16, color: '#fff' }}>
-                        Check Out
-                      </Text>
-                    </DataTable.Title>
-                  </DataTable.Header>
-                  <ScrollView
-                    style={styles.scrollView}
-                    contentContainerStyle={{ flexGrow: 1 }}>
-                    <View>
-                      {props.students.map((students, index) => {
-                        return (
-                          <DataTable.Row
-                            key={index}
-                            style={{
-                              backgroundColor: 'white',
-                              color: '#FFFFFF',
-                              paddingHorizontal: 10,
-                            }}>
-                            <DataTable.Cell style={{ ...styles.tableheading }}>
-                              <Text style={{ fontSize: 14 }}>
-                                {students.studentId}
-                              </Text>
-                            </DataTable.Cell>
-                            <DataTable.Cell style={{ ...styles.tableheading }}>
-                              <Text style={{ fontSize: 14 }}>
-                                {students.name}
-                              </Text>
-                            </DataTable.Cell>
-                            <DataTable.Cell style={{ ...styles.tabletime }}>
-                              <View>
-                                {props?.onboardStudents &&
-                                  props.onboardStudents[date] &&
-                                  props.onboardStudents[date][students._id]
-                                    ?.checkIn ? (
-                                    <FAIcon name="circle" color="green" />
-                                  ) : (
-                                    <FAIcon name="circle" color="#B7B7B7" />
-                                  )}
-                              </View>
-                              <View
-                                style={{
-                                  width: 60,
-                                }}>
-                                <Text
-                                  style={{
-                                    color: '#B7B7B7',
-                                    width: '100%',
-                                    textAlign: 'center',
-                                    fontSize: 12,
-                                    lineHeight: 12,
-                                  }}>
-                                  {props.onboardStudents &&
-                                    props.onboardStudents[date] &&
-                                    props.onboardStudents[date][students._id]
-                                      ?.checkIn
-                                    ?
-                                    moment(
-                                      props.onboardStudents[date][
-                                        students._id
-                                      ]?.checkIn,
-                                    )
-                                      .local()
-                                      .format('LT')
-                                    : '—'}
-                                </Text>
-                              </View>
-                            </DataTable.Cell>
-                            <DataTable.Cell style={{ ...styles.tabletime }}>
-                              <View>
-                                {props.onboardStudents &&
-                                  props.onboardStudents[date] &&
-                                  props.onboardStudents[date][students._id]
-                                    ?.checkOut ? (
-                                    <FAIcon name="circle" color="green" />
-                                  ) : (
-                                    <FAIcon name="circle" color="#B7B7B7" />
-                                  )}
-                              </View>
-                              <View
-                                style={{
-                                  width: 60,
-                                }}>
-                                <Text
-                                  style={{
-                                    color: '#B7B7B7',
-                                    width: '100%',
-                                    textAlign: 'center',
-                                    fontSize: 12,
-                                    lineHeight: 12,
-                                  }}>
-                                  {props.onboardStudents &&
-                                    props.onboardStudents[date] &&
-                                    props.onboardStudents[date][students._id]
-                                      ?.checkOut
-                                    ? moment(
-                                      props.onboardStudents[date][
-                                        students._id
-                                      ]?.checkOut,
-                                    )
-                                      .local()
-                                      .format('LT')
-                                    : '—'}
-                                </Text>
-                              </View>
-                            </DataTable.Cell>
-                          </DataTable.Row>
-                        );
-                      })}
+                    {state != 7 && state != 8 && state != 6?
+                    <View style={styles.frameContainer}>
+                      <Image resizeMode={'contain'} style={styles.frame} source={frame} />
+                    </View>
+                    :
+                    null}
+                    {state == 6 ?
+                    <View style={styles.frameContainer}>
+                      <Image resizeMode={'contain'} style={styles.frame} source={rotating_blue_mask} />
+                    </View>
+                    :
+                    null}
+                    {state == 7 ?
+
+                    <View style={styles.frameContainer}>
+                      <Image resizeMode={'contain'} style={styles.frame} source={star_sparkling} />
                     </View>
 
-                    <View>
-                      <DataTable.Row
 
+
+                    :
+                    null}
+                    {state == 8 ?
+                    <View style={styles.frameContainer}>
+                      <Image resizeMode={'contain'} style={styles.frame} source={blue_check_mark} />
+                    </View>
+                    :
+                    null}
+                    {state == 0 ?
+
+                      <SafeAreaView style={{ flex: 1, backgroundColor: "#0D3A71" }}>
+                        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+                          <View style={styles.buttonOver}>
+                            <Text style={styles.text}>팔을 쭉 뻗어서 가이드라인에 얼굴을 맞춰주세요.</Text>
+                          </View>
+                          <View style={{ marginTop: 10 }}>
+                            <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                              <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/photo_selfie.png")} />
+                              <Image stype={{ width: 100, height: 100, marginLeft: 0 }} source={require("./../../../assets/images/selfie2.png")} />
+                            </View>
+                          </View>
+                          <TouchableOpacity onPress={tempfunc}>
+                            <ImageBackground source={require("./../../../assets/images/bottom_button.png")}  style={{width:width,height:50, marginTop:15,alignItems: 'center',justifyContent: 'center'}}>
+                              <Text style={{ fontWeight: "bold", color: "white" }}>사진 촬영 시작하기</Text>
+                            </ImageBackground>
+                          </TouchableOpacity>
+                        </View>
+                      </SafeAreaView>
+                    : 
+                    null }
+                    {state == 1 ?
+                    <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+                      <View style={styles.buttonOver}>
+                        <Text style={styles.text}>팔을 쭉 뻗어서 가이드라인에 얼굴을 맞춰주세요.</Text>
+                      </View>
+                      <View style={{ marginTop: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                          <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/photo_selfie.png")} />
+                          <Image stype={{ width: 100, height: 100, marginLeft: 0 }} source={require("./../../../assets/images/selfie2.png")} />
+                        </View>
+                      </View>
+                      <View></View>
+                    </View>
+                    : 
+                    null }
+                    {state == 2 ?
+                    <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+                      <View style={styles.buttonOver}>
+                        <Text style={styles.text}>촬영이 시작되면 가이드라인을 따라 {'\n'}
+                                                얼굴을 돌려주세요.</Text>
+                      </View>
+                      <View style={{ marginTop: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+
+                        </View>
+                      </View>
+                      <View></View>
+                    </View>
+                    : 
+                    null }
+                    {state == 3 ?
+                    <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+                      <View style={styles.buttonOver}>
+                        <Text style={styles.text}>촬영이 시작되면 가이드라인을 따라 {'\n'}
+                                                얼굴을 돌려주세요.</Text>
+                      </View>
+                      <View style={{ marginTop: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                            <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/blue_three.png")} />
+                        </View>
+                      </View>
+                      <View></View>
+                    </View>
+                    : 
+                    null }
+                    {state == 4 ?
+                    <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+                      <View style={styles.buttonOver}>
+                        <Text style={styles.text}>촬영이 시작되면 가이드라인을 따라 {'\n'}
+                                                얼굴을 돌려주세요.</Text>
+                      </View>
+                      <View style={{ marginTop: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                            <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/blue_two.png")} />
+                        </View>
+                      </View>
+                      <View></View>
+                    </View>
+                    : 
+                    null }
+                    {state == 5 ?
+                    <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+                      <View style={styles.buttonOver}>
+                        <Text style={styles.text}>촬영이 곧 시작 됩니다. {'\n'}
+                                          가이드라인을 따라 얼굴을 돌려주세요.</Text>
+                      </View>
+                      <View style={{ marginTop: 10 }}>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                            <Image stype={{ width: 100, height: 100, marginRight: 0 }} source={require("./../../../assets/images/blue_one.png")} />
+                        </View>
+                      </View>
+                      <View></View>
+                    </View>
+                    : 
+                    null }
+                    {state == 6 ?
+                    <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+                    <View style={{justifyContent:"center"}}>
+                      <Text style={styles.text}>촬영이 시작 되었습니다 {'\n'}
+                                        가이드라인을 따라 얼굴을 돌려주세요.</Text>
+                    </View>
+                    <View style={{ marginTop: 10 }}>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                      </View>
+                    </View>
+                    <View></View>
+                  </View>
+                    : 
+                    null }  
+                    {state == 7 ?
+                    <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+                    <View style={{justifyContent:"center"}}>
+                      <Text style={styles.text}>인공지능이 분석 중입니다. {'\n'}
+                                                  잠시만 기다려 주세요.</Text>
+                    </View>
+                    <View style={{ marginTop: 10 }}>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                      </View>
+                    </View>
+                    <View></View>
+                  </View>
+                    : 
+                    null }
+                    {state == 8 ?
+                    <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
+                    <View style={{justifyContent:"center"}}>
+                      <Text style={styles.text}>완료 되었습니다</Text>
+                    </View>
+                    <View style={{ marginTop: 10 }}>
+                      <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                      </View>
+                    </View>
+                    <View></View>
+                  </View>
+                    : 
+                    null }
+
+
+
+                    {/* <View
+                      style={{
+                        justifyContent: 'center',
+                        backgroundColor: 'white',
+                        width: width - 40,
+                        marginTop: 20,
+                        borderRadius: 10,
+                        marginLeft: 20,
+                        paddingVertical: 20,
+                        zIndex: 100
+                      }}>
+                      <Text style={{ textAlign: 'center', color: '#000' }}>
+                        경계 상자에면 정렬
+                      </Text>
+                    </View> */}
+                    {/* <View
+                      style={{
+                        position: 'absolute',
+                        right: 0,
+                        height,
+                        justifyContent: 'center',
+                        zIndex: 100,
+                      }}>
+                      {!picture && (
+                        <Pressable
+                          disabled={props.loading || picture}
+                          onPress={takePicture}
+                          style={{
+                            ...styles.capture,
+                            borderColor: props.loading ? '#fff6' : '#fff',
+                          }}>
+                          <Icon
+                            name="camera-alt"
+                            size={60}
+                            color={props.loading ? '#fff6' : '#fff'}
+                          />
+                        </Pressable>
+                      )}
+                    </View> */}
+                    {/* <View style={styles.displayKids}>
+                      <List.Accordion
+                        title={`        Total: ${props.students.length
+                          }          On Board: ${props.onboardCount && props.onboardCount > 0
+                            ? props.onboardCount
+                            : 0
+                          }`}
                         style={{
-                          backgroundColor: 'purple',
-                          color: '#FFFFFF',
-                          paddingHorizontal: 10,
+                          backgroundColor: 'white',
+                          color: 'black',
+                          borderRadius: 20,
+                        }}
+                        titleStyle={{
+                          color: 'black',
+                          fontWeight: 'normal',
+                          fontWeight: 'bold',
+                          textAlign: 'center',
                         }}>
+                        {props.students.length > 0 ? (
+                          <View style={styles.collapsible}>
+                            <DataTable
+                              style={{
+                                backgroundColor: 'white',
+                                width: 550,
+                                marginLeft: -120,
+                              }}>
+                              <DataTable.Header
+                                style={{
+                                  backgroundColor: '#5CA8D6',
+                                  color: '#FFFFFF',
+                                  paddingHorizontal: -30,
+                                }}>
+                                <DataTable.Title style={{ ...styles.tableheading }}>
+                                  <Text style={{ fontSize: 16, color: '#fff' }}>No</Text>
+                                </DataTable.Title>
+                                <DataTable.Title style={{ ...styles.tableheading }}>
+                                  <Text style={{ fontSize: 16, color: '#fff' }}>Name</Text>
+                                </DataTable.Title>
+                                <DataTable.Title style={{ ...styles.tableheading }}>
+                                  <Text style={{ fontSize: 16, color: '#fff' }}>
+                                    Check In
+                                  </Text>
+                                </DataTable.Title>
+                                <DataTable.Title style={{ ...styles.tableheading }}>
+                                  <Text style={{ fontSize: 16, color: '#fff' }}>
+                                    Check Out
+                                  </Text>
+                                </DataTable.Title>
+                              </DataTable.Header>
+                              <ScrollView
+                                style={styles.scrollView}
+                                contentContainerStyle={{ flexGrow: 1 }}>
+                                <View>
+                                  {props.students.map((students, index) => {
+                                    return (
+                                      <DataTable.Row
+                                        key={index}
+                                        style={{
+                                          backgroundColor: 'white',
+                                          color: '#FFFFFF',
+                                          paddingHorizontal: 10,
+                                        }}>
+                                        <DataTable.Cell style={{ ...styles.tableheading }}>
+                                          <Text style={{ fontSize: 14 }}>
+                                            {students.studentId}
+                                          </Text>
+                                        </DataTable.Cell>
+                                        <DataTable.Cell style={{ ...styles.tableheading }}>
+                                          <Text style={{ fontSize: 14 }}>
+                                            {students.name}
+                                          </Text>
+                                        </DataTable.Cell>
+                                        <DataTable.Cell style={{ ...styles.tabletime }}>
+                                          <View>
+                                            {props?.onboardStudents &&
+                                              props.onboardStudents[date] &&
+                                              props.onboardStudents[date][students._id]
+                                                ?.checkIn ? (
+                                                <FAIcon name="circle" color="green" />
+                                              ) : (
+                                                <FAIcon name="circle" color="#B7B7B7" />
+                                              )}
+                                          </View>
+                                          <View
+                                            style={{
+                                              width: 60,
+                                            }}>
+                                            <Text
+                                              style={{
+                                                color: '#B7B7B7',
+                                                width: '100%',
+                                                textAlign: 'center',
+                                                fontSize: 12,
+                                                lineHeight: 12,
+                                              }}>
+                                              {props.onboardStudents &&
+                                                props.onboardStudents[date] &&
+                                                props.onboardStudents[date][students._id]
+                                                  ?.checkIn
+                                                ?
+                                                moment(
+                                                  props.onboardStudents[date][
+                                                    students._id
+                                                  ]?.checkIn,
+                                                )
+                                                  .local()
+                                                  .format('LT')
+                                                : '—'}
+                                            </Text>
+                                          </View>
+                                        </DataTable.Cell>
+                                        <DataTable.Cell style={{ ...styles.tabletime }}>
+                                          <View>
+                                            {props.onboardStudents &&
+                                              props.onboardStudents[date] &&
+                                              props.onboardStudents[date][students._id]
+                                                ?.checkOut ? (
+                                                <FAIcon name="circle" color="green" />
+                                              ) : (
+                                                <FAIcon name="circle" color="#B7B7B7" />
+                                              )}
+                                          </View>
+                                          <View
+                                            style={{
+                                              width: 60,
+                                            }}>
+                                            <Text
+                                              style={{
+                                                color: '#B7B7B7',
+                                                width: '100%',
+                                                textAlign: 'center',
+                                                fontSize: 12,
+                                                lineHeight: 12,
+                                              }}>
+                                              {props.onboardStudents &&
+                                                props.onboardStudents[date] &&
+                                                props.onboardStudents[date][students._id]
+                                                  ?.checkOut
+                                                ? moment(
+                                                  props.onboardStudents[date][
+                                                    students._id
+                                                  ]?.checkOut,
+                                                )
+                                                  .local()
+                                                  .format('LT')
+                                                : '—'}
+                                            </Text>
+                                          </View>
+                                        </DataTable.Cell>
+                                      </DataTable.Row>
+                                    );
+                                  })}
+                                </View>
 
-                        <DataTable.Cell style={{ ...styles.tableheading }}>
-                          <Text style={{ fontSize: 16, color: '#fff' }}>No</Text>
-                        </DataTable.Cell>
-                        <DataTable.Cell style={{ ...styles.tableheading }}>
-                          <Text style={{ fontSize: 16, color: '#fff' }}>Name</Text>
-                        </DataTable.Cell>
-                        <DataTable.Cell style={{ ...styles.tableheading }}>
-                          <Text style={{ fontSize: 16, color: '#fff' }}>Check In</Text>
-                        </DataTable.Cell>
-                        <DataTable.Cell style={{ ...styles.tableheading }}>
-                          <Text style={{ fontSize: 16, color: '#fff' }}>Check Out</Text>
-                        </DataTable.Cell>
+                                <View>
+                                  <DataTable.Row
+
+                                    style={{
+                                      backgroundColor: 'purple',
+                                      color: '#FFFFFF',
+                                      paddingHorizontal: 10,
+                                    }}>
+
+                                    <DataTable.Cell style={{ ...styles.tableheading }}>
+                                      <Text style={{ fontSize: 16, color: '#fff' }}>No</Text>
+                                    </DataTable.Cell>
+                                    <DataTable.Cell style={{ ...styles.tableheading }}>
+                                      <Text style={{ fontSize: 16, color: '#fff' }}>Name</Text>
+                                    </DataTable.Cell>
+                                    <DataTable.Cell style={{ ...styles.tableheading }}>
+                                      <Text style={{ fontSize: 16, color: '#fff' }}>Check In</Text>
+                                    </DataTable.Cell>
+                                    <DataTable.Cell style={{ ...styles.tableheading }}>
+                                      <Text style={{ fontSize: 16, color: '#fff' }}>Check Out</Text>
+                                    </DataTable.Cell>
 
 
-                      </DataTable.Row>
+                                  </DataTable.Row>
 
-                    </View>
-                  </ScrollView>
+                                </View>
+                              </ScrollView>
 
-                  <DataTable.Pagination
-                    page={1}
-                    numberOfPages={3}
-                    onPageChange={page => {
-                      console.log(page);
-                    }}
-                    label="1-2 of 6"
-                  />
-                </DataTable>
-              </View>
-            ) : (
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    backgroundColor: '#5CA8D6',
-                    width: 350,
-                    height: 60,
-                    marginTop: 10,
-                    borderRadius: 10,
-                  }}>
-                  <Text style={{ textAlign: 'center', color: 'white' }}>
-                    NO STUDENTS PRESENT
-                </Text>
-                </View>
-              )}
-          </List.Accordion>
-        </View> */}
+                              <DataTable.Pagination
+                                page={1}
+                                numberOfPages={3}
+                                onPageChange={page => {
+                                  console.log(page);
+                                }}
+                                label="1-2 of 6"
+                              />
+                            </DataTable>
+                          </View>
+                        ) : (
+                            <View
+                              style={{
+                                justifyContent: 'center',
+                                backgroundColor: '#5CA8D6',
+                                width: 350,
+                                height: 60,
+                                marginTop: 10,
+                                borderRadius: 10,
+                              }}>
+                              <Text style={{ textAlign: 'center', color: 'white' }}>
+                                NO STUDENTS PRESENT
+                            </Text>
+                            </View>
+                          )}
+                      </List.Accordion>
+                    </View> */}
 
-        {/* {!picture && !recog && !isLoading && (
-          <View style={styles.displayGest}>
-            <Text style={styles.text}>
-              Keep Blinking Your Left Eye to record your gesture
-            </Text>
-          </View>
-        )} */}
+                    {/* {!picture && !recog && !isLoading && (
+                      <View style={styles.displayGest}>
+                        <Text style={styles.text}>
+                          Keep Blinking Your Left Eye to record your gesture
+                        </Text>
+                      </View>
+                    )} */}
 
-        {/* {!startRecog && (
-          <TouchableOpacity
-            onPress={() => setStartRecog(true)}
-            style={styles.proxyView}>
-            <View>
-              <Button style={styles.proxyhistory} title="Start">
-                <Text style={{ color: 'white', textTransform: 'capitalize' }}>
-                  {' '}
-                  Start
-                </Text>
-              </Button>
-            </View>
-          </TouchableOpacity>
-        )} */}
+                    {/* {!startRecog && (
+                      <TouchableOpacity
+                        onPress={() => setStartRecog(true)}
+                        style={styles.proxyView}>
+                        <View>
+                          <Button style={styles.proxyhistory} title="Start">
+                            <Text style={{ color: 'white', textTransform: 'capitalize' }}>
+                              {' '}
+                              Start
+                            </Text>
+                          </Button>
+                        </View>
+                      </TouchableOpacity>
+                    )} */}
 
-        {/* {startRecog && (
-          <TouchableOpacity
-            onPress={() => setStartRecog(false)}
-            style={styles.proxyView}>
-            <View>
-              <Button style={styles.proxyhistory} title="Start">
-                <Text style={{ color: 'white', textTransform: 'capitalize' }}>
-                  {' '}
-                  Stop
-                </Text>
-              </Button>
-            </View>
-          </TouchableOpacity>
-        )} */}
+                    {/* {startRecog && (
+                      <TouchableOpacity
+                        onPress={() => setStartRecog(false)}
+                        style={styles.proxyView}>
+                        <View>
+                          <Button style={styles.proxyhistory} title="Start">
+                            <Text style={{ color: 'white', textTransform: 'capitalize' }}>
+                              {' '}
+                              Stop
+                            </Text>
+                          </Button>
+                        </View>
+                      </TouchableOpacity>
+                    )} */}
 
-        {/* {props.loading ? (
-          <Image
-            style={{ ...styles.preview, zIndex: 999 }}
-            source={{ uri: picture }}
-          />
-        ) : null} */}
-        {
-          props.loading
-            ? <View style={styles.loadingContainer}>
-              {/* <CustomHeader title={'측정 결과'} /> */}
+                    {/* {props.loading ? (
+                      <Image
+                        style={{ ...styles.preview, zIndex: 999 }}
+                        source={{ uri: picture }}
+                      />
+                    ) : null} */}
+                    {
+                      props.loading
+                        ? <View style={styles.loadingContainer}>
+                          {/* <CustomHeader title={'측정 결과'} /> */}
 
-              <ActivityIndicator
-                size="large"
-                style={styles.loader}
-                animating={props.loading || isLoading}
-              />
-            </View>
-            : null
-        }
+                          <ActivityIndicator
+                            size="large"
+                            style={styles.loader}
+                            animating={props.loading || isLoading}
+                          />
+                        </View>
+                        : null
+                    }
 
-        {/* {props.action ? (
-          <View
-            style={{
-              position: 'absolute',
-              top: height / 2 - actionSide / 2,
-              left: width / 2 - actionSide / 2,
-              width: actionSide,
-              height: actionSide,
-              borderRadius: actionSide,
-              backgroundColor:
-                props.actionImage === 'enter'
-                  ? '#14BB46'
-                  : props.actionImage === 'leave'
-                    ? '#E5D048'
-                    : props.actionImage === 'close'
-                      ? '#E42323'
-                      : null,
-              zIndex: 1001,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Image
-              resizeMode="contain"
-              style={{ width: actionSide - 100, height: actionSide - 100 }}
-              source={
-                props.actionImage === 'enter'
-                  ? require('./../../../assets/images/enter.png')
-                  : props.actionImage === 'leave'
-                    ? require('./../../../assets/images/leave.png')
-                    : props.actionImage === 'close'
-                      ? require('./../../../assets/images/close.png')
-                      : null
-              }
-            />
-          </View>
-        ) : null} */}
-      </View>
+                    {/* {props.action ? (
+                      <View
+                        style={{
+                          position: 'absolute',
+                          top: height / 2 - actionSide / 2,
+                          left: width / 2 - actionSide / 2,
+                          width: actionSide,
+                          height: actionSide,
+                          borderRadius: actionSide,
+                          backgroundColor:
+                            props.actionImage === 'enter'
+                              ? '#14BB46'
+                              : props.actionImage === 'leave'
+                                ? '#E5D048'
+                                : props.actionImage === 'close'
+                                  ? '#E42323'
+                                  : null,
+                          zIndex: 1001,
+                          justifyContent: 'center',
+                          alignItems: 'center',
+                        }}>
+                        <Image
+                          resizeMode="contain"
+                          style={{ width: actionSide - 100, height: actionSide - 100 }}
+                          source={
+                            props.actionImage === 'enter'
+                              ? require('./../../../assets/images/enter.png')
+                              : props.actionImage === 'leave'
+                                ? require('./../../../assets/images/leave.png')
+                                : props.actionImage === 'close'
+                                  ? require('./../../../assets/images/close.png')
+                                  : null
+                          }
+                        />
+                      </View>
+                    ) : null} */}
+                  </View>
+
+        </Fragment>
     </>
   );
 };

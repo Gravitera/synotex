@@ -20,6 +20,9 @@ import * as Animatable from 'react-native-animatable';
 import { BackHandler } from 'react-native';
 import { Linking } from 'react-native';
 
+import { SafeAreaView, StatusBar } from "react-native";
+import { Fragment } from 'react';
+
 const { width, height } = Dimensions.get("window")
 
 
@@ -138,147 +141,157 @@ const InputFeaturesView = (props) => {
 
   return (
     <>
-    
+      <Fragment>
+          <SafeAreaView style={{ flex: 0, backgroundColor: "#0D3A71" }} />
+          <StatusBar barStyle="light-content" />
+
+          <SafeAreaView style={{ flex: 1, backgroundColor: "#0D3A71" }}>
   
 
 
-      <TouchableNativeFeedback onPress={() => screentouched()}>
-      <View style={styles.container} onResponderGrant = { () => screentouched() }>
-        <CustomBackForwardButtonHeader title={'입력 정보'} backFunction={() => {navigation.navigate("intro")}} forwardFunction={props.onNext} />
-        <ScrollView style={{ flex: 1, marginTop: 64, paddingTop: 24 }}>
-          <Text style={styles.heading}></Text>
+                  <TouchableNativeFeedback onPress={() => screentouched()}>
+                  <View style={styles.container} onResponderGrant = { () => screentouched() }>
+                    <CustomBackForwardButtonHeader title={'입력 정보'} backFunction={() => {navigation.navigate("intro")}} forwardFunction={props.onNext} />
+                    <ScrollView style={{ flex: 1, marginTop: 64, paddingTop: 24 }}>
+                      <Text style={styles.heading}></Text>
 
-          <Image resizeMode="contain" source={require("./../../../assets/images/inputfeaturestop.png")} style={{marginLeft: "-9.25%", marginTop:"1%", width: "120%"}}></Image>
-          <View style={{marginTop:"12%"}}>
+                      <Image resizeMode="contain" source={require("./../../../assets/images/inputfeaturestop.png")} style={{marginLeft: "-9.25%", marginTop:"1%", width: "120%"}}></Image>
+                      <View style={{marginTop:"12%"}}>
 
-          </View>
-          <View style={styles.inputBox}>
+                      </View>
+                      <View style={styles.inputBox}>
 
-            <Text style="label">나이 (필수)</Text>
-            <TextInput
-              style={styles.field}
-              label="Age"
-              errorText={props.ageError.message}
-              error={props.ageError.error}
-              onBlur={props.onBlur}
-              value={props.age}
-              onChangeText={text => onChange2({ text, name: "age" })}
-              keyboardType="numeric"
-            />
-            <View style={{ ...styles.nestedFields, borderTopColor: theme.color.secondary, borderTopWidth: 1, paddingTop: 18 }}>
-            <View style={styles.leftField}>
+                        <Text style="label">나이 (필수)</Text>
+                        <TextInput
+                          style={styles.field}
+                          label="Age"
+                          errorText={props.ageError.message}
+                          error={props.ageError.error}
+                          onBlur={props.onBlur}
+                          value={props.age}
+                          onChangeText={text => onChange2({ text, name: "age" })}
+                          keyboardType="numeric"
+                        />
+                        <View style={{ ...styles.nestedFields, borderTopColor: theme.color.secondary, borderTopWidth: 1, paddingTop: 18 }}>
+                        <View style={styles.leftField}>
 
-              <Text style="label">신장 (필수)</Text>
-              <TextInput
-                // style={{width: '100%'}}
-                label="Height"
-                error={props.heightError.error}
-                errorText={props.heightError.message}
-                onBlur={props.onBlur}
-                value={props.height}
-                onChangeText={text => onChange2({ text, name: "height" })}
-                keyboardType="numeric"
-              />
-              </View>
-              {/*<View style={styles.leftField}>
+                          <Text style="label">신장 (필수)</Text>
+                          <TextInput
+                            // style={{width: '100%'}}
+                            label="Height"
+                            error={props.heightError.error}
+                            errorText={props.heightError.message}
+                            onBlur={props.onBlur}
+                            value={props.height}
+                            onChangeText={text => onChange2({ text, name: "height" })}
+                            keyboardType="numeric"
+                          />
+                          </View>
+                          {/*<View style={styles.leftField}>
 
-                <Text style="label">신장 (필수)</Text>
-                <TextInput
-                  // style={{width: '100%'}}
-                  label="Height"
-                  error={props.heightError.error}
-                  errorText={props.heightError.message}
-                  onBlur={props.onBlur}
-                  value={props.height}
-                  onChangeText={text => props.onChange({ text, name: "height" })}
-                  keyboardType="numeric"
-                />
-              </View>*/}
-              <View style={styles.rightField}>
-                <Picker
-                  selectedValue={props.heightUnit}
-                  style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 ,height: 44} } itemStyle={{height: 44}}
-                  onValueChange={(itemValue, itemIndex) =>
-                    props.setHeightUnit(itemValue)
-                  }
-                >
-                  <Picker.Item label="cm" value="cm" color='#757575' />
-                  <Picker.Item label="feet" value="feet" color='#757575' />
-                </Picker>
-              </View>
-            </View>
-          </View>
+                            <Text style="label">신장 (필수)</Text>
+                            <TextInput
+                              // style={{width: '100%'}}
+                              label="Height"
+                              error={props.heightError.error}
+                              errorText={props.heightError.message}
+                              onBlur={props.onBlur}
+                              value={props.height}
+                              onChangeText={text => props.onChange({ text, name: "height" })}
+                              keyboardType="numeric"
+                            />
+                          </View>*/}
+                          {/*
+                          <View style={styles.rightField}>
+                            <Picker
+                              selectedValue={props.heightUnit}
+                              style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 ,height: 44} } itemStyle={{height: 44}}
+                              onValueChange={(itemValue, itemIndex) =>
+                                props.setHeightUnit(itemValue)
+                              }
+                            >
+                              <Picker.Item label="cm" value="cm" color='#757575' />
+                              <Picker.Item label="feet" value="feet" color='#757575' />
+                            </Picker>
+                          </View>
+                          */}
+                        </View>
+                      </View>
 
-          <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/member/privacy.html")} style={{}}>
-            <Text style={styles.heading}>개인정보 보호방침 보러가기</Text>
-          </TouchableOpacity>
-          {/*<Text style={styles.heading}>더 정확한 측정을 원하신다면 아래사항을 입력하여 주세요.</Text>*/}
-
-
-
-          {/*<View style={{ ...styles.inputBox, marginBottom: 86 }}>
+                      <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/member/privacy.html")} style={{}}>
+                        <Text style={styles.heading}>개인정보 보호방침 보러가기</Text>
+                      </TouchableOpacity>
+                      {/*<Text style={styles.heading}>더 정확한 측정을 원하신다면 아래사항을 입력하여 주세요.</Text>*/}
 
 
-            <View style={styles.nestedFields}>
-              <View style={styles.leftField}>
-                <Text style="label">몸무게 (필수)</Text>
-                <TextInput
-                  label="Weight"
-                  value={props.weight}
-                  onChangeText={text => props.onChange({ text, name: "weight" })}
-                  keyboardType="numeric"
-                />
-              </View>
-              <View style={styles.rightField}>
-                <Picker
-                  selectedValue={props.weightUnit}
-                  style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 ,height: 44} } itemStyle={{height: 44}}
-                  onValueChange={(itemValue, itemIndex) =>
-                    props.setWeightUnit(itemValue)
-                  }
-                >
-                  <Picker.Item label="kg" value="kilogram" color='#757575' />
-                  <Picker.Item label="lbs" value="pounds" color='#757575' />
-                </Picker>
-              </View>
-            </View>
 
-            <View style={{ ...styles.nestedFields, borderTopColor: theme.color.secondary, borderTopWidth: 1, paddingTop: 18 }}>
-              <View style={styles.leftField}>
-
-                <Text style="label">신발 사이즈 (필수)</Text>
-                <TextInput
-                  label="Shoe Size"
-                  value={props.shoeSize}
-                  onChangeText={text => props.onChange({ text, name: "shoe size" })}
-                  keyboardType="numeric"
-                />
-              </View>
-              <View style={styles.rightField}>
-                <Picker
-                  selectedValue={props.shoeSizeUnit}
-                  style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 ,height: 44} } itemStyle={{height: 44}}
-                  onValueChange={(itemValue, itemIndex) =>
-                    props.setShoeSizeUnit(itemValue)
-                  }
-                >
-                  <Picker.Item label="mm" value="mm" color='#757575' />
-                  <Picker.Item label="US" value="US" color='#757575' />
-                  <Picker.Item label="EU" value="EU" color='#757575' />
-                </Picker>
-              </View>
-            </View>
-          </View>*/}
+                      {/*<View style={{ ...styles.inputBox, marginBottom: 86 }}>
 
 
-        </ScrollView>
-        <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+                        <View style={styles.nestedFields}>
+                          <View style={styles.leftField}>
+                            <Text style="label">몸무게 (필수)</Text>
+                            <TextInput
+                              label="Weight"
+                              value={props.weight}
+                              onChangeText={text => props.onChange({ text, name: "weight" })}
+                              keyboardType="numeric"
+                            />
+                          </View>
+                          <View style={styles.rightField}>
+                            <Picker
+                              selectedValue={props.weightUnit}
+                              style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 ,height: 44} } itemStyle={{height: 44}}
+                              onValueChange={(itemValue, itemIndex) =>
+                                props.setWeightUnit(itemValue)
+                              }
+                            >
+                              <Picker.Item label="kg" value="kilogram" color='#757575' />
+                              <Picker.Item label="lbs" value="pounds" color='#757575' />
+                            </Picker>
+                          </View>
+                        </View>
 
-          {/*<Button style={{ width: '100%' }} onPress={props.onNext} label="측정 시작하기" />*/}
-          <Button style={{ width: '100%' }} onPress={props.onNext} label="측정 시작하기" />
-        </View>
-      </View>
-      </TouchableNativeFeedback>
+                        <View style={{ ...styles.nestedFields, borderTopColor: theme.color.secondary, borderTopWidth: 1, paddingTop: 18 }}>
+                          <View style={styles.leftField}>
+
+                            <Text style="label">신발 사이즈 (필수)</Text>
+                            <TextInput
+                              label="Shoe Size"
+                              value={props.shoeSize}
+                              onChangeText={text => props.onChange({ text, name: "shoe size" })}
+                              keyboardType="numeric"
+                            />
+                          </View>
+                          <View style={styles.rightField}>
+                            <Picker
+                              selectedValue={props.shoeSizeUnit}
+                              style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 ,height: 44} } itemStyle={{height: 44}}
+                              onValueChange={(itemValue, itemIndex) =>
+                                props.setShoeSizeUnit(itemValue)
+                              }
+                            >
+                              <Picker.Item label="mm" value="mm" color='#757575' />
+                              <Picker.Item label="US" value="US" color='#757575' />
+                              <Picker.Item label="EU" value="EU" color='#757575' />
+                            </Picker>
+                          </View>
+                        </View>
+                      </View>*/}
+
+
+                    </ScrollView>
+                    <View style={{ position: 'absolute', bottom: 0, width: '100%' }}>
+
+                      {/*<Button style={{ width: '100%' }} onPress={props.onNext} label="측정 시작하기" />*/}
+                      <Button style={{ width: '100%' }} onPress={props.onNext} label="측정 시작하기" />
+                    </View>
+                  </View>
+                  </TouchableNativeFeedback>
+
+          </SafeAreaView>
+
+      </Fragment>
 
     </>
   );
