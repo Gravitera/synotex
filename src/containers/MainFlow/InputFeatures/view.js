@@ -145,13 +145,25 @@ const InputFeaturesView = (props) => {
       <TouchableNativeFeedback onPress={() => screentouched()}>
       <View style={styles.container} onResponderGrant = { () => screentouched() }>
         <CustomBackForwardButtonHeader title={'입력 정보'} backFunction={() => {navigation.navigate("intro")}} forwardFunction={props.onNext} />
-        <ScrollView style={{ flex: 1, marginTop: 64, paddingTop: 24 }}>
-          <Text style={styles.heading}></Text>
+        <ScrollView style={{ flex: 1, marginTop: 64, paddingTop: 0 }}>
+          {/*<Text style={styles.heading}></Text> ScrollView paddingTop 24*/}
+          <View style={{backgroundColor: "#0D3A71", width: width, height: height*0.2, flexDirection: "row", alignItems: 'center'}}>
+            <Image style={{height:height*0.135, width: width*0.5, marginLeft: width*0.15}} source={require("./../../../assets/images/input_privacy_notice.png")}>
+            </Image>
 
+            <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/member/privacy.html")} style={{ height:height*0.03, width: width*0.41, marginLeft: -1*width*0.51, marginTop: 1*height*0.1, borderRadius:50 }}>
+
+            </TouchableOpacity>
+
+            <Image style={{height:height*0.1, width: width*0.16, marginLeft: width*0.126}} source={require("./../../../assets/images/input_privacy_logo.png")}>
+            </Image>
+          </View>
+          {/*
           <Image resizeMode="contain" source={require("./../../../assets/images/inputfeaturestop.png")} style={{marginLeft: "-9.25%", marginTop:"1%", width: "120%"}}></Image>
           <View style={{marginTop:"12%"}}>
 
           </View>
+          */}
           <View style={styles.inputBox}>
 
             <Text style="label">나이 (필수)</Text>

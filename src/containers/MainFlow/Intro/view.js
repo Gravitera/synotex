@@ -29,9 +29,7 @@ const IntroView = (props) => {
 
 
         {/* intro_contain_back.png  */}
-        <ImageBackground source={require("./../../../assets/images/intro_contain_back.png")}  style={{width:width,height:height,  
-          alignItems: 'center',
-    justifyContent: 'center'}}>
+        <ImageBackground source={require("./../../../assets/images/intro_contain_back.png")}  style={{width:width,height:height,alignItems: 'center',justifyContent: 'center'}}>
         <View style={{ marginVertical: height / 10 }}>    
         
         
@@ -47,7 +45,7 @@ const IntroView = (props) => {
         
 
           {/* intro_mask.png 80  */}
-          <Image style={{marginLeft:10,marginTop:80,width:264,height:206}}  source={require("./../../../assets/images/intro_mask.png")} />
+            <Image style={{marginLeft:10,marginTop:80,width:264,height:206}}  source={require("./../../../assets/images/intro_mask.png")} />
           
           </ImageBackground>
           
@@ -56,10 +54,27 @@ const IntroView = (props) => {
 
         
         <View>
-          <TouchableOpacity style={{marginBottom:24,width:194,height:35}} onPress={() => props.navigation.navigate('intro2')} > 
+
+
+          <TouchableOpacity style={{marginLeft: -1*width*0.03, marginTop: -1*height*0.05, width:width*0.25, height:height*0.075, backgroundColor: "white", borderRadius: 10}} onPress={() => props.navigation.navigate('intro2')} >
+
+            <Image style={{width:width*0.15,height:height*0.06,alignItems:'center',justifyContent:'center', marginLeft:"5%", marginTop: "2%"}}  source={require("./../../../assets/images/intro_button_inside1.png")} >
+            </Image>
+
+          </TouchableOpacity>
+          
+          <TouchableOpacity style={{marginLeft: width*0.25, marginTop: -1*height*0.075,width:width*0.25,height:height*0.075, backgroundColor: "white", borderRadius: 10}} onPress={() => props.navigation.navigate('ArCamera2')} >
+
+            <Image style={{width:width*0.15,height:height*0.05,alignItems:'center',justifyContent:'center', marginLeft:"15%", marginTop: "9%"}}  source={require("./../../../assets/images/intro_button_inside2.png")} >
+            </Image>
+
+          </TouchableOpacity>
+
+
+          {/*<TouchableOpacity style={{marginBottom:24,width:194,height:35}} onPress={() => props.navigation.navigate('intro2')} > 
         <ImageBackground style={{width:194,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
           <Text style={{color:'#214A84'}}>
-            알맞는 마스크 찾기
+            알맞는 마스크 찾기  intro_button1
           </Text>
         </ImageBackground>
         </TouchableOpacity>
@@ -70,7 +85,7 @@ const IntroView = (props) => {
             시노텍스 마스크 가상착용
           </Text>
         </ImageBackground>
-        </TouchableOpacity>
+        </TouchableOpacity>*/}
 
           {/* <Button label="알맞는 마스크 찾기"   color="#841584" style={{ backgroundColor: 'white', marginBottom: 24 }} onPress={() => props.navigation.navigate('initial')} /> */}
           {/* <Button label="Synotex 바로가기" onPress={() => Linking.openURL("http://synotexmall.com/")} /> */}
