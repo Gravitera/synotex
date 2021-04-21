@@ -44,6 +44,7 @@ import {
   DrawerActions,
 } from '@react-navigation/native';
 import { SafeAreaView, StatusBar, useColorScheme } from 'react-native';
+import { Image } from "react-native";
 
 
 const Stack = createStackNavigator();
@@ -187,14 +188,21 @@ const MainFlow = (props) => {
     <MaterialBottomTabs.Navigator
       initialRouteName="Home"
       activeColor="#e91e63"
-      barStyle={{ backgroundColor: "white"}}
+      barStyle={{ backgroundColor: "white", height: height*0.1}}
     >
       <MaterialBottomTabs.Screen
         name="Home"
         children={createHomeStack}
         options={{
           tabBarLabel: "Home",
+          tabBarIcon: ({ tintColor }) => (
+            <Image
+              source={require('./../../assets/images/round_chalet_black_18.png')}
+              style={{width: width*0.11, height: height*0.05}}
+            />
+          )
         }}
+        
       />
       <MaterialBottomTabs.Screen
         name="Brandstory"
