@@ -35,6 +35,9 @@ import IntroView2 from './Intro2';
 import Storybrand from './Brandstory';
 import ArCamera from './ArCamera';
 import ArCamera2 from './ArCamera2';
+import Synotexmall from './Synotexmall';
+import Offlinestore from './Offlinestore';
+import Exitapp from './Exit';
 // import { requestLocationPermission } from './../../utils'
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -187,18 +190,20 @@ const MainFlow = (props) => {
   return (
     <MaterialBottomTabs.Navigator
       initialRouteName="Home"
-      activeColor="#e91e63"
-      barStyle={{ backgroundColor: "white", height: height*0.1}}
+      activeColor="#0D3A71"
+      barStyle={{ backgroundColor: "white", height: height*0.08}}
+      shifting={false}
     >
       <MaterialBottomTabs.Screen
         name="Home"
         children={createHomeStack}
         options={{
-          tabBarLabel: "Home",
+          //tabBarLabel: "Home",
+          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontSize: 12, marginLeft: 10}}>Home</Text>,
           tabBarIcon: ({ tintColor }) => (
             <Image
-              source={require('./../../assets/images/round_chalet_black_18.png')}
-              style={{width: width*0.11, height: height*0.05}}
+              source={require('./../../assets/images/hometab.png')}
+              style={{width: width*0.08, height: height*0.05}}
             />
           )
         }}
@@ -208,28 +213,52 @@ const MainFlow = (props) => {
         name="Brandstory"
         component={Storybrand}
         options={{
-          tabBarLabel: "브랜드스토리",
+          tabBarLabel: <View style={{}}><Text style={{fontFamily : "pacifico", textAlign : "center", fontSize: 11}}>브랜드스토리</Text></View>,
+          tabBarIcon: ({ tintColor }) => (
+            <Image
+              source={require('./../../assets/images/brandstorytab.png')}
+              style={{width: width*0.099, height: height*0.05}}
+            />
+          )
         }}
       />
       <MaterialBottomTabs.Screen
         name="Store"
-        component={IntroView2}
+        component={Synotexmall}
         options={{
-          tabBarLabel: "스토어",
+          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center"}}>스토어</Text>,
+          tabBarIcon: ({ tintColor }) => (
+            <Image
+              source={require('./../../assets/images/storetab.png')}
+              style={{width: width*0.095, height: height*0.05}}
+            />
+          )
         }}
       />
       <MaterialBottomTabs.Screen
         name="OfflineStore"
-        component={IntroView2}
+        component={Offlinestore}
         options={{
-          tabBarLabel: "오프라인매장",
+          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center"}}>오프라인매장</Text>,
+          tabBarIcon: ({ tintColor }) => (
+            <Image
+              source={require('./../../assets/images/offlinetab.png')}
+              style={{width: width*0.08, height: height*0.05}}
+            />
+          )
         }}
       />
       <MaterialBottomTabs.Screen
         name="Exit"
-        component={IntroView2}
+        component={Exitapp}
         options={{
-          tabBarLabel: "종료",
+          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center"}}>종료</Text>,
+          tabBarIcon: ({ tintColor }) => (
+            <Image
+              source={require('./../../assets/images/exittab.png')}
+              style={{width: width*0.08, height: height*0.05}}
+            />
+          )
         }}
       />
 
