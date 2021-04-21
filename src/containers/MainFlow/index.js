@@ -36,6 +36,17 @@ import ArCamera from './ArCamera';
 import ArCamera2 from './ArCamera2';
 // import { requestLocationPermission } from './../../utils'
 import { createStackNavigator } from '@react-navigation/stack';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import {
+  NavigationContainer,
+  DarkTheme,
+  DrawerActions,
+} from '@react-navigation/native';
+import { SafeAreaView, StatusBar, useColorScheme } from 'react-native';
+
+
+const Stack = createStackNavigator();
+const MaterialBottomTabs = createMaterialBottomTabNavigator();
 
 let socket;
 
@@ -109,11 +120,39 @@ const MainFlow = (props) => {
   };
 
   // console.log('object1 DRAWER TEST DRIVER', driverData);
-  const Stack = createStackNavigator();
 
-  return (
-    <>
-      <Stack.Navigator
+  const createBottomTabs = () => {
+    return (
+      <MaterialBottomTabs.Navigator>
+        <MaterialBottomTabs.Screen
+          name="Home"
+          style={{ marginBottom: 16 }}
+          component={Intro}
+          options={{
+            tabBarLabel: "Home",
+            tabBarIcon: () => <Icon name="home" color="#fff" size={24} />
+          }}
+        />
+        <MaterialBottomTabs.Screen
+          name="Brandstory"
+        />
+        <MaterialBottomTabs.Screen
+          name="Store"
+        />
+        <MaterialBottomTabs.Screen
+          name="OfflineStore"
+        />
+        <MaterialBottomTabs.Screen
+          name="Exit"
+        />
+      </MaterialBottomTabs.Navigator>
+    );
+  };
+
+  const createHomeStack = () => {
+    return (
+      <>
+        <Stack.Navigator
         headerMode="none"
         initialRouteName={'intro'}
         drawerContent={(props) => (
@@ -123,6 +162,79 @@ const MainFlow = (props) => {
             logout={() => props.navigation.navigate('AuthFlow')}
           />
         )}>
+          <Stack.Screen name="intro" component={Intro} />
+          <Stack.Screen name="scanner" component={Scanner} />
+          <Stack.Screen name="scanner2" component={Scanner2} />
+          <Stack.Screen name="initial" component={Initial} />
+          <Stack.Screen name="method" component={Method} />
+          <Stack.Screen name="input" component={InputFeatures} />
+          <Stack.Screen name="response" component={Response} />
+          <Stack.Screen name="recommendation" component={Recommendation} />
+          <Stack.Screen name="intro2" component={IntroView2} />
+          <Stack.Screen name="ArCamera" component={ArCamera} />
+          <Stack.Screen name="ArCamera2" component={ArCamera2} />
+        </Stack.Navigator>
+      </>
+    );   
+  };
+  return (
+    <MaterialBottomTabs.Navigator
+      initialRouteName="Home"
+      activeColor="#e91e63"
+      barStyle={{ backgroundColor: "white"}}
+    >
+      <MaterialBottomTabs.Screen
+        name="Home"
+        children={createHomeStack}
+        options={{
+          tabBarLabel: "Home",
+        }}
+      />
+      <MaterialBottomTabs.Screen
+        name="Brandstory"
+        component={IntroView2}
+        options={{
+          tabBarLabel: "브랜드스토리",
+        }}
+      />
+      <MaterialBottomTabs.Screen
+        name="Store"
+        component={IntroView2}
+        options={{
+          tabBarLabel: "스토어",
+        }}
+      />
+      <MaterialBottomTabs.Screen
+        name="OfflineStore"
+        component={IntroView2}
+        options={{
+          tabBarLabel: "오프라인매장",
+        }}
+      />
+      <MaterialBottomTabs.Screen
+        name="Exit"
+        component={IntroView2}
+        options={{
+          tabBarLabel: "종료",
+        }}
+      />
+
+    </MaterialBottomTabs.Navigator>
+  );
+
+  /*
+  return (
+    <>
+      <Stack.Navigator
+      headerMode="none"
+      initialRouteName={'intro'}
+      drawerContent={(props) => (
+        <StackContent
+          {...props}
+          driverData={driverData}
+          logout={() => props.navigation.navigate('AuthFlow')}
+        />
+      )}>
         <Stack.Screen name="intro" component={Intro} />
         <Stack.Screen name="scanner" component={Scanner} />
         <Stack.Screen name="scanner2" component={Scanner2} />
@@ -134,14 +246,41 @@ const MainFlow = (props) => {
         <Stack.Screen name="intro2" component={IntroView2} />
         <Stack.Screen name="ArCamera" component={ArCamera} />
         <Stack.Screen name="ArCamera2" component={ArCamera2} />
-        {/* <Stack.Screen name="feedback" component={Feedback} /> */}
-        {/* <Stack.Screen name="ResetPassword" component={ResetPasswordEmail} /> */}
-        {/* <Stack.Screen name="ResetOldPassword" component={ResetOldPassword} />
-        <Stack.Screen name="ResetNewPin" component={ResetNewPin} />
-        <Stack.Screen name="LogOut" component={LogOut} /> */}
       </Stack.Navigator>
     </>
   );
+  */
+
 };
 
+
+/*
+const TabNavigator = createMaterialBottomTabNavigator({
+    Home: {
+      screen: Intro
+    },
+    Brandstory: {
+
+    },
+    Store: {
+
+    },
+    OfflineStore: {
+
+    },
+    Exit:{
+      
+    }
+  },
+  {
+    initialRouteName: 'Home',
+    activeColor: '#ffffff',
+    inactiveColor: '#bda1f7',
+    barStyle: { backgroundColor: '#6948f4' },
+  }
+);
+*/
+
+
 export default MainFlow;
+//export default createAppContainer(TabNavigator);

@@ -166,7 +166,7 @@ const InputFeaturesView = (props) => {
           */}
           <View style={styles.inputBox}>
 
-            <Text style="label">나이 (필수)</Text>
+            <Text style="label">나이(필수)</Text>
             <TextInput
               style={styles.field}
               label="Age"
