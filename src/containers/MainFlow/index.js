@@ -32,6 +32,7 @@ import InputFeatures from './InputFeatures';
 import Response from './Response';
 import Recommendation from './Recommendation';
 import IntroView2 from './Intro2';
+import Storybrand from './Brandstory';
 import ArCamera from './ArCamera';
 import ArCamera2 from './ArCamera2';
 // import { requestLocationPermission } from './../../utils'
@@ -121,6 +122,7 @@ const MainFlow = (props) => {
 
   // console.log('object1 DRAWER TEST DRIVER', driverData);
 
+  /*
   const createBottomTabs = () => {
     return (
       <MaterialBottomTabs.Navigator>
@@ -148,6 +150,7 @@ const MainFlow = (props) => {
       </MaterialBottomTabs.Navigator>
     );
   };
+  */
 
   const createHomeStack = () => {
     return (
@@ -177,6 +180,9 @@ const MainFlow = (props) => {
       </>
     );   
   };
+
+
+  
   return (
     <MaterialBottomTabs.Navigator
       initialRouteName="Home"
@@ -192,7 +198,7 @@ const MainFlow = (props) => {
       />
       <MaterialBottomTabs.Screen
         name="Brandstory"
-        component={IntroView2}
+        component={Storybrand}
         options={{
           tabBarLabel: "브랜드스토리",
         }}
