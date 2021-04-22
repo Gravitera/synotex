@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   topimage:{
     width: width*0.99,
-    height: height*0.5,
+    height: height*0.51,
     marginTop: height*0.08,
     marginLeft: width*0.035
   },

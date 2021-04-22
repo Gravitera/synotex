@@ -155,7 +155,7 @@ const InputFeaturesView = (props) => {
 
             </TouchableOpacity>
 
-            <Image style={{height:height*0.1, width: width*0.16, marginLeft: width*0.126}} source={require("./../../../assets/images/input_privacy_logo.png")}>
+            <Image style={{height:height*0.11, width: width*0.16, marginLeft: width*0.126}} source={require("./../../../assets/images/input_privacy_logo.png")}>
             </Image>
           </View>
           {/*
@@ -164,7 +164,54 @@ const InputFeaturesView = (props) => {
 
           </View>
           */}
+
+          <View style={{marginTop: height*0.05}}>
+
+          </View>
+
           <View style={styles.inputBox}>
+            <Text style={{marginTop: "-12.5%", fontSize: 15, fontWeight: "bold"}}>나이 (필수)</Text>
+            <TextInput
+              style={styles.field}
+              label="Age"
+              errorText={props.ageError.message}
+              error={props.ageError.error}
+              onBlur={props.onBlur}
+              value={props.age}
+              onChangeText={text => onChange2({ text, name: "age" })}
+              keyboardType="numeric"
+              style={{marginRight: "7%"}}
+              placeholder="30"
+              placeholderTextColor="grey"
+              style={{marginTop: "-10%", fontSize: 15}}
+            />
+          </View>
+
+          <View style={styles.inputBox2}>
+            <Text style={{marginTop: "-12.5%", fontSize: 15, fontWeight: "bold"}}>신장 (필수)</Text>
+            <TextInput
+                // style={{width: '100%'}}
+                label="Height"
+                error={props.heightError.error}
+                errorText={props.heightError.message}
+                onBlur={props.onBlur}
+                value={props.height}
+                onChangeText={text => onChange2({ text, name: "height" })}
+                keyboardType="numeric"
+                placeholder="175"
+                placeholderTextColor="grey"
+                style={{marginRight: "-55%", marginTop: "-10%", fontSize: 15}}
+              />
+            <Text style={{marginTop: "-12%"}}>cm</Text>
+          </View>
+
+
+
+
+
+
+
+          {/*<View style={styles.inputBox}>
 
             <Text style="label">나이(필수)</Text>
             <TextInput
@@ -206,7 +253,7 @@ const InputFeaturesView = (props) => {
                   keyboardType="numeric"
                 />
               </View>*/}
-              <View style={styles.rightField}>
+              {/*<View style={styles.rightField}>
                 <Picker
                   selectedValue={props.heightUnit}
                   style={{ borderBottomColor: theme.color.secondary, borderBottomWidth: 1 ,height: 44} } itemStyle={{height: 44}}
@@ -219,11 +266,11 @@ const InputFeaturesView = (props) => {
                 </Picker>
               </View>
             </View>
-          </View>
+          </View>*/}
 
-          <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/member/privacy.html")} style={{}}>
+          {/*<TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/member/privacy.html")} style={{}}>
             <Text style={styles.heading}>개인정보 보호방침 보러가기</Text>
-          </TouchableOpacity>
+          </TouchableOpacity>*/}
           {/*<Text style={styles.heading}>더 정확한 측정을 원하신다면 아래사항을 입력하여 주세요.</Text>*/}
 
 
@@ -350,7 +397,28 @@ const styles = StyleSheet.create({
     backgroundColor: theme.color.light,
     borderRadius: 20,
     paddingHorizontal: 20,
-    paddingTop: 30,
+    paddingTop: 50,
+    paddingBottom: 10,
+    marginBottom: 15,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 3,
+      height: 3,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4.65,
+    elevation: 5,
+    marginHorizontal: 30,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent:'space-between'
+
+  },
+  inputBox2: {
+    backgroundColor: theme.color.light,
+    borderRadius: 20,
+    paddingHorizontal: 20,
+    paddingTop: 50,
     paddingBottom: 10,
     marginBottom: 40,
     shadowColor: "#000",
@@ -361,7 +429,10 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 4.65,
     elevation: 5,
-    marginHorizontal: 30
+    marginHorizontal: 30,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent:'space-between'
   }
 });
 
