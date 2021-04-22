@@ -385,93 +385,46 @@ const RecommendationView = (props) => {
 
 
         <Animatable.View animation="slideInUp" direction="alternate">
-            <View style={styles.headerContainer}>
+            <View style={styles.headerContainer, {flexDirection: "column"}}>
 
               {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
-              <Text style={styles.header2}>시노텍스 마스크 바로구매</Text>
+              <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>시노텍스앱에서 측정한 당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"{overallsize}"</Text> 입니다.</Text>
+              <Text style={{marginTop: 0, color: theme.color.light, marginBottom: height*0.03, marginLeft: width*0.07}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
             </View>
-          </Animatable.View>
+        </Animatable.View>
 
-          <Animatable.View animation="slideInUp" direction="alternate">
-            {/* <Image style={{ width: width - 40, height: 489 * ratio, marginVertical: 40, borderRadius: 5 }} resizeMode="contain" source={require('./../../../assets/images/graph.png')} /> */}
-            {maskImage == "XS" ?
-            <View style={styles.gallery}>
-              <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%82%A4%EC%A6%88-50%EB%A7%A4/27/category/1/display/2/")} style={styles.maskButton}>
-                <View style={styles.buttonCont}>
+        <View style={{flexDirection:"row", justifyContent: "space-between", marginLeft: width*0.03}}>
+          <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/category/%ED%99%94%EC%9D%B4%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%AC/30/")}>
+            <Image style={{width: width*0.2,height: width*0.2,marginBottom: height*0.01}} resizeMode="contain" source={require(`./../../../assets/images/whitemaskicon.png`)} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/category/%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%A7%88%EC%8A%A4%ED%81%AC/49/")}>
+            <Image style={{width: width*0.2,height: width*0.2,marginBottom: height*0.01}} resizeMode="contain" source={require(`./../../../assets/images/greymaskicon.png`)} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/category/%EB%B8%94%EB%9E%99%EB%A7%88%EC%8A%A4%ED%81%AC/29/")}>
+            <Image style={{width: width*0.2,height: width*0.2,marginBottom: height*0.01}} resizeMode="contain" source={require(`./../../../assets/images/blackmaskicon.png`)} />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/index.html")}>
+            <Image style={{width: width*0.245,height: width*0.245,marginBottom: height*0.01, marginTop: -1*height*0.015}} resizeMode="contain" source={require(`./../../../assets/images/whitecollabmaskicon.png`)} />
+          </TouchableOpacity>
+        </View>
+  
 
-                  <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/white.png`)} />
-                  <Text style={styles.prodText}>
-                    ePTFE 필터마스크{'\n'}
-                    {whitemasktext}{'\n'}
-                  ￦ 25,000원
-                </Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%82%A4%EC%A6%88-50%EB%A7%A4/27/category/1/display/2/")} style={styles.maskButton}>
-                <View style={styles.buttonCont}>
-
-                  <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/white.png`)} />
-                  <Text style={styles.prodText}>
-                    ePTFE 필터마스크{'\n'}
-                    {blackmasktext}{'\n'}
-                  ￦ 25,000원
-                </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            : null}
-            {maskImage == "S" || maskImage == "M" || maskImage == "L" ?
-            <View style={styles.gallery}>
-              <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-50%EB%A7%A4/31/category/1/display/2/")} style={styles.maskButton}>
-                <View style={styles.buttonCont}>
-
-                  <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/white.png`)} />
-                  <Text style={styles.prodText}>
-                    ePTFE 필터마스크{'\n'}
-                    {whitemasktext}{'\n'}
-                  ￦ 25,000원
-                </Text>
-                </View>
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%EB%B8%94%EB%9E%99-50%EB%A7%A4/32/category/1/display/2/")} style={styles.maskButton}>
-                <View style={styles.buttonCont}>
-
-                  <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/black.png`)} />
-                  <Text style={styles.prodText}>
-                    ePTFE 필터마스크{'\n'}
-                    {blackmasktext}{'\n'}
-                  ￦ 35,000원
-                </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-            : null}
-          </Animatable.View>
-
-            {Platform.OS == 'android' ? 
+        {Platform.OS == 'android' ? 
             <Animatable.View animation="slideInUp" direction="alternate">
           <View style={styles.headerContainer}>
             <TouchableOpacity style={styles.header2} onPress={() => props.navigation.navigate('ArCamera',{MaskSize: storeData.attendanceReducer.res.MaskSize})} > 
-              <ImageBackground style={{width:350,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button_recommendation.png")} >
+              <ImageBackground style={{width:width*0.9,height:height*0.05,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button_recommendation.png")} >
                 <Text style={{color:'#214A84'}}>
                   시노텍스 마스크 가상착용
                 </Text>
               </ImageBackground>
             </TouchableOpacity>
           </View>
+          <Image style={{width:width*0.15,height:height*0.05,alignItems:'center',justifyContent:'center', marginLeft: width*0.75, marginTop: -1*height*0.06}}  source={require("./../../../assets/images/goicon.png")} />
           </Animatable.View> 
-          : null}
+        : null}
 
-          <Animatable.View animation="slideInUp" direction="alternate">
-            <View style={styles.headerContainer}>
 
-              {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
-              <Text style={styles.header}>당신의 추천 사이즈는 {overallsize} 입니다.</Text>
-              
-            </View>
-          </Animatable.View>
 
           <Animatable.View animation="slideInUp" direction="alternate">
             <View style={styles.headerContainer}>
@@ -483,21 +436,19 @@ const RecommendationView = (props) => {
           </Animatable.View>
 
           
-          <Animatable.View animation="slideInUp" direction="alternate">
+          {/*<Animatable.View animation="slideInUp" direction="alternate">
             <Table borderStyle={{ borderWidth: 1, borderColor: '#dfdfdf', backgroundColor: theme.color.light, marginBottom: 24 }}>
               <Row data={tableHead} style={styles.head} textStyle={styles.text} />
               <Rows data={tableData} style={{ backgroundColor: theme.color.light }} textStyle={styles.text} />
             </Table>
-          </Animatable.View>
+          </Animatable.View>*/}
 
-          <Animatable.View animation="slideInUp" direction="alternate">
+          {/*<Animatable.View animation="slideInUp" direction="alternate">
             <View style={styles.headerContainer}>
-
-              {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
               <Text style={styles.header4}>  </Text>
               
             </View>
-          </Animatable.View>
+          </Animatable.View>*/}
           
           <Animatable.View animation="slideInUp" direction="alternate">
             <Table borderStyle={{ borderWidth: 1, borderColor: '#dfdfdf', backgroundColor: theme.color.light, marginBottom: 24 }}>

@@ -199,11 +199,11 @@ const MainFlow = (props) => {
         children={createHomeStack}
         options={{
           //tabBarLabel: "Home",
-          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontSize: 12, marginLeft: 10}}>Home</Text>,
+          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontSize: 12, marginLeft: 10, fontWeight: "bold"}}>Home</Text>,
           tabBarIcon: ({ tintColor }) => (
             <Image
               source={require('./../../assets/images/hometab.png')}
-              style={{width: width*0.08, height: height*0.05}}
+              style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.007}}
             />
           )
         }}
@@ -213,11 +213,11 @@ const MainFlow = (props) => {
         name="Brandstory"
         component={Storybrand}
         options={{
-          tabBarLabel: <View style={{}}><Text style={{fontFamily : "pacifico", textAlign : "center", fontSize: 11}}>브랜드스토리</Text></View>,
+          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontSize: 11, fontWeight: "bold"}}>브랜드스토리</Text>,
           tabBarIcon: ({ tintColor }) => (
             <Image
               source={require('./../../assets/images/brandstorytab.png')}
-              style={{width: width*0.099, height: height*0.05}}
+              style={{width: width*0.099, height: height*0.05, marginTop: -1*height*0.015}}
             />
           )
         }}
@@ -226,11 +226,11 @@ const MainFlow = (props) => {
         name="Store"
         component={Synotexmall}
         options={{
-          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center"}}>스토어</Text>,
+          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontWeight: "bold"}}>스토어</Text>,
           tabBarIcon: ({ tintColor }) => (
             <Image
               source={require('./../../assets/images/storetab.png')}
-              style={{width: width*0.095, height: height*0.05}}
+              style={{width: width*0.095, height: height*0.05, marginTop: -1*height*0.0125}}
             />
           )
         }}
@@ -239,11 +239,11 @@ const MainFlow = (props) => {
         name="OfflineStore"
         component={Offlinestore}
         options={{
-          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center"}}>오프라인매장</Text>,
+          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontWeight: "bold"}}>오프라인매장</Text>,
           tabBarIcon: ({ tintColor }) => (
             <Image
               source={require('./../../assets/images/offlinetab.png')}
-              style={{width: width*0.08, height: height*0.05}}
+              style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.011}}
             />
           )
         }}
@@ -252,11 +252,11 @@ const MainFlow = (props) => {
         name="Exit"
         component={Exitapp}
         options={{
-          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center"}}>종료</Text>,
+          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontWeight: "bold"}}>종료</Text>,
           tabBarIcon: ({ tintColor }) => (
             <Image
               source={require('./../../assets/images/exittab.png')}
-              style={{width: width*0.08, height: height*0.05}}
+              style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.01}}
             />
           )
         }}

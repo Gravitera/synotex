@@ -227,7 +227,7 @@ const ScannerView = (props) => {
           type={RNCamera.Constants.Type.front}
           flashMode={RNCamera.Constants.FlashMode.off}
           playSoundOnCapture={false}
-
+          useCamera2Api={true}
           androidCameraPermissionOptions={{
             title: 'Permission to use camera',
             message: 'We need your permission to use your camera',
