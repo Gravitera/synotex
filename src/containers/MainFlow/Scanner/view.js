@@ -133,66 +133,66 @@ const ScannerView = (props) => {
   };
 
   const runFacemesh2 = async (e) => {
-    console.log(" ======================== face detected !!!! from Scanner ");
+    //console.log(" ======================== face detected !!!! from Scanner ");
   };
 
   const tempfunc = async () => {
-    console.log(" ========= current state   before click  ", state);
+    //console.log(" ========= current state   before click  ", state);
     setState(1);
     guide_sound.play((success) => {
-      console.log("success");
+      //console.log("success");
     });
-    console.log(" ========= current state   after click  ", state);
+    //console.log(" ========= current state   after click  ", state);
     setTimeout(() => {
       setState(2);
-      console.log(" ========= current state   after wait  ", state);
+      //console.log(" ========= current state   after wait  ", state);
     }, 1000);
 
     setTimeout(() => {
       setState(3);
       button_beep.play((success) => {
-        console.log("success");
+        //console.log("success");
       })
-      console.log(" ========= current state   after wait  blue_three ", state);
+      //console.log(" ========= current state   after wait  blue_three ", state);
     },4000);
     setTimeout(() => {
       setState(4);
       button_beep.play((success) => {
-        console.log("success");
+        //console.log("success");
       })
-      console.log(" ========= current state   after wait  blue_two ", state);
+      //console.log(" ========= current state   after wait  blue_two ", state);
     },5000);
     setTimeout(() => {
       setState(5);
       button_beep.play((success) => {
-        console.log("success");
+        //console.log("success");
       })
-      console.log(" ========= current state   after wait  blue_one ", state);
+      //console.log(" ========= current state   after wait  blue_one ", state);
     },6000);
     setTimeout(() => {
   //    setState(6);
-      console.log(" ========= current state   after wait  initial take photo ", state);
+      //console.log(" ========= current state   after wait  initial take photo ", state);
       takePicture();
     },7000);
 
     setTimeout(() => {
-      console.log(" ============ play turn your face sound ");
+      //console.log(" ============ play turn your face sound ");
       setState(6);
       turnFace.play((success) => {
-        console.log("success");
+        //console.log("success");
       })
     }, 8000);
 
     setTimeout(() => {
       setState(7);
       AI_measurement_sound.play((success) => {
-        console.log("success");
+        //console.log("success");
       })
-      console.log(" ========= current state   after wait  show star-like sparkling ", state);
+      //console.log(" ========= current state   after wait  show star-like sparkling ", state);
     },13000);
     setTimeout(() => {
       setState(8);
-      console.log(" ========= current state   after wait  show blue-check-mark ", state);
+      //console.log(" ========= current state   after wait  show blue-check-mark ", state);
     },15000);
 
     setTimeout(() => {
@@ -206,15 +206,15 @@ const ScannerView = (props) => {
         MaskSize: props.MaskSize
       }
       */
-     console.log(props)
-     console.log(resp)
-      console.log(" =========== onNext data    ", props.resp);
+     //console.log(props)
+     //console.log(resp)
+      //console.log(" =========== onNext data    ", props.resp);
       props.onNext(props.resp);
     },16000);
 
   };
 
-  console.log(" ============ current state before return   ", state);
+  //console.log(" ============ current state before return   ", state);
 
 
   return (

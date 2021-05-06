@@ -51,11 +51,16 @@ var blackmasktext = '';
 var overallsize = '';
 */
 
-const AI_large = new Sound('ai_large.mp3', Sound.MAIN_BUNDLE);
-const AI_medium = new Sound('ai_medium.mp3', Sound.MAIN_BUNDLE);
-const AI_small = new Sound('ai_small.mp3', Sound.MAIN_BUNDLE);
-const AI_kids = new Sound('ai_kids.mp3', Sound.MAIN_BUNDLE);
+const AI_large = new Sound('largesize.mp3', Sound.MAIN_BUNDLE);
+const AI_medium = new Sound('mediumsize.mp3', Sound.MAIN_BUNDLE);
+const AI_small = new Sound('smallsize.mp3', Sound.MAIN_BUNDLE);
+const AI_kids = new Sound('kidssize.mp3', Sound.MAIN_BUNDLE);
 const feedbackvoice = new Sound("feedbackvoice.mp3", Sound.MAIN_BUNDLE);
+
+const nonesizesmall = new Sound("nonesizesmall.mp3", Sound.MAIN_BUNDLE);
+const nonesizemedium = new Sound("nonesizemedium.mp3", Sound.MAIN_BUNDLE);
+const nonesizelarge = new Sound("nonesizelarge.mp3", Sound.MAIN_BUNDLE);
+const nonesize = new Sound("nonesize.mp3", Sound.MAIN_BUNDLE);
 
 const RecommendationView = (props) => {
 
@@ -196,6 +201,44 @@ const RecommendationView = (props) => {
     overallsize = "대형(L)";
     maskImage = "L";
   }
+  if (storeData.attendanceReducer.res.MaskSize == "NS"){
+    MaskSize_Korean = "소형(S)";
+    whitemasktext = "화이트소형(S)";
+    blackmasktext = "블랙소형(S)";
+    overallsize = "소형(S)";
+    maskImage = "S";
+  }
+  if (storeData.attendanceReducer.res.MaskSize == "NM"){
+    MaskSize_Korean = "중형(M)";
+    whitemasktext = "화이트중형(M)";
+    blackmasktext = "블랙중형(M)";
+    overallsize = "중형(M)";
+    maskImage = "M";
+  }
+  if (storeData.attendanceReducer.res.MaskSize == "NL"){
+    MaskSize_Korean = "대형(L)";
+    whitemasktext = "화이트대형(L)";
+    blackmasktext = "블랙대형(L)";
+    overallsize = "대형(L)";
+    maskImage = "L";
+  }
+  if (storeData.attendanceReducer.res.MaskSize == "N"){
+    MaskSize_Korean = "재측청";
+    whitemasktext = "화이트";
+    blackmasktext = "블랙";
+    overallsize = "";
+    maskImage = "L";
+  }
+
+
+
+
+
+
+
+
+
+
   let FaceHeightPercent_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeightPercent))) + "mm";
   let FaceHeight_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeight))) + "mm";
   let FaceWidthPercent_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidthPercent))) + "mm";
@@ -334,41 +377,72 @@ const RecommendationView = (props) => {
   console.log(" =================================== MaskSize in Recomm =============== ", storeData.attendanceReducer.res.MaskSize);
 
   if (storeData.attendanceReducer.res.MaskSize == "XS" && feedbacksent == 0){
-      AI_kids.play((success) => {
-        console.log("success");
-      });
-
-  }
-
-  if (storeData.attendanceReducer.res.MaskSize == "S" && feedbacksent == 0){
-
-      AI_small.play((success) => {
-        console.log("success");
-      });
-
-  }
-
-  if (storeData.attendanceReducer.res.MaskSize == "M" && feedbacksent == 0){
-
-      AI_medium.play((success) => {
-        console.log("success");
-      });
-
-  }
-
-  if (storeData.attendanceReducer.res.MaskSize == "L" && feedbacksent == 0){
-
-      AI_large.play((success) => {
-        console.log("success");
-      });
-
-  }
-
-  if (feedbacksent == 1){
-    feedbackvoice.play((success) => {
+    AI_kids.play((success) => {
       console.log("success");
-    })
-  }
+    });
+
+}
+
+if (storeData.attendanceReducer.res.MaskSize == "S" && feedbacksent == 0){
+
+    AI_small.play((success) => {
+      console.log("success");
+    });
+
+}
+
+if (storeData.attendanceReducer.res.MaskSize == "M" && feedbacksent == 0){
+
+    AI_medium.play((success) => {
+      console.log("success");
+    });
+
+}
+
+if (storeData.attendanceReducer.res.MaskSize == "L" && feedbacksent == 0){
+
+    AI_large.play((success) => {
+      console.log("success");
+    });
+
+}
+
+if (storeData.attendanceReducer.res.MaskSize == "NS" && feedbacksent == 0){
+
+  nonesizesmall.play((success) => {
+    console.log("success");
+  });
+
+}
+
+if (storeData.attendanceReducer.res.MaskSize == "NM" && feedbacksent == 0){
+
+  nonesizemedium.play((success) => {
+    console.log("success");
+  });
+
+}
+
+if (storeData.attendanceReducer.res.MaskSize == "NL" && feedbacksent == 0){
+
+  nonesizelarge.play((success) => {
+    console.log("success");
+  });
+
+}
+if (storeData.attendanceReducer.res.MaskSize == "N" && feedbacksent == 0){
+
+  nonesize.play((success) => {
+    console.log("success");
+  });
+
+}
+
+if (feedbacksent == 1){
+  feedbackvoice.play((success) => {
+    console.log("success");
+  })
+}
 
 
   return (
@@ -388,8 +462,61 @@ const RecommendationView = (props) => {
             <View style={styles.headerContainer, {flexDirection: "column"}}>
 
               {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
-              <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>시노텍스앱에서 측정한 당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"{overallsize}"</Text> 입니다.</Text>
-              <Text style={{marginTop: 0, color: theme.color.light, marginBottom: height*0.03, marginLeft: width*0.07}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
+
+
+                {storeData.attendanceReducer.res.MaskSize.toLowerCase() == "xs" ?
+                  <View style={{flexDirection: "column", alignItems:'center'}}>
+                    <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>시노텍스앱에서 측정한</Text>
+                    <Text style={{marginTop: -1*height*0.01, color: theme.color.light, marginBottom: height*0.02}}>당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"키즈(XS)"</Text> 입니다.</Text>
+                    <Text style={{marginTop: -1*height*0.01,color: theme.color.light,marginBottom: height*0.025 }}>더운 계절에는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"소형(S)"</Text>도 사용하기 편하십니다.</Text>
+                  </View>
+                  :
+                  null}      
+                  {storeData.attendanceReducer.res.MaskSize.toLowerCase() == "s" ?
+                  <View style={{flexDirection: "column", alignItems:'center'}}>
+                    <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>시노텍스앱에서 측정한</Text>
+                    <Text style={{marginTop: -1*height*0.01, color: theme.color.light, marginBottom: height*0.02}}>당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"소형(S)"</Text> 입니다.</Text>
+                    <Text style={{marginTop: -1*height*0.01,color: theme.color.light,marginBottom: height*0.025 }}>더운 계절에는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"중형(M)"</Text>도 사용하기 편하십니다.</Text>
+                  </View>
+                  :
+                  null}   
+                  {storeData.attendanceReducer.res.MaskSize.toLowerCase() == "m" ?
+                  <View style={{flexDirection: "column", alignItems:'center'}}>
+                    <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>시노텍스앱에서 측정한</Text>
+                    <Text style={{marginTop: -1*height*0.01, color: theme.color.light, marginBottom: height*0.02}}>당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"중형(M)"</Text> 입니다.</Text>
+                    <Text style={{marginTop: -1*height*0.01,color: theme.color.light,marginBottom: height*0.025 }}>더운 계절에는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"대형(L)"</Text>도 사용하기 편하십니다.</Text>
+                  </View>
+                  :
+                  null}   
+                  {storeData.attendanceReducer.res.MaskSize.toLowerCase() == "l" ?
+                  <View style={{flexDirection: "column", alignItems:'center'}}>
+                    <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>시노텍스앱에서 측정한</Text>
+                    <Text style={{marginTop: -1*height*0.01, color: theme.color.light, marginBottom: height*0.02}}>당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"대형(L)"</Text> 입니다.</Text>
+                  </View>
+                  :
+                  null}  
+
+                  {storeData.attendanceReducer.res.MaskSize == "NS" || storeData.attendanceReducer.res.MaskSize == "NM" || storeData.attendanceReducer.res.MaskSize == "NL"?
+                  <View style={{flexDirection: "column", alignItems:'center'}}>
+                    <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>측정결과, 딱 맞는 사이즈가 없습니다.</Text>
+                    <Text style={{marginTop: 5,color: theme.color.light,marginBottom: 30 }}>넉넉한 사이즈 {overallsize}을 추천 드립니다.</Text>
+                  </View>
+                  :
+                  null} 
+
+                  {storeData.attendanceReducer.res.MaskSize == "N"?
+                  <View style={{flexDirection: "column", alignItems:'center'}}>
+                    <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>정확하게 맞는 사이즈가 없습니다. 재 측정 해주세요.</Text>
+                  </View>
+                  :
+                  null} 
+
+
+
+              <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.03, marginLeft: width*0.07}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
+
+
+  
             </View>
         </Animatable.View>
 
@@ -413,14 +540,18 @@ const RecommendationView = (props) => {
             <Animatable.View animation="slideInUp" direction="alternate">
           <View style={styles.headerContainer}>
             <TouchableOpacity style={styles.header2} onPress={() => props.navigation.navigate('ArCamera',{MaskSize: storeData.attendanceReducer.res.MaskSize})} > 
-              <ImageBackground style={{width:width*0.9,height:height*0.05,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button_recommendation.png")} >
+              
+
+              <ImageBackground resizeMode="contain" style={{width:width*0.7,height:height*0.05,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button_recommendation.png")} >
                 <Text style={{color:'#214A84'}}>
                   시노텍스 마스크 가상착용
                 </Text>
               </ImageBackground>
+
+
             </TouchableOpacity>
           </View>
-          <Image style={{width:width*0.15,height:height*0.05,alignItems:'center',justifyContent:'center', marginLeft: width*0.75, marginTop: -1*height*0.06}}  source={require("./../../../assets/images/goicon.png")} />
+          <Image resizeMode="contain" style={{width:width*0.15,height:height*0.05,alignItems:'center',justifyContent:'center', marginLeft: width*0.675, marginTop: -1*height*0.06}}  source={require("./../../../assets/images/goicon.png")} />
           </Animatable.View> 
         : null}
 
@@ -491,7 +622,7 @@ const RecommendationView = (props) => {
             
           </Animatable.View>
 
-          {feedbacksent == 0 ?
+          {feedbacksent == 0 && storeData.attendanceReducer.res.MaskSize != "N"?
           <Animatable.View animation="slideInUp" direction="alternate">
 
           <View style={{marginTop:"-5%"}}>
@@ -500,7 +631,9 @@ const RecommendationView = (props) => {
           <View style={styles.headerContainer}>
           <Text style={styles.header3}>착용 사이즈가 다를경우 아래 중 하나을 선택해주세요</Text>
           </View>
-          <View style={styles.gallery} >
+
+
+            <View style={styles.gallery} >
                 <TouchableOpacity onPress={sendFeedbackXS} style={{marginTop:"0%"}}>
                 {/*<ImageBackground style={{width:60,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >*/}
                 
@@ -547,11 +680,10 @@ const RecommendationView = (props) => {
                 </View>
 
               {/*</ImageBackground>*/}
-                      </TouchableOpacity>
-              </View>
+                </TouchableOpacity>
+            </View>
 
-
-              </View>
+            </View>
 
           </Animatable.View>
             : null }

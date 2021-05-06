@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import AuthFlow from '../AuthFlow';
-import InitialSetupFlow from '../InitialSetupFlow';
 import MainFlow from '../MainFlow';
 import { connect } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';

@@ -29,7 +29,7 @@ const Brandstory = (props) => {
 
         <CustomBrandstoryHeader title={"브랜드 스토리"}/>
 
-        <Image source={require("./../../../assets/images/brandstorytop2x.png")} style={styles.topimage}/>
+        <Image source={require("./../../../assets/images/brandstorytop1x.png")} style={styles.topimage}/>
 
         <View style={{justifyContent: "center"}}>
             <Image source={require("./../../../assets/images/brandstorybottom2x.png")} style={styles.bottomimage}/>
@@ -45,10 +45,10 @@ const styles = StyleSheet.create({
     height: 300
   },
   topimage:{
-    width: width*0.99,
-    height: height*0.51,
+    width: width*0.96,
+    height: height*0.49,
     marginTop: height*0.08,
-    marginLeft: width*0.035
+    marginLeft: width*0.045
   },
   bottomimage:{
     width: width*1,

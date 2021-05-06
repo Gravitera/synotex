@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -14,16 +14,38 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector, useDispatch } from 'react-redux';
 const { height, width } = Dimensions.get('window');
 
+const Sound = require('react-native-sound');
+
+const nnetwork = new Sound('nnetwork.mp3', Sound.MAIN_BUNDLE);
+const unrecognized = new Sound('unrecognized.mp3', Sound.MAIN_BUNDLE);
+
 const vh = height / 100;
 const vw = width / 100;
 const ratio = (width - 40) / 534;
 let windowHeight = 220;
 
 const ResponseView = (props) => {
+
+  
    
     const storeData = useSelector((store) => store);
     console.log("store",storeData)
     console.log("props : ",props)
+
+    var condition = 0;
+
+
+    var respmessage = storeData.attendanceReducer.res.ID;
+    if (respmessage == "NNetwork"){
+      nnetwork.play((success) => {
+      });
+      condition = 1;
+    };
+    if (respmessage == "Unrecognized"){
+      unrecognized.play((success) => {
+      });
+      condition = 2;
+    };
 
   return (
     <>
@@ -33,10 +55,26 @@ const ResponseView = (props) => {
           <Image style={{ width: width, height: height - windowHeight, zIndex: 0 }} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + storeData.attendanceReducer.res.FrontImage }} />
           <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
             <View style={styles.buttonOver}>
+
+
+              {condition == 0 ?
               <Text style={styles.text}>재측정을 원하시는경우는 재촬영 버튼을 눌러주시거나{"\n"}
             결과을 확인하시려면 측정결과 버튼을 눌러주세요</Text>
+            : null }
+            {condition == 1 ?
+              <Text style={styles.text}>인터넷 연결을 확인 해주세요.</Text>
+            : null }
+            {condition == 2 ?
+              <Text style={styles.text}>측정을 못 하였습니다.{"\n"}
+            측정을 정확하게 다시 해주세요.</Text>
+            : null }
+
+
+
             </View>
             <View style={{ marginTop: 4 }}>
+
+
               <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                 <TouchableOpacity onPress={() => props.navigation.navigate("input")}>
                   <View style={{resizeMode: "contain", justifyContent:"center"}}>

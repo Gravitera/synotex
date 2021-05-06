@@ -13,21 +13,11 @@ import {
 
 //Screens
 // import Policy from './Policy';
-import Feedback from './Feedback';
-import DrawerContent from '../../components/Drawer';
 import Scanner from './Scanner';
-import Scanner2 from './Scanner2';
-// import ResetPasswordEmail from './ResetPasswordEmail'
-import ResetPasswordEmail from './ResetPasswordEmail';
-import ResetOldPassword from './ResetOldPassword';
-import LogOut from './LogOut';
-import ResetNewPin from './ResetNewPin';
 import { getStorageItem } from '../../utils';
 import io from 'socket.io-client';
 import Geolocation from 'react-native-geolocation-service';
 import Intro from './Intro';
-import Method from './Method';
-import Initial from './Initial';
 import InputFeatures from './InputFeatures';
 import Response from './Response';
 import Recommendation from './Recommendation';
@@ -171,9 +161,6 @@ const MainFlow = (props) => {
         )}>
           <Stack.Screen name="intro" component={Intro} />
           <Stack.Screen name="scanner" component={Scanner} />
-          <Stack.Screen name="scanner2" component={Scanner2} />
-          <Stack.Screen name="initial" component={Initial} />
-          <Stack.Screen name="method" component={Method} />
           <Stack.Screen name="input" component={InputFeatures} />
           <Stack.Screen name="response" component={Response} />
           <Stack.Screen name="recommendation" component={Recommendation} />
