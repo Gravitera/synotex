@@ -13,8 +13,7 @@ import { Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { SafeAreaView, StatusBar } from "react-native";
-import { Fragment } from 'react';
+import { StatusBar } from "react-native";
 
 
 const { height, width } = Dimensions.get('window');
@@ -30,12 +29,12 @@ const ResponseView = (props) => {
     console.log("store",storeData)
     console.log("props : ",props)
 
+  StatusBar.setBackgroundColor("#0D3A71");
+
   return (
     <>
 
-        <Fragment>
-          <SafeAreaView style={{ flex: 0, backgroundColor: "#0D3A71" }} />
-          <StatusBar barStyle="light-content" />
+
             <View style={styles.container}>
               {/* <CustomHeader title={'측정 결과'} /> */}
               <View style={{ alignItems: 'center', flex: 1 }}>
@@ -80,7 +79,7 @@ const ResponseView = (props) => {
               </View>
             </View>
 
-          </Fragment>
+
     </>
   );
 };

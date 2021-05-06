@@ -96,7 +96,8 @@ const Scanner = (props) => {
 
     console.log(" ============= sendFaceData activated =========== ");
     
-    fetch('http://52.79.235.238:3030/submit', {
+    //fetch('http://13.124.53.75:3030/submit', {
+    fetch("http://synotex-load-balancer-237167545.ap-northeast-2.elb.amazonaws.com/submit", {
       mode: 'no-cors',
       method: 'POST',
       headers: {
@@ -135,7 +136,7 @@ const Scanner = (props) => {
         console.log(" ========== setResponse ======  ", FaceWidthPercent);
 //        props.navigation.navigate("scanner2", res)
 
-dispatch(addRes(res))
+        dispatch(addRes(res))
         console.log("finish res")
       })
       .catch((err) => {

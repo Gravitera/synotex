@@ -141,11 +141,7 @@ const InputFeaturesView = (props) => {
 
   return (
     <>
-      <Fragment>
-          <SafeAreaView style={{ flex: 0, backgroundColor: "#0D3A71" }} />
-          <StatusBar barStyle="light-content" />
 
-          <SafeAreaView style={{ flex: 1, backgroundColor: "#0D3A71" }}>
   
 
 
@@ -289,9 +285,6 @@ const InputFeaturesView = (props) => {
                   </View>
                   </TouchableNativeFeedback>
 
-          </SafeAreaView>
-
-      </Fragment>
 
     </>
   );

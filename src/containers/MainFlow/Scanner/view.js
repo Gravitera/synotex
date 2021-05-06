@@ -6,7 +6,6 @@ import {
   Dimensions,
   Pressable,
   Image,
-  SafeAreaView,
   ScrollView,
   TouchableOpacity,
   ImageBackground
@@ -22,8 +21,7 @@ import moment from 'moment';
 import axios from 'axios';
 
 
-import { SafeAreaView, StatusBar } from "react-native";
-import { Fragment } from 'react';
+import { StatusBar } from "react-native";
 
 
 
@@ -223,13 +221,12 @@ const ScannerView = (props) => {
 
   console.log(" ============ current state before return   ", state);
 
+  StatusBar.setBackgroundColor("#0D3A71");
 
   return (
     <>
 
-      <Fragment>
-          <SafeAreaView style={{ flex: 0, backgroundColor: "#0D3A71" }} />
-          <StatusBar barStyle="light-content" />
+
 
         
                   <View style={styles.container}>
@@ -327,7 +324,7 @@ const ScannerView = (props) => {
                     null}
                     {state == 0 ?
 
-                      <SafeAreaView style={{ flex: 1, backgroundColor: "#0D3A71" }}>
+                      //<SafeAreaView style={{ flex: 1, backgroundColor: "#0D3A71" }}> 
                         <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
                           <View style={styles.buttonOver}>
                             <Text style={styles.text}>팔을 쭉 뻗어서 가이드라인에 얼굴을 맞춰주세요.</Text>
@@ -344,7 +341,7 @@ const ScannerView = (props) => {
                             </ImageBackground>
                           </TouchableOpacity>
                         </View>
-                      </SafeAreaView>
+                     //</SafeAreaView>
                     : 
                     null }
                     {state == 1 ?
@@ -811,7 +808,7 @@ const ScannerView = (props) => {
                     ) : null} */}
                   </View>
 
-        </Fragment>
+
     </>
   );
 };

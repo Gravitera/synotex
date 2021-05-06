@@ -6,8 +6,7 @@ import {slideTransitionDefinition } from './../../../components/ArCameraUtil/sim
 import { CustomBackButtonHeader2, CustomDrawerButtonHeader } from '../../../components/Header';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { SafeAreaView, StatusBar } from "react-native";
-import { Fragment } from 'react';
+import { StatusBar } from "react-native";
 
 class ArCameraView extends React.Component {
 
@@ -30,6 +29,8 @@ class ArCameraView extends React.Component {
 
   componentDidMount() {
     if (Platform.OS === 'android') {
+
+      StatusBar.setBackgroundColor("#0D3A71");
       PermissionsAndroid.requestMultiple(
         [
           PermissionsAndroid.PERMISSIONS.CAMERA,
@@ -252,11 +253,6 @@ class ArCameraView extends React.Component {
     const effect = effectsData[currentEffectIndex]
     return (
 
-      <Fragment>
-          <SafeAreaView style={{ flex: 0, backgroundColor: "#0D3A71" }} />
-          <StatusBar barStyle="light-content" />
-
-          <SafeAreaView style={{ flex: 1, backgroundColor: "#0D3A71" }}>
             <View style={styles.container}>
               <View style={{flex:1}}>
                 <CustomBackButtonHeader2 backFunction={this.props.navigation.goBack} title={'가상착용'} />
@@ -423,9 +419,7 @@ class ArCameraView extends React.Component {
         
             
             </View>
-          </SafeAreaView>
 
-      </Fragment>
     )
   }
 }

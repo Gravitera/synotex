@@ -14,8 +14,8 @@ import Button from './../../../components/Button'
 import { TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 
-import { SafeAreaView, StatusBar } from "react-native";
-import { Fragment } from 'react';
+
+import { StatusBar } from "react-native";
 
 const { height, width } = Dimensions.get('window');
 
@@ -23,7 +23,7 @@ const vh = height / 100;
 const vw = width / 100;
 
 const IntroView2 = (props) => {
-
+    StatusBar.setBackgroundColor("#214A84");
     useEffect(() => {
         setTimeout(() => {
           props.navigation.navigate("input");
@@ -35,20 +35,15 @@ const IntroView2 = (props) => {
 //   }, 1000); 
   return (
     <>
-      <Fragment>
-          <SafeAreaView style={{ flex: 0, backgroundColor: "#214A84" }} />
-          <StatusBar barStyle="light-content" />
 
-          <SafeAreaView style={{ flex: 1, backgroundColor: "#214A84" }}>
 
               <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:width,height:height,alignItems: 'center',justifyContent: 'center'}}>
 
                     <Image resizeMode="contain" source={require("./../../../assets/images/Intro2_image.png")} style={styles.logo}></Image>
             </ImageBackground>
 
-            </SafeAreaView>
 
-        </Fragment>
+
     </>
   );
 };

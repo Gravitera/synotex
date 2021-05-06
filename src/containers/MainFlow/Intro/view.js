@@ -15,8 +15,7 @@ import { TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 
 
-import { SafeAreaView, StatusBar } from "react-native";
-import { Fragment } from 'react';
+import { StatusBar } from "react-native";
 
 const { height, width } = Dimensions.get('window');
 
@@ -25,15 +24,11 @@ const vw = width / 100;
 
 
 const IntroView = (props) => {
-
+  StatusBar.setBackgroundColor("#214A84")
 
   return (
     <>
-      <Fragment>
-          <SafeAreaView style={{ flex: 0, backgroundColor: "#214A84" }} />
-          <StatusBar barStyle="light-content" />
 
-          <SafeAreaView style={{ flex: 1, backgroundColor: "#214A84" }}>
         <View style={styles.container}>
 
 
@@ -87,11 +82,7 @@ const IntroView = (props) => {
           </ImageBackground>
           
         </View>
-        </SafeAreaView>
 
-
-
-      </Fragment>
     </>
   );
 };
