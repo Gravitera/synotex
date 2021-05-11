@@ -29,10 +29,11 @@ const Brandstory = (props) => {
 
         <CustomBrandstoryHeader title={"브랜드 스토리"}/>
 
-        <Image source={require("./../../../assets/images/brandstorytop1x.png")} style={styles.topimage}/>
-
         <View style={{justifyContent: "center"}}>
-            <Image source={require("./../../../assets/images/brandstorybottom2x.png")} style={styles.bottomimage}/>
+          <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytop1x.png")} style={styles.topimage}/>
+        </View>
+        <View style={{justifyContent: "center"}}>
+            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorybottom2x.png")} style={styles.bottomimage}/>
         </View>
 
     </>

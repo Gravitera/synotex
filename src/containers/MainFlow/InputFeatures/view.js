@@ -35,6 +35,8 @@ const InputFeaturesView = (props) => {
   const [curragelen, setcurragelen] = useState(0);
   const [currgender, setcurrgender] = useState("None");
   const [buttonclicked, setbuttonclicked] = useState(false);
+  const [initialage, setInitialage] = useState(30);
+  const [initialheight, setInitialheight] = useState(175);
 
   const maleClick = () => {
     if (male == false && female == true){
@@ -110,6 +112,13 @@ const InputFeaturesView = (props) => {
     setbuttonclicked(false);
   }
 
+  const onFocusage = () => {
+    this.setInitialage('');
+  }
+  const onFocusheight = () => {
+    this.setInitialheight('');
+  }
+
   const setbuttonclickedfunc = () => {
     Keyboard.dismiss();
     var heightstatus = true;
@@ -172,7 +181,6 @@ const InputFeaturesView = (props) => {
           <View style={styles.inputBox}>
             <Text style={{marginTop: "-12.5%", fontSize: 15, fontWeight: "bold"}}>나이 (필수)</Text>
             <TextInput
-              style={styles.field}
               label="Age"
               errorText={props.ageError.message}
               error={props.ageError.error}
@@ -181,9 +189,9 @@ const InputFeaturesView = (props) => {
               onChangeText={text => onChange2({ text, name: "age" })}
               keyboardType="numeric"
               style={{marginRight: "7%"}}
-              placeholder="30"
+              placeholder="예시: 30"
               placeholderTextColor="grey"
-              style={{marginTop: "-10%", fontSize: 15}}
+              style={{marginTop: "-10%", fontSize: 15, marginRight: "-2%"}}
             />
           </View>
 
@@ -198,11 +206,11 @@ const InputFeaturesView = (props) => {
                 value={props.height}
                 onChangeText={text => onChange2({ text, name: "height" })}
                 keyboardType="numeric"
-                placeholder="175"
+                placeholder="예시: 175"
                 placeholderTextColor="grey"
                 style={{marginRight: "-55%", marginTop: "-10%", fontSize: 15}}
               />
-            <Text style={{marginTop: "-12%"}}>cm</Text>
+            <Text style={{marginTop: "-12%"}}></Text>
           </View>
 
 
