@@ -62,6 +62,9 @@ const nonesizemedium = new Sound("nonesizemedium.mp3", Sound.MAIN_BUNDLE);
 const nonesizelarge = new Sound("nonesizelarge.mp3", Sound.MAIN_BUNDLE);
 const nonesize = new Sound("nonesize.mp3", Sound.MAIN_BUNDLE);
 
+const nnetwork = new Sound('nnetwork.mp3', Sound.MAIN_BUNDLE);
+const unrecognized = new Sound('unrecognized.mp3', Sound.MAIN_BUNDLE);
+
 const RecommendationView = (props) => {
 
   const [feedbacksent, setfeedbacksent] = useState(0);
@@ -430,13 +433,30 @@ if (storeData.attendanceReducer.res.MaskSize == "NL" && feedbacksent == 0){
   });
 
 }
-if (storeData.attendanceReducer.res.MaskSize == "N" && feedbacksent == 0){
+if (storeData.attendanceReducer.res.MaskSize == "N" && feedbacksent == 0 && storeData.attendanceReducer.res.ID != "NNetwork" && storeData.attendanceReducer.res.ID != "Unrecognized"){
 
   nonesize.play((success) => {
     console.log("success");
   });
 
 }
+
+if (storeData.attendanceReducer.res.MaskSize == "N" && feedbacksent == 0 && storeData.attendanceReducer.res.ID == "NNetwork"){
+
+  nnetwork.play((success) => {
+    console.log("success");
+  });
+
+}
+
+if (storeData.attendanceReducer.res.MaskSize == "N" && feedbacksent == 0 && storeData.attendanceReducer.res.ID == "Unrecognized"){
+
+  unrecognized.play((success) => {
+    console.log("success");
+  });
+
+}
+
 
 if (feedbacksent == 1){
   feedbackvoice.play((success) => {
@@ -499,14 +519,26 @@ if (feedbacksent == 1){
                   {storeData.attendanceReducer.res.MaskSize == "NS" || storeData.attendanceReducer.res.MaskSize == "NM" || storeData.attendanceReducer.res.MaskSize == "NL"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
                     <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>측정결과, 딱 맞는 사이즈가 없습니다.</Text>
-                    <Text style={{marginTop: 5,color: theme.color.light,marginBottom: 30 }}>넉넉한 사이즈 {overallsize}을 추천 드립니다.</Text>
+                    <Text style={{marginTop: 5,color: theme.color.light,marginBottom: 30 }}>넉넉한 사이즈 <Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>{overallsize}</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text>을 추천 드립니다.</Text>
                   </View>
                   :
                   null} 
 
-                  {storeData.attendanceReducer.res.MaskSize == "N"?
+                  {storeData.attendanceReducer.res.MaskSize == "N" && storeData.attendanceReducer.res.ID != "NNetwork" && storeData.attendanceReducer.res.ID != "Unrecognized"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
                     <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>정확하게 맞는 사이즈가 없습니다. 재 측정 해주세요.</Text>
+                  </View>
+                  :
+                  null} 
+                  {storeData.attendanceReducer.res.MaskSize == "N" && storeData.attendanceReducer.res.ID == "NNetwork"?
+                  <View style={{flexDirection: "column", alignItems:'center'}}>
+                    <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>인터넷 연결을 확인 해주세요.</Text>
+                  </View>
+                  :
+                  null} 
+                  {storeData.attendanceReducer.res.MaskSize == "N" && storeData.attendanceReducer.res.ID == "Unrecognized"?
+                  <View style={{flexDirection: "column", alignItems:'center'}}>
+                    <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>측정을 못 하였습니다. 측정을 정확하게 다시 해주세요.</Text>
                   </View>
                   :
                   null} 

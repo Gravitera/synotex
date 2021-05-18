@@ -186,11 +186,12 @@ const MainFlow = (props) => {
         children={createHomeStack}
         options={{
           //tabBarLabel: "Home",
-          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontSize: 12, marginLeft: 10, fontWeight: "bold"}}>Home</Text>,
+          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", marginLeft: 17, fontWeight: "bold"}}>Home</Text>,
           tabBarIcon: ({ tintColor }) => (
             <Image
-              source={require('./../../assets/images/hometab.png')}
-              style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.007}}
+              source={require('./../../assets/images/round_chalet_black_36.png')}
+              resizeMode="contain"
+              style={{width: width*0.1, height: height*0.05, marginTop: -1*height*0.015}}
             />
           )
         }}
@@ -200,11 +201,12 @@ const MainFlow = (props) => {
         name="Brandstory"
         component={Storybrand}
         options={{
-          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontSize: 11, fontWeight: "bold"}}>브랜드스토리</Text>,
+          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontWeight: "bold"}}>브랜드스토리</Text>,
           tabBarIcon: ({ tintColor }) => (
             <Image
-              source={require('./../../assets/images/brandstorytab.png')}
-              style={{width: width*0.099, height: height*0.05, marginTop: -1*height*0.015}}
+              source={require('./../../assets/images/round_manage_search_black_36.png')}
+              resizeMode="contain"
+              style={{width: width*0.099, height: height*0.05, marginTop: -1*height*0.0175}}
             />
           )
         }}
@@ -216,8 +218,9 @@ const MainFlow = (props) => {
           tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontWeight: "bold"}}>스토어</Text>,
           tabBarIcon: ({ tintColor }) => (
             <Image
-              source={require('./../../assets/images/storetab.png')}
-              style={{width: width*0.095, height: height*0.05, marginTop: -1*height*0.0125}}
+              source={require('./../../assets/images/round_storefront_black_36.png')}
+              resizeMode="contain"
+              style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.015}}
             />
           )
         }}
@@ -229,8 +232,9 @@ const MainFlow = (props) => {
           tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontWeight: "bold"}}>오프라인매장</Text>,
           tabBarIcon: ({ tintColor }) => (
             <Image
-              source={require('./../../assets/images/offlinetab.png')}
-              style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.011}}
+              source={require('./../../assets/images/round_map_black_36.png')}
+              resizeMode="contain"
+              style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.015}}
             />
           )
         }}
@@ -242,8 +246,9 @@ const MainFlow = (props) => {
           tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontWeight: "bold"}}>종료</Text>,
           tabBarIcon: ({ tintColor }) => (
             <Image
-              source={require('./../../assets/images/exittab.png')}
-              style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.01}}
+              source={require('./../../assets/images/round_settings_power_black_36.png')}
+              resizeMode="contain"
+              style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.016}}
             />
           )
         }}

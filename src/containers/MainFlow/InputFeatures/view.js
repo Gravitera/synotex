@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Picker } from 'react-native';
-import AuthLayout from '../../../components/AuthLayout';
 import Input from '../../../components/TextInput';
 import theme, { color, font } from '../../../../theme';
 import { CustomBackForwardButtonHeader } from '../../../components/Header';

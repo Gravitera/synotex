@@ -27,15 +27,9 @@ const Appexit = (props) => {
 
   return (
     <>
-
-        <CustomBrandstoryHeader title={"브랜드 스토리"}/>
-
-        <Image source={require("./../../../assets/images/brandstorytop2x.png")} style={styles.topimage}/>
-
-        <View style={{justifyContent: "center"}}>
-            <Image source={require("./../../../assets/images/brandstorybottom2x.png")} style={styles.bottomimage}/>
-        </View>
-
+      <View style={{backgroundColor: "blue"}}>
+        
+      </View>
     </>
   );
 };

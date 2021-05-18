@@ -96,7 +96,7 @@ const CustomBackForwardButtonHeader = (props) => {
 
 const CustomBrandstoryHeader = (props) => {
   return (
-    <View style={styles.headerContainer}>
+    <View style={styles.headerContainerbrandstory}>
       <TouchableOpacity
         style={styles.drawerTrigger}
       >
@@ -139,6 +139,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     zIndex: 200,
+  },
+  headerContainerbrandstory: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: theme.color.bg,
+    alignItems: 'center',
+    position: 'absolute',
+    width: '100%',
+    zIndex: 400
   },
   headerContainer2: {
     flexDirection: 'row',
