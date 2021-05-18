@@ -45,7 +45,7 @@ const IntroView = (props) => {
         
 
           {/* intro_mask.png 80  */}
-            <Image style={{marginLeft:-1*width*0.06,marginTop:height*0.11,width:width*0.8,height:width*0.53}} resizeMode="contain" source={require("./../../../assets/images/intro_mask.png")} />
+            <Image style={{marginLeft:-1*width*0.086,marginTop:height*0.11,width:width*0.8,height:width*0.53}} resizeMode="contain" source={require("./../../../assets/images/intro_mask.png")} />
           
           </ImageBackground>
           
