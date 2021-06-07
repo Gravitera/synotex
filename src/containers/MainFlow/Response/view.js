@@ -17,7 +17,6 @@ const { height, width } = Dimensions.get('window');
 
 const Sound = require('react-native-sound');
 
-const nnetwork = new Sound('nnetwork.mp3', Sound.MAIN_BUNDLE);
 const unrecognized = new Sound('unrecognized.mp3', Sound.MAIN_BUNDLE);
 
 const vh = height / 100;
@@ -38,8 +37,6 @@ const ResponseView = (props) => {
 
     var respmessage = storeData.attendanceReducer.res.ID;
     if (respmessage == "NNetwork"){
-      nnetwork.play((success) => {
-      });
       condition = 1;
     };
     if (respmessage == "Unrecognized"){
@@ -82,7 +79,7 @@ const ResponseView = (props) => {
                   {/*<Image style={{ width: 98, height: 121, marginRight: 15 }} source={require("./../../../assets/images/refresh.png")} />*/}
                   {/*<ImageBackground style={{ width: 95, height: 95, marginRight: "15%" }} source={require("./../../../assets/images/refresh.png")}>*/}
                   <View style={{ width: width*0.25, height: width*0.25, marginRight: "15%", backgroundColor: "#0D3A71", borderRadius: 50}}>
-                    <Image resizeMode="contain" style={{width:width*0.2,height:height*0.2,alignItems:'center',justifyContent:'center', marginLeft:width*0.025, marginTop: -1*height*0.04}}  source={require("./../../../assets/images/camera_image.png")} >
+                    <Image resizeMode="contain" style={{width:width*0.2,height:width*0.2,alignItems:'center',justifyContent:'center', marginLeft:width*0.025, marginTop: 1*height*0.01}}  source={require("./../../../assets/images/camera_image.png")} >
                     </Image>
                   </View>
                   {/*</ImageBackground>*/}
@@ -95,7 +92,7 @@ const ResponseView = (props) => {
                     <View style={{justifyContent:"center", resizeMode: "contain"}}>
                       {/*<ImageBackground style={{ width: 95, height: 95, marginLeft: "5%"}} source={require("./../../../assets/images/result.png")}>*/}
                         <View style={{ width: width*0.25, height: width*0.25, marginRight: "5%", backgroundColor: "#0D3A71", borderRadius: 50}}>
-                          <Image resizeMode="contain" style={{width:width*0.18,height:height*0.18,alignItems:'center',justifyContent:'center', marginLeft:width*0.038, marginTop: -1*height*0.021}}  source={require("./../../../assets/images/result_image.png")} >
+                          <Image resizeMode="contain" style={{width:width*0.18,height:width*0.18,alignItems:'center',justifyContent:'center', marginLeft:width*0.038, marginTop: 1*height*0.021}}  source={require("./../../../assets/images/result_image.png")} >
                           </Image>
                         </View>
                       {/*</ImageBackground>*/}
