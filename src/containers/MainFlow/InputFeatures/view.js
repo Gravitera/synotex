@@ -155,15 +155,19 @@ const InputFeaturesView = (props) => {
         <CustomBackForwardButtonHeader title={'입력 정보'} backFunction={() => {navigation.navigate("intro")}} forwardFunction={props.onNext} />
         <ScrollView style={{ flex: 1, marginTop: 64, paddingTop: 0 }}>
           {/*<Text style={styles.heading}></Text> ScrollView paddingTop 24*/}
-          <View style={{backgroundColor: "#0D3A71", width: width, height: height*0.2, flexDirection: "row", alignItems: 'center'}}>
-            <Image style={{height:height*0.135, width: width*0.5, marginLeft: width*0.15}} source={require("./../../../assets/images/input_privacy_notice.png")}>
+          <View style={{backgroundColor: "#0D3A71", width: width, height: height*0.2, flexDirection: "row", alignItems: 'space-between'}}>
+            <Image resizeMode="contain" style={{height: height*0.2, width: width*0.45, marginLeft: width*0.15}} source={require("./../../../assets/images/input_privacy_notice.png")}>
             </Image>
+
+            <View style={{width:width*0.05}}>
+
+            </View>
 
             <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/member/privacy.html")} style={{ height:height*0.03, width: width*0.41, marginLeft: -1*width*0.51, marginTop: 1*height*0.1, borderRadius:50 }}>
 
             </TouchableOpacity>
 
-            <Image style={{height:height*0.11, width: width*0.16, marginLeft: width*0.126}} source={require("./../../../assets/images/input_privacy_logo.png")}>
+            <Image resizeMode="contain" style={{width: width*0.2,  height: height*0.2, marginLeft: width*0.126}} source={require("./../../../assets/images/input_privacy_logo.png")}>
             </Image>
           </View>
           {/*
@@ -177,41 +181,43 @@ const InputFeaturesView = (props) => {
 
           </View>
 
-          <View style={styles.inputBox}>
-            <Text style={{marginTop: "-12.5%", fontSize: 15, fontWeight: "bold"}}>나이 (필수)</Text>
-            <TextInput
-              label="Age"
-              errorText={props.ageError.message}
-              error={props.ageError.error}
-              onBlur={props.onBlur}
-              value={props.age}
-              onChangeText={text => onChange2({ text, name: "age" })}
-              keyboardType="numeric"
-              style={{marginRight: "7%"}}
-              placeholder="예시: 30"
-              placeholderTextColor="grey"
-              style={{marginTop: "-10%", fontSize: 15, marginRight: "-2%"}}
-            />
-          </View>
+          <View style={{flexDirection: "column", alignItems: "center", justifyContent:"center"}}>
 
-          <View style={styles.inputBox2}>
-            <Text style={{marginTop: "-12.5%", fontSize: 15, fontWeight: "bold"}}>신장 (필수)</Text>
-            <TextInput
-                // style={{width: '100%'}}
-                label="Height"
-                error={props.heightError.error}
-                errorText={props.heightError.message}
+            <View style={styles.inputBox}>
+              <Text style={{marginTop: "-12.5%", fontSize: 15, fontWeight: "bold"}}>나이 (필수)</Text>
+              <TextInput
+                label="Age"
+                errorText={props.ageError.message}
+                error={props.ageError.error}
                 onBlur={props.onBlur}
-                value={props.height}
-                onChangeText={text => onChange2({ text, name: "height" })}
+                value={props.age}
+                onChangeText={text => onChange2({ text, name: "age" })}
                 keyboardType="numeric"
-                placeholder="예시: 175"
+                placeholder="예시: 30"
                 placeholderTextColor="grey"
-                style={{marginRight: "-55%", marginTop: "-10%", fontSize: 15}}
+                style={{marginTop: "-12%", fontSize: 15, marginRight: "-2%"}}
               />
-            <Text style={{marginTop: "-12%"}}></Text>
-          </View>
+            </View>
 
+            <View style={styles.inputBox}>
+              <Text style={{marginTop: "-12.5%", fontSize: 15, fontWeight: "bold"}}>신장 (필수)</Text>
+              <TextInput
+                  // style={{width: '100%'}}
+                  label="Height"
+                  error={props.heightError.error}
+                  errorText={props.heightError.message}
+                  onBlur={props.onBlur}
+                  value={props.height}
+                  onChangeText={text => onChange2({ text, name: "height" })}
+                  keyboardType="numeric"
+                  placeholder="예시: 175"
+                  placeholderTextColor="grey"
+                  style={{marginTop: "-12%", fontSize: 15, marginRight: "-60%"}}
+                />
+              <Text style={{marginTop: "-12%"}}></Text>
+            </View>
+
+          </View>
 
 
 
@@ -412,6 +418,7 @@ const styles = StyleSheet.create({
       width: 3,
       height: 3,
     },
+    width: width*0.85,
     shadowOpacity: 0.25,
     shadowRadius: 4.65,
     elevation: 5,

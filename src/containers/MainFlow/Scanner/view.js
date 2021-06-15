@@ -37,11 +37,11 @@ const rotating_blue_mask = require('./../../../assets/images/rotating_blue_mask.
 
 const vh = height / 100;
 const vw = width / 100;
-const frameSide = width - 160;
+const frameSide = height*0.35;
 const actionSide = 250;
 const loaderSide = 100;
 const date = moment().local().format('l');
-let windowHeight = 220;
+let windowHeight = height*0.32;
 
 
 const { windowwidth, windowheight } = Dimensions.get("window");

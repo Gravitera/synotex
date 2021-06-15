@@ -393,7 +393,7 @@ if (storeData.attendanceReducer.res.MaskSize == "S" && feedbacksent == 0){
 
 }
 
-if (storeData.attendanceReducer.res.MaskSize == "M" && feedbacksent == 0){
+if (storeData.attendanceReducer.res.MaskSize == "M" && feedbacksent == 0 && storeData.attendanceReducer.res.ID != "Unrecognized" && storeData.attendanceReducer.res.ID != "NNetwork"){
 
     AI_medium.play((success) => {
       console.log("success");
@@ -499,7 +499,7 @@ if (feedbacksent == 1){
                   </View>
                   :
                   null}   
-                  {storeData.attendanceReducer.res.MaskSize.toLowerCase() == "m" ?
+                  {storeData.attendanceReducer.res.MaskSize.toLowerCase() == "m" && storeData.attendanceReducer.res.ID != "Unrecognized" && storeData.attendanceReducer.res.ID != "NNetwork"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
                     <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>시노텍스앱에서 측정한</Text>
                     <Text style={{marginTop: -1*height*0.01, color: theme.color.light, marginBottom: height*0.02}}>당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"중형(M)"</Text> 입니다.</Text>
@@ -555,13 +555,13 @@ if (feedbacksent == 1){
                   </View>
                   :
                   null} 
-                  {storeData.attendanceReducer.res.MaskSize == "N" && storeData.attendanceReducer.res.ID == "NNetwork"?
+                  {storeData.attendanceReducer.res.ID == "NNetwork"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
                     <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>인터넷 연결을 확인 해주세요.</Text>
                   </View>
                   :
                   null} 
-                  {storeData.attendanceReducer.res.MaskSize == "N" && storeData.attendanceReducer.res.ID == "Unrecognized"?
+                  {storeData.attendanceReducer.res.ID == "Unrecognized"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
                     <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>정확한 측정을 위해 다시한번 시도해 주세요.</Text>
                     <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>팔을 쭉 뻗어서 가이드 라인에 얼굴을 맞춰 측정하시면</Text>
@@ -572,7 +572,7 @@ if (feedbacksent == 1){
 
 
 
-              <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.03, marginLeft: width*0.07}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
+              <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.03, width:width*0.8, marginLeft: width*0.07}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
 
 
   
@@ -596,21 +596,22 @@ if (feedbacksent == 1){
   
 
         {Platform.OS == 'android' ? 
-            <Animatable.View animation="slideInUp" direction="alternate">
-          <View style={styles.headerContainer}>
-            <TouchableOpacity style={styles.header2} onPress={() => props.navigation.navigate('ArCamera',{MaskSize: storeData.attendanceReducer.res.MaskSize})} > 
-              
+          <Animatable.View animation="slideInUp" direction="alternate">
+            <View style={{marginLeft: width*0.1}}>
+              <TouchableOpacity style={{flexDirection:"row", alignItems:"space-between", marginTop: height*0.05, width:width*0.7}} onPress={() => props.navigation.navigate('ArCamera',{MaskSize: storeData.attendanceReducer.res.MaskSize})} > 
+                
 
-              <ImageBackground resizeMode="contain" style={{width:width*0.7,height:height*0.05,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button_recommendation.png")} >
-                <Text style={{color:'#214A84'}}>
-                  시노텍스 마스크 가상착용
-                </Text>
-              </ImageBackground>
+                <ImageBackground resizeMode="contain" style={{width:width*0.7,height:height*0.05,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button_recommendation.png")} >
+                  <Text style={{color:'#214A84'}}>
+                    시노텍스 마스크 가상착용
+                  </Text>
+                </ImageBackground>
 
+                <Image resizeMode="contain" style={{width:width*0.15,height:height*0.05,alignItems:'center',justifyContent:'center',  marginLeft: -1*width*0.13, marginTop: -1*height*0.06}}  source={require("./../../../assets/images/goicon.png")} />
 
-            </TouchableOpacity>
-          </View>
-          <Image resizeMode="contain" style={{width:width*0.15,height:height*0.05,alignItems:'center',justifyContent:'center', marginLeft: width*0.675, marginTop: -1*height*0.06}}  source={require("./../../../assets/images/goicon.png")} />
+              </TouchableOpacity>
+
+            </View>
           </Animatable.View> 
         : null}
 

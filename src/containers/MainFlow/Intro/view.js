@@ -83,7 +83,6 @@ const IntroView = (props) => {
           </Text>
         </ImageBackground>
         </TouchableOpacity>
-
         <TouchableOpacity style={{marginBottom:24,width:194,height:35}} onPress={() => props.navigation.navigate('ArCamera2')} > 
         <ImageBackground style={{width:194,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
           <Text style={{color:'#214A84'}}>

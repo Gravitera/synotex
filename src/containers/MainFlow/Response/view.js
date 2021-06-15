@@ -22,7 +22,7 @@ const unrecognized = new Sound('unrecognized.mp3', Sound.MAIN_BUNDLE);
 const vh = height / 100;
 const vw = width / 100;
 const ratio = (width - 40) / 534;
-let windowHeight = 220;
+let windowHeight = height*0.32;
 
 const ResponseView = (props) => {
 
@@ -78,7 +78,7 @@ const ResponseView = (props) => {
                   <View style={{resizeMode: "contain", justifyContent:"center"}}>
                   {/*<Image style={{ width: 98, height: 121, marginRight: 15 }} source={require("./../../../assets/images/refresh.png")} />*/}
                   {/*<ImageBackground style={{ width: 95, height: 95, marginRight: "15%" }} source={require("./../../../assets/images/refresh.png")}>*/}
-                  <View style={{ width: width*0.25, height: width*0.25, marginRight: "15%", backgroundColor: "#0D3A71", borderRadius: 50}}>
+                  <View style={{ width: width*0.25, height: width*0.25, marginRight: "15%", backgroundColor: "#0D3A71", borderRadius: 100}}>
                     <Image resizeMode="contain" style={{width:width*0.2,height:width*0.2,alignItems:'center',justifyContent:'center', marginLeft:width*0.025, marginTop: 1*height*0.01}}  source={require("./../../../assets/images/camera_image.png")} >
                     </Image>
                   </View>
@@ -91,7 +91,7 @@ const ResponseView = (props) => {
                   {/*<Image style={{ width: 98, height: 121, marginLeft: 15 }} source={require("./../../../assets/images/result.png")} />*/}
                     <View style={{justifyContent:"center", resizeMode: "contain"}}>
                       {/*<ImageBackground style={{ width: 95, height: 95, marginLeft: "5%"}} source={require("./../../../assets/images/result.png")}>*/}
-                        <View style={{ width: width*0.25, height: width*0.25, marginRight: "5%", backgroundColor: "#0D3A71", borderRadius: 50}}>
+                        <View style={{ width: width*0.25, height: width*0.25, marginRight: "5%", backgroundColor: "#0D3A71", borderRadius: 100}}>
                           <Image resizeMode="contain" style={{width:width*0.18,height:width*0.18,alignItems:'center',justifyContent:'center', marginLeft:width*0.038, marginTop: 1*height*0.021}}  source={require("./../../../assets/images/result_image.png")} >
                           </Image>
                         </View>
