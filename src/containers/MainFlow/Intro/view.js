@@ -76,26 +76,6 @@ const IntroView = (props) => {
         </View>
 
 
-          {/*<TouchableOpacity style={{marginBottom:24,width:194,height:35}} onPress={() => props.navigation.navigate('intro2')} > 
-        <ImageBackground style={{width:194,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
-          <Text style={{color:'#214A84'}}>
-            알맞는 마스크 찾기  intro_button1
-          </Text>
-        </ImageBackground>
-        </TouchableOpacity>
-        <TouchableOpacity style={{marginBottom:24,width:194,height:35}} onPress={() => props.navigation.navigate('ArCamera2')} > 
-        <ImageBackground style={{width:194,height:34,alignItems:'center',justifyContent:'center'}}  source={require("./../../../assets/images/intro_white_button.png")} >
-          <Text style={{color:'#214A84'}}>
-            시노텍스 마스크 가상착용
-          </Text>
-        </ImageBackground>
-        </TouchableOpacity>*/}
-
-          {/* <Button label="알맞는 마스크 찾기"   color="#841584" style={{ backgroundColor: 'white', marginBottom: 24 }} onPress={() => props.navigation.navigate('initial')} /> */}
-          {/* <Button label="Synotex 바로가기" onPress={() => Linking.openURL("http://synotexmall.com/")} /> */}
-        
-        
-        {/* <Image style={{width:264,height:206}}  source={require("./../../../assets/images/intro_bottom.png")} /> */}
         </ImageBackground>
         
       </View>

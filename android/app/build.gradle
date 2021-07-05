@@ -136,8 +136,8 @@ android {
         applicationId "com.lynxbus"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 10
-        versionName "10.0"
+        versionCode 12
+        versionName "12.0"
         missingDimensionStrategy 'react-native-camera', 'general'
         multiDexEnabled true
     }
