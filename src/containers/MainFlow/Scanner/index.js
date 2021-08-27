@@ -118,24 +118,42 @@ const Scanner = (props) => {
         setLoading(false);
 
         setResp({"frontImage":res.FrontImage})
-        /*
-        setFaceWidth(res.FaceWidth);
-        setFaceHeight(res.FaceHeight);
-        setFaceWidthPercent(res.FaceWidthPercent);
-        setFaceHeightPercent(res.FaceHeightPercent);
-        setFrontImage(res.FrontImage);
-        setMaskSize(res.MaskSize);
-        */
 
-       
-        /*
-       console.log(" ========== res type  ======= ", typeof res);
-       console.log(" ========== res type  ======= ", res);
-        console.log(" ========== setResponse ======  ", FaceWidth);
-        console.log(" ========== setResponse ======  ", FaceHeight);
-        console.log(" ========== setResponse ======  ", FaceWidthPercent);
-        */
-//        props.navigation.navigate("scanner2", res)
+
+      /*
+        var temp = {
+          FrontImage: image,
+          FaceWidth: 0,
+          FaceHeight: 0,
+          FaceWidthPercent: 0,
+          FaceHeightPercent: 0,
+          MaskSize: "SS",
+          Pentagram: {
+            FaceHeight: 0,
+            HeadHeight: 0,
+            HeadWidth: 0,
+            ChinWidth: 0,
+            HeadRound: 0,
+          },
+          PentagramAverage: {
+            FaceHeight: 0,
+            HeadHeight: 0,
+            HeadWidth: 0,
+            ChinWidth: 0,
+            HeadRound: 0,
+          },
+          PentagramPredicted: {
+            FaceHeight: 0,
+            HeadHeight: 0,
+            HeadWidth: 0,
+            ChinWidth: 0,
+            HeadRound: 0,
+          },
+          ID: 100
+        }
+
+        dispatch(addRes(temp));
+      */
 
         dispatch(addRes(res))
         console.log("finish res")
@@ -291,29 +309,7 @@ const Scanner = (props) => {
                   // console.log("ERROR =>", JSON.stringify(err))
                   console.log('ERROR =>', err);
                 });
-              // return position
-              // console.log("data =>", { studentId, position });
-              // props.markAttendance(
-              //   { studentId, position },
-              //   // { studentId: "5f7de291a28b040023c104b4", position: "Plot abc" },
-              //   (res) => {
-              //     // console.log("response in scanner", res)
-              //     setLoading(false);
-              //     props.showAlert('Attendance Marked');
-              //     if (res.data.activity === "Check In") {
-              //       startAction("enter");
-              //     }
-              //     else if (res.data.activity === "Check Out") {
-              //       startAction("leave");
-              //     }
-              //   },
-              //   (err) => {
-              //     props.showAlert('Attendance Failed');
-              //     startAction("close");
-              //     console.log('err of ResetPasswordEmail -->', err);
-              //     setLoading(false);
-              //   },
-              // );
+
             })
             .catch((error) => {
               setLoading(false);

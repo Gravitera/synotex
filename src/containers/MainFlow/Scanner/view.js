@@ -27,6 +27,8 @@ const Sound = require('react-native-sound')
 // import { ScrollView } from 'react-native-gesture-handler';
 import { CustomDrawerButtonHeader, CustomHeader } from '../../../components/Header';
 import theme from '../../../../theme';
+
+
 // import { SafeAreaView } from 'react-native-safe-area-context';
 // import { color, font } from '../../../../theme'
 const { height, width } = Dimensions.get('window');

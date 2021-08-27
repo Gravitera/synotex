@@ -135,6 +135,37 @@ class ArCameraView extends React.Component {
     
 
   }
+
+  SSclicked = () => {
+    
+    if(this.state.MaskColor == "White"){
+        if(this.state.MaskSize == "XS"){
+            this.onChangeEffect(4)
+        } else if(this.state.MaskSize == "S"){
+            this.onChangeEffect(3)
+        } else if(this.state.MaskSize == "M"){
+            this.onChangeEffect(2)
+        } else if(this.state.MaskSize == "L"){
+            this.onChangeEffect(1)
+        }
+    
+    } else {
+        if(this.state.MaskSize == "XS"){
+            this.onChangeEffect(12)
+        } else if(this.state.MaskSize == "S"){
+            this.onChangeEffect(11)
+        } else if(this.state.MaskSize == "M"){
+            this.onChangeEffect(10)
+        } else if(this.state.MaskSize == "L"){
+            this.onChangeEffect(9)
+        }
+    
+    }
+    
+
+  }
+
+
   Sclicked = () => {
 
     if(this.state.MaskColor == "White"){
@@ -250,6 +281,17 @@ class ArCameraView extends React.Component {
               </Text>
               </View>
             </TouchableOpacity>
+
+            <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.SSclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText1}>
+              더블 스몰
+              </Text>
+            </View>
+            </TouchableOpacity>
+
+
+
             <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.Sclicked() }>
             <View style={{justifyContent: "center"}}>
               <Text style={styles.prodText1}>
@@ -286,6 +328,19 @@ class ArCameraView extends React.Component {
               </Text>
               </View>
             </TouchableOpacity>
+
+
+            <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.SSclicked() }>
+            <View style={{justifyContent: "center", flexDirection:"column"}}>
+              <Text style={styles.prodText2}>
+              더블 스몰
+              </Text>
+            </View>
+            </TouchableOpacity>
+
+
+
+
             <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Sclicked() }>
             <View style={{justifyContent: "center"}}>
               <Text style={styles.prodText2}>
@@ -559,8 +614,8 @@ const styles = StyleSheet.create({
   buttonCont1: {
     backgroundColor: "white",
     borderRadius: 10,
-    height: 50,
-    width: 80,
+    height: 40,
+    width: 60,
     flexDirection: 'row',
     justifyContent: 'center',
     padding: 2,
@@ -569,8 +624,10 @@ const styles = StyleSheet.create({
   buttonCont2: {
     backgroundColor: "black",
     borderRadius: 10,
-    height: 50,
-    width: 80,
+    //height: 50,
+    //width: 80,
+    height: 40,
+    width: 60,
     flexDirection: 'row',
     justifyContent: 'center',
     padding: 2,
@@ -590,7 +647,7 @@ const styles = StyleSheet.create({
     fontSize: 12,
     height: 50,
     textAlignVertical: 'center',
-    backgroundColor: "black",
+    //backgroundColor: "black",
     color: "white"
   },
   bottomTextContainer2: {
