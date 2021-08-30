@@ -143,11 +143,11 @@ class ArCameraView extends React.Component {
       } else if (this.state.MaskSize == "SS"){
           this.onChangeEffect(effectsData.ws)
       } else if(this.state.MaskSize == "S"){
-          this.onChangeEffect(effectsData.wm)
+          this.onChangeEffect(effectsData.wxs)
       } else if(this.state.MaskSize == "M"){
-          this.onChangeEffect(effectsData.wl)
+          this.onChangeEffect(effectsData.wxxs)
       } else if(this.state.MaskSize == "L"){
-          this.onChangeEffect(effectsData.wxl)
+          this.onChangeEffect(effectsData.wxxs)
       }
   
   } else {
@@ -157,11 +157,11 @@ class ArCameraView extends React.Component {
       } else if (this.state.MaskSize == "SS"){
           this.onChangeEffect(effectsData.bs)
       } else if(this.state.MaskSize == "S"){
-          this.onChangeEffect(effectsData.bm)
+          this.onChangeEffect(effectsData.bxs)
       } else if(this.state.MaskSize == "M"){
-          this.onChangeEffect(effectsData.bl)
+          this.onChangeEffect(effectsData.bxxs)
       } else if(this.state.MaskSize == "L"){
-          this.onChangeEffect(effectsData.bxl)
+          this.onChangeEffect(effectsData.bxxs)
       }
   }
     
