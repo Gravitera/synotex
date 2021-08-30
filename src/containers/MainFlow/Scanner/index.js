@@ -13,7 +13,6 @@ import { connect } from 'react-redux';
 import { onSnackbar } from '../../../store/actions/layoutActions';
 import { getStorageItem, setStorageItem } from '../../../utils';
 import moment, { utc } from 'moment';
-import _ from 'react-native-google-places';
 
 const Scanner = (props) => {
   const dispatch = useDispatch();

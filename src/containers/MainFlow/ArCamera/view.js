@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, View, Button, Platform, PermissionsAndroid, Dimensions, TouchableOpacity, Text, Image} from 'react-native'
 import DeepARView from './../../../components/ArCameraUtil/DeepARView';
-import { effectsData } from './../../../components/ArCameraUtil/effectsData';
+import { effectsData } from './../../../components/ArCameraUtil/effectsData2';
 import {slideTransitionDefinition } from './../../../components/ArCameraUtil/simplenavigator/TransitionDefinitions';
 import { CustomBackButtonHeader2, CustomDrawerButtonHeader } from '../../../components/Header';
 import { useSelector, useDispatch } from 'react-redux';
@@ -89,8 +89,9 @@ class ArCameraView extends React.Component {
       return
     }
 
-    const newEffect = effectsData[idxNumber]
-    this.deepARView.switchEffect(newEffect.name, 'effect')
+    this.deepARView.switchEffect(idxNumber, "effect");
+    //const newEffect = effectsData[idxNumber]
+    //this.deepARView.switchEffect(newEffect.name, 'effect')
 
 
   }
@@ -136,140 +137,164 @@ class ArCameraView extends React.Component {
   XSclicked = () => {
     
     if(this.state.MaskColor == "White"){
-        if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(4)
-        } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(3)
-        } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(2)
-        } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(1)
-        }
-    
-    } else {
-        if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(12)
-        } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(11)
-        } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(10)
-        } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(9)
-        }
-    
-    }
+
+      if(this.state.MaskSize == "XS"){
+          this.onChangeEffect(effectsData.wm)
+      } else if (this.state.MaskSize == "SS"){
+          this.onChangeEffect(effectsData.ws)
+      } else if(this.state.MaskSize == "S"){
+          this.onChangeEffect(effectsData.wm)
+      } else if(this.state.MaskSize == "M"){
+          this.onChangeEffect(effectsData.wl)
+      } else if(this.state.MaskSize == "L"){
+          this.onChangeEffect(effectsData.wxl)
+      }
+  
+  } else {
+
+      if(this.state.MaskSize == "XS"){
+          this.onChangeEffect(effectsData.bm)
+      } else if (this.state.MaskSize == "SS"){
+          this.onChangeEffect(effectsData.bs)
+      } else if(this.state.MaskSize == "S"){
+          this.onChangeEffect(effectsData.bm)
+      } else if(this.state.MaskSize == "M"){
+          this.onChangeEffect(effectsData.bl)
+      } else if(this.state.MaskSize == "L"){
+          this.onChangeEffect(effectsData.bxl)
+      }
+  }
     
 
   }
 
-
+  
   SSclicked = () => {
     
     if(this.state.MaskColor == "White"){
-        if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(4)
-        } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(3)
-        } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(2)
-        } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(1)
-        }
-    
-    } else {
-        if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(12)
-        } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(11)
-        } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(10)
-        } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(9)
-        }
-    
-    }
-    
 
+      if(this.state.MaskSize == "XS"){
+          this.onChangeEffect(effectsData.wl)
+      } else if (this.state.MaskSize == "SS"){
+          this.onChangeEffect(effectsData.wm)
+      } else if(this.state.MaskSize == "S"){
+          this.onChangeEffect(effectsData.ws)
+      } else if(this.state.MaskSize == "M"){
+          this.onChangeEffect(effectsData.wss)
+      } else if(this.state.MaskSize == "L"){
+          this.onChangeEffect(effectsData.wxs)
+      }
+  
+  } else {
+
+      if(this.state.MaskSize == "XS"){
+          this.onChangeEffect(effectsData.bl)
+      } else if (this.state.MaskSize == "SS"){
+          this.onChangeEffect(effectsData.bm)
+      } else if(this.state.MaskSize == "S"){
+          this.onChangeEffect(effectsData.bs)
+      } else if(this.state.MaskSize == "M"){
+          this.onChangeEffect(effectsData.bss)
+      } else if(this.state.MaskSize == "L"){
+          this.onChangeEffect(effectsData.bxs)
+      }
   }
+  }
+  
 
 
   Sclicked = () => {
 
     if(this.state.MaskColor == "White"){
-        if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(5)
-        } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(4)
-        } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(3)
-        } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(2)
-        }
-    
-    } else {
-        if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(13)
-        } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(12)
-        } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(11)
-        } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(10)
-        }
-    
-    }
+
+      if(this.state.MaskSize == "XS"){
+          this.onChangeEffect(effectsData.wxl)
+      } else if (this.state.MaskSize == "SS"){
+          this.onChangeEffect(effectsData.wl)
+      } else if(this.state.MaskSize == "S"){
+          this.onChangeEffect(effectsData.wm)
+      } else if(this.state.MaskSize == "M"){
+          this.onChangeEffect(effectsData.ws)
+      } else if(this.state.MaskSize == "L"){
+          this.onChangeEffect(effectsData.wxs)
+      }
+  
+  } else {
+
+      if(this.state.MaskSize == "XS"){
+          this.onChangeEffect(effectsData.bxl)
+      } else if (this.state.MaskSize == "SS"){
+          this.onChangeEffect(effectsData.bl)
+      } else if(this.state.MaskSize == "S"){
+          this.onChangeEffect(effectsData.bm)
+      } else if(this.state.MaskSize == "M"){
+          this.onChangeEffect(effectsData.bs)
+      } else if(this.state.MaskSize == "L"){
+          this.onChangeEffect(effectsData.bxs)
+      }
+  }
 
   }
   Mclicked = () => {
 
     if(this.state.MaskColor == "White"){
-        if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(6)
-        } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(5)
-        } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(4)
-        } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(3)
-        }
-    
-    } else {
-        if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(14)
-        } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(13)
-        } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(12)
-        } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(11)
-        }
-    
-    }
+
+      if(this.state.MaskSize == "XS"){
+          this.onChangeEffect(effectsData.wxxl)
+      } else if (this.state.MaskSize == "SS"){
+          this.onChangeEffect(effectsData.wxl)
+      } else if(this.state.MaskSize == "S"){
+          this.onChangeEffect(effectsData.wl)
+      } else if(this.state.MaskSize == "M"){
+          this.onChangeEffect(effectsData.wm)
+      } else if(this.state.MaskSize == "L"){
+          this.onChangeEffect(effectsData.ws)
+      }
+  
+  } else {
+
+      if(this.state.MaskSize == "XS"){
+          this.onChangeEffect(effectsData.bxxl)
+      } else if (this.state.MaskSize == "SS"){
+          this.onChangeEffect(effectsData.bxl)
+      } else if(this.state.MaskSize == "S"){
+          this.onChangeEffect(effectsData.bl)
+      } else if(this.state.MaskSize == "M"){
+          this.onChangeEffect(effectsData.bm)
+      } else if(this.state.MaskSize == "L"){
+          this.onChangeEffect(effectsData.bs)
+      }
+  }
   }
   Lclicked = () => {
 
     if(this.state.MaskColor == "White"){
+
         if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(7)
+            this.onChangeEffect(effectsData.wxxl)
+        } else if (this.state.MaskSize == "SS"){
+            this.onChangeEffect(effectsData.wxxl)
         } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(6)
+            this.onChangeEffect(effectsData.wxl)
         } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(5)
+            this.onChangeEffect(effectsData.wl)
         } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(4)
+            this.onChangeEffect(effectsData.wm)
         }
     
     } else {
+
         if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(15)
+            this.onChangeEffect(effectsData.bxxl)
+        } else if (this.state.MaskSize == "SS"){
+            this.onChangeEffect(effectsData.bxxl)
         } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(14)
+            this.onChangeEffect(effectsData.bxl)
         } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(13)
+            this.onChangeEffect(effectsData.bl)
         } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(12)
+            this.onChangeEffect(effectsData.bm)
         }
-    
     }
 
   }
@@ -360,7 +385,7 @@ class ArCameraView extends React.Component {
             <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.SSclicked() }>
             <View style={{justifyContent: "center"}}>
               <Text style={styles.prodText1}>
-              더블 스몰
+              초등(SS)
               </Text>
             </View>
             </TouchableOpacity>
@@ -407,7 +432,7 @@ class ArCameraView extends React.Component {
             <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.SSclicked() }>
             <View style={{justifyContent: "center"}}>
               <Text style={styles.prodText2}>
-              더블 스몰
+              초등(SS)
               </Text>
             </View>
             </TouchableOpacity>
@@ -737,6 +762,11 @@ const styles = StyleSheet.create({
 })
 
 export default ArCameraView;
+
+
+
+
+
 
 
 
