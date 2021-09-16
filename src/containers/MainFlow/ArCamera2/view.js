@@ -17,7 +17,8 @@ class ArCameraView extends React.Component {
       currentEffectIndex: 0,
       switchCameraInProgress: false,
       MaskColorClicked: false,
-      MaskColor: "Black"
+      MaskColor: "Black",
+      MaskSize: "M"
     }
 
   }
