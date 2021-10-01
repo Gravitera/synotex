@@ -28,52 +28,46 @@ const IntroView = (props) => {
       <View style={styles.container}>
 
 
-        {/* intro_contain_back.png  */}
         <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:width,height:height,alignItems: 'center',justifyContent: 'center'}}>
-        <View style={{ marginVertical: height / 10 }}>    
-        
-        
-        {/* <Image style={styles.logo}  source={{uri :'https://i.imgur.com/bsIlxZ6_d.webp?maxwidth=1520&fidelity=grand'}} /> */}
-
-          <Image source={require("./../../../assets/images/intro_logo.png")} style={styles.logo}>
-          </Image>
-
-          {/* <Image style={styles.logo}  source={require("./../../../assets/images/intro_logo.png")} /> */}
+          <View style={{ marginVertical: height / 10 }}>    
           
-          
-          <ImageBackground style={{width:248,height:264}}  source={require("./../../../assets/images/intro_back.png")} >
-        
 
-          {/* intro_mask.png 80  */}
-            <Image style={{marginLeft:-1*width*0.086,marginTop:height*0.11,width:width*0.8,height:width*0.53}} resizeMode="contain" source={require("./../../../assets/images/intro_mask.png")} />
-          
-          </ImageBackground>
-          
-          {/* <Text style={{ color: theme.font.color, textAlign: 'center', fontSize: 18 }}>국내최초 AI 마스크 앱</Text> */}
-        </View>
-
-        
-        <View style={{alignItems:"center", flexDirection: "row", justifyContent: "space-between", marginBottom: height*0.17}}>
-
-
-          <TouchableOpacity style={{width:width*0.3, height:height*0.075, backgroundColor: "white", borderRadius: 10}} onPress={() => props.navigation.navigate('intro2')} >
-
-            <Image resizeMode="contain" style={{width:width*0.33,height:height*0.065,alignItems:'center',justifyContent:'center', marginLeft:-1*width*0.01, marginTop: height*0.005}}  source={require("./../../../assets/images/intro_button_inside1.png")} >
+            <Image source={require("./../../../assets/images/intro_logo.png")} style={styles.logo}>
             </Image>
 
-          </TouchableOpacity>
+            
+            <ImageBackground style={{width:248,height:264}}  source={require("./../../../assets/images/intro_back.png")} >
+          
 
-          <View style={{width:width*0.05}}>
+              <Image style={{marginLeft:-1*width*0.086,marginTop:height*0.11,width:width*0.8,height:width*0.53}} resizeMode="contain" source={require("./../../../assets/images/intro_mask.png")} />
+            
+            </ImageBackground>
+            
+
           </View>
+
           
-          <TouchableOpacity style={{width:width*0.3,height:height*0.075, backgroundColor: "white", borderRadius: 10}} onPress={() => props.navigation.navigate('ArCamera2')} >
+          <View style={{alignItems:"center", flexDirection: "row", justifyContent: "space-between", marginBottom: height*0.17}}>
 
-            <Image resizeMode="contain" style={{width:width*0.35,height:height*0.05,alignItems:'center',justifyContent:'center', marginLeft:width*0.01, marginTop: height*0.008}}  source={require("./../../../assets/images/intro_button_inside2.png")} >
-            </Image>
 
-          </TouchableOpacity>
+            <TouchableOpacity style={{width:width*0.3, height:height*0.075, backgroundColor: "white", borderRadius: 10}} onPress={() => props.navigation.navigate('intro2')} >
 
-        </View>
+              <Image resizeMode="contain" style={{width:width*0.33,height:height*0.065,alignItems:'center',justifyContent:'center', marginLeft:-1*width*0.01, marginTop: height*0.005}}  source={require("./../../../assets/images/intro_button_inside1.png")} >
+              </Image>
+
+            </TouchableOpacity>
+
+            <View style={{width:width*0.05}}>
+            </View>
+            
+            <TouchableOpacity style={{width:width*0.3,height:height*0.075, backgroundColor: "white", borderRadius: 10}} onPress={() => props.navigation.navigate('ArCamera2')} >
+
+              <Image resizeMode="contain" style={{width:width*0.35,height:height*0.05,alignItems:'center',justifyContent:'center', marginLeft:width*0.01, marginTop: height*0.008}}  source={require("./../../../assets/images/intro_button_inside2.png")} >
+              </Image>
+
+            </TouchableOpacity>
+
+          </View>
 
 
         </ImageBackground>

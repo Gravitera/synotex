@@ -404,12 +404,11 @@ class ArCameraView extends React.Component {
   render() {
 
     const { permissionsGranted, currentEffectIndex } = this.state
-    const { height, width } = Dimensions.get('window');
+    const { width } = Dimensions.get('window')
 
     const effect = effectsData[currentEffectIndex]
 
     return (
-      <>
       <View style={styles.container}>
         <View style={{flex:1}}>
           <CustomBackButtonHeader2 backFunction={this.props.navigation.goBack} title={'가상착용'} />
@@ -419,32 +418,187 @@ class ArCameraView extends React.Component {
               style={{width: width, height: '100%'}}
             />
         </View>
-
         
-      
-      </View>
-
-      <View style={{position: "absolute", marginTop: height*0.65, width: width, height: height*0.2, flexDirection: "row", justifyContent: "space-between"}}>
-          <View style={{marginTop: height*0.05, backgroundColor: "black", height: width*0.2, width: width*0.1, justifyContent: "center" }}>
-            <Image resizeMode="contain" style={{marginLeft: "25%"}} source={require(`./../../../assets/images/left_arrow_ar.png`)} />
-          </View>
-
-          <View style={{width: width*0.36, height: width*0.2, backgroundColor: "black", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
-            
-          </View>
-
-          <View style={{width: width*0.36, height: width*0.2, backgroundColor: "black", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
-          
-          </View>
+        {/* <TouchableOpacity style={styles.cameraSwitchContainer} onPress={ () => this.switchCamera() }>
+          <Image style={styles.camera} source={cameraSwitchImg} />
+        </TouchableOpacity> */}
 
 
+        {!this.state.MaskColorClicked ?
+        <View style={styles.bottomTextContainer2}>
+            <Text style={{ color: 'white', textShadowColor:'grey' }}>
+                원하시는 마스크 색상을 클릭해주세요
+            </Text>
+        </View>
+        :
+        null}
 
-          <View style={{marginTop: height*0.05 , backgroundColor: "black", height: width*0.2, width: width*0.1, justifyContent: "center"  }}>
-            <Image resizeMode="contain" style={{marginLeft: "25%"}} source={require(`./../../../assets/images/right_arrow_ar.png`)} />
-          </View>
+        {!this.state.MaskColorClicked ?
+        <View style={styles.bottomTextContainer1}>
+            <Text style={{ color: 'white', textShadowColor:'grey' }}>
+                사이즈별 가상착용시 실제나온 측정값과 상이할수 있습니다
+            </Text>
+        </View>
+        :
+        null}
+        
+       
+        <View style={styles.bottomBtnContainer}>
+
+            <TouchableOpacity style={{flex: 0.5, alignItems: 'center'}} onPress={ () => this.whiteColorClicked() }>
+            <View style={styles.buttonCont}>
+
+              <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/white.png`)} />
+              <Text style={styles.prodText}>
+                ePTFE 필터마스크{'\n'}
+                흰색 마스크
+              </Text>
+            </View>
+
+              {/*<View style={styles.prevContainer}><Text style={styles.prev}>흰색</Text></View>*/}
+
+
+            </TouchableOpacity>
+            <TouchableOpacity style={{flex: 0.5, alignItems: 'center'}}  onPress={ () => this.blackColorClicked() }>
+            <View style={styles.buttonCont}>
+              <Image style={styles.galleryImage} resizeMode="contain" source={require(`./../../../assets/images/black.png`)} />
+              <Text style={styles.prodText}>
+                ePTFE 필터마스크{'\n'}
+                블랙 마스크
+              </Text>
+            </View>
+              {/*<View style={styles.nextContainer}><Text style={styles.next}>검정색</Text></View>*/}
+            </TouchableOpacity>
+
         </View>
 
-      </>
+        {this.state.MaskColorClicked && this.state.MaskColor == "White" ? 
+        <View style={styles.bottomBtnContainer1}>
+        <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.XSclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText1}>
+              키즈(XS)
+              </Text>
+              </View>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.SSclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText1}>
+              초등(SS)
+              </Text>
+            </View>
+            </TouchableOpacity>
+
+
+
+            <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.Sclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText1}>
+              스몰(S)
+              </Text>
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont1}  onPress={ () => this.Mclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText1}>
+              미디움(M)
+              </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.Lclicked() }>
+              <View style={{justifyContent: "center"}}>
+                <Text style={styles.prodText1}>
+                  라지(L)
+                </Text>
+              </View>
+            </TouchableOpacity>
+        </View>
+        </View>
+        :
+        null}
+
+      {this.state.MaskColorClicked && this.state.MaskColor == "Black" ? 
+        <View style={styles.bottomBtnContainer2}>
+        <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.XSclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText2}>
+              키즈(XS)
+              </Text>
+              </View>
+            </TouchableOpacity>
+
+
+            <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.SSclicked() }>
+            <View style={{justifyContent: "center", flexDirection:"column"}}>
+              <Text style={styles.prodText2}>
+              초등(SS)
+              </Text>
+            </View>
+            </TouchableOpacity>
+
+
+
+
+            <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Sclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText2}>
+              스몰(S)
+              </Text>
+            </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont2}  onPress={ () => this.Mclicked() }>
+            <View style={{justifyContent: "center"}}>
+              <Text style={styles.prodText2}>
+              미디움(M)
+              </Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Lclicked() }>
+              <View style={{justifyContent: "center"}}>
+                <Text style={styles.prodText2}>
+                라지(L)
+                </Text>
+              </View>
+            </TouchableOpacity>
+        </View>
+        </View>
+        :
+        null}
+
+
+          {/*
+        <View style={styles.bottomBtnContainer21}>
+        <View style={{flexDirection: 'row'}}>
+            <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.onChangeEffect(4) }>
+                <Text style={styles.prodText1}>
+                블랙 XS
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.onChangeEffect(5) }>
+              <Text style={styles.prodText}>
+                블랙 S
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont1} onPress={ () => this.onChangeEffect(6) }>
+              <Text style={styles.prodText1}>
+                블랙 M
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.buttonCont1}  onPress={ () => this.onChangeEffect(7) }>
+              <Text style={styles.prodText1}>
+                블랙 L
+              </Text>
+            </TouchableOpacity>
+        </View>
+        </View>
+          */}
+            
+  
+      
+      </View>
     )
   }
 }

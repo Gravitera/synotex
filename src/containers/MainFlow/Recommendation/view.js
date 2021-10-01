@@ -386,6 +386,8 @@ if (feedbacksent == 1){
                   :
                   null}
 
+
+
                 {storeData.attendanceReducer.res.MaskSize.toLowerCase() == "l"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
                     <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>시노텍스앱에서 측정한</Text>
