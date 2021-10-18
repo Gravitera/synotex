@@ -18,7 +18,21 @@ class ArCameraView extends React.Component {
       switchCameraInProgress: false,
       MaskColorClicked: false,
       MaskColor: "Black",
-      MaskSize: "M"
+      MaskSize: "M",
+
+
+
+      maskidx : [0,1,2,3,4,5,6,7,8],
+      maskcolor : ["grey", "darkgrey", "darkpink", 
+      "lightgrey", "lightpink", "beige", "black", "khaki", "white"],
+
+      maskcolorkor : ["그레이", "다크 {'\n'} 그레이", "다크 {'\n'} 핑크",
+      "라이트 {'\n'} 그레이", "라이트 {'\n'} 핑크", "블랙", "카키", "화이트"],
+
+      maskloc : "./../../../assets/images/masks/",
+      currmaskidx : [0,1],
+      imglocs: require("./../../../assets/images/masks/grey.png"),
+      imglocs2: require("./../../../assets/images/masks/darkgrey.png"),
     }
 
   }
@@ -45,6 +59,125 @@ class ArCameraView extends React.Component {
       
     }
     console.log(" ====================  this.state   ", this.state);
+  }
+
+  pressLeft(){
+    var temp = this.state.currmaskidx;
+    var temp2 = true;
+    //console.log(" ====== current mask idx pressed left  ")
+    if (temp[0] == 0){
+      //console.log(" ===== 1 ")
+      this.setState({currmaskidx: [8,0]});
+      this.setState({imglocs: require("./../../../assets/images/masks/white.png")});
+      this.setState({imglocs2: require("./../../../assets/images/masks/grey.png")});
+      temp2 = false;
+    }
+    if (temp[0] == 8 && temp[1] == 0){
+      //console.log(" ===== 2 ")
+      this.setState({currmaskidx: [7,8]});
+      this.setState({imglocs: require("./../../../assets/images/masks/khaki.png")});
+      this.setState({imglocs2: require("./../../../assets/images/masks/white.png")});
+      temp2 = false;
+    }
+    if (temp2 == true){
+      //console.log(" ===== 3 ")
+      var newtemp = [this.state.currmaskidx[0]-1, this.state.currmaskidx[1]-1];
+
+      if (newtemp[0] == 0 && newtemp[1] == 1){
+        this.setState({imglocs: require("./../../../assets/images/masks/grey.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
+      }
+      if (newtemp[0] == 1 && newtemp[1] == 2){
+        this.setState({imglocs: require("./../../../assets/images/masks/darkgrey.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/darkpink.png")});
+      }
+      if (newtemp[0] == 2 && newtemp[1] == 3){
+        this.setState({imglocs: require("./../../../assets/images/masks/darkpink.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/lightgrey.png")});
+      }
+      if (newtemp[0] == 3 && newtemp[1] == 4){
+        this.setState({imglocs: require("./../../../assets/images/masks/lightgrey.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/lightpink.png")});
+      }
+      if (newtemp[0] == 4 && newtemp[1] == 5){
+        this.setState({imglocs: require("./../../../assets/images/masks/lightpink.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/beige.png")});
+      }
+      if (newtemp[0] == 5 && newtemp[1] == 6){
+        this.setState({imglocs: require("./../../../assets/images/masks/beige.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/black.png")});
+      }
+      if (newtemp[0] == 6 && newtemp[1] == 7){
+        this.setState({imglocs: require("./../../../assets/images/masks/black.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/khaki.png")});
+      }
+      if (newtemp[0] == 7 && newtemp[1] == 8){
+        this.setState({imglocs: require("./../../../assets/images/masks/khaki.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/white.png")});
+      }
+
+      this.setState({currmaskidx: newtemp});
+    }
+    //console.log(" ====== current mask idx pressed left  ", this.state.currmaskidx);
+
+  }
+
+  pressRight(){
+    var temp = this.state.currmaskidx;
+    var temp2 = true;
+    //console.log(" ====== current mask idx pressed right  ")
+    if (temp[1] == 8){
+      //console.log(" ===== 1 ")
+      this.setState({currmaskidx: [8,0]});
+      this.setState({imglocs: require("./../../../assets/images/masks/white.png")});
+      this.setState({imglocs2: require("./../../../assets/images/masks/grey.png")});
+      temp2 = false;
+    }
+    if (temp[1] == 0 && temp[0] == 8){
+      //console.log(" ===== 2 ")
+      this.setState({currmaskidx: [1,2]});
+      this.setState({imglocs: require("./../../../assets/images/masks/grey.png")});
+      this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
+      temp2 = false;
+    }
+    if (temp2 == true){
+      //console.log(" ===== 3 ")
+      var newtemp = [this.state.currmaskidx[0]+1, this.state.currmaskidx[1]+1];
+      if (newtemp[0] == 0 && newtemp[1] == 1){
+        this.setState({imglocs: require("./../../../assets/images/masks/grey.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
+      }
+      if (newtemp[0] == 1 && newtemp[1] == 2){
+        this.setState({imglocs: require("./../../../assets/images/masks/darkgrey.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/darkpink.png")});
+      }
+      if (newtemp[0] == 2 && newtemp[1] == 3){
+        this.setState({imglocs: require("./../../../assets/images/masks/darkpink.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/lightgrey.png")});
+      }
+      if (newtemp[0] == 3 && newtemp[1] == 4){
+        this.setState({imglocs: require("./../../../assets/images/masks/lightgrey.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/lightpink.png")});
+      }
+      if (newtemp[0] == 4 && newtemp[1] == 5){
+        this.setState({imglocs: require("./../../../assets/images/masks/lightpink.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/beige.png")});
+      }
+      if (newtemp[0] == 5 && newtemp[1] == 6){
+        this.setState({imglocs: require("./../../../assets/images/masks/beige.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/black.png")});
+      }
+      if (newtemp[0] == 6 && newtemp[1] == 7){
+        this.setState({imglocs: require("./../../../assets/images/masks/black.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/khaki.png")});
+      }
+      if (newtemp[0] == 7 && newtemp[1] == 8){
+        this.setState({imglocs: require("./../../../assets/images/masks/khaki.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/white.png")});
+      }
+      this.setState({currmaskidx: newtemp});
+    }
+    //console.log(" ====== current mask idx pressed right  ", this.state.currmaskidx);
   }
 
   didAppear() {
@@ -425,23 +558,88 @@ class ArCameraView extends React.Component {
       </View>
 
       <View style={{position: "absolute", marginTop: height*0.65, width: width, height: height*0.2, flexDirection: "row", justifyContent: "space-between"}}>
-          <View style={{marginTop: height*0.05, backgroundColor: "black", height: width*0.2, width: width*0.1, justifyContent: "center" }}>
-            <Image resizeMode="contain" style={{marginLeft: "25%"}} source={require(`./../../../assets/images/left_arrow_ar.png`)} />
-          </View>
-
-          <View style={{width: width*0.36, height: width*0.2, backgroundColor: "black", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
-            
-          </View>
-
-          <View style={{width: width*0.36, height: width*0.2, backgroundColor: "black", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
           
+          <TouchableOpacity onPress={() => this.pressLeft()}>
+            <View style={{marginTop: height*0.05, height: width*0.2, width: width*0.1, justifyContent: "center" }}>
+              <Image resizeMode="contain" style={{marginLeft: "25%"}} source={require(`./../../../assets/images/left_arrow_ar.png`)} />
+            </View>
+          </TouchableOpacity>
+
+          <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
+            
+            <Image resizeMode="contain" style={{marginLeft: "25%"}} source={this.state.imglocs} />
+
+            {this.state.imglocs == require("./../../../assets/images/masks/grey.png") ? 
+              <Text>그레이</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/darkgrey.png") ? 
+              <Text>다크 {"\n"} 그레이</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/darkpink.png") ? 
+              <Text>다크 {"\n"} 핑크</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/lightgrey.png") ? 
+              <Text>라이트 {"\n"} 그레이</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/lightpink.png") ? 
+              <Text>라이트 {"\n"} 핑크</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/beige.png") ? 
+              <Text>베이지</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/black.png") ? 
+              <Text>블랙</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/khaki.png") ? 
+              <Text>카키</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/white.png") ? 
+              <Text>화이트</Text>
+            : null}
+
+          </View>
+
+          <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
+            
+            <Image resizeMode="contain" style={{marginLeft: "25%"}} source={this.state.imglocs2} />
+
+            {this.state.imglocs == require("./../../../assets/images/masks/grey.png") ? 
+              <Text>그레이</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/darkgrey.png") ? 
+              <Text>다크 {"\n"} 그레이</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/darkpink.png") ? 
+              <Text>다크 {"\n"} 핑크</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/lightgrey.png") ? 
+              <Text>라이트 {"\n"} 그레이</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/lightpink.png") ? 
+              <Text>라이트 {"\n"} 핑크</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/beige.png") ? 
+              <Text>베이지</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/black.png") ? 
+              <Text>블랙</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/khaki.png") ? 
+              <Text>카키</Text>
+            : null}
+            {this.state.imglocs == require("./../../../assets/images/masks/white.png") ? 
+              <Text>화이트</Text>
+            : null}
+
           </View>
 
 
+          <TouchableOpacity onPress={() => this.pressRight()}>
+            <View style={{marginTop: height*0.05 , height: width*0.2, width: width*0.1, justifyContent: "center"  }}>
+              <Image resizeMode="contain" style={{marginLeft: "25%"}} source={require(`./../../../assets/images/right_arrow_ar.png`)} />
+            </View>
+          </TouchableOpacity>
 
-          <View style={{marginTop: height*0.05 , backgroundColor: "black", height: width*0.2, width: width*0.1, justifyContent: "center"  }}>
-            <Image resizeMode="contain" style={{marginLeft: "25%"}} source={require(`./../../../assets/images/right_arrow_ar.png`)} />
-          </View>
         </View>
 
       </>

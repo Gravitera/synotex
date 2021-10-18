@@ -69,6 +69,7 @@ const RecommendationView = (props) => {
   const [feedbacksent, setfeedbacksent] = useState(0);
 
 
+
   const storeData = useSelector((store) => store);
 /*
   var maskImage = "M";
@@ -432,6 +433,8 @@ if (feedbacksent == 1){
                   </View>
                   :
                   null} 
+
+
                   {storeData.attendanceReducer.res.MaskSize == "NL"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
                     <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.02}}>얼굴이 작아 보이는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>중형(M)</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text> 사이즈를 추천드리며,</Text>
