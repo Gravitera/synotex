@@ -420,49 +420,49 @@ class ArCameraView extends React.Component {
       {this.state.MaskColorClicked && this.state.MaskColor == "Black" ? 
         <View style={styles.bottomBtnContainer2}>
         <View style={{flexDirection: 'row'}}>
-        <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.XSclicked() }>
-            <View style={{justifyContent: "center"}}>
-              <Text style={styles.prodText2}>
-              키즈(XS)
-              </Text>
-              </View>
-            </TouchableOpacity>
-
-
-            <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.SSclicked() }>
-            <View style={{justifyContent: "center"}}>
-              <Text style={styles.prodText2}>
-              초등(SS)
-              </Text>
-            </View>
-            </TouchableOpacity>
-
-
-
-            <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Sclicked() }>
-            <View style={{justifyContent: "center"}}>
-              <Text style={styles.prodText2}>
-              스몰(S)
-              </Text>
-            </View>
-            </TouchableOpacity>
-            
-            
-            
-            <TouchableOpacity style={styles.buttonCont2}  onPress={ () => this.Mclicked() }>
-            <View style={{justifyContent: "center"}}>
-              <Text style={styles.prodText2}>
-              미디움(M)
-              </Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Lclicked() }>
+          <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.XSclicked() }>
               <View style={{justifyContent: "center"}}>
                 <Text style={styles.prodText2}>
-                  라지(L)
+                키즈(XS)
+                </Text>
+                </View>
+              </TouchableOpacity>
+
+
+              <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.SSclicked() }>
+              <View style={{justifyContent: "center"}}>
+                <Text style={styles.prodText2}>
+                초등(SS)
                 </Text>
               </View>
-            </TouchableOpacity>
+              </TouchableOpacity>
+
+
+
+              <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Sclicked() }>
+              <View style={{justifyContent: "center"}}>
+                <Text style={styles.prodText2}>
+                스몰(S)
+                </Text>
+              </View>
+              </TouchableOpacity>
+              
+              
+              
+              <TouchableOpacity style={styles.buttonCont2}  onPress={ () => this.Mclicked() }>
+              <View style={{justifyContent: "center"}}>
+                <Text style={styles.prodText2}>
+                미디움(M)
+                </Text>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Lclicked() }>
+                <View style={{justifyContent: "center"}}>
+                  <Text style={styles.prodText2}>
+                    라지(L)
+                  </Text>
+                </View>
+              </TouchableOpacity>
         </View>
         </View>
         :

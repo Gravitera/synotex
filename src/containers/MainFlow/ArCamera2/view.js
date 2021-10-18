@@ -180,6 +180,78 @@ class ArCameraView extends React.Component {
     //console.log(" ====== current mask idx pressed right  ", this.state.currmaskidx);
   }
 
+  leftmaskclicked(temp){
+    console.log(" ====== left mask clicked   ", temp)
+    this.setState({MaskColor: temp});
+    /*
+    if (this.state.imglocs == require("./../../../assets/images/masks/grey.png")){
+      this.setState({MaskColor: "grey"});
+    }
+    if (this.state.imglocs == require("./../../../assets/images/masks/darkgrey.png")){
+      this.setState({MaskColor: "darkgrey"});
+    }
+    if (this.state.imglocs == require("./../../../assets/images/masks/darkpink.png")){
+      this.setState({MaskColor: "darkpink"});
+    }
+    if (this.state.imglocs == require("./../../../assets/images/masks/lightgrey.png")){
+      this.setState({MaskColor: "lightgrey"});
+    }
+    if (this.state.imglocs == require("./../../../assets/images/masks/lightpink.png")){
+      this.setState({MaskColor: "lightpink"});
+    }
+    if (this.state.imglocs == require("./../../../assets/images/masks/beige.png")){
+      this.setState({MaskColor: "beige"});
+    }
+    if (this.state.imglocs == require("./../../../assets/images/masks/black.png")){
+      this.setState({MaskColor: "black"});
+    }
+    if (this.state.imglocs == require("./../../../assets/images/masks/khaki.png")){
+      this.setState({MaskColor: "khaki"});
+    }
+    if (this.state.imglocs == require("./../../../assets/images/masks/white.png")){
+      this.setState({MaskColor: "white"});
+    }
+    */
+    this.setState({MaskColorClicked: true});
+    console.log(" ========= maskcolor   ", this.state.MaskColor);
+  }      
+
+  rightmaskclicked(temp){
+    console.log(" ====== right mask clicked   ", temp)
+    this.setState({MaskColor: temp});
+    /*
+    if (this.state.imglocs2 == require("./../../../assets/images/masks/grey.png")){
+      this.setState({MaskColor: "grey"});
+    }
+    if (this.state.imglocs2 == require("./../../../assets/images/masks/darkgrey.png")){
+      this.setState({MaskColor: "darkgrey"});
+    }
+    if (this.state.imglocs2 == require("./../../../assets/images/masks/darkpink.png")){
+      this.setState({MaskColor: "darkpink"});
+    }
+    if (this.state.imglocs2 == require("./../../../assets/images/masks/lightgrey.png")){
+      this.setState({MaskColor: "lightgrey"});
+    }
+    if (this.state.imglocs2 == require("./../../../assets/images/masks/lightpink.png")){
+      this.setState({MaskColor: "lightpink"});
+    }
+    if (this.state.imglocs2 == require("./../../../assets/images/masks/beige.png")){
+      this.setState({MaskColor: "beige"});
+    }
+    if (this.state.imglocs2 == require("./../../../assets/images/masks/black.png")){
+      this.setState({MaskColor: "black"});
+    }
+    if (this.state.imglocs2 == require("./../../../assets/images/masks/khaki.png")){
+      this.setState({MaskColor: "khaki"});
+    }
+    if (this.state.imglocs2 == require("./../../../assets/images/masks/white.png")){
+      this.setState({MaskColor: "white"});
+    }
+    */
+    this.setState({MaskColorClicked: true});
+    console.log(" ========= maskcolor   ", this.state.MaskColor);
+  }
+
   didAppear() {
     if (this.deepARView) {
         this.deepARView.resume();
@@ -565,73 +637,78 @@ class ArCameraView extends React.Component {
             </View>
           </TouchableOpacity>
 
-          <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
-            
-            <Image resizeMode="contain" style={{marginLeft: "25%"}} source={this.state.imglocs} />
+          <TouchableOpacity onPress={(data) => this.leftmaskclicked(data)}>
+            <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
+              
+              <Image resizeMode="contain" style={{marginLeft: "1%", marginTop: "5%"}} source={this.state.imglocs} />
 
-            {this.state.imglocs == require("./../../../assets/images/masks/grey.png") ? 
-              <Text>그레이</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/darkgrey.png") ? 
-              <Text>다크 {"\n"} 그레이</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/darkpink.png") ? 
-              <Text>다크 {"\n"} 핑크</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/lightgrey.png") ? 
-              <Text>라이트 {"\n"} 그레이</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/lightpink.png") ? 
-              <Text>라이트 {"\n"} 핑크</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/beige.png") ? 
-              <Text>베이지</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/black.png") ? 
-              <Text>블랙</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/khaki.png") ? 
-              <Text>카키</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/white.png") ? 
-              <Text>화이트</Text>
-            : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/grey.png") ? 
+                <Text style={{marginTop: "35%"}}>그레이</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/darkgrey.png") ? 
+                <Text style={{marginTop: "23%"}}>   다크 {"\n"} 그레이</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/darkpink.png") ? 
+                <Text style={{marginTop: "23%"}}>   다크 {"\n"}   핑크</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/lightgrey.png") ? 
+                <Text style={{marginTop: "23%"}}>   라이트 {"\n"}   그레이</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/lightpink.png") ? 
+                <Text style={{marginTop: "23%"}}>   라이트 {"\n"}   핑크</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/beige.png") ? 
+                <Text style={{marginTop: "35%"}}>베이지</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/black.png") ? 
+                <Text style={{marginTop: "35%"}}>블랙</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/khaki.png") ? 
+                <Text style={{marginTop: "35%"}}>카키</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/white.png") ? 
+                <Text style={{marginTop: "35%"}}>화이트</Text>
+              : null}
 
-          </View>
+            </View>
+          </TouchableOpacity>
 
-          <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
-            
-            <Image resizeMode="contain" style={{marginLeft: "25%"}} source={this.state.imglocs2} />
+          <TouchableOpacity onPress={(data) => this.rightmaskclicked(data)}>
+            <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
+              
+              <Image resizeMode="contain" style={{marginLeft: "1%", marginTop: "5%"}} source={this.state.imglocs2} />
 
-            {this.state.imglocs == require("./../../../assets/images/masks/grey.png") ? 
-              <Text>그레이</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/darkgrey.png") ? 
-              <Text>다크 {"\n"} 그레이</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/darkpink.png") ? 
-              <Text>다크 {"\n"} 핑크</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/lightgrey.png") ? 
-              <Text>라이트 {"\n"} 그레이</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/lightpink.png") ? 
-              <Text>라이트 {"\n"} 핑크</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/beige.png") ? 
-              <Text>베이지</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/black.png") ? 
-              <Text>블랙</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/khaki.png") ? 
-              <Text>카키</Text>
-            : null}
-            {this.state.imglocs == require("./../../../assets/images/masks/white.png") ? 
-              <Text>화이트</Text>
-            : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/grey.png") ? 
+                <Text style={{marginTop: "35%"}}>그레이</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/darkgrey.png") ? 
+                <Text style={{marginTop: "23%"}}>   다크 {"\n"} 그레이</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/darkpink.png") ? 
+                <Text style={{marginTop: "23%"}}>   다크 {"\n"}   핑크</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/lightgrey.png") ? 
+                <Text style={{marginTop: "23%"}}>   라이트 {"\n"}   그레이</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/lightpink.png") ? 
+                <Text style={{marginTop: "23%"}}>   라이트 {"\n"}   핑크</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/beige.png") ? 
+                <Text style={{marginTop: "35%"}}>베이지</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/black.png") ? 
+                <Text style={{marginTop: "35%"}}>블랙</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/khaki.png") ? 
+                <Text style={{marginTop: "35%"}}>카키</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/white.png") ? 
+                <Text style={{marginTop: "35%"}}>화이트</Text>
+              : null}
 
-          </View>
+            </View>
+
+          </TouchableOpacity>
 
 
           <TouchableOpacity onPress={() => this.pressRight()}>
@@ -641,6 +718,57 @@ class ArCameraView extends React.Component {
           </TouchableOpacity>
 
         </View>
+
+        {this.state.MaskColorClicked == true ?
+          <View style={styles.bottomBtnContainer2}>
+            <View style={{flexDirection: 'row'}}>
+              <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.XSclicked() }>
+                <View style={{justifyContent: "center"}}>
+                  <Text style={styles.prodText2}>
+                  키즈(XS)
+                  </Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.SSclicked() }>
+                <View style={{justifyContent: "center"}}>
+                  <Text style={styles.prodText2}>
+                  초등(SS)
+                  </Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Sclicked() }>
+                <View style={{justifyContent: "center"}}>
+                  <Text style={styles.prodText2}>
+                  스몰(S)
+                  </Text>
+                </View>
+              </TouchableOpacity>
+              
+              <TouchableOpacity style={styles.buttonCont2}  onPress={ () => this.Mclicked() }>
+                <View style={{justifyContent: "center"}}>
+                  <Text style={styles.prodText2}>
+                  미디움(M)
+                  </Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Lclicked() }>
+                <View style={{justifyContent: "center"}}>
+                  <Text style={styles.prodText2}>
+                    라지(L)
+                  </Text>
+                </View>
+              </TouchableOpacity>
+
+            </View>
+          </View>
+        :null}
+
+
+
+
 
       </>
     )
@@ -800,7 +928,7 @@ const styles = StyleSheet.create({
     width: '100%',
     bottom: 80,
     height: 50,
-    marginBottom: "-12.5%"
+    marginBottom: "-15.5%"
   },
 
   bottomBtnContainer21: {
@@ -867,7 +995,6 @@ const styles = StyleSheet.create({
     margin:10
   },
   buttonCont2: {
-    backgroundColor: "black",
     borderRadius: 10,
     //height: 50,
     //width: 80,
@@ -893,7 +1020,8 @@ const styles = StyleSheet.create({
     height: 50,
     textAlignVertical: 'center',
     //backgroundColor: "black",
-    color: "white"
+    color: "white",
+    fontWeight: "bold"
   },
   bottomTextContainer2: {
     position: 'absolute',
