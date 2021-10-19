@@ -180,9 +180,120 @@ const RecommendationView = (props) => {
 
 
 
+  var maskidx = [0,1,2,3,4,5,6,7,8]
+  // 총 9 색상의 마스크를 리스트로 정리 
+  var maskcolor = ["grey", "darkgrey", "darkpink",
+  "lightgrey", "lightpink", "beige", "black", "khaki", "white"]
 
+  // 총 9지 색상의 마스크가 있는 RN 베이스 경로
+  var maskloc = "./../../../assets/images/masks/"
 
+  // 현재 보여지고 있는 왼쪽, 오른쪽 마스크의 인덱스 (예: [3,4], [6,7])
+  //var currmaskidx = [0,1]
 
+  // 현재 보여지고 있는 왼쪽, 오른쪽 마스크중 왼쪽의 이미지 소스
+  var imglocs = require("./../../../assets/images/masks/grey.png")
+  // 현재 보여지고 있는 왼쪽, 오른쪽 마스크중 오른쪽의 이미지 소스
+  var imglocs2 = require("./../../../assets/images/masks/darkgrey.png")
+  var imglocs3 = require("./../../../assets/images/masks/darkpink.png")
+
+  var [currmaskidx, setcurrmaskidx] = useState(0)
+  var [currmaskidx2, setcurrmaskidx2] = useState(1)
+  var [currmaskidx3, setcurrmaskidx3] = useState(2)
+  //
+  //  밑에 왼쪽 화살표 눌렀을떄 반응
+  //
+  const pressLeft = () => {
+    //
+    //  왼쪽 화살표를 눌렀을떄 currmaskidx 를 왼쪽으로 옮겨줌 (예: [2,3] -> [1,2])
+    //
+    var temp = [currmaskidx, currmaskidx2, currmaskidx3];
+    var temp2 = true;
+
+    if (temp[0] == 0){
+      
+      //setcurrmaskidx([8,0,1]);
+      setcurrmaskidx(8);
+      setcurrmaskidx2(0);
+      setcurrmaskidx3(1)
+      temp2 = false;
+    }
+    if (temp[0] == 8 && temp[1] == 0){
+
+      //setcurrmaskidx([7,8,0]);
+      setcurrmaskidx(7);
+      setcurrmaskidx2(8);
+      setcurrmaskidx3(0)
+      temp2 = false;
+    }
+    if (temp[0] == 7 && temp[1] == 8){
+
+      //setcurrmaskidx([6,7,8]);
+      setcurrmaskidx(6);
+      setcurrmaskidx2(7);
+      setcurrmaskidx3(8)
+      temp2 = false;
+    }
+
+    if (temp2 == true){
+
+      var newtemp = [currmaskidx-1, currmaskidx2-1, currmaskidx3-1];
+
+      //setcurrmaskidx(newtemp);
+      setcurrmaskidx(newtemp[0]);
+      setcurrmaskidx2(newtemp[1]);
+      setcurrmaskidx3(newtemp[2])
+    }
+
+    console.log(" ======== new mask idx   ", currmaskidx, "   ", currmaskidx2, "   ", currmaskidx3);
+
+  }
+
+  //
+  //  밑에 오른쪽 화살표 눌렀을떄 반응
+  //
+  const pressRight = () => {
+    //
+    //  오른쪽 화살표를 눌렀을떄 currmaskidx 를 오른쪽으로 옮겨줌 (예: [2,3] -> [3,4])
+    //
+    var temp = [currmaskidx, currmaskidx2, currmaskidx3];
+    var temp2 = true;
+
+    if (temp[2] == 8){
+      
+      //setcurrmaskidx([7,8,0]);
+      setcurrmaskidx(7);
+      setcurrmaskidx2(8);
+      setcurrmaskidx3(0)
+      temp2 = false;
+    }
+    if (temp[2] == 0 && temp[1] == 8){
+
+      //setcurrmaskidx([8,0,1]);
+      setcurrmaskidx(8);
+      setcurrmaskidx2(0);
+      setcurrmaskidx3(1)
+      temp2 = false;
+    }
+    if (temp[2] == 1 && temp[1] == 0){
+
+      //setcurrmaskidx([0,1,2]);
+      setcurrmaskidx(0);
+      setcurrmaskidx2(1);
+      setcurrmaskidx3(2)
+      temp2 = false;
+    }
+
+    if (temp2 == true){
+
+      var newtemp = [currmaskidx+1, currmaskidx2+1, currmaskidx3+1];
+
+      setcurrmaskidx(newtemp[0]);
+      setcurrmaskidx2(newtemp[1]);
+      setcurrmaskidx3(newtemp[2]);
+    }
+
+  }
 
 
 
@@ -482,21 +593,271 @@ if (feedbacksent == 1){
             </View>
         </Animatable.View>
 
-        <View style={{flexDirection:"row", justifyContent: "space-between", marginLeft: width*0.03}}>
-          <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/category/%ED%99%94%EC%9D%B4%ED%8A%B8%EB%A7%88%EC%8A%A4%ED%81%AC/30/")}>
-            <Image style={{width: width*0.2,height: width*0.2,marginBottom: height*0.01}} resizeMode="contain" source={require(`./../../../assets/images/whitemaskicon.png`)} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/category/%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%A7%88%EC%8A%A4%ED%81%AC/49/")}>
-            <Image style={{width: width*0.2,height: width*0.2,marginBottom: height*0.01}} resizeMode="contain" source={require(`./../../../assets/images/greymaskicon.png`)} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/category/%EB%B8%94%EB%9E%99%EB%A7%88%EC%8A%A4%ED%81%AC/29/")}>
-            <Image style={{width: width*0.2,height: width*0.2,marginBottom: height*0.01}} resizeMode="contain" source={require(`./../../../assets/images/blackmaskicon.png`)} />
+        <View style={{ width: width*0.9, height: width*0.2, flexDirection: "row", justifyContent: "space-between"}}>
+           
+          <TouchableOpacity onPress={() => pressLeft()}>
+                <View style={{ height: width*0.2, width: width*0.1, justifyContent: "center" }}>
+                  <Image resizeMode="contain" style={{marginLeft: "25%"}} source={require(`./../../../assets/images/left_arrow_ar.png`)} />
+                </View>
           </TouchableOpacity>
 
-          {/*<TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8%EC%BD%9C%EB%9D%BC%EB%B3%B4-50%EB%A7%A4/51/category/30/display/1/")}>
-            <Image style={{width: width*0.2,height: width*0.2,marginBottom: height*0.01, marginTop: -1*height*0}} resizeMode="contain" source={require(`./../../../assets/images/whitecollabmaskicon.png`)} />
-          </TouchableOpacity>*/}
+
+
+
+          {currmaskidx == 0 && currmaskidx2 == 1 && currmaskidx3 == 2 ?
+          <View style={{flexDirection:"row", height: width*0.2, width: width*0.65 , justifyContent: "space-between"}}>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/uv-%EC%9E%90%EC%99%B8%EC%84%A0%EC%B0%A8%EB%8B%A8-%EA%B7%B8%EB%A0%88%EC%9D%B4-50%EB%A7%A4/37/category/49/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>그레이</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/grey.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%8B%A4%ED%81%AC%EA%B7%B8%EB%A0%88%EC%9D%B4-50%EB%A7%A4/63/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>다그레이</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/darkgrey.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%9D%BC%EC%9D%B4%ED%8A%B8%ED%95%91%ED%81%AC-50%EB%A7%A4/60/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>다-핑크</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/darkpink.png")} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          :null}
+
+          {currmaskidx == 1 && currmaskidx2 == 2 && currmaskidx3 == 3 ?
+          <View style={{flexDirection:"row", height: width*0.2, width: width*0.65 , justifyContent: "space-between"}}>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%8B%A4%ED%81%AC%EA%B7%B8%EB%A0%88%EC%9D%B4-50%EB%A7%A4/63/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>다그레이</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/darkgrey.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%9D%BC%EC%9D%B4%ED%8A%B8%ED%95%91%ED%81%AC-50%EB%A7%A4/60/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>다-핑크</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/darkpink.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%9D%BC%EC%9D%B4%ED%8A%B8%EA%B7%B8%EB%A0%88%EC%9D%B4-50%EB%A7%A4/62/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 18, fontWeight: "bold"}}>라그레이</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/lightgrey.png")} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          :null}
+
+          {currmaskidx == 2 && currmaskidx2 == 3 && currmaskidx3 == 4 ?
+          <View style={{flexDirection:"row", height: width*0.2, width: width*0.65 , justifyContent: "space-between"}}>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%9D%BC%EC%9D%B4%ED%8A%B8%ED%95%91%ED%81%AC-50%EB%A7%A4/60/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>다-핑크</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/darkpink.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%9D%BC%EC%9D%B4%ED%8A%B8%EA%B7%B8%EB%A0%88%EC%9D%B4-50%EB%A7%A4/62/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 18, fontWeight: "bold"}}>라그레이</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/lightgrey.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%9D%BC%EC%9D%B4%ED%8A%B8%ED%95%91%ED%81%AC-50%EB%A7%A4/60/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>라-핑크</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/lightpink.png")} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          :null}
+
+          {currmaskidx == 3 && currmaskidx2 == 4 && currmaskidx3 == 5 ?
+          <View style={{flexDirection:"row", height: width*0.2, width: width*0.65 , justifyContent: "space-between"}}>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%9D%BC%EC%9D%B4%ED%8A%B8%EA%B7%B8%EB%A0%88%EC%9D%B4-50%EB%A7%A4/62/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 18, fontWeight: "bold"}}>라그레이</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/lightgrey.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%9D%BC%EC%9D%B4%ED%8A%B8%ED%95%91%ED%81%AC-50%EB%A7%A4/60/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>라-핑크</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/lightpink.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%B2%A0%EC%9D%B4%EC%A7%80-50%EB%A7%A4/59/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>베이지</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/beige.png")} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          :null}
+
+          {currmaskidx == 4 && currmaskidx2 == 5 && currmaskidx3 == 6 ?
+          <View style={{flexDirection:"row", height: width*0.2, width: width*0.65 , justifyContent: "space-between"}}>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%9D%BC%EC%9D%B4%ED%8A%B8%ED%95%91%ED%81%AC-50%EB%A7%A4/60/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>라-핑크</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/lightpink.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%B2%A0%EC%9D%B4%EC%A7%80-50%EB%A7%A4/59/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>베이지</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/beige.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/uv-%EC%9E%90%EC%99%B8%EC%84%A0%EC%B0%A8%EB%8B%A8-%EB%B8%94%EB%9E%99-50%EB%A7%A4/32/category/29/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 23, fontWeight: "bold"}}>블랙</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/black.png")} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          :null}
+
+          {currmaskidx == 5 && currmaskidx2 == 6 && currmaskidx3 == 7 ?
+          <View style={{flexDirection:"row", height: width*0.2, width: width*0.65 , justifyContent: "space-between"}}>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%B2%A0%EC%9D%B4%EC%A7%80-50%EB%A7%A4/59/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>베이지</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/beige.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/uv-%EC%9E%90%EC%99%B8%EC%84%A0%EC%B0%A8%EB%8B%A8-%EB%B8%94%EB%9E%99-50%EB%A7%A4/32/category/29/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 23, fontWeight: "bold"}}>블랙</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/black.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EC%B9%B4%ED%82%A4-50%EB%A7%A4/64/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 25, fontWeight: "bold"}}>카키</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/khaki.png")} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          :null}
+
+          {currmaskidx == 6 && currmaskidx2 == 7 && currmaskidx3 == 8 ?
+          <View style={{flexDirection:"row", height: width*0.2, width: width*0.65 , justifyContent: "space-between"}}>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/uv-%EC%9E%90%EC%99%B8%EC%84%A0%EC%B0%A8%EB%8B%A8-%EB%B8%94%EB%9E%99-50%EB%A7%A4/32/category/29/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 23, fontWeight: "bold"}}>블랙</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/black.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EC%B9%B4%ED%82%A4-50%EB%A7%A4/64/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 25, fontWeight: "bold"}}>카키</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/khaki.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-50%EB%A7%A4/31/category/30/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>화이트</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/white.png")} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          :null}
+
+          {currmaskidx == 7 && currmaskidx2 == 8 && currmaskidx3 == 0 ?
+          <View style={{flexDirection:"row", height: width*0.2, width: width*0.65 , justifyContent: "space-between"}}>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EC%B9%B4%ED%82%A4-50%EB%A7%A4/64/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 25, fontWeight: "bold"}}>카키</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/khaki.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-50%EB%A7%A4/31/category/30/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>화이트</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/white.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/uv-%EC%9E%90%EC%99%B8%EC%84%A0%EC%B0%A8%EB%8B%A8-%EA%B7%B8%EB%A0%88%EC%9D%B4-50%EB%A7%A4/37/category/49/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>그레이</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/grey.png")} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          :null}
+
+          {currmaskidx == 8 && currmaskidx2 == 0 && currmaskidx3 == 1 ?
+          <View style={{flexDirection:"row", height: width*0.2, width: width*0.65 , justifyContent: "space-between"}}>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%A7%88%EC%8A%A4%ED%81%AC-%ED%99%94%EC%9D%B4%ED%8A%B8-50%EB%A7%A4/31/category/30/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>화이트</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/white.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/uv-%EC%9E%90%EC%99%B8%EC%84%A0%EC%B0%A8%EB%8B%A8-%EA%B7%B8%EB%A0%88%EC%9D%B4-50%EB%A7%A4/37/category/49/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>그레이</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/grey.png")} />
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => Linking.openURL("https://synotexmall.com/product/eptfe-%ED%95%84%ED%84%B0-%EB%8B%A4%ED%81%AC%EA%B7%B8%EB%A0%88%EC%9D%B4-50%EB%A7%A4/63/category/60/display/1/")}>
+              <View style={{justifyContent: "center", width:width*0.2, height: width*0.2, backgroundColor: "white", borderRadius: 50, flexDirection: "column"}}>
+                <View style={{height: 7}}></View>
+                <Text style={{fontSize: 12, marginLeft: 20, fontWeight: "bold"}}>다그레이</Text>
+                <Image style={{width: width*0.175,height: width*0.175, marginLeft: 10}} resizeMode="contain" source={require("./../../../assets/images/masks/darkgrey.png")} />
+              </View>
+            </TouchableOpacity>
+          </View>
+          :null}
+
+
+
+
+
+
+
+
+
+
+
+          <TouchableOpacity onPress={() => pressRight()}>
+                <View style={{ height: width*0.2, width: width*0.1, justifyContent: "center"  }}>
+                  <Image resizeMode="contain" style={{marginLeft: "25%"}} source={require(`./../../../assets/images/right_arrow_ar.png`)} />
+                </View>
+          </TouchableOpacity>
+
         </View>
+
+
+
   
 
         {Platform.OS == 'android' ? 
