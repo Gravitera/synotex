@@ -64,23 +64,23 @@ class ArCameraView extends React.Component {
   pressLeft(){
     var temp = this.state.currmaskidx;
     var temp2 = true;
-    //console.log(" ====== current mask idx pressed left  ")
+
     if (temp[0] == 0){
-      //console.log(" ===== 1 ")
+
       this.setState({currmaskidx: [8,0]});
       this.setState({imglocs: require("./../../../assets/images/masks/white.png")});
       this.setState({imglocs2: require("./../../../assets/images/masks/grey.png")});
       temp2 = false;
     }
     if (temp[0] == 8 && temp[1] == 0){
-      //console.log(" ===== 2 ")
+
       this.setState({currmaskidx: [7,8]});
       this.setState({imglocs: require("./../../../assets/images/masks/khaki.png")});
       this.setState({imglocs2: require("./../../../assets/images/masks/white.png")});
       temp2 = false;
     }
     if (temp2 == true){
-      //console.log(" ===== 3 ")
+
       var newtemp = [this.state.currmaskidx[0]-1, this.state.currmaskidx[1]-1];
 
       if (newtemp[0] == 0 && newtemp[1] == 1){
@@ -118,7 +118,6 @@ class ArCameraView extends React.Component {
 
       this.setState({currmaskidx: newtemp});
     }
-    //console.log(" ====== current mask idx pressed left  ", this.state.currmaskidx);
 
   }
 
@@ -127,21 +126,21 @@ class ArCameraView extends React.Component {
     var temp2 = true;
     //console.log(" ====== current mask idx pressed right  ")
     if (temp[1] == 8){
-      //console.log(" ===== 1 ")
+
       this.setState({currmaskidx: [8,0]});
       this.setState({imglocs: require("./../../../assets/images/masks/white.png")});
       this.setState({imglocs2: require("./../../../assets/images/masks/grey.png")});
       temp2 = false;
     }
     if (temp[1] == 0 && temp[0] == 8){
-      //console.log(" ===== 2 ")
+ 
       this.setState({currmaskidx: [1,2]});
       this.setState({imglocs: require("./../../../assets/images/masks/grey.png")});
       this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
       temp2 = false;
     }
     if (temp2 == true){
-      //console.log(" ===== 3 ")
+
       var newtemp = [this.state.currmaskidx[0]+1, this.state.currmaskidx[1]+1];
       if (newtemp[0] == 0 && newtemp[1] == 1){
         this.setState({imglocs: require("./../../../assets/images/masks/grey.png")});
@@ -177,79 +176,74 @@ class ArCameraView extends React.Component {
       }
       this.setState({currmaskidx: newtemp});
     }
-    //console.log(" ====== current mask idx pressed right  ", this.state.currmaskidx);
+
   }
 
-  leftmaskclicked(temp){
-    console.log(" ====== left mask clicked   ", temp)
-    this.setState({MaskColor: temp});
-    /*
+  leftmaskclicked(){
+
+
     if (this.state.imglocs == require("./../../../assets/images/masks/grey.png")){
-      this.setState({MaskColor: "grey"});
+      this.setState({MaskColor: "grey"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/darkgrey.png")){
-      this.setState({MaskColor: "darkgrey"});
+      this.setState({MaskColor: "darkgrey"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/darkpink.png")){
-      this.setState({MaskColor: "darkpink"});
+      this.setState({MaskColor: "darkpink"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/lightgrey.png")){
-      this.setState({MaskColor: "lightgrey"});
+      this.setState({MaskColor: "lightgrey"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/lightpink.png")){
-      this.setState({MaskColor: "lightpink"});
+      this.setState({MaskColor: "lightpink"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/beige.png")){
-      this.setState({MaskColor: "beige"});
+      this.setState({MaskColor: "beige"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/black.png")){
-      this.setState({MaskColor: "black"});
+      this.setState({MaskColor: "black"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/khaki.png")){
-      this.setState({MaskColor: "khaki"});
+      this.setState({MaskColor: "khaki"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/white.png")){
-      this.setState({MaskColor: "white"});
+      this.setState({MaskColor: "white"}, () => console.log(this.state.MaskColor));
     }
-    */
     this.setState({MaskColorClicked: true});
-    console.log(" ========= maskcolor   ", this.state.MaskColor);
   }      
 
-  rightmaskclicked(temp){
-    console.log(" ====== right mask clicked   ", temp)
-    this.setState({MaskColor: temp});
-    /*
+  rightmaskclicked(){
+
     if (this.state.imglocs2 == require("./../../../assets/images/masks/grey.png")){
-      this.setState({MaskColor: "grey"});
+      this.setState({MaskColor: "grey"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/darkgrey.png")){
-      this.setState({MaskColor: "darkgrey"});
+      this.setState({MaskColor: "darkgrey"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/darkpink.png")){
-      this.setState({MaskColor: "darkpink"});
+      this.setState({MaskColor: "darkpink"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/lightgrey.png")){
-      this.setState({MaskColor: "lightgrey"});
+      this.setState({MaskColor: "lightgrey"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/lightpink.png")){
-      this.setState({MaskColor: "lightpink"});
+      this.setState({MaskColor: "lightpink"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/beige.png")){
-      this.setState({MaskColor: "beige"});
+      this.setState({MaskColor: "beige"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/black.png")){
-      this.setState({MaskColor: "black"});
+      this.setState({MaskColor: "black"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/khaki.png")){
-      this.setState({MaskColor: "khaki"});
+      this.setState({MaskColor: "khaki"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/white.png")){
-      this.setState({MaskColor: "white"});
+      this.setState({MaskColor: "white"}, () => console.log(this.state.MaskColor));
     }
-    */
+
     this.setState({MaskColorClicked: true});
-    console.log(" ========= maskcolor   ", this.state.MaskColor);
+
   }
 
   didAppear() {
@@ -346,6 +340,9 @@ class ArCameraView extends React.Component {
   */
 
   XSclicked = () => {
+
+    this.setState({MaskSize: "XS"}, () => console.log(this.state.MaskSize));
+
     
     if(this.state.MaskColor == "White"){
 
@@ -381,6 +378,8 @@ class ArCameraView extends React.Component {
 
   
   SSclicked = () => {
+
+    this.setState({MaskSize: "SS"}, () => console.log(this.state.MaskSize));
     
     if(this.state.MaskColor == "White"){
 
@@ -416,6 +415,8 @@ class ArCameraView extends React.Component {
 
   Sclicked = () => {
 
+    this.setState({MaskSize: "S"}, () => console.log(this.state.MaskSize));
+
     if(this.state.MaskColor == "White"){
 
       if(this.state.MaskSize == "XS"){
@@ -448,6 +449,8 @@ class ArCameraView extends React.Component {
   }
   Mclicked = () => {
 
+    this.setState({MaskSize: "M"}, () => console.log(this.state.MaskSize));
+
     if(this.state.MaskColor == "White"){
 
       if(this.state.MaskSize == "XS"){
@@ -478,6 +481,8 @@ class ArCameraView extends React.Component {
   }
   }
   Lclicked = () => {
+
+    this.setState({MaskSize: "L"}, () => console.log(this.state.MaskSize));
 
     if(this.state.MaskColor == "White"){
 
@@ -637,7 +642,7 @@ class ArCameraView extends React.Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={(data) => this.leftmaskclicked(data)}>
+          <TouchableOpacity onPress={() => this.leftmaskclicked()}>
             <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
               
               <Image resizeMode="contain" style={{marginLeft: "1%", marginTop: "5%"}} source={this.state.imglocs} />
@@ -673,7 +678,7 @@ class ArCameraView extends React.Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={(data) => this.rightmaskclicked(data)}>
+          <TouchableOpacity onPress={() => this.rightmaskclicked()}>
             <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
               
               <Image resizeMode="contain" style={{marginLeft: "1%", marginTop: "5%"}} source={this.state.imglocs2} />
