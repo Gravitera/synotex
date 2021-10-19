@@ -5,7 +5,7 @@ import { effectsData } from './../../../components/ArCameraUtil/effectsData2';
 import {slideTransitionDefinition } from './../../../components/ArCameraUtil/simplenavigator/TransitionDefinitions';
 import { CustomBackButtonHeader2, CustomDrawerButtonHeader } from '../../../components/Header';
 
-
+import RNFetchBlob from "rn-fetch-blob";
 
 class ArCameraView extends React.Component {
 
@@ -23,16 +23,20 @@ class ArCameraView extends React.Component {
 
 
       maskidx : [0,1,2,3,4,5,6,7,8],
+      // 총 9 색상의 마스크를 리스트로 정리 
       maskcolor : ["grey", "darkgrey", "darkpink", 
       "lightgrey", "lightpink", "beige", "black", "khaki", "white"],
 
-      maskcolorkor : ["그레이", "다크 {'\n'} 그레이", "다크 {'\n'} 핑크",
-      "라이트 {'\n'} 그레이", "라이트 {'\n'} 핑크", "블랙", "카키", "화이트"],
-
+      // 총 9지 색상의 마스크가 있는 RN 베이스 경로
       maskloc : "./../../../assets/images/masks/",
+
+      // 현재 보여지고 있는 왼쪽, 오른쪽 마스크의 인덱스 (예: [3,4], [6,7])
       currmaskidx : [0,1],
+
+      // 현재 보여지고 있는 왼쪽, 오른쪽 마스크중 왼쪽의 이미지 소스
       imglocs: require("./../../../assets/images/masks/grey.png"),
-      imglocs2: require("./../../../assets/images/masks/darkgrey.png"),
+      // 현재 보여지고 있는 왼쪽, 오른쪽 마스크중 오른쪽의 이미지 소스
+      imglocs2: require("./../../../assets/images/masks/darkgrey.png"), 
     }
 
   }
@@ -61,7 +65,13 @@ class ArCameraView extends React.Component {
     console.log(" ====================  this.state   ", this.state);
   }
 
+  //
+  //  밑에 왼쪽 화살표 눌렀을떄 반응
+  //
   pressLeft(){
+    //
+    //  왼쪽 화살표를 눌렀을떄 currmaskidx 를 왼쪽으로 옮겨줌 (예: [2,3] -> [1,2])
+    //
     var temp = this.state.currmaskidx;
     var temp2 = true;
 
@@ -121,7 +131,13 @@ class ArCameraView extends React.Component {
 
   }
 
+  //
+  //  오른쪽 버튼 눌렀을떄의 반응
+  //
   pressRight(){
+    //
+    //  오른쪽 화살표를 눌렀을떄 currmaskidx 를 오른쪽으로 옮겨줌 (예: [2,3] -> [3,4])
+    //
     var temp = this.state.currmaskidx;
     var temp2 = true;
     //console.log(" ====== current mask idx pressed right  ")
@@ -179,7 +195,33 @@ class ArCameraView extends React.Component {
 
   }
 
+
+  //
+  //  왼쪽 화살표, 오른쪽 화살표 사이에 있는 마스크 이미지 두개중 왼쪽꺼 클릭시
+  //
   leftmaskclicked(){
+    //
+    //  왼쪽, 오른쪽 마스크 있을떄 왼쪽 마스크를 눌렀을떄 this.state.MaskColor 를 바꿔줌
+    //
+
+    /*    
+    const {fs, fetch, wrap} = RNFetchBlob;
+    console.log(" ======== root directory   ", fs.dirs.DocumentDir);
+
+    RNFetchBlob
+    .config({
+      path: fs.dirs.DocumentDir
+    })
+    .fetch("GET", "https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/beige/beige_3xs")
+    .then((res) => {
+      console.log(" ====== the file saved to  ", res.path());
+    }).catch((error) => {
+      console.log(error);
+    })
+    */
+
+    //fetch("GET", "https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/beige/beige_3xs")
+
 
 
     if (this.state.imglocs == require("./../../../assets/images/masks/grey.png")){
@@ -212,7 +254,15 @@ class ArCameraView extends React.Component {
     this.setState({MaskColorClicked: true});
   }      
 
+
+  //
+  //  왼쪽 화살표, 오른쪽 화살표 사이에 있는 마스크 이미지 두개중 오른쪽꺼 클릭시
+  //
   rightmaskclicked(){
+
+    //
+    //  왼쪽, 오른쪽 마스크 있을떄 오른쪽 마스크를 눌렀을떄 this.state.MaskColor 를 바꿔줌
+    //
 
     if (this.state.imglocs2 == require("./../../../assets/images/masks/grey.png")){
       this.setState({MaskColor: "grey"}, () => console.log(this.state.MaskColor));
@@ -311,38 +361,15 @@ class ArCameraView extends React.Component {
     }
   }
 
-  whiteColorClicked = () => {
-    console.log(" white mask clicked ");
-    this.setState({MaskColorClicked  : true});
-    this.setState({MaskColor : "White"});
-    
-  }
-
-  blackColorClicked = () => {
-    console.log(" black mask clicked ");
-    this.setState({MaskColorClicked  :true});
-    this.setState({MaskColor : "Black"});
-  }
-
-  /*
-  XSclicked = () => {
-    
-    if(this.state.MaskColor == "White"){
-      this.onChangeEffect(2);
-    
-    } else {
-      this.onChangeEffect(9);
-    
-    }
-    
-
-  }
-  */
+ 
 
   XSclicked = () => {
+
+    //
+    //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
+    //
 
     this.setState({MaskSize: "XS"}, () => console.log(this.state.MaskSize));
-
     
     if(this.state.MaskColor == "White"){
 
@@ -378,6 +405,10 @@ class ArCameraView extends React.Component {
 
   
   SSclicked = () => {
+
+    //
+    //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
+    //
 
     this.setState({MaskSize: "SS"}, () => console.log(this.state.MaskSize));
     
@@ -415,6 +446,10 @@ class ArCameraView extends React.Component {
 
   Sclicked = () => {
 
+    //
+    //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
+    //
+
     this.setState({MaskSize: "S"}, () => console.log(this.state.MaskSize));
 
     if(this.state.MaskColor == "White"){
@@ -449,6 +484,10 @@ class ArCameraView extends React.Component {
   }
   Mclicked = () => {
 
+    //
+    //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
+    //
+
     this.setState({MaskSize: "M"}, () => console.log(this.state.MaskSize));
 
     if(this.state.MaskColor == "White"){
@@ -482,6 +521,10 @@ class ArCameraView extends React.Component {
   }
   Lclicked = () => {
 
+    //
+    //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
+    //
+
     this.setState({MaskSize: "L"}, () => console.log(this.state.MaskSize));
 
     if(this.state.MaskColor == "White"){
@@ -514,101 +557,6 @@ class ArCameraView extends React.Component {
     }
 
   }
-
-
- /*
-  XSclicked = () => {
-    
-    if(this.state.MaskColor == "White"){
-        if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(4)
-        } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(3)
-        } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(2)
-        } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(1)
-        }
-    
-    } else {
-        if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(12)
-        } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(11)
-        } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(10)
-        } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(9)
-        }
-    
-    }
-    
-
-  }
-
-  
-  SSclicked = () => {
-    
-    if(this.state.MaskColor == "White"){
-        if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(3)
-        } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(4)
-        } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(5)
-        } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect()
-        }
-    
-    } else {
-        if(this.state.MaskSize == "XS"){
-            this.onChangeEffect(12)
-        } else if(this.state.MaskSize == "S"){
-            this.onChangeEffect(11)
-        } else if(this.state.MaskSize == "M"){
-            this.onChangeEffect(10)
-        } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(9)
-        }
-    
-    }
-  }
-  
-
-
-  Sclicked = () => {
-
-    if(this.state.MaskColor == "White"){
-      this.onChangeEffect(3);
-    
-    } else {
-      this.onChangeEffect(11);
-    
-    }
-
-  }
-  Mclicked = () => {
-
-    if(this.state.MaskColor == "White"){
-      this.onChangeEffect(4);
-    
-    } else {
-      this.onChangeEffect(12);
-    
-    }
-  }
-  Lclicked = () => {
-
-    if(this.state.MaskColor == "White"){
-      this.onChangeEffect(5);
-    
-    } else {
-      this.onChangeEffect(13);
-    
-    }
-
-  }
-  */
 
         
   render() {
