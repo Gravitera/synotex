@@ -20,6 +20,7 @@ class ArCameraView extends React.Component {
       MaskColor: "Black",
       MaskSize: "M",
 
+      temp: 5,
 
 
       maskidx : [0,1,2,3,4,5,6,7,8],
@@ -326,6 +327,12 @@ class ArCameraView extends React.Component {
       } else if (event.type === 'imageVisibilityChanged') {
 
       }
+
+      if (temp = true){
+        temp = 5
+      }
+     
+
   }
 
   onChangeEffect = (idxNumber) => {
@@ -598,9 +605,12 @@ class ArCameraView extends React.Component {
               {this.state.imglocs == require("./../../../assets/images/masks/grey.png") ? 
                 <Text style={{marginTop: "35%"}}>그레이</Text>
               : null}
+
+
               {this.state.imglocs == require("./../../../assets/images/masks/darkgrey.png") ? 
                 <Text style={{marginTop: "23%"}}>   다크 {"\n"} 그레이</Text>
               : null}
+
               {this.state.imglocs == require("./../../../assets/images/masks/darkpink.png") ? 
                 <Text style={{marginTop: "23%"}}>   다크 {"\n"}   핑크</Text>
               : null}
@@ -631,9 +641,14 @@ class ArCameraView extends React.Component {
               
               <Image resizeMode="contain" style={{marginLeft: "1%", marginTop: "5%"}} source={this.state.imglocs2} />
 
+
+
               {this.state.imglocs2 == require("./../../../assets/images/masks/grey.png") ? 
                 <Text style={{marginTop: "35%"}}>그레이</Text>
               : null}
+
+
+
               {this.state.imglocs2 == require("./../../../assets/images/masks/darkgrey.png") ? 
                 <Text style={{marginTop: "23%"}}>   다크 {"\n"} 그레이</Text>
               : null}
