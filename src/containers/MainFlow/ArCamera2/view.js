@@ -25,8 +25,9 @@ class ArCameraView extends React.Component {
 
       maskidx : [0,1,2,3,4,5,6,7,8],
       // 총 9 색상의 마스크를 리스트로 정리 
-      maskcolor : ["grey", "darkgrey", "darkpink", 
+      maskcolorlist : ["darkgrey", "darkpink", 
       "lightgrey", "lightpink", "beige", "black", "khaki", "white"],
+
 
       // 총 9지 색상의 마스크가 있는 RN 베이스 경로
       maskloc : "./../../../assets/images/masks/",
@@ -35,11 +36,13 @@ class ArCameraView extends React.Component {
       currmaskidx : [0,1],
 
       // 현재 보여지고 있는 왼쪽, 오른쪽 마스크중 왼쪽의 이미지 소스
-      imglocs: require("./../../../assets/images/masks/grey.png"),
+      imglocs: require("./../../../assets/images/masks/darkgrey.png"),
       // 현재 보여지고 있는 왼쪽, 오른쪽 마스크중 오른쪽의 이미지 소스
-      imglocs2: require("./../../../assets/images/masks/darkgrey.png"), 
-    }
+      imglocs2: require("./../../../assets/images/masks/darkpink.png"), 
+      loadingarview: require("./../../../assets/images/loadingarview.gif"),
 
+      downloadinprogress: false,
+    }
   }
 
   async componentDidMount() {
@@ -64,7 +67,7 @@ class ArCameraView extends React.Component {
 
       console.log("check and get mask data")
       //check before already downloaded mask data
-      console.log("length",this.state.maskcolor.length)
+      console.log("length",this.state.maskcolorlist.length)
 
       RNFetchBlob.fs.mkdir(RNFetchBlob.fs.dirs.DocumentDir + `/mask`)
       .then(() => { 
@@ -79,22 +82,25 @@ class ArCameraView extends React.Component {
         // files will an array contains filenames
         .then((files) => {
             console.log("file list",files)
-    })
+        })
 
-      for (let i = 0; i < this.state.maskcolor.length; i++) {
+      /*
+      for (let i = 0; i < this.state.maskcolors3.length; i++) {
           console.log("start for")
-        await this.delay2xl(this.state.maskcolor[i],this);
-        await this.delay2xs(this.state.maskcolor[i],this);
-        await this.delay3xs(this.state.maskcolor[i],this);
-        await this.delayl(this.state.maskcolor[i],this);
-        await this.delaym(this.state.maskcolor[i],this);
-        await this.delays(this.state.maskcolor[i],this);
-        await this.delayss(this.state.maskcolor[i],this);
-        await this.delayxl(this.state.maskcolor[i],this);
-        await this.delayxs(this.state.maskcolor[i],this);
+        await this.delay2xl(this.state.maskcolors3[i],this);
+        await this.delay2xs(this.state.maskcolors3[i],this);
+        await this.delay3xs(this.state.maskcolors3[i],this);
+        await this.delayl(this.state.maskcolors3[i],this);
+        await this.delaym(this.state.maskcolors3[i],this);
+        await this.delays(this.state.maskcolors3[i],this);
+        await this.delayss(this.state.maskcolors3[i],this);
+        await this.delayxl(this.state.maskcolors3[i],this);
+        await this.delayxs(this.state.maskcolors3[i],this);
 
         console.log("finish delay for loop")
       }
+      */
+
       
       
     }
@@ -103,216 +109,31 @@ class ArCameraView extends React.Component {
   }
 
 
-
-    delay2xl(value,ths) {
-        console.log("value:::",value)
-        return new Promise(function (resolve, reject) {
-            console.log("before setTimeout")
-            setTimeout(function () {
-                console.log("in setTimeOut")
-                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_2xl`).then((exist) => {
-                    if(exist){
-                        console.log("already downloaded...  skip this period")
-                    } else {
-                        //if no mask data, start download.....
-                        console.log("no dir")
-                        console.log("RNFetchBlob.fs.dirs.DocumentDir",RNFetchBlob.fs.dirs.DocumentDir)
-                        console.log("RNFetchBlob.fs.dirs.DocumentDir",RNFetchBlob.fs.dirs.DocumentDir+'/mask')
-                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_2xl`})
-                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_2xl`, {})
-                        .then((res) => {
-                            console.log('The file saved to ', res.path())
-                            resolve()
-                        })
-                    }
-                })
-                .catch((e) => { console.log("fs exist check error :::",e) })
-            }, 500)
-            
+  downloadmask(color, size, ths){
+    
+    return new Promise(function (resolve, reject) {
+      setTimeout(function(){
+        RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${color}_${size}`).then((exist) => {
+          if (exist){
+            console.log("already downloaded ...   skip this period");
+            resolve();
+          }else{
+            ths.setState({downloadinprogress: true});
+            RNFetchBlob.config({path: RNFetchBlob.fs.dirs.DocumentDir + `/mask/${color}_${size}`})
+            .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${color}/${color}_${size}`, {})
+            .then((res) => {
+                console.log('The file saved to ', res.path())
+                ths.setState({downloadinprogress: false});
+                resolve()
+            })
+            .catch((error) => {
+              console.log("fs exist check error   ", error);
+            })
+          }
         })
-    }
-
-    delay2xs(value,ths) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_2xs`).then((exist) => {
-                    if(exist){
-                        console.log("already downloaded...  skip this period")
-                    } else {
-                        //if no mask data, start download.....
-                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_2xs`})
-                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_2xs`, {})
-                        .then((res) => {
-                            console.log('The file saved to ', res.path())
-                            resolve()
-                        })
-                    }
-                })
-                .catch((e) => { console.log("fs exist check error :::",e) })
-            }, 500)
-            
-        })
-    }
-
-    delay3xs(value,ths) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_3xs`).then((exist) => {
-                    if(exist){
-                        console.log("already downloaded...  skip this period")
-                    } else {
-                        //if no mask data, start download.....
-                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_3xs`})
-                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_3xs`, {})
-                        .then((res) => {
-                            console.log('The file saved to ', res.path())
-                            resolve()
-                        })
-                    }
-                })
-                .catch((e) => { console.log("fs exist check error :::",e) })
-            }, 500)
-            
-        })
-    }
-
-    delayl(value,ths) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_l`).then((exist) => {
-                    if(exist){
-                        console.log("already downloaded...  skip this period")
-                    } else {
-                        //if no mask data, start download.....
-                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_l`})
-                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_l`, {})
-                        .then((res) => {
-                            console.log('The file saved to ', res.path())
-                            resolve()
-                        })
-                    }
-                })
-                .catch((e) => { console.log("fs exist check error :::",e) })
-            }, 500)
-            
-        })
-    }
-
-    delaym(value,ths) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_m`).then((exist) => {
-                    if(exist){
-                        console.log("already downloaded...  skip this period")
-                    } else {
-                        //if no mask data, start download.....
-                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_m`})
-                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_m`, {})
-                        .then((res) => {
-                            console.log('The file saved to ', res.path())
-                            resolve()
-                        })
-                    }
-                })
-                .catch((e) => { console.log("fs exist check error :::",e) })
-            }, 500)
-            
-        })
-    }
-
-    delays(value,ths) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_s`).then((exist) => {
-                    if(exist){
-                        console.log("already downloaded...  skip this period")
-                    } else {
-                        //if no mask data, start download.....
-                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_s`})
-                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_s`, {})
-                        .then((res) => {
-                            console.log('The file saved to ', res.path())
-                            resolve()
-                        })
-                    }
-                })
-                .catch((e) => { console.log("fs exist check error :::",e) })
-            }, 500)
-            
-        })
-    }
-
-    delayss(value,ths) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_ss`).then((exist) => {
-                    if(exist){
-                        console.log("already downloaded...  skip this period")
-                    } else {
-                        //if no mask data, start download.....
-                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_ss`})
-                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_ss`, {})
-                        .then((res) => {
-                            console.log('The file saved to ', res.path())
-                            resolve()
-                        })
-                    }
-                })
-                .catch((e) => { console.log("fs exist check error :::",e) })
-            }, 500)
-            
-        })
-    }
-
-    delayxl(value,ths) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_xl`).then((exist) => {
-                    if(exist){
-                        console.log("already downloaded...  skip this period")
-                    } else {
-                        //if no mask data, start download.....
-                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_xl`})
-                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_xl`, {})
-                        .then((res) => {
-                            console.log('The file saved to ', res.path())
-                            resolve()
-                        })
-                    }
-                })
-                .catch((e) => { console.log("fs exist check error :::",e) })
-            }, 500)
-            
-        })
-    }
-
-    delayxs(value,ths) {
-        return new Promise(function (resolve, reject) {
-            setTimeout(function () {
-                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_xs`).then((exist) => {
-                    console.log("is exist? ::",exist)
-                    if(exist){
-                        console.log("already downloaded...  skip this period")
-                        this.setState({checkDownload: false})
-                        console.log(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_xs`)
-                    } else {
-                        //if no mask data, start download.....
-                        console.log("nodata downloaded... start download")
-                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_xs`})
-                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_xs`, {})
-                        .then((res) => {
-                            console.log('The file saved to ', res.path())
-                            console.log("result file ::::::"+res.path()+`/${value}_xs`)
-                            this.setState({checkDownload: false})
-                            resolve()
-                        })
-                    }
-                })
-                .catch((e) => { console.log("fs exist check error :::",e) })
-            }, 500)
-            
-        })
-    }
+      }, 5)
+    })
+  }
 
   //
   //  밑에 왼쪽 화살표 눌렀을떄 반응
@@ -324,16 +145,18 @@ class ArCameraView extends React.Component {
     var temp = this.state.currmaskidx;
     var temp2 = true;
 
+
+
     if (temp[0] == 0){
 
-      this.setState({currmaskidx: [8,0]});
+      this.setState({currmaskidx: [7,0]});
       this.setState({imglocs: require("./../../../assets/images/masks/white.png")});
-      this.setState({imglocs2: require("./../../../assets/images/masks/grey.png")});
+      this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
       temp2 = false;
     }
-    if (temp[0] == 8 && temp[1] == 0){
+    if (temp[0] == 7 && temp[1] == 0){
 
-      this.setState({currmaskidx: [7,8]});
+      this.setState({currmaskidx: [6,7]});
       this.setState({imglocs: require("./../../../assets/images/masks/khaki.png")});
       this.setState({imglocs2: require("./../../../assets/images/masks/white.png")});
       temp2 = false;
@@ -342,35 +165,32 @@ class ArCameraView extends React.Component {
 
       var newtemp = [this.state.currmaskidx[0]-1, this.state.currmaskidx[1]-1];
 
+
       if (newtemp[0] == 0 && newtemp[1] == 1){
-        this.setState({imglocs: require("./../../../assets/images/masks/grey.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
-      }
-      if (newtemp[0] == 1 && newtemp[1] == 2){
         this.setState({imglocs: require("./../../../assets/images/masks/darkgrey.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/darkpink.png")});
       }
-      if (newtemp[0] == 2 && newtemp[1] == 3){
+      if (newtemp[0] == 1 && newtemp[1] == 2){
         this.setState({imglocs: require("./../../../assets/images/masks/darkpink.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/lightgrey.png")});
       }
-      if (newtemp[0] == 3 && newtemp[1] == 4){
+      if (newtemp[0] == 2 && newtemp[1] == 3){
         this.setState({imglocs: require("./../../../assets/images/masks/lightgrey.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/lightpink.png")});
       }
-      if (newtemp[0] == 4 && newtemp[1] == 5){
+      if (newtemp[0] == 3 && newtemp[1] == 4){
         this.setState({imglocs: require("./../../../assets/images/masks/lightpink.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/beige.png")});
       }
-      if (newtemp[0] == 5 && newtemp[1] == 6){
+      if (newtemp[0] == 4 && newtemp[1] == 5){
         this.setState({imglocs: require("./../../../assets/images/masks/beige.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/black.png")});
       }
-      if (newtemp[0] == 6 && newtemp[1] == 7){
+      if (newtemp[0] == 5 && newtemp[1] == 6){
         this.setState({imglocs: require("./../../../assets/images/masks/black.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/khaki.png")});
       }
-      if (newtemp[0] == 7 && newtemp[1] == 8){
+      if (newtemp[0] == 6 && newtemp[1] == 7){
         this.setState({imglocs: require("./../../../assets/images/masks/khaki.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/white.png")});
       }
@@ -390,52 +210,49 @@ class ArCameraView extends React.Component {
     var temp = this.state.currmaskidx;
     var temp2 = true;
     //console.log(" ====== current mask idx pressed right  ")
-    if (temp[1] == 8){
 
-      this.setState({currmaskidx: [8,0]});
+    if (temp[1] == 7){
+
+      this.setState({currmaskidx: [7,0]});
       this.setState({imglocs: require("./../../../assets/images/masks/white.png")});
-      this.setState({imglocs2: require("./../../../assets/images/masks/grey.png")});
+      this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
       temp2 = false;
     }
-    if (temp[1] == 0 && temp[0] == 8){
+    if (temp[1] == 0 && temp[0] == 7){
  
-      this.setState({currmaskidx: [1,2]});
-      this.setState({imglocs: require("./../../../assets/images/masks/grey.png")});
-      this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
+      this.setState({currmaskidx: [0,1]});
+      this.setState({imglocs: require("./../../../assets/images/masks/darkgrey.png")});
+      this.setState({imglocs2: require("./../../../assets/images/masks/darkpink.png")});
       temp2 = false;
     }
     if (temp2 == true){
 
       var newtemp = [this.state.currmaskidx[0]+1, this.state.currmaskidx[1]+1];
       if (newtemp[0] == 0 && newtemp[1] == 1){
-        this.setState({imglocs: require("./../../../assets/images/masks/grey.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
-      }
-      if (newtemp[0] == 1 && newtemp[1] == 2){
         this.setState({imglocs: require("./../../../assets/images/masks/darkgrey.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/darkpink.png")});
       }
-      if (newtemp[0] == 2 && newtemp[1] == 3){
+      if (newtemp[0] == 1 && newtemp[1] == 2){
         this.setState({imglocs: require("./../../../assets/images/masks/darkpink.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/lightgrey.png")});
       }
-      if (newtemp[0] == 3 && newtemp[1] == 4){
+      if (newtemp[0] == 2 && newtemp[1] == 3){
         this.setState({imglocs: require("./../../../assets/images/masks/lightgrey.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/lightpink.png")});
       }
-      if (newtemp[0] == 4 && newtemp[1] == 5){
+      if (newtemp[0] == 3 && newtemp[1] == 4){
         this.setState({imglocs: require("./../../../assets/images/masks/lightpink.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/beige.png")});
       }
-      if (newtemp[0] == 5 && newtemp[1] == 6){
+      if (newtemp[0] == 4 && newtemp[1] == 5){
         this.setState({imglocs: require("./../../../assets/images/masks/beige.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/black.png")});
       }
-      if (newtemp[0] == 6 && newtemp[1] == 7){
+      if (newtemp[0] == 5 && newtemp[1] == 6){
         this.setState({imglocs: require("./../../../assets/images/masks/black.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/khaki.png")});
       }
-      if (newtemp[0] == 7 && newtemp[1] == 8){
+      if (newtemp[0] == 6 && newtemp[1] == 7){
         this.setState({imglocs: require("./../../../assets/images/masks/khaki.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/white.png")});
       }
@@ -473,17 +290,14 @@ class ArCameraView extends React.Component {
 
 
 
-    if (this.state.imglocs == require("./../../../assets/images/masks/grey.png")){
-      this.setState({MaskColor: "grey"}, () => console.log(this.state.MaskColor));
-    }
     if (this.state.imglocs == require("./../../../assets/images/masks/darkgrey.png")){
-      this.setState({MaskColor: "darkgrey"}, () => console.log(this.state.MaskColor));
+      this.setState({MaskColor: "grayblack"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/darkpink.png")){
       this.setState({MaskColor: "darkpink"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/lightgrey.png")){
-      this.setState({MaskColor: "lightgrey"}, () => console.log(this.state.MaskColor));
+      this.setState({MaskColor: "lightgray"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/lightpink.png")){
       this.setState({MaskColor: "lightpink"}, () => console.log(this.state.MaskColor));
@@ -492,10 +306,10 @@ class ArCameraView extends React.Component {
       this.setState({MaskColor: "beige"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/black.png")){
-      this.setState({MaskColor: "black"}, () => console.log(this.state.MaskColor));
+      this.setState({MaskColor: "back"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/khaki.png")){
-      this.setState({MaskColor: "khaki"}, () => console.log(this.state.MaskColor));
+      this.setState({MaskColor: "kaki"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs == require("./../../../assets/images/masks/white.png")){
       this.setState({MaskColor: "white"}, () => console.log(this.state.MaskColor));
@@ -513,17 +327,14 @@ class ArCameraView extends React.Component {
     //  왼쪽, 오른쪽 마스크 있을떄 오른쪽 마스크를 눌렀을떄 this.state.MaskColor 를 바꿔줌
     //
 
-    if (this.state.imglocs2 == require("./../../../assets/images/masks/grey.png")){
-      this.setState({MaskColor: "grey"}, () => console.log(this.state.MaskColor));
-    }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/darkgrey.png")){
-      this.setState({MaskColor: "darkgrey"}, () => console.log(this.state.MaskColor));
+      this.setState({MaskColor: "grayblack"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/darkpink.png")){
       this.setState({MaskColor: "darkpink"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/lightgrey.png")){
-      this.setState({MaskColor: "lightgrey"}, () => console.log(this.state.MaskColor));
+      this.setState({MaskColor: "lightgray"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/lightpink.png")){
       this.setState({MaskColor: "lightpink"}, () => console.log(this.state.MaskColor));
@@ -532,10 +343,10 @@ class ArCameraView extends React.Component {
       this.setState({MaskColor: "beige"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/black.png")){
-      this.setState({MaskColor: "black"}, () => console.log(this.state.MaskColor));
+      this.setState({MaskColor: "back"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/khaki.png")){
-      this.setState({MaskColor: "khaki"}, () => console.log(this.state.MaskColor));
+      this.setState({MaskColor: "kaki"}, () => console.log(this.state.MaskColor));
     }
     if (this.state.imglocs2 == require("./../../../assets/images/masks/white.png")){
       this.setState({MaskColor: "white"}, () => console.log(this.state.MaskColor));
@@ -584,6 +395,9 @@ class ArCameraView extends React.Component {
   }
 
   onChangeEffect = (idxNumber) => {
+    console.log(" ============  temp val   ", idxNumber);
+    console.log(" ============  temp val   ", idxNumber);
+    console.log(" ============  temp val   ", idxNumber);
     if (!this.deepARView) {
         console.log("view didnt load")
       return
@@ -619,14 +433,21 @@ class ArCameraView extends React.Component {
 
  
 
-  XSclicked = () => {
+  async XSclicked(){
 
     //
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
 
     this.setState({MaskSize: "XS"}, () => console.log(this.state.MaskSize));
+
+    await this.downloadmask(this.state.MaskColor, "xs", this);
+
+    this.onChangeEffect(this.state.MaskColor+"_"+"xs");
+
     
+    
+    /*
     if(this.state.MaskColor == "White"){
 
       if(this.state.MaskSize == "XS"){
@@ -641,31 +462,38 @@ class ArCameraView extends React.Component {
           this.onChangeEffect(effectsData.wxxxs)
       }
   
-  } else {
+    } else {
 
-      if(this.state.MaskSize == "XS"){
-          this.onChangeEffect(effectsData.bm)
-      } else if (this.state.MaskSize == "SS"){
-          this.onChangeEffect(effectsData.bs)
-      } else if(this.state.MaskSize == "S"){
-          this.onChangeEffect(effectsData.bxs)
-      } else if(this.state.MaskSize == "M"){
-          this.onChangeEffect(effectsData.bxxs)
-      } else if(this.state.MaskSize == "L"){
-          this.onChangeEffect(effectsData.bxxxs)
-      }
-  }
-    
+        if(this.state.MaskSize == "XS"){
+            this.onChangeEffect(effectsData.bm)
+        } else if (this.state.MaskSize == "SS"){
+            this.onChangeEffect(effectsData.bs)
+        } else if(this.state.MaskSize == "S"){
+            this.onChangeEffect(effectsData.bxs)
+        } else if(this.state.MaskSize == "M"){
+            this.onChangeEffect(effectsData.bxxs)
+        } else if(this.state.MaskSize == "L"){
+            this.onChangeEffect(effectsData.bxxxs)
+        }
+    }
+    */
+      
 
   }
 
   
-  SSclicked = () => {
+  async SSclicked(){
 
     //
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
+    this.setState({MaskSize: "SS"}, () => console.log(this.state.MaskSize));
 
+    await this.downloadmask(this.state.MaskColor, "ss", this);
+
+    this.onChangeEffect(this.state.MaskColor+"_"+"ss");
+
+      /*
     this.setState({MaskSize: "SS"}, () => console.log(this.state.MaskSize));
     
     if(this.state.MaskColor == "White"){
@@ -682,30 +510,38 @@ class ArCameraView extends React.Component {
           this.onChangeEffect(effectsData.wxs)
       }
   
-  } else {
+      } else {
 
-      if(this.state.MaskSize == "XS"){
-          this.onChangeEffect(effectsData.bl)
-      } else if (this.state.MaskSize == "SS"){
-          this.onChangeEffect(effectsData.bm)
-      } else if(this.state.MaskSize == "S"){
-          this.onChangeEffect(effectsData.bs)
-      } else if(this.state.MaskSize == "M"){
-          this.onChangeEffect(effectsData.bss)
-      } else if(this.state.MaskSize == "L"){
-          this.onChangeEffect(effectsData.bxs)
+          if(this.state.MaskSize == "XS"){
+              this.onChangeEffect(effectsData.bl)
+          } else if (this.state.MaskSize == "SS"){
+              this.onChangeEffect(effectsData.bm)
+          } else if(this.state.MaskSize == "S"){
+              this.onChangeEffect(effectsData.bs)
+          } else if(this.state.MaskSize == "M"){
+              this.onChangeEffect(effectsData.bss)
+          } else if(this.state.MaskSize == "L"){
+              this.onChangeEffect(effectsData.bxs)
+          }
       }
-  }
+      */
   }
   
 
 
-  Sclicked = () => {
+  async Sclicked(){
 
     //
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
 
+    this.setState({MaskSize: "S"}, () => console.log(this.state.MaskSize));
+
+    await this.downloadmask(this.state.MaskColor, "s", this);
+
+    this.onChangeEffect(this.state.MaskColor+"_"+"s");
+
+      /*
     this.setState({MaskSize: "S"}, () => console.log(this.state.MaskSize));
 
     if(this.state.MaskColor == "White"){
@@ -722,28 +558,38 @@ class ArCameraView extends React.Component {
           this.onChangeEffect(effectsData.wxs)
       }
   
-  } else {
+      } else {
 
-      if(this.state.MaskSize == "XS"){
-          this.onChangeEffect(effectsData.bxl)
-      } else if (this.state.MaskSize == "SS"){
-          this.onChangeEffect(effectsData.bl)
-      } else if(this.state.MaskSize == "S"){
-          this.onChangeEffect(effectsData.bm)
-      } else if(this.state.MaskSize == "M"){
-          this.onChangeEffect(effectsData.bs)
-      } else if(this.state.MaskSize == "L"){
-          this.onChangeEffect(effectsData.bxs)
+          if(this.state.MaskSize == "XS"){
+              this.onChangeEffect(effectsData.bxl)
+          } else if (this.state.MaskSize == "SS"){
+              this.onChangeEffect(effectsData.bl)
+          } else if(this.state.MaskSize == "S"){
+              this.onChangeEffect(effectsData.bm)
+          } else if(this.state.MaskSize == "M"){
+              this.onChangeEffect(effectsData.bs)
+          } else if(this.state.MaskSize == "L"){
+              this.onChangeEffect(effectsData.bxs)
+          }
       }
-  }
+  */
 
   }
-  Mclicked = () => {
+
+
+  async Mclicked(){
 
     //
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
 
+    this.setState({MaskSize: "M"}, () => console.log(this.state.MaskSize));
+
+    await this.downloadmask(this.state.MaskColor, "m", this);
+
+    this.onChangeEffect(this.state.MaskColor+"_"+"m");
+
+    /*
     this.setState({MaskSize: "M"}, () => console.log(this.state.MaskSize));
 
     if(this.state.MaskColor == "White"){
@@ -760,26 +606,37 @@ class ArCameraView extends React.Component {
           this.onChangeEffect(effectsData.ws)
       }
   
-  } else {
+      } else {
 
-      if(this.state.MaskSize == "XS"){
-          this.onChangeEffect(effectsData.bxxl)
-      } else if (this.state.MaskSize == "SS"){
-          this.onChangeEffect(effectsData.bxl)
-      } else if(this.state.MaskSize == "S"){
-          this.onChangeEffect(effectsData.bl)
-      } else if(this.state.MaskSize == "M"){
-          this.onChangeEffect(effectsData.bm)
-      } else if(this.state.MaskSize == "L"){
-          this.onChangeEffect(effectsData.bs)
+          if(this.state.MaskSize == "XS"){
+              this.onChangeEffect(effectsData.bxxl)
+          } else if (this.state.MaskSize == "SS"){
+              this.onChangeEffect(effectsData.bxl)
+          } else if(this.state.MaskSize == "S"){
+              this.onChangeEffect(effectsData.bl)
+          } else if(this.state.MaskSize == "M"){
+              this.onChangeEffect(effectsData.bm)
+          } else if(this.state.MaskSize == "L"){
+              this.onChangeEffect(effectsData.bs)
+          }
       }
+      */
   }
-  }
-  Lclicked = () => {
+  
+  
+  async Lclicked(){
 
     //
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
+
+    this.setState({MaskSize: "L"}, () => console.log(this.state.MaskSize));
+
+    await this.downloadmask(this.state.MaskColor, "l", this);
+
+    this.onChangeEffect(this.state.MaskColor+"_"+"l");
+
+    /*
 
     this.setState({MaskSize: "L"}, () => console.log(this.state.MaskSize));
 
@@ -811,6 +668,7 @@ class ArCameraView extends React.Component {
             this.onChangeEffect(effectsData.bm)
         }
     }
+    */
 
   }
 
@@ -833,10 +691,13 @@ class ArCameraView extends React.Component {
               style={{width: width, height: '100%'}}
             />
         </View>
-
-        
-      
       </View>
+
+      {this.state.downloadinprogress == true?
+      <View style={{position: "absolute", zIndex: 100, backgroundColor: "#0000", width: width*0.1, height: width*0.1, marginLeft: width*0.45, marginTop: height*0.4}}>
+          <Image resizeMode={'contain'} style={{width: width*0.1, height: width*0.1}} source={this.state.loadingarview} />
+      </View>
+      :null}
 
       <View style={{position: "absolute", marginTop: height*0.65, width: width, height: height*0.2, flexDirection: "row", justifyContent: "space-between"}}>
           
