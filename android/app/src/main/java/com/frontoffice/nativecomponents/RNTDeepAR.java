@@ -207,7 +207,9 @@ public class RNTDeepAR extends FrameLayout implements AREventListener, SurfaceHo
 
         String effect = null;
         if (!effectName.isEmpty() && !effectName.equalsIgnoreCase("me") && !effectName.equalsIgnoreCase("none")) {
-            effect = "file:///android_asset/effects/" + effectName;
+            // effect = "file:///android_asset/effects/" + effectName;
+            effect = "/data/data/com.lynxbus/files/mask/" + effectName;
+            System.out.println("effect file : " + effect);
             deepAr.switchEffect(slot, effect);
         } else {
             deepAr.switchEffect(slot, (String) null, 0);

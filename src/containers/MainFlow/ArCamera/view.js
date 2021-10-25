@@ -66,6 +66,7 @@ class ArCameraView extends React.Component {
       
       
     }
+    console.log("AR CAMERA 1")
     console.log(" ======================== this.state in componentDidMount   ", this.state.MaskSize);
   }
 

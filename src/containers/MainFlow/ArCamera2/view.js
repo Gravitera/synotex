@@ -19,7 +19,7 @@ class ArCameraView extends React.Component {
       MaskColorClicked: false,
       MaskColor: "Black",
       MaskSize: "M",
-
+      checkDownload:true,
       temp: 5,
 
 
@@ -42,7 +42,7 @@ class ArCameraView extends React.Component {
 
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     if (Platform.OS === 'android') {
       PermissionsAndroid.requestMultiple(
         [
@@ -56,15 +56,263 @@ class ArCameraView extends React.Component {
           result['android.permission.WRITE_EXTERNAL_STORAGE'] === 'granted' && 
           result['android.permission.RECORD_AUDIO'] === 'granted') {
             this.setState({ permissionsGranted: true, showPermsAlert: false });
+
         } else {
           this.setState({ permissionsGranted: false, showPermsAlert: true });
         }
       })
+
+      console.log("check and get mask data")
+      //check before already downloaded mask data
+      console.log("length",this.state.maskcolor.length)
+
+      RNFetchBlob.fs.mkdir(RNFetchBlob.fs.dirs.DocumentDir + `/mask`)
+      .then(() => { 
+        console.log("finish")
+      })
+      .catch((err) => { 
+          console.log("mkdir err:",err)
+          this.setState({checkDownload: false})
+       })
+
+      RNFetchBlob.fs.ls(RNFetchBlob.fs.dirs.DocumentDir + `/mask`)
+        // files will an array contains filenames
+        .then((files) => {
+            console.log("file list",files)
+    })
+
+      for (let i = 0; i < this.state.maskcolor.length; i++) {
+          console.log("start for")
+        await this.delay2xl(this.state.maskcolor[i],this);
+        await this.delay2xs(this.state.maskcolor[i],this);
+        await this.delay3xs(this.state.maskcolor[i],this);
+        await this.delayl(this.state.maskcolor[i],this);
+        await this.delaym(this.state.maskcolor[i],this);
+        await this.delays(this.state.maskcolor[i],this);
+        await this.delayss(this.state.maskcolor[i],this);
+        await this.delayxl(this.state.maskcolor[i],this);
+        await this.delayxs(this.state.maskcolor[i],this);
+
+        console.log("finish delay for loop")
+      }
       
       
     }
-    console.log(" ====================  this.state   ", this.state);
+    console.log("AR CAMERA 2");
+    console.log(" ====================  this.state   ??", this.state);
   }
+
+
+
+    delay2xl(value,ths) {
+        console.log("value:::",value)
+        return new Promise(function (resolve, reject) {
+            console.log("before setTimeout")
+            setTimeout(function () {
+                console.log("in setTimeOut")
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_2xl`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        console.log("no dir")
+                        console.log("RNFetchBlob.fs.dirs.DocumentDir",RNFetchBlob.fs.dirs.DocumentDir)
+                        console.log("RNFetchBlob.fs.dirs.DocumentDir",RNFetchBlob.fs.dirs.DocumentDir+'/mask')
+                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_2xl`})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_2xl`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delay2xs(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_2xs`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_2xs`})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_2xs`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delay3xs(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_3xs`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_3xs`})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_3xs`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delayl(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_l`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_l`})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_l`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delaym(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_m`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_m`})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_m`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delays(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_s`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_s`})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_s`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delayss(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_ss`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_ss`})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_ss`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delayxl(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_xl`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_xl`})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_xl`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delayxs(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_xs`).then((exist) => {
+                    console.log("is exist? ::",exist)
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                        this.setState({checkDownload: false})
+                        console.log(RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_xs`)
+                    } else {
+                        //if no mask data, start download.....
+                        console.log("nodata downloaded... start download")
+                        RNFetchBlob.config({path : RNFetchBlob.fs.dirs.DocumentDir + `/mask/${value}_xs`})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_xs`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            console.log("result file ::::::"+res.path()+`/${value}_xs`)
+                            this.setState({checkDownload: false})
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
 
   //
   //  밑에 왼쪽 화살표 눌렀을떄 반응
@@ -207,11 +455,11 @@ class ArCameraView extends React.Component {
 
     /*    
     const {fs, fetch, wrap} = RNFetchBlob;
-    console.log(" ======== root directory   ", fs.dirs.DocumentDir);
+    console.log(" ======== root directory   ", fs.RNFetchBlob.fs.dirs.DocumentDir);
 
     RNFetchBlob
     .config({
-      path: fs.dirs.DocumentDir
+      path: fs.RNFetchBlob.fs.dirs.DocumentDir
     })
     .fetch("GET", "https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/beige/beige_3xs")
     .then((res) => {
@@ -341,6 +589,7 @@ class ArCameraView extends React.Component {
       return
     }
 
+    console.log("idxnum::::",idxNumber)
     this.deepARView.switchEffect(idxNumber, "effect");
     //const newEffect = effectsData[idxNumber]
     //this.deepARView.switchEffect(newEffect.name, 'effect')
@@ -597,7 +846,7 @@ class ArCameraView extends React.Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.leftmaskclicked()}>
+          <TouchableOpacity disable={this.state.checkDownload} onPress={() => this.leftmaskclicked()}>
             <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
               
               <Image resizeMode="contain" style={{marginLeft: "1%", marginTop: "5%"}} source={this.state.imglocs} />
@@ -636,7 +885,7 @@ class ArCameraView extends React.Component {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => this.rightmaskclicked()}>
+          <TouchableOpacity disable={this.state.checkDownload} onPress={() => this.rightmaskclicked()}>
             <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
               
               <Image resizeMode="contain" style={{marginLeft: "1%", marginTop: "5%"}} source={this.state.imglocs2} />
@@ -979,12 +1228,12 @@ const styles = StyleSheet.create({
     marginBottom: 60,
   },
   prodText1: {
-    fontSize: 12,
+    fontSize: 10,
     height: 50,
     textAlignVertical: 'center'
   },
   prodText2: {
-    fontSize: 12,
+    fontSize: 10,
     height: 50,
     textAlignVertical: 'center',
     //backgroundColor: "black",

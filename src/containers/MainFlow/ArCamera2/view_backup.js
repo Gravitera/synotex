@@ -4,7 +4,7 @@ import DeepARView from './../../../components/ArCameraUtil/DeepARView';
 import { effectsData } from './../../../components/ArCameraUtil/effectsData2';
 import {slideTransitionDefinition } from './../../../components/ArCameraUtil/simplenavigator/TransitionDefinitions';
 import { CustomBackButtonHeader2, CustomDrawerButtonHeader } from '../../../components/Header';
-
+import RNFetchBlob from 'rn-fetch-blob';
 
 
 class ArCameraView extends React.Component {
@@ -18,10 +18,214 @@ class ArCameraView extends React.Component {
       switchCameraInProgress: false,
       MaskColorClicked: false,
       MaskColor: "Black",
-      MaskSize: "M"
+      MaskSize: "M",
+      colorList:["white","black"]
     }
 
+    
+
   }
+
+                    
+
+    delay2xl(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.DocumentDir + `/mask/${value}_2xl`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : dirs.DocumentDir + '/mask'})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_2xl`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delay2xs(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.DocumentDir + `/mask/${value}_2xs`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : dirs.DocumentDir + '/mask'})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_2xs`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delay3xs(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.DocumentDir + `/mask/${value}_3xs`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : dirs.DocumentDir + '/mask'})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_3xs`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delayl(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.DocumentDir + `/mask/${value}_l`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : dirs.DocumentDir + '/mask'})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_l`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delaym(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.DocumentDir + `/mask/${value}_m`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : dirs.DocumentDir + '/mask'})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_m`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delays(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.DocumentDir + `/mask/${value}_s`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : dirs.DocumentDir + '/mask'})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_s`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delayss(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.DocumentDir + `/mask/${value}_ss`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : dirs.DocumentDir + '/mask'})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_ss`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delayxl(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.DocumentDir + `/mask/${value}_xl`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : dirs.DocumentDir + '/mask'})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_xl`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
+    delayxs(value,ths) {
+        return new Promise(function (resolve, reject) {
+            setTimeout(function () {
+                RNFetchBlob.fs.exists(RNFetchBlob.fs.DocumentDir + `/mask/${value}_xs`).then((exist) => {
+                    if(exist){
+                        console.log("already downloaded...  skip this period")
+                    } else {
+                        //if no mask data, start download.....
+                        RNFetchBlob.config({path : dirs.DocumentDir + '/mask'})
+                        .fetch('GET', `https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/${value}/${value}_xs`, {})
+                        .then((res) => {
+                            console.log('The file saved to ', res.path())
+                            resolve()
+                        })
+                    }
+                })
+                .catch((e) => { console.log("fs exist check error :::",e) })
+            }, 500)
+            
+        })
+    }
+
 
   componentDidMount() {
     if (Platform.OS === 'android') {
@@ -31,12 +235,32 @@ class ArCameraView extends React.Component {
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
           PermissionsAndroid.PERMISSIONS.RECORD_AUDIO
         ]
-      ).then(result => {
+      ).then(async result => {
         if (
           result['android.permission.CAMERA'] === 'granted' &&  
           result['android.permission.WRITE_EXTERNAL_STORAGE'] === 'granted' && 
           result['android.permission.RECORD_AUDIO'] === 'granted') {
             this.setState({ permissionsGranted: true, showPermsAlert: false });
+
+            console.log("check and get mask data")
+
+            // https://synotexmasks.s3.ap-northeast-2.amazonaws.com/maskeffects/beige/beige_2xl
+
+            //check before already downloaded mask data
+            for (let i = 0; i < colorList.length; i++) {
+                await this.delay2xl(colorList[i],this);
+                await this.delay2xs(colorList[i],this);
+                await this.delay3xs(colorList[i],this);
+                await this.delayl(colorList[i],this);
+                await this.delaym(colorList[i],this);
+                await this.delays(colorList[i],this);
+                await this.delayss(colorList[i],this);
+                await this.delayxl(colorList[i],this);
+                await this.delayxs(colorList[i],this);
+
+                console.log("finish delay for loop")
+            }
+
         } else {
           this.setState({ permissionsGranted: false, showPermsAlert: true });
         }
@@ -44,7 +268,8 @@ class ArCameraView extends React.Component {
       
       
     }
-    console.log(" ====================  this.state   ", this.state);
+    console.log("backup view")
+    console.log(" ====================  this.state???   ", this.state);
   }
 
   didAppear() {
