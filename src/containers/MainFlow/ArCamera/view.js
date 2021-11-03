@@ -21,6 +21,7 @@ class ArCameraView extends React.Component {
       MaskColorClicked: false,
       MaskColor: "Black",
       MaskSize: "M",
+      MaskSizeClicked: false,
   //    MaskSize: this.storeData.attendanceReducer.res.MaskSize
   //    MaskSize: this.props.navigation.getParam('MaskSize')
       MaskSize: this.props.route.params.MaskSize,
@@ -31,8 +32,8 @@ class ArCameraView extends React.Component {
 
       maskidx : [0,1,2,3,4,5,6,7,8],
       // 총 9 색상의 마스크를 리스트로 정리 
-      maskcolorlist : ["darkgrey", "darkpink", 
-      "lightgrey", "lightpink", "beige", "black", "khaki", "white"],
+
+      maskcolorlist: ["white", "black", "beige", "lightpink", "darkpink", "lightgrey", "darkgrey", "khaki"],
 
       // 총 9지 색상의 마스크가 있는 RN 베이스 경로
       maskloc : "./../../../assets/images/masks/",
@@ -41,9 +42,9 @@ class ArCameraView extends React.Component {
       currmaskidx : [0,1],
 
       // 현재 보여지고 있는 왼쪽, 오른쪽 마스크중 왼쪽의 이미지 소스
-      imglocs: require("./../../../assets/images/masks/darkgrey.png"),
+      imglocs: require("./../../../assets/images/masks/white.png"),
       // 현재 보여지고 있는 왼쪽, 오른쪽 마스크중 오른쪽의 이미지 소스
-      imglocs2: require("./../../../assets/images/masks/darkpink.png"), 
+      imglocs2: require("./../../../assets/images/masks/black.png"), 
       loadingarview: require("./../../../assets/images/loadingarview.gif"),
 
       downloadinprogress: false,   
@@ -150,54 +151,53 @@ class ArCameraView extends React.Component {
     var temp = this.state.currmaskidx;
     var temp2 = true;
 
-
+    
 
     if (temp[0] == 0){
 
       this.setState({currmaskidx: [7,0]});
-      this.setState({imglocs: require("./../../../assets/images/masks/white.png")});
-      this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
+      this.setState({imglocs: require("./../../../assets/images/masks/khaki.png")});
+      this.setState({imglocs2: require("./../../../assets/images/masks/white.png")});
       temp2 = false;
     }
     if (temp[0] == 7 && temp[1] == 0){
 
       this.setState({currmaskidx: [6,7]});
-      this.setState({imglocs: require("./../../../assets/images/masks/khaki.png")});
-      this.setState({imglocs2: require("./../../../assets/images/masks/white.png")});
+      this.setState({imglocs: require("./../../../assets/images/masks/darkgrey.png")});
+      this.setState({imglocs2: require("./../../../assets/images/masks/khaki.png")});
       temp2 = false;
     }
     if (temp2 == true){
 
       var newtemp = [this.state.currmaskidx[0]-1, this.state.currmaskidx[1]-1];
 
-
       if (newtemp[0] == 0 && newtemp[1] == 1){
-        this.setState({imglocs: require("./../../../assets/images/masks/darkgrey.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/darkpink.png")});
+        this.setState({imglocs: require("./../../../assets/images/masks/white.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/black.png")});
       }
       if (newtemp[0] == 1 && newtemp[1] == 2){
-        this.setState({imglocs: require("./../../../assets/images/masks/darkpink.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/lightgrey.png")});
+        this.setState({imglocs: require("./../../../assets/images/masks/black.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/beige.png")});
       }
       if (newtemp[0] == 2 && newtemp[1] == 3){
-        this.setState({imglocs: require("./../../../assets/images/masks/lightgrey.png")});
+        this.setState({imglocs: require("./../../../assets/images/masks/beige.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/lightpink.png")});
       }
       if (newtemp[0] == 3 && newtemp[1] == 4){
         this.setState({imglocs: require("./../../../assets/images/masks/lightpink.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/beige.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/darkpink.png")});
       }
       if (newtemp[0] == 4 && newtemp[1] == 5){
-        this.setState({imglocs: require("./../../../assets/images/masks/beige.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/black.png")});
+        this.setState({imglocs: require("./../../../assets/images/masks/darkpink.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/lightgrey.png")});
       }
       if (newtemp[0] == 5 && newtemp[1] == 6){
-        this.setState({imglocs: require("./../../../assets/images/masks/black.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/khaki.png")});
+        this.setState({imglocs: require("./../../../assets/images/masks/lightgrey.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
       }
       if (newtemp[0] == 6 && newtemp[1] == 7){
-        this.setState({imglocs: require("./../../../assets/images/masks/khaki.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/white.png")});
+        this.setState({imglocs: require("./../../../assets/images/masks/darkgrey.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/khaki.png")});
       }
 
       this.setState({currmaskidx: newtemp});
@@ -219,47 +219,47 @@ class ArCameraView extends React.Component {
     if (temp[1] == 7){
 
       this.setState({currmaskidx: [7,0]});
-      this.setState({imglocs: require("./../../../assets/images/masks/white.png")});
-      this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
+      this.setState({imglocs: require("./../../../assets/images/masks/khaki.png")});
+      this.setState({imglocs2: require("./../../../assets/images/masks/white.png")});
       temp2 = false;
     }
     if (temp[1] == 0 && temp[0] == 7){
  
       this.setState({currmaskidx: [0,1]});
-      this.setState({imglocs: require("./../../../assets/images/masks/darkgrey.png")});
-      this.setState({imglocs2: require("./../../../assets/images/masks/darkpink.png")});
+      this.setState({imglocs: require("./../../../assets/images/masks/white.png")});
+      this.setState({imglocs2: require("./../../../assets/images/masks/black.png")});
       temp2 = false;
     }
     if (temp2 == true){
 
       var newtemp = [this.state.currmaskidx[0]+1, this.state.currmaskidx[1]+1];
       if (newtemp[0] == 0 && newtemp[1] == 1){
-        this.setState({imglocs: require("./../../../assets/images/masks/darkgrey.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/darkpink.png")});
+        this.setState({imglocs: require("./../../../assets/images/masks/white.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/black.png")});
       }
       if (newtemp[0] == 1 && newtemp[1] == 2){
-        this.setState({imglocs: require("./../../../assets/images/masks/darkpink.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/lightgrey.png")});
+        this.setState({imglocs: require("./../../../assets/images/masks/black.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/beige.png")});
       }
       if (newtemp[0] == 2 && newtemp[1] == 3){
-        this.setState({imglocs: require("./../../../assets/images/masks/lightgrey.png")});
+        this.setState({imglocs: require("./../../../assets/images/masks/beige.png")});
         this.setState({imglocs2: require("./../../../assets/images/masks/lightpink.png")});
       }
       if (newtemp[0] == 3 && newtemp[1] == 4){
         this.setState({imglocs: require("./../../../assets/images/masks/lightpink.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/beige.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/darkpink.png")});
       }
       if (newtemp[0] == 4 && newtemp[1] == 5){
-        this.setState({imglocs: require("./../../../assets/images/masks/beige.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/black.png")});
+        this.setState({imglocs: require("./../../../assets/images/masks/darkpink.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/lightgrey.png")});
       }
       if (newtemp[0] == 5 && newtemp[1] == 6){
-        this.setState({imglocs: require("./../../../assets/images/masks/black.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/khaki.png")});
+        this.setState({imglocs: require("./../../../assets/images/masks/lightgrey.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/darkgrey.png")});
       }
       if (newtemp[0] == 6 && newtemp[1] == 7){
-        this.setState({imglocs: require("./../../../assets/images/masks/khaki.png")});
-        this.setState({imglocs2: require("./../../../assets/images/masks/white.png")});
+        this.setState({imglocs: require("./../../../assets/images/masks/darkgrey.png")});
+        this.setState({imglocs2: require("./../../../assets/images/masks/khaki.png")});
       }
       this.setState({currmaskidx: newtemp});
     }
@@ -436,6 +436,7 @@ class ArCameraView extends React.Component {
 
   async XSclicked(){
 
+    this.setState({MaskSizeClicked: true});
 
     if (this.state.MaskSize == "XS"){
       await this.downloadmask(this.state.MaskColor, "m", this);
@@ -494,6 +495,7 @@ class ArCameraView extends React.Component {
   
   async SSclicked(){
 
+    this.setState({MaskSizeClicked: true});
     //
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
@@ -559,6 +561,8 @@ class ArCameraView extends React.Component {
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
 
+    this.setState({MaskSizeClicked: true});
+
     if (this.state.MaskSize == "XS"){
       await this.downloadmask(this.state.MaskColor, "xl", this);
       this.onChangeEffect(this.state.MaskColor+"_"+"xl");
@@ -616,6 +620,7 @@ class ArCameraView extends React.Component {
     //
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
+    this.setState({MaskSizeClicked: true});
 
     if (this.state.MaskSize == "XS"){
       await this.downloadmask(this.state.MaskColor, "2xl", this);
@@ -675,6 +680,8 @@ class ArCameraView extends React.Component {
     //
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
+
+    this.setState({MaskSizeClicked: true});
 
     if (this.state.MaskSize == "XS"){
       await this.downloadmask(this.state.MaskColor, "2xl", this);
@@ -751,6 +758,18 @@ class ArCameraView extends React.Component {
       
       </View>
 
+      {this.state.MaskSizeClicked == false ?
+      <View style={{position: "absolute", zIndex: 100, marginTop: "20%", marginLeft: "15%"}}>
+          <Text style={{color: "white", fontWeight: "bold"}}>※ 색상을 선택하고 아래 사이즈를 선택 해주세요.</Text>
+      </View>
+      :null}
+
+      {this.state.downloadinprogress == true?
+      <View style={{position: "absolute", zIndex: 100, backgroundColor: "#0000", width: width*0.1, height: width*0.1, marginLeft: width*0.45, marginTop: height*0.4}}>
+          <Image resizeMode={'contain'} style={{width: width*0.1, height: width*0.1}} source={this.state.loadingarview} />
+      </View>
+      :null}
+
         <View style={{position: "absolute", marginTop: height*0.65, width: width, height: height*0.2, flexDirection: "row", justifyContent: "space-between"}}>
             
             <TouchableOpacity onPress={() => this.pressLeft()}>
@@ -762,7 +781,7 @@ class ArCameraView extends React.Component {
             <TouchableOpacity onPress={() => this.leftmaskclicked()}>
               <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
                 
-                <Image resizeMode="contain" style={{marginLeft: "1%", marginTop: "5%"}} source={this.state.imglocs} />
+                <Image resizeMode="contain" style={{marginLeft: "4%", marginTop: "5%"}} source={this.state.imglocs} />
 
                 {this.state.imglocs == require("./../../../assets/images/masks/grey.png") ? 
                   <Text style={{marginTop: "35%"}}>그레이</Text>
@@ -798,7 +817,7 @@ class ArCameraView extends React.Component {
             <TouchableOpacity onPress={() => this.rightmaskclicked()}>
               <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
                 
-                <Image resizeMode="contain" style={{marginLeft: "1%", marginTop: "5%"}} source={this.state.imglocs2} />
+                <Image resizeMode="contain" style={{marginLeft: "4%", marginTop: "5%"}} source={this.state.imglocs2} />
 
                 {this.state.imglocs2 == require("./../../../assets/images/masks/grey.png") ? 
                   <Text style={{marginTop: "35%"}}>그레이</Text>
