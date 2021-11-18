@@ -45,6 +45,7 @@ class ArCameraView extends React.Component {
     }
   }
 
+
   async componentDidMount() {
     if (Platform.OS === 'android') {
       PermissionsAndroid.requestMultiple(
@@ -703,7 +704,7 @@ class ArCameraView extends React.Component {
       </View>
 
       {this.state.MaskSizeClicked == false ?
-      <View style={{position: "absolute", zIndex: 100, marginTop: "20%", marginLeft: "15%"}}>
+      <View style={{position: "absolute", zIndex: 100, marginTop: height*0.20, marginLeft: "15%"}}>
           <Text style={{color: "white", fontWeight: "bold"}}>※ 색상을 선택하고 아래 사이즈를 선택 해주세요.</Text>
       </View>
       :null}
@@ -834,7 +835,7 @@ class ArCameraView extends React.Component {
               <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Sclicked() }>
                 <View style={{justifyContent: "center"}}>
                   <Text style={styles.prodText2}>
-                  스몰(S)
+                  소형(S)
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -842,7 +843,7 @@ class ArCameraView extends React.Component {
               <TouchableOpacity style={styles.buttonCont2}  onPress={ () => this.Mclicked() }>
                 <View style={{justifyContent: "center"}}>
                   <Text style={styles.prodText2}>
-                  미디움(M)
+                  중형(M)
                   </Text>
                 </View>
               </TouchableOpacity>
@@ -850,7 +851,7 @@ class ArCameraView extends React.Component {
               <TouchableOpacity style={styles.buttonCont2} onPress={ () => this.Lclicked() }>
                 <View style={{justifyContent: "center"}}>
                   <Text style={styles.prodText2}>
-                    라지(L)
+                    대형(L)
                   </Text>
                 </View>
               </TouchableOpacity>

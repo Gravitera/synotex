@@ -28,6 +28,7 @@ import ArCamera2 from './ArCamera2';
 import Synotexmall from './Synotexmall';
 import Offlinestore from './Offlinestore';
 import Exitapp from './Exit';
+import Onlinemall from "./Onlinemall"
 // import { requestLocationPermission } from './../../utils'
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -167,6 +168,7 @@ const MainFlow = (props) => {
           <Stack.Screen name="intro2" component={IntroView2} />
           <Stack.Screen name="ArCamera" component={ArCamera} />
           <Stack.Screen name="ArCamera2" component={ArCamera2} />
+          <Stack.Screen name="Onlinemall" component={Onlinemall} />
         </Stack.Navigator>
       </>
     );   
@@ -214,6 +216,7 @@ const MainFlow = (props) => {
       <MaterialBottomTabs.Screen
         name="Store"
         component={Synotexmall}
+        
         options={{
           tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", fontWeight: "bold"}}>스토어</Text>,
           tabBarIcon: ({ tintColor }) => (
@@ -221,6 +224,7 @@ const MainFlow = (props) => {
               source={require('./../../assets/images/round_storefront_black_36.png')}
               resizeMode="contain"
               style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.015}}
+              onPress={() => Linking.openURL("https://synotexmall.com")}
             />
           )
         }}

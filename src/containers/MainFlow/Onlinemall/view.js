@@ -22,17 +22,14 @@ const { height, width } = Dimensions.get('window');
 const vh = height / 100;
 const vw = width / 100;
 
-const Mallsynotex = (props) => {
+const Mallonline = (props) => {
 
-  /*
   useEffect(() => {
-    Linking.openURL("https://www.synotexmall.com")
-    return () => {
-      Linking.removeAllListeners();
-    };
-  }, []);
-  */
-  
+    setTimeout(() => {
+      Linking.openURL("https://www.synotexmall.com");
+      props.navigation.navigate("intro");
+    },0);
+  });
 
   return (
     <>
@@ -61,11 +58,9 @@ const Mallsynotex = (props) => {
 
       </View>
     </>
-  )
+  );
+};
 
-
-
-}
 
 const styles = StyleSheet.create({
   logo:{
@@ -94,26 +89,4 @@ const styles = StyleSheet.create({
   },
 });
 
-/*
-const styles = StyleSheet.create({
-  logo:{
-    width: 300,
-    height: 300
-  },
-  topimage:{
-    width: width*0.99,
-    height: height*0.5,
-    marginTop: height*0.08,
-    marginLeft: width*0.035
-  },
-  bottomimage:{
-    width: width*1,
-    height: height*0.33,
-    marginTop: -1*height*0.02,
-    marginLeft: -1*width*0.00
-  }
-
-});
-*/
-
-export default Mallsynotex;
+export default Mallonline;
