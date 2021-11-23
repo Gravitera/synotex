@@ -53,7 +53,7 @@ const Mallsynotex = (props) => {
 
         <TouchableOpacity onPress={() => props.navigation.navigate('Onlinemall')}>        
           <View style={{alignItems:"center", justifyContent: "center", marginBottom: height*0.17, backgroundColor: "white", width: width*0.5, height: width*0.1, borderRadius: 20}}>
-            <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 쇼핑몰 바로가기</Text>
+            <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 공식몰 바로가기</Text>
           </View>
         </TouchableOpacity>
 
