@@ -63,5 +63,13 @@ export var effectsData = [
     name: 'black_2xl',
     title: 'black_2xl'
   },
+  {
+    name: 'white_ss',
+    title: 'white_ss'
+  },
+  {
+    name: 'black_ss',
+    title: 'black_ss'
+  },
 ]
 

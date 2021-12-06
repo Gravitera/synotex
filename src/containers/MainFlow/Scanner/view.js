@@ -15,7 +15,7 @@ import {
 //import { Camera, Permissions, FaceDetector, DangerZone } from 'expo';
 
 import { List, DataTable, ActivityIndicator, Button } from 'react-native-paper';
-import { RNCamera } from 'react-native-camera';
+import {RNCamera} from 'react-native-camera';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import moment from 'moment';
@@ -27,6 +27,8 @@ const Sound = require('react-native-sound')
 // import { ScrollView } from 'react-native-gesture-handler';
 import { CustomDrawerButtonHeader, CustomHeader } from '../../../components/Header';
 import theme from '../../../../theme';
+
+
 // import { SafeAreaView } from 'react-native-safe-area-context';
 // import { color, font } from '../../../../theme'
 const { height, width } = Dimensions.get('window');
@@ -37,11 +39,11 @@ const rotating_blue_mask = require('./../../../assets/images/rotating_blue_mask.
 
 const vh = height / 100;
 const vw = width / 100;
-const frameSide = width - 160;
+const frameSide = height*0.35;
 const actionSide = 250;
 const loaderSide = 100;
 const date = moment().local().format('l');
-let windowHeight = 220;
+let windowHeight = height*0.27;
 
 
 const { windowwidth, windowheight } = Dimensions.get("window");
@@ -133,88 +135,76 @@ const ScannerView = (props) => {
   };
 
   const runFacemesh2 = async (e) => {
-    console.log(" ======================== face detected !!!! from Scanner ");
+    //console.log(" ======================== face detected !!!! from Scanner ");
   };
 
   const tempfunc = async () => {
-    console.log(" ========= current state   before click  ", state);
+    //console.log(" ========= current state   before click  ", state);
     setState(1);
     guide_sound.play((success) => {
-      console.log("success");
+      //console.log("success");
     });
-    console.log(" ========= current state   after click  ", state);
+    //console.log(" ========= current state   after click  ", state);
     setTimeout(() => {
       setState(2);
-      console.log(" ========= current state   after wait  ", state);
+      //console.log(" ========= current state   after wait  ", state);
     }, 1000);
 
     setTimeout(() => {
       setState(3);
       button_beep.play((success) => {
-        console.log("success");
+        //console.log("success");
       })
-      console.log(" ========= current state   after wait  blue_three ", state);
+      //console.log(" ========= current state   after wait  blue_three ", state);
     },4000);
     setTimeout(() => {
       setState(4);
       button_beep.play((success) => {
-        console.log("success");
+        //console.log("success");
       })
-      console.log(" ========= current state   after wait  blue_two ", state);
+      //console.log(" ========= current state   after wait  blue_two ", state);
     },5000);
     setTimeout(() => {
       setState(5);
       button_beep.play((success) => {
-        console.log("success");
+        //console.log("success");
       })
-      console.log(" ========= current state   after wait  blue_one ", state);
+      //console.log(" ========= current state   after wait  blue_one ", state);
     },6000);
     setTimeout(() => {
   //    setState(6);
-      console.log(" ========= current state   after wait  initial take photo ", state);
+      //console.log(" ========= current state   after wait  initial take photo ", state);
       takePicture();
     },7000);
 
     setTimeout(() => {
-      console.log(" ============ play turn your face sound ");
+      //console.log(" ============ play turn your face sound ");
       setState(6);
       turnFace.play((success) => {
-        console.log("success");
+        //console.log("success");
       })
     }, 8000);
 
     setTimeout(() => {
       setState(7);
       AI_measurement_sound.play((success) => {
-        console.log("success");
+        //console.log("success");
       })
-      console.log(" ========= current state   after wait  show star-like sparkling ", state);
+      //console.log(" ========= current state   after wait  show star-like sparkling ", state);
     },13000);
     setTimeout(() => {
       setState(8);
-      console.log(" ========= current state   after wait  show blue-check-mark ", state);
+      //console.log(" ========= current state   after wait  show blue-check-mark ", state);
     },15000);
 
     setTimeout(() => {
-      /*
-      const data = {
-        FaceWidth: props.FaceWidth,
-        FaceHeight: props.FaceHeight,
-        FaceWidthPercent: props.FaceWidthPercent,
-        FaceHeightPercent: props.FaceHeightPercent,
-        FrontImage: props.FrontImage,
-        MaskSize: props.MaskSize
-      }
-      */
-     console.log(props)
-     console.log(resp)
-      console.log(" =========== onNext data    ", props.resp);
+
       props.onNext(props.resp);
     },16000);
 
   };
 
-  console.log(" ============ current state before return   ", state);
+  //console.log(" ============ current state before return   ", state);
 
 
   return (
@@ -227,7 +217,7 @@ const ScannerView = (props) => {
           type={RNCamera.Constants.Type.front}
           flashMode={RNCamera.Constants.FlashMode.off}
           playSoundOnCapture={false}
-
+          useCamera2Api={true}
           androidCameraPermissionOptions={{
             title: 'Permission to use camera',
             message: 'We need your permission to use your camera',
@@ -237,52 +227,15 @@ const ScannerView = (props) => {
 
          onFacesDetected={runFacemesh2}
         // videoStabilizationMode="cinematic"
-         faceDetectionClassifications={
-           RNCamera.Constants.FaceDetection.Classifications.all
-         }
-         faceDetectionLandmarks={RNCamera.Constants.FaceDetection.Landmarks.all }
-         faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
+        //  faceDetectionClassifications={
+        //    RNCamera.Constants.FaceDetection.Classifications.all
+        //  }
+        //  faceDetectionLandmarks={RNCamera.Constants.FaceDetection.Landmarks.all }
+        //  faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
 //          onCameraReady={startRecording}
         />
 
 
-
-
-          {/*<Camera 
-            style={{ flex: 1 }} 
-            type={Camera.Constants.Type} 
-            onFacesDetected={this.state.faceDetecting ? this.handleFacesDetected : undefined }
-            onFaceDetectionError={this.handleFaceDetectionError}
-            faceDetectorSettings={{
-              mode: FaceDetector.Constants.Mode.fast,
-              detectLandmarks: FaceDetector.Constants.Mode.none,
-              runClassifications: FaceDetector.Constants.Mode.none,
-            }}
-            ref={cameraRef}
-          >*/}
-
-
-
-  
-        {/* <CustomDrawerButtonHeader title={'About'} /> */}
-
-
-        {/*<View style={styles.frameContainer}>
-          <Image resizeMode={'contain'} style={styles.frame} source={frame} />
-        </View>
-        <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-          <View style={styles.buttonOver}>
-            <Text style={styles.text}>측정사진이 마음에 들지 않으시면 재촬영{"\n"}
-            측정사진이 맘에 드신다면 측정결과 확인 버튼을 눌러주세요.</Text>
-          </View>
-          <View style={{ marginTop: 10 }}>
-            <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-              <TouchableOpacity onPress={takePicture}>
-                <Image style={{ width: 103, height: 103 }} source={require("./../../../assets/images/shutter.png")} />
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>*/}
 
         {state != 7 && state != 8 && state != 6?
         <View style={styles.frameContainer}>
@@ -449,294 +402,6 @@ const ScannerView = (props) => {
         null }
 
 
-
-        {/* <View
-          style={{
-            justifyContent: 'center',
-            backgroundColor: 'white',
-            width: width - 40,
-            marginTop: 20,
-            borderRadius: 10,
-            marginLeft: 20,
-            paddingVertical: 20,
-            zIndex: 100
-          }}>
-          <Text style={{ textAlign: 'center', color: '#000' }}>
-            경계 상자에면 정렬
-          </Text>
-        </View> */}
-        {/* <View
-          style={{
-            position: 'absolute',
-            right: 0,
-            height,
-            justifyContent: 'center',
-            zIndex: 100,
-          }}>
-          {!picture && (
-            <Pressable
-              disabled={props.loading || picture}
-              onPress={takePicture}
-              style={{
-                ...styles.capture,
-                borderColor: props.loading ? '#fff6' : '#fff',
-              }}>
-              <Icon
-                name="camera-alt"
-                size={60}
-                color={props.loading ? '#fff6' : '#fff'}
-              />
-            </Pressable>
-          )}
-        </View> */}
-        {/* <View style={styles.displayKids}>
-          <List.Accordion
-            title={`        Total: ${props.students.length
-              }          On Board: ${props.onboardCount && props.onboardCount > 0
-                ? props.onboardCount
-                : 0
-              }`}
-            style={{
-              backgroundColor: 'white',
-              color: 'black',
-              borderRadius: 20,
-            }}
-            titleStyle={{
-              color: 'black',
-              fontWeight: 'normal',
-              fontWeight: 'bold',
-              textAlign: 'center',
-            }}>
-            {props.students.length > 0 ? (
-              <View style={styles.collapsible}>
-                <DataTable
-                  style={{
-                    backgroundColor: 'white',
-                    width: 550,
-                    marginLeft: -120,
-                  }}>
-                  <DataTable.Header
-                    style={{
-                      backgroundColor: '#5CA8D6',
-                      color: '#FFFFFF',
-                      paddingHorizontal: -30,
-                    }}>
-                    <DataTable.Title style={{ ...styles.tableheading }}>
-                      <Text style={{ fontSize: 16, color: '#fff' }}>No</Text>
-                    </DataTable.Title>
-                    <DataTable.Title style={{ ...styles.tableheading }}>
-                      <Text style={{ fontSize: 16, color: '#fff' }}>Name</Text>
-                    </DataTable.Title>
-                    <DataTable.Title style={{ ...styles.tableheading }}>
-                      <Text style={{ fontSize: 16, color: '#fff' }}>
-                        Check In
-                      </Text>
-                    </DataTable.Title>
-                    <DataTable.Title style={{ ...styles.tableheading }}>
-                      <Text style={{ fontSize: 16, color: '#fff' }}>
-                        Check Out
-                      </Text>
-                    </DataTable.Title>
-                  </DataTable.Header>
-                  <ScrollView
-                    style={styles.scrollView}
-                    contentContainerStyle={{ flexGrow: 1 }}>
-                    <View>
-                      {props.students.map((students, index) => {
-                        return (
-                          <DataTable.Row
-                            key={index}
-                            style={{
-                              backgroundColor: 'white',
-                              color: '#FFFFFF',
-                              paddingHorizontal: 10,
-                            }}>
-                            <DataTable.Cell style={{ ...styles.tableheading }}>
-                              <Text style={{ fontSize: 14 }}>
-                                {students.studentId}
-                              </Text>
-                            </DataTable.Cell>
-                            <DataTable.Cell style={{ ...styles.tableheading }}>
-                              <Text style={{ fontSize: 14 }}>
-                                {students.name}
-                              </Text>
-                            </DataTable.Cell>
-                            <DataTable.Cell style={{ ...styles.tabletime }}>
-                              <View>
-                                {props?.onboardStudents &&
-                                  props.onboardStudents[date] &&
-                                  props.onboardStudents[date][students._id]
-                                    ?.checkIn ? (
-                                    <FAIcon name="circle" color="green" />
-                                  ) : (
-                                    <FAIcon name="circle" color="#B7B7B7" />
-                                  )}
-                              </View>
-                              <View
-                                style={{
-                                  width: 60,
-                                }}>
-                                <Text
-                                  style={{
-                                    color: '#B7B7B7',
-                                    width: '100%',
-                                    textAlign: 'center',
-                                    fontSize: 12,
-                                    lineHeight: 12,
-                                  }}>
-                                  {props.onboardStudents &&
-                                    props.onboardStudents[date] &&
-                                    props.onboardStudents[date][students._id]
-                                      ?.checkIn
-                                    ?
-                                    moment(
-                                      props.onboardStudents[date][
-                                        students._id
-                                      ]?.checkIn,
-                                    )
-                                      .local()
-                                      .format('LT')
-                                    : '—'}
-                                </Text>
-                              </View>
-                            </DataTable.Cell>
-                            <DataTable.Cell style={{ ...styles.tabletime }}>
-                              <View>
-                                {props.onboardStudents &&
-                                  props.onboardStudents[date] &&
-                                  props.onboardStudents[date][students._id]
-                                    ?.checkOut ? (
-                                    <FAIcon name="circle" color="green" />
-                                  ) : (
-                                    <FAIcon name="circle" color="#B7B7B7" />
-                                  )}
-                              </View>
-                              <View
-                                style={{
-                                  width: 60,
-                                }}>
-                                <Text
-                                  style={{
-                                    color: '#B7B7B7',
-                                    width: '100%',
-                                    textAlign: 'center',
-                                    fontSize: 12,
-                                    lineHeight: 12,
-                                  }}>
-                                  {props.onboardStudents &&
-                                    props.onboardStudents[date] &&
-                                    props.onboardStudents[date][students._id]
-                                      ?.checkOut
-                                    ? moment(
-                                      props.onboardStudents[date][
-                                        students._id
-                                      ]?.checkOut,
-                                    )
-                                      .local()
-                                      .format('LT')
-                                    : '—'}
-                                </Text>
-                              </View>
-                            </DataTable.Cell>
-                          </DataTable.Row>
-                        );
-                      })}
-                    </View>
-
-                    <View>
-                      <DataTable.Row
-
-                        style={{
-                          backgroundColor: 'purple',
-                          color: '#FFFFFF',
-                          paddingHorizontal: 10,
-                        }}>
-
-                        <DataTable.Cell style={{ ...styles.tableheading }}>
-                          <Text style={{ fontSize: 16, color: '#fff' }}>No</Text>
-                        </DataTable.Cell>
-                        <DataTable.Cell style={{ ...styles.tableheading }}>
-                          <Text style={{ fontSize: 16, color: '#fff' }}>Name</Text>
-                        </DataTable.Cell>
-                        <DataTable.Cell style={{ ...styles.tableheading }}>
-                          <Text style={{ fontSize: 16, color: '#fff' }}>Check In</Text>
-                        </DataTable.Cell>
-                        <DataTable.Cell style={{ ...styles.tableheading }}>
-                          <Text style={{ fontSize: 16, color: '#fff' }}>Check Out</Text>
-                        </DataTable.Cell>
-
-
-                      </DataTable.Row>
-
-                    </View>
-                  </ScrollView>
-
-                  <DataTable.Pagination
-                    page={1}
-                    numberOfPages={3}
-                    onPageChange={page => {
-                      console.log(page);
-                    }}
-                    label="1-2 of 6"
-                  />
-                </DataTable>
-              </View>
-            ) : (
-                <View
-                  style={{
-                    justifyContent: 'center',
-                    backgroundColor: '#5CA8D6',
-                    width: 350,
-                    height: 60,
-                    marginTop: 10,
-                    borderRadius: 10,
-                  }}>
-                  <Text style={{ textAlign: 'center', color: 'white' }}>
-                    NO STUDENTS PRESENT
-                </Text>
-                </View>
-              )}
-          </List.Accordion>
-        </View> */}
-
-        {/* {!picture && !recog && !isLoading && (
-          <View style={styles.displayGest}>
-            <Text style={styles.text}>
-              Keep Blinking Your Left Eye to record your gesture
-            </Text>
-          </View>
-        )} */}
-
-        {/* {!startRecog && (
-          <TouchableOpacity
-            onPress={() => setStartRecog(true)}
-            style={styles.proxyView}>
-            <View>
-              <Button style={styles.proxyhistory} title="Start">
-                <Text style={{ color: 'white', textTransform: 'capitalize' }}>
-                  {' '}
-                  Start
-                </Text>
-              </Button>
-            </View>
-          </TouchableOpacity>
-        )} */}
-
-        {/* {startRecog && (
-          <TouchableOpacity
-            onPress={() => setStartRecog(false)}
-            style={styles.proxyView}>
-            <View>
-              <Button style={styles.proxyhistory} title="Start">
-                <Text style={{ color: 'white', textTransform: 'capitalize' }}>
-                  {' '}
-                  Stop
-                </Text>
-              </Button>
-            </View>
-          </TouchableOpacity>
-        )} */}
-
         {/* {props.loading ? (
           <Image
             style={{ ...styles.preview, zIndex: 999 }}
@@ -757,42 +422,7 @@ const ScannerView = (props) => {
             : null
         }
 
-        {/* {props.action ? (
-          <View
-            style={{
-              position: 'absolute',
-              top: height / 2 - actionSide / 2,
-              left: width / 2 - actionSide / 2,
-              width: actionSide,
-              height: actionSide,
-              borderRadius: actionSide,
-              backgroundColor:
-                props.actionImage === 'enter'
-                  ? '#14BB46'
-                  : props.actionImage === 'leave'
-                    ? '#E5D048'
-                    : props.actionImage === 'close'
-                      ? '#E42323'
-                      : null,
-              zIndex: 1001,
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}>
-            <Image
-              resizeMode="contain"
-              style={{ width: actionSide - 100, height: actionSide - 100 }}
-              source={
-                props.actionImage === 'enter'
-                  ? require('./../../../assets/images/enter.png')
-                  : props.actionImage === 'leave'
-                    ? require('./../../../assets/images/leave.png')
-                    : props.actionImage === 'close'
-                      ? require('./../../../assets/images/close.png')
-                      : null
-              }
-            />
-          </View>
-        ) : null} */}
+    
       </View>
     </>
   );

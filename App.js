@@ -3,16 +3,16 @@ import React, { useEffect } from 'react';
 import { SafeAreaView, StatusBar, useColorScheme } from 'react-native';
 import { styles } from './src/styles/styles';
 
-import Feed from './src/feed';
-import Detail from './src/detail';
+// import Feed from './src/feed';
+// import Detail from './src/detail';
 
-import Screen1 from './src/screens/drawer/screen1';
-import Screen2 from './src/screens/drawer/screen2';
-import Screen3 from './src/screens/drawer/screen3';
+// import Screen1 from './src/screens/drawer/screen1';
+// import Screen2 from './src/screens/drawer/screen2';
+// import Screen3 from './src/screens/drawer/screen3';
 
-import Tab1 from './src/screens/tabs/tab1';
-import Tab2 from './src/screens/tabs/tab2';
-import Tab3 from './src/screens/tabs/tab3';
+// import Tab1 from './src/screens/tabs/tab1';
+// import Tab2 from './src/screens/tabs/tab2';
+// import Tab3 from './src/screens/tabs/tab3';
 
 import {
   NavigationContainer,

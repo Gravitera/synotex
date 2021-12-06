@@ -84,11 +84,11 @@ class DeepARView extends React.Component {
 
     var onEventSent = (event) => {
       const onEventSentCallback = this.props.onEventSent;
-      //console.log("RECEIVED message from native", event.nativeEvent, onEventSentCallback);
+      console.log("RECEIVED message from native", event.nativeEvent, onEventSentCallback);
 
       if(onEventSentCallback) {
         onEventSentCallback(event.nativeEvent);
-        //this.props.onEventSent(event.nativeEvent);
+        // this.props.onEventSent(event.nativeEvent);
       }
     }
 

@@ -94,6 +94,22 @@ const CustomBackForwardButtonHeader = (props) => {
   );
 };
 
+const CustomBrandstoryHeader = (props) => {
+  return (
+    <View style={styles.headerContainerbrandstory}>
+      <TouchableOpacity
+        style={styles.drawerTrigger}
+      >
+      </TouchableOpacity>
+      <Text style={styles.heading}>{props.title}</Text>
+      <TouchableOpacity
+        style={styles.drawerTrigger}
+      >
+      </TouchableOpacity>
+    </View>
+  );
+}
+
 const CustomBackForwardButtonHeader2 = (props) => {
   return (
     <View style={styles.headerContainer}>
@@ -112,7 +128,7 @@ const CustomBackForwardButtonHeader2 = (props) => {
   );
 };
 
-export { CustomDrawerButtonHeader, CustomBackButtonHeader, CustomBackForwardButtonHeader, CustomHeader, CustomBackButtonHeader2, CustomBackForwardButtonHeader2};
+export { CustomBrandstoryHeader, CustomDrawerButtonHeader, CustomBackButtonHeader, CustomBackForwardButtonHeader, CustomHeader, CustomBackButtonHeader2, CustomBackForwardButtonHeader2};
 
 const styles = StyleSheet.create({
   headerContainer: {
@@ -123,6 +139,15 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: '100%',
     zIndex: 200,
+  },
+  headerContainerbrandstory: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: theme.color.bg,
+    alignItems: 'center',
+    position: 'absolute',
+    width: '100%',
+    zIndex: 400
   },
   headerContainer2: {
     flexDirection: 'row',

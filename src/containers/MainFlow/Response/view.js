@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   StyleSheet,
   View,
@@ -12,18 +12,38 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import { Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector, useDispatch } from 'react-redux';
+import { ImageBackground } from 'react-native';
 const { height, width } = Dimensions.get('window');
+
+const Sound = require('react-native-sound');
+
+const unrecognized = new Sound('unrecognized.mp3', Sound.MAIN_BUNDLE);
 
 const vh = height / 100;
 const vw = width / 100;
 const ratio = (width - 40) / 534;
-let windowHeight = 220;
+let windowHeight = height*0.32;
 
 const ResponseView = (props) => {
+
+  
    
     const storeData = useSelector((store) => store);
     console.log("store",storeData)
     console.log("props : ",props)
+
+    var condition = 0;
+
+
+    var respmessage = storeData.attendanceReducer.res.ID;
+    if (respmessage == "NNetwork"){
+      condition = 1;
+    };
+    if (respmessage == "Unrecognized"){
+      unrecognized.play((success) => {
+      });
+      condition = 2;
+    };
 
   return (
     <>
@@ -33,16 +53,36 @@ const ResponseView = (props) => {
           <Image style={{ width: width, height: height - windowHeight, zIndex: 0 }} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + storeData.attendanceReducer.res.FrontImage }} />
           <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
             <View style={styles.buttonOver}>
+
+
+              {condition == 0 ?
               <Text style={styles.text}>재측정을 원하시는경우는 재촬영 버튼을 눌러주시거나{"\n"}
             결과을 확인하시려면 측정결과 버튼을 눌러주세요</Text>
+            : null }
+            {condition == 1 ?
+              <Text style={styles.text}>인터넷 연결을 확인 해주세요.</Text>
+            : null }
+            {condition == 2 ?
+              <Text style={styles.text}>측정을 못 하였습니다.{"\n"}
+            측정을 정확하게 다시 해주세요.</Text>
+            : null }
+
+
+
             </View>
-            <View style={{ marginTop: 4 }}>
+            <View style={{ marginTop: 25 }}>
+
+
               <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
                 <TouchableOpacity onPress={() => props.navigation.navigate("input")}>
                   <View style={{resizeMode: "contain", justifyContent:"center"}}>
                   {/*<Image style={{ width: 98, height: 121, marginRight: 15 }} source={require("./../../../assets/images/refresh.png")} />*/}
-                  <Image style={{ width: 95, height: 95, marginRight: "15%" }} source={require("./../../../assets/images/refresh.png")} />
-                  
+                  {/*<ImageBackground style={{ width: 95, height: 95, marginRight: "15%" }} source={require("./../../../assets/images/refresh.png")}>*/}
+                  <View style={{ width: width*0.25, height: width*0.25, marginRight: "15%", backgroundColor: "#0D3A71", borderRadius: 100}}>
+                    <Image resizeMode="contain" style={{width:width*0.2,height:width*0.2,alignItems:'center',justifyContent:'center', marginLeft:width*0.025, marginTop: 1*height*0.01}}  source={require("./../../../assets/images/camera_image.png")} >
+                    </Image>
+                  </View>
+                  {/*</ImageBackground>*/}
                   </View>
                   <Text style={styles.text2}>재촬영</Text>
                 </TouchableOpacity>
@@ -50,7 +90,12 @@ const ResponseView = (props) => {
 
                   {/*<Image style={{ width: 98, height: 121, marginLeft: 15 }} source={require("./../../../assets/images/result.png")} />*/}
                     <View style={{justifyContent:"center", resizeMode: "contain"}}>
-                      <Image style={{ width: 95, height: 95, marginLeft: "5%"}} source={require("./../../../assets/images/result.png")} />
+                      {/*<ImageBackground style={{ width: 95, height: 95, marginLeft: "5%"}} source={require("./../../../assets/images/result.png")}>*/}
+                        <View style={{ width: width*0.25, height: width*0.25, marginRight: "5%", backgroundColor: "#0D3A71", borderRadius: 100}}>
+                          <Image resizeMode="contain" style={{width:width*0.18,height:width*0.18,alignItems:'center',justifyContent:'center', marginLeft:width*0.038, marginTop: 1*height*0.021}}  source={require("./../../../assets/images/result_image.png")} >
+                          </Image>
+                        </View>
+                      {/*</ImageBackground>*/}
                     </View>
                     <Text style={styles.text3}>측정 결과</Text>
                 </TouchableOpacity>

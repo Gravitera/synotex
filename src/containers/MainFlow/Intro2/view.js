@@ -21,24 +21,23 @@ const vw = width / 100;
 
 const IntroView2 = (props) => {
 
+
     useEffect(() => {
         setTimeout(() => {
           props.navigation.navigate("input");
-        },750);
+        },1000);
       });
+
+
 
 //   setTimeout(() => {
 //     props.navigation.navigate('input'); //this.props.navigation.navigate('Login')
 //   }, 1000); 
   return (
     <>
-
-
-     <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:width,height:height,alignItems: 'center',justifyContent: 'center'}}>
-
-          <Image resizeMode="contain" source={require("./../../../assets/images/Intro2_image.png")} style={styles.logo}></Image>
-  </ImageBackground>
-
+      <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{paddingBottom:200 ,width:width,height:height,alignItems: 'center',justifyContent: 'center'}}>
+        <Image resizeMode="contain" source={require("./../../../assets/images/Intro2_image.png")} style={styles.logo}></Image>
+      </ImageBackground>
 
     </>
   );
