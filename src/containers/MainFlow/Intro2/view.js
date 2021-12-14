@@ -28,7 +28,7 @@ const IntroView2 = (props) => {
         },750);
       });
 
-
+      console.log(" window width     ", width,"     ", height);
 
 //   setTimeout(() => {
 //     props.navigation.navigate('input'); //this.props.navigation.navigate('Login')

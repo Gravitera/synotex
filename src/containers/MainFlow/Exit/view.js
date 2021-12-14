@@ -15,7 +15,8 @@ import { TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 import { CustomBrandstoryHeader } from '../../../components/Header';
 //import { styles } from '../../../styles/styles';
-import {BackHandler} from "react-native";
+import {BackHandler, Platform} from "react-native";
+import RNExitApp from 'react-native-exit-app';
 
 const { height, width } = Dimensions.get('window');
 
@@ -23,7 +24,14 @@ const vh = height / 100;
 const vw = width / 100;
 
 const Appexit = (props) => {
-  BackHandler.exitApp();
+
+  if (Platform.OS === "android"){
+    BackHandler.exitApp();
+  }
+  if (Platform.OS === "ios"){
+    RNExitApp.exitApp();
+  }
+
 
   return (
     <>

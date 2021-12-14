@@ -47,74 +47,128 @@ const ResponseView = (props) => {
 
   return (
     <>
-      <View style={styles.container}>
-        {/* <CustomHeader title={'측정 결과'} /> */}
-        <View style={{ alignItems: 'center', flex: 1 }}>
-          <Image style={{ width: width, height: height - windowHeight, zIndex: 0 }} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + storeData.attendanceReducer.res.FrontImage }} />
-          <View style={{ width, height: windowHeight, zIndex: 1000, position: 'absolute', bottom: 0, backgroundColor: theme.color.light }}>
-            <View style={styles.buttonOver}>
 
+      {width < 1500?
 
-              {condition == 0 ?
-              <Text style={styles.text}>재측정을 원하시는경우는 재촬영 버튼을 눌러주시거나{"\n"}
-            결과을 확인하시려면 측정결과 버튼을 눌러주세요</Text>
-            : null }
-            {condition == 1 ?
-              <Text style={styles.text}>인터넷 연결을 확인 해주세요.</Text>
-            : null }
-            {condition == 2 ?
-              <Text style={styles.text}>측정을 못 하였습니다.{"\n"}
-            측정을 정확하게 다시 해주세요.</Text>
-            : null }
+      <View style={{width: width, height: height}}>
+          <Image style={{width: width, height: "60%"}} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + storeData.attendanceReducer.res.FrontImage }} />
+          <View style={{width: width, height: "40%", flexDirection:"column"}}>
+            <View style={{width: width, height: "10%"}}/>
+                {condition == 0?
+                <>
+                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>재측정을 원하시는경우는 재촬영 버튼을 눌러주시거나</Text>
+                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>결과을 확인하시려면 측정결과 버튼을 눌러주세요</Text>
+                  </>
+                :null}
+                {condition == 1?
+                <>
+                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>인터넷 연결을 확인 해주세요.</Text>
+                </>
+                :null}
+                {condition == 2?
+                <>
+                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>측정을 못 하였습니다.</Text>
+                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>측정을 정확하게 다시 해주세요.</Text>
+                </>
+                :null}
 
+            <View style={{ flexDirection: 'row', justifyContent: 'center', width:width, height: "60%", alignItems:"center"}}>
+              <TouchableOpacity onPress={() => props.navigation.navigate("input")}>
 
+                <View style={{ width: width*0.3, height: width*0.3, backgroundColor: "#0D3A71", borderRadius: 100, alignItems:"center", flexDirection:"column"}}>
+                <View style={{height: "5%"}}/>
+                  <Image resizeMode="contain" style={{width:"70%", height:"70%"}}  source={require("./../../../assets/images/camera_image.png")} >
+                  </Image>
+                  <View style={{height: "5%"}}/>
+                  <Text style={{textAlign:"center", fontSize:13, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold, color:"white" }}>재촬영</Text>
+                </View>
 
-            </View>
-            <View style={{ marginTop: 4 }}>
+                
+              </TouchableOpacity>
+              <View style={{width: "10%"}}/>
+              <TouchableOpacity onPress={props.onNext}>
+                
 
-
-              <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
-                <TouchableOpacity onPress={() => props.navigation.navigate("input")}>
-                  <View style={{resizeMode: "contain", justifyContent:"center"}}>
-                  {/*<Image style={{ width: 98, height: 121, marginRight: 15 }} source={require("./../../../assets/images/refresh.png")} />*/}
-                  {/*<ImageBackground style={{ width: 95, height: 95, marginRight: "15%" }} source={require("./../../../assets/images/refresh.png")}>*/}
-                  <View style={{ width: width*0.25, height: width*0.25, marginRight: "15%", backgroundColor: "#0D3A71", borderRadius: 100}}>
-                    <Image resizeMode="contain" style={{width:width*0.2,height:width*0.2,alignItems:'center',justifyContent:'center', marginLeft:width*0.025, marginTop: 1*height*0.01}}  source={require("./../../../assets/images/camera_image.png")} >
+                  <View style={{ width: width*0.3, height: width*0.3, backgroundColor: "#0D3A71", borderRadius: 100, alignItems:"center", flexDirection:"column"}}>
+                    <View style={{height: "10%"}}/>
+                    <Image resizeMode="contain" style={{width:"70%", height:"70%"}}  source={require("./../../../assets/images/result_image.png")} >
                     </Image>
+                    <Text style={{textAlign:"center", fontSize:13, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold, color:"white" }}>측정 결과</Text>
                   </View>
-                  {/*</ImageBackground>*/}
-                  </View>
-                  <Text style={styles.text2}>재촬영</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={props.onNext}>
 
-                  {/*<Image style={{ width: 98, height: 121, marginLeft: 15 }} source={require("./../../../assets/images/result.png")} />*/}
-                    <View style={{justifyContent:"center", resizeMode: "contain"}}>
-                      {/*<ImageBackground style={{ width: 95, height: 95, marginLeft: "5%"}} source={require("./../../../assets/images/result.png")}>*/}
-                        <View style={{ width: width*0.25, height: width*0.25, marginRight: "5%", backgroundColor: "#0D3A71", borderRadius: 100}}>
-                          <Image resizeMode="contain" style={{width:width*0.18,height:width*0.18,alignItems:'center',justifyContent:'center', marginLeft:width*0.038, marginTop: 1*height*0.021}}  source={require("./../../../assets/images/result_image.png")} >
-                          </Image>
-                        </View>
-                      {/*</ImageBackground>*/}
-                    </View>
-                    <Text style={styles.text3}>측정 결과</Text>
-                </TouchableOpacity>
-              </View>
-
-              {/* <TouchableOpacity style={styles.progressButton} onPress={props.onNext}>
-              <View>
-                <Text style={styles.heading}>AI 자동인식 을 통한 열굴 치수확인</Text>
-                <Text style={styles.paragraph}>얼굴 치수에 따른 추천 마스크 사이즈을 확인해주세요</Text>
-              </View>
-              <View>
-                <Icon name="chevron-forward" size={42} color={theme.color.secondary} />
-              </View>
-            </TouchableOpacity> */}
+              </TouchableOpacity>
             </View>
+
+
           </View>
 
-        </View>
+
       </View>
+
+
+      :
+
+
+      <View style={{width: width, height: height}}>
+          <Image style={{width: width, height: "60%"}} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + storeData.attendanceReducer.res.FrontImage }} />
+          <View style={{width: width, height: "40%", flexDirection:"column"}}>
+            <View style={{width: width, height: "5%"}}/>
+                {condition == 0?
+                <>
+                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>재측정을 원하시는경우는 재촬영 버튼을 눌러주시거나</Text>
+                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>결과을 확인하시려면 측정결과 버튼을 눌러주세요</Text>
+                  </>
+                :null}
+                {condition == 1?
+                <>
+                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>인터넷 연결을 확인 해주세요.</Text>
+                </>
+                :null}
+                {condition == 2?
+                <>
+                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>측정을 못 하였습니다.</Text>
+                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>측정을 정확하게 다시 해주세요.</Text>
+                </>
+                :null}
+
+            <View style={{ flexDirection: 'row', justifyContent: 'center', width:width, height: "60%", alignItems:"center"}}>
+              <TouchableOpacity onPress={() => props.navigation.navigate("input")}>
+
+                <View style={{ width: width*0.2, height: width*0.2, backgroundColor: "#0D3A71", borderRadius: 100, alignItems:"center", flexDirection:"column"}}>
+                <View style={{height: "5%"}}/>
+                  <Image resizeMode="contain" style={{width:"70%", height:"70%"}}  source={require("./../../../assets/images/camera_image.png")} >
+                  </Image>
+                  <View style={{height: "5%"}}/>
+                  <Text style={{textAlign:"center", fontSize:13, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold, color:"white" }}>재촬영</Text>
+                </View>
+
+                
+              </TouchableOpacity>
+              <View style={{width: "10%"}}/>
+              <TouchableOpacity onPress={props.onNext}>
+                
+
+                  <View style={{ width: width*0.2, height: width*0.2, backgroundColor: "#0D3A71", borderRadius: 100, alignItems:"center", flexDirection:"column"}}>
+                    <View style={{height: "10%"}}/>
+                    <Image resizeMode="contain" style={{width:"70%", height:"70%"}}  source={require("./../../../assets/images/result_image.png")} >
+                    </Image>
+                    <Text style={{textAlign:"center", fontSize:13, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold, color:"white" }}>측정 결과</Text>
+                  </View>
+
+              </TouchableOpacity>
+            </View>
+
+
+          </View>
+
+
+      </View>
+
+
+      }
+
+
+
     </>
   );
 };
