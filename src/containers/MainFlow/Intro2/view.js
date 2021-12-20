@@ -14,7 +14,7 @@ import Button from './../../../components/Button'
 import { TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 
-const { height, width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 const vh = height / 100;
 const vw = width / 100;

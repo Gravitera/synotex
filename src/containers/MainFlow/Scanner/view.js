@@ -46,7 +46,6 @@ const date = moment().local().format('l');
 let windowHeight = height*0.32;
 
 
-const { windowwidth, windowheight } = Dimensions.get("window");
 
 const guide_sound = new Sound('guide_voice.mp3', Sound.MAIN_BUNDLE);
 const AI_measurement_sound = new Sound('ai_measurement_voice.mp3', Sound.MAIN_BUNDLE);
@@ -54,6 +53,9 @@ const button_beep = new Sound('button_beep.mp3', Sound.MAIN_BUNDLE);
 const turnFace = new Sound("turnface.mp3", Sound.MAIN_BUNDLE);
 
 const ScannerView = (props) => {
+
+
+  console.log("windowwidth, windowheight", "    ", width, "   ", height);
   // console.log('SCANNER VIEW PROPS', props.students);
   let camera;
   // console.log('SCANNER VIEW PROPS', props.onboardStudents);
@@ -211,12 +213,12 @@ const ScannerView = (props) => {
     <>
       {width < 1500 ?
       <View style={{width: width, height: height}}>
-        <View style={{width: width, height: "60%", backgroundColor: "black" }} onLayout={(event) => {console.log(" layout   ", event.nativeEvent.layout);}}>
+        <View style={{width: width, height: "60%", backgroundColor: "black", zIndex: -1}} onLayout={(event) => {console.log(" layout   ", event.nativeEvent.layout);}}>
 
     
           <RNCamera
             ref={cameraRef}
-            style={{width: width, height: "80%"}}
+            style={{width: width, height: "100%"}}
             type={RNCamera.Constants.Type.front}
             flashMode={RNCamera.Constants.FlashMode.off}
             playSoundOnCapture={false}
@@ -239,25 +241,25 @@ const ScannerView = (props) => {
           />
 
           {state != 7 && state != 8 && state != 6?
-          <Image resizeMode={'contain'} style={{width: width*0.5, height: width*0.7, left: (width*0.5 - width*0.25), top: (height*0.3 - width*0.35), position:"absolute"}} source={frame} />
+
+
+          /*<Image resizeMode={'contain'} style={{width: width*0.5, height: width*0.7, left: (width*0.5 - width*0.25), top: (height*0.3 - width*0.35), position:"absolute"}} source={frame} />*/
+          <Image resizeMode={'contain'} style={{tintColor: '#fff',width: 200, height: 400, left: (width*0.5 - 100), top: (height*0.3 - 200), position:"absolute"}} source={frame} />
+          
           :null}
           {state == 6 ?
-          <View style={{width: width*0.5, height: width*0.7, left: (width*0.5 - width*0.25), top: (height*0.3 - width*0.35), position:"absolute"}}>
-            <Image resizeMode={'contain'} style={styles.frame} source={rotating_blue_mask} />
-          </View>
+          <Image resizeMode={'contain'} style={{tintColor: '#fff',width: 200, height: 400, left: (width*0.5 - 100), top: (height*0.3 - 200), position:"absolute"}} source={rotating_blue_mask} />
           :
           null}
           {state == 7 ?
-
-          <View style={{width: width*0.5, height: width*0.7, left: (width*0.5 - width*0.25), top: (height*0.3 - width*0.35), position:"absolute"}}>
-            <Image resizeMode={'contain'} style={styles.frame} source={star_sparkling} />
+          <View>
+          <Image resizeMode={'contain'} style={{tintColor: '#fff',width: 200, height: 400, left: (width*0.5 - 100), top: (height*0.3 - 200), position:"absolute"}} source={star_sparkling} />
           </View>
           :
           null}
           {state == 8?
-          <View style={{width: width*0.2, height: width*0.2, left: "18%", top: (height*0.3 - width*0.35), position:"absolute"}}>
-            <Image resizeMode={'contain'} style={styles.frame} source={blue_check_mark} />
-          </View>
+          <Image resizeMode={'contain'} style={{tintColor: '#fff',width: 200, height: 400, left: (width*0.5 - 100), top: (height*0.3 - 200), position:"absolute"}} source={blue_check_mark} />
+
           :
           null}
          
@@ -269,7 +271,7 @@ const ScannerView = (props) => {
 
         {state == 0 ?
         <>
-          <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
+          <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
             <View style={{height: "10%", width: width}}/>
             <View style={{width: width, height: "10%"}}>
@@ -294,7 +296,7 @@ const ScannerView = (props) => {
         :null}
         {state == 1 ?
         <>
-        <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
+        <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
           <View style={{height: "10%", width: width}}/>
           <View style={{width: width, height: "10%"}}>
@@ -315,7 +317,7 @@ const ScannerView = (props) => {
       :null}
       {state == 2 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
+      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -331,7 +333,7 @@ const ScannerView = (props) => {
     :null}
     {state == 3 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
+      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -351,7 +353,7 @@ const ScannerView = (props) => {
     :null}
     {state == 4 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
+      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -371,7 +373,7 @@ const ScannerView = (props) => {
     :null}
     {state == 5 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
+      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -391,7 +393,7 @@ const ScannerView = (props) => {
     :null}
     {state == 6 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
+      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -408,7 +410,7 @@ const ScannerView = (props) => {
 
     {state == 7 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
+      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -424,7 +426,7 @@ const ScannerView = (props) => {
     :null}
     {state == 8 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
+      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -445,12 +447,12 @@ const ScannerView = (props) => {
 
 
       <View style={{width: width, height: height}}>
-        <View style={{width: width, height: "60%", backgroundColor: "black" }} onLayout={(event) => {console.log(" layout   ", event.nativeEvent.layout);}}>
+        <View style={{width: width, height: "60%"}} onLayout={(event) => {console.log(" layout   ", event.nativeEvent.layout);}}>
 
     
           <RNCamera
             ref={cameraRef}
-            style={{width: width, height: "80%"}}
+            style={{width: width, height: "100%"}}
             type={RNCamera.Constants.Type.front}
             flashMode={RNCamera.Constants.FlashMode.off}
             playSoundOnCapture={false}
@@ -472,28 +474,28 @@ const ScannerView = (props) => {
 
           />
 
-          {state != 7 && state != 8 && state != 6?
-          <Image resizeMode={'contain'} style={{width: width*0.5, height: width*0.7, left: (width*0.5 - width*0.25), top: (height*0.3 - width*0.35), position:"absolute"}} source={frame} />
-          :null}
-          {state == 6 ?
-          <View style={{width: width*0.5, height: width*0.7, left: (width*0.5 - width*0.25), top: (height*0.3 - width*0.35), position:"absolute"}}>
-            <Image resizeMode={'contain'} style={styles.frame} source={rotating_blue_mask} />
-          </View>
-          :
-          null}
-          {state == 7 ?
+            {state != 7 && state != 8 && state != 6?
 
-          <View style={{width: width*0.5, height: width*0.7, left: (width*0.5 - width*0.25), top: (height*0.3 - width*0.35), position:"absolute"}}>
-            <Image resizeMode={'contain'} style={styles.frame} source={star_sparkling} />
-          </View>
-          :
-          null}
-          {state == 8?
-          <View style={{width: width*0.2, height: width*0.2, left: "26%", top: (height*0.3 - width*0.35), position:"absolute"}}>
-            <Image resizeMode={'contain'} style={styles.frame} source={blue_check_mark} />
-          </View>
-          :
-          null}
+
+            /*<Image resizeMode={'contain'} style={{width: width*0.5, height: width*0.7, left: (width*0.5 - width*0.25), top: (height*0.3 - width*0.35), position:"absolute"}} source={frame} />*/
+            <Image resizeMode={'contain'} style={{tintColor: '#fff',width: 200, height: 400, left: (width*0.5 - 100), top: (height*0.3 - 200), position:"absolute"}} source={frame} />
+
+            :null}
+            {state == 6 ?
+            <Image resizeMode={'contain'} style={{tintColor: '#fff',width: 200, height: 400, left: (width*0.5 - 100), top: (height*0.3 - 200), position:"absolute"}} source={rotating_blue_mask} />
+            :
+            null}
+            {state == 7 ?
+
+            <Image resizeMode={'contain'} style={{tintColor: '#fff',width: 200, height: 400, left: (width*0.5 - 100), top: (height*0.3 - 200), position:"absolute"}} source={star_sparkling} />
+
+            :
+            null}
+            {state == 8?
+            <Image resizeMode={'contain'} style={{tintColor: '#fff',width: 200, height: 400, left: (width*0.5 - 100), top: (height*0.3 - 200), position:"absolute"}} source={blue_check_mark} />
+
+            :
+            null}
          
 
 

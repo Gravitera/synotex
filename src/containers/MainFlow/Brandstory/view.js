@@ -40,6 +40,8 @@ const Brandstory = (props) => {
             </TouchableOpacity>
           </View>
 
+        {width < 1500 ?
+
         <ScrollView style={{ flex: 1, marginTop: height*0.08, paddingTop: 0, zIndex: 5}}>
           <View style={{flexDirection: "column", alignItems: "center", justifyContent:"center"}}>
             <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopone.png")} style={styles.topimage}>
@@ -58,8 +60,34 @@ const Brandstory = (props) => {
             </ImageBackground>
             <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopsix.png")} style={styles.topimagesix}>
             </ImageBackground>
-            </View>
+          </View>
         </ScrollView>
+
+        :
+
+        <ScrollView style={{ flex: 1, marginTop: height*0.08, paddingTop: 0, zIndex: 5}}>
+          <View style={{flexDirection: "column", alignItems: "center", justifyContent:"center"}}>
+            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopone.png")} style={styles.topimage2}>
+              <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeimage.png")} style={styles.temptopimage2}>
+              </ImageBackground>
+            </ImageBackground>
+            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/blackimage.png")} style={styles.topblackimage2}>
+            </ImageBackground>
+            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytoptwo.png")} style={styles.topimagetwo2}>
+            </ImageBackground>
+            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopthreeimage.png")} style={styles.topimagethree2}>
+            </ImageBackground>
+            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopfourimage.png")} style={styles.topimagefour2}>
+            </ImageBackground>
+            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopfiveimage.png")} style={styles.topimagefive2}>
+            </ImageBackground>
+            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopsix.png")} style={styles.topimagesix2}>
+            </ImageBackground>
+          </View>
+        </ScrollView>
+
+        }
+  
 
     </>
   );
@@ -76,6 +104,17 @@ const styles = StyleSheet.create({
     marginTop: height*0.015,
     marginLeft: width*0.03,
     justifyContent: "center",
+    alignItems:"center",
+    zIndex: 10,
+
+  },
+  topimage2:{
+    width: width*0.95,
+    height: height*0.95,
+    marginTop: height*0.015,
+    marginLeft: width*0.03,
+    justifyContent: "center",
+    alignItems:"center",
     zIndex: 10,
 
   },
@@ -88,8 +127,25 @@ const styles = StyleSheet.create({
     zIndex: 10,
 
   },
+  temptopimage2:{
+    width: width*0.55,
+    height: height*0.75,
+    justifyContent: "center",
+    marginTop: -1*height*0.295,
+    zIndex: 10,
+
+  },
   topblackimage:{
     width: width*0.93,
+    height: height*0.7,
+    justifyContent: "center",
+    marginTop: -1*height*0.1,
+    marginLeft: width*0.0,
+    zIndex: 10,
+
+  },
+  topblackimage2:{
+    width: width*0.55,
     height: height*0.7,
     justifyContent: "center",
     marginTop: -1*height*0.1,
@@ -106,8 +162,26 @@ const styles = StyleSheet.create({
     zIndex: 10,
 
   },
+  topimagetwo2:{
+    width: width*0.55,
+    height: height*1,
+    marginTop: -1*height*0.43,
+    marginLeft: 0,
+    justifyContent: "center",
+    zIndex: 10,
+
+  },
   topimagethree:{
     width: width*0.9,
+    height: height*1.4,
+    marginTop: -1*height*0.63,
+    marginLeft: width*0,
+    justifyContent: "center",
+    zIndex: 10,
+
+  },
+  topimagethree2:{
+    width: width*0.55,
     height: height*1.4,
     marginTop: -1*height*0.63,
     marginLeft: width*0,
@@ -124,6 +198,15 @@ const styles = StyleSheet.create({
     zIndex: 10,
 
   },
+  topimagefour2:{
+    width: width*0.55,
+    height: height*1.4,
+    marginTop: -1*height*0.57,
+    marginLeft: width*0,
+    justifyContent: "center",
+    zIndex: 10,
+
+  },
   topimagefive:{
     width: width*0.9,
     height: height*1.4,
@@ -133,8 +216,26 @@ const styles = StyleSheet.create({
     zIndex: 10,
 
   },
+  topimagefive2:{
+    width: width*0.55,
+    height: height*1.4,
+    marginTop: -1*height*0.58,
+    marginLeft: width*0,
+    justifyContent: "center",
+    zIndex: 10,
+
+  },
   topimagesix:{
     width: width*0.7,
+    height: height*0.2,
+    marginTop: -1*height*0.35,
+    marginLeft: width*0,
+    justifyContent: "center",
+    zIndex: 10,
+
+  },
+  topimagesix2:{
+    width: width*0.4,
     height: height*0.2,
     marginTop: -1*height*0.35,
     marginLeft: width*0,

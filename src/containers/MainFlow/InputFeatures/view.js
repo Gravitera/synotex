@@ -25,6 +25,7 @@ const { width, height } = Dimensions.get("window")
 const InputFeaturesView = (props) => {
   const navigation = useNavigation()
 
+  console.log(" ====== width,  height    ", width, "    ", height);
   
   const [male, setMale] = useState(false);
   const [female, setFemale] = useState(false);
