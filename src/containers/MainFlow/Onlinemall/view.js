@@ -26,8 +26,22 @@ const Mallonline = (props) => {
 
   useEffect(() => {
     setTimeout(() => {
-      Linking.openURL("https://www.synotexmall.com");
+        //url이 post결과값을 받아오지못했으면 바로 일반몰로 이동
+      if(props.url !== undefined) {
+          //url이 공백이면 일반몰로 이동
+          if(props.url !== ""){
+              Linking.openURL(props.url);
       props.navigation.navigate("intro");
+          } else {
+              Linking.openURL("https://www.synotexmall.com");
+      props.navigation.navigate("intro");
+          }
+          
+      } else {
+          Linking.openURL("https://www.synotexmall.com");
+      props.navigation.navigate("intro");
+      }
+      
     },0);
   });
 

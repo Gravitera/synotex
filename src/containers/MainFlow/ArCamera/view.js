@@ -4,7 +4,6 @@ import DeepARView from './../../../components/ArCameraUtil/DeepARView';
 import { effectsData } from './../../../components/ArCameraUtil/effectsData2';
 import {slideTransitionDefinition } from './../../../components/ArCameraUtil/simplenavigator/TransitionDefinitions';
 import { CustomBackButtonHeader2, CustomDrawerButtonHeader } from '../../../components/Header';
-import { useSelector, useDispatch } from 'react-redux';
 
 import RNFetchBlob from "rn-fetch-blob";
 
@@ -15,25 +14,20 @@ class ArCameraView extends React.Component {
 
     this.state = {
       permissionsGranted: Platform.OS === 'ios',
-      showPermsAlert: false,
       currentEffectIndex: 0,
       switchCameraInProgress: false,
       MaskColorClicked: false,
       MaskColor: "Black",
       MaskSize: "M",
       MaskSizeClicked: false,
-  //    MaskSize: this.storeData.attendanceReducer.res.MaskSize
-  //    MaskSize: this.props.navigation.getParam('MaskSize')
-      MaskSize: this.props.route.params.MaskSize,
-
-
       checkDownload:true,
       temp: 5,
 
+
       maskidx : [0,1,2,3,4,5,6,7,8],
       // 총 9 색상의 마스크를 리스트로 정리 
-
       maskcolorlist: ["white", "black", "beige", "lightpink", "darkpink", "lightgrey", "darkgrey", "khaki"],
+
 
       // 총 9지 색상의 마스크가 있는 RN 베이스 경로
       maskloc : "./../../../assets/images/masks/",
@@ -47,13 +41,12 @@ class ArCameraView extends React.Component {
       imglocs2: require("./../../../assets/images/masks/black.png"), 
       loadingarview: require("./../../../assets/images/loadingarview.gif"),
 
-      downloadinprogress: false,   
-
+      downloadinprogress: false,
     }
-
   }
 
-  componentDidMount() {
+
+  async componentDidMount() {
     if (Platform.OS === 'android') {
       PermissionsAndroid.requestMultiple(
         [
@@ -67,10 +60,12 @@ class ArCameraView extends React.Component {
           result['android.permission.WRITE_EXTERNAL_STORAGE'] === 'granted' && 
           result['android.permission.RECORD_AUDIO'] === 'granted') {
             this.setState({ permissionsGranted: true, showPermsAlert: false });
+
         } else {
           this.setState({ permissionsGranted: false, showPermsAlert: true });
         }
       })
+
       console.log("check and get mask data")
       //check before already downloaded mask data
       console.log("length",this.state.maskcolorlist.length)
@@ -102,7 +97,6 @@ class ArCameraView extends React.Component {
         await this.delayss(this.state.maskcolors3[i],this);
         await this.delayxl(this.state.maskcolors3[i],this);
         await this.delayxs(this.state.maskcolors3[i],this);
-
         console.log("finish delay for loop")
       }
       */
@@ -112,8 +106,8 @@ class ArCameraView extends React.Component {
     }
     console.log("AR CAMERA 2");
     console.log(" ====================  this.state   ??", this.state);
-    
   }
+
 
   downloadmask(color, size, ths){
     
@@ -278,7 +272,6 @@ class ArCameraView extends React.Component {
     /*    
     const {fs, fetch, wrap} = RNFetchBlob;
     console.log(" ======== root directory   ", fs.RNFetchBlob.fs.dirs.CacheDir);
-
     RNFetchBlob
     .config({
       path: fs.RNFetchBlob.fs.dirs.CacheDir
@@ -361,13 +354,11 @@ class ArCameraView extends React.Component {
 
   }
 
-
-
-
   didAppear() {
+
     if (this.deepARView) {
         this.deepARView.resume();
-      }
+    }
   }
 
   willDisappear(){
@@ -394,6 +385,12 @@ class ArCameraView extends React.Component {
       } else if (event.type === 'imageVisibilityChanged') {
 
       }
+
+      if (temp = true){
+        temp = 5
+      }
+     
+
   }
 
   onChangeEffect = (idxNumber) => {
@@ -406,7 +403,8 @@ class ArCameraView extends React.Component {
     }
 
     console.log("idxnum::::",idxNumber)
-    this.deepARView.switchEffect(idxNumber, "effect");
+    console.log("Rksqkswkd :::", RNFetchBlob.fs.dirs.CacheDir + `/mask/`+idxNumber)
+    this.deepARView.switchEffect(RNFetchBlob.fs.dirs.CacheDir + `/mask/`+idxNumber, "effect");
     //const newEffect = effectsData[idxNumber]
     //this.deepARView.switchEffect(newEffect.name, 'effect')
 
@@ -433,34 +431,25 @@ class ArCameraView extends React.Component {
     }
   }
 
+ 
 
   async XSclicked(){
 
+    //
+    //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
+    //
+
+    this.setState({MaskSize: "XS"}, () => console.log(this.state.MaskSize));
     this.setState({MaskSizeClicked: true});
 
-    if (this.state.MaskSize == "XS"){
-      await this.downloadmask(this.state.MaskColor, "m", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"m");
-    } else if (this.state.MaskSize == "SS"){
-      await this.downloadmask(this.state.MaskColor, "s", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"s");
-    } else if (this.state.MaskSize == "S"){
-      await this.downloadmask(this.state.MaskColor, "xs", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"xs");
-    } else if (this.state.MaskSize == "M"){
-      await this.downloadmask(this.state.MaskColor, "2xs", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"2xs");
-    } else if (this.state.MaskSize == "L"){
-      await this.downloadmask(this.state.MaskColor, "2xs", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"2xs");
-    }
+    await this.downloadmask(this.state.MaskColor, "xs", this);
 
+    this.onChangeEffect(this.state.MaskColor+"_"+"xs");
 
-    /*
-    this.setState({MaskSize: "XS"}, () => console.log(this.state.MaskSize));
     
+    
+    /*
     if(this.state.MaskColor == "White"){
-
       if(this.state.MaskSize == "XS"){
           this.onChangeEffect(effectsData.wm)
       } else if (this.state.MaskSize == "SS"){
@@ -470,11 +459,10 @@ class ArCameraView extends React.Component {
       } else if(this.state.MaskSize == "M"){
           this.onChangeEffect(effectsData.wxxs)
       } else if(this.state.MaskSize == "L"){
-          this.onChangeEffect(effectsData.wxxs)
+          this.onChangeEffect(effectsData.wxxxs)
       }
-    
+  
     } else {
-
         if(this.state.MaskSize == "XS"){
             this.onChangeEffect(effectsData.bm)
         } else if (this.state.MaskSize == "SS"){
@@ -484,43 +472,32 @@ class ArCameraView extends React.Component {
         } else if(this.state.MaskSize == "M"){
             this.onChangeEffect(effectsData.bxxs)
         } else if(this.state.MaskSize == "L"){
-            this.onChangeEffect(effectsData.bxxs)
+            this.onChangeEffect(effectsData.bxxxs)
         }
     }
     */
-    
+      
 
   }
 
   
   async SSclicked(){
 
-    this.setState({MaskSizeClicked: true});
     //
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
-    if (this.state.MaskSize == "XS"){
-      await this.downloadmask(this.state.MaskColor, "l", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"l");
-    } else if (this.state.MaskSize == "SS"){
-      await this.downloadmask(this.state.MaskColor, "m", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"m");
-    } else if (this.state.MaskSize == "S"){
-      await this.downloadmask(this.state.MaskColor, "s", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"s");
-    } else if (this.state.MaskSize == "M"){
-      await this.downloadmask(this.state.MaskColor, "ss", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"ss");
-    } else if (this.state.MaskSize == "L"){
-      await this.downloadmask(this.state.MaskColor, "xs", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"xs");
-    }
+    this.setState({MaskSize: "SS"}, () => console.log(this.state.MaskSize));
 
-    /*
+    this.setState({MaskSizeClicked: true});
+
+    await this.downloadmask(this.state.MaskColor, "ss", this);
+
+    this.onChangeEffect(this.state.MaskColor+"_"+"ss");
+
+      /*
     this.setState({MaskSize: "SS"}, () => console.log(this.state.MaskSize));
     
     if(this.state.MaskColor == "White"){
-
       if(this.state.MaskSize == "XS"){
           this.onChangeEffect(effectsData.wl)
       } else if (this.state.MaskSize == "SS"){
@@ -534,7 +511,6 @@ class ArCameraView extends React.Component {
       }
   
       } else {
-
           if(this.state.MaskSize == "XS"){
               this.onChangeEffect(effectsData.bl)
           } else if (this.state.MaskSize == "SS"){
@@ -547,10 +523,7 @@ class ArCameraView extends React.Component {
               this.onChangeEffect(effectsData.bxs)
           }
       }
-
-    */
-
-
+      */
   }
   
 
@@ -561,31 +534,17 @@ class ArCameraView extends React.Component {
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
 
-    this.setState({MaskSizeClicked: true});
-
-    if (this.state.MaskSize == "XS"){
-      await this.downloadmask(this.state.MaskColor, "xl", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"xl");
-    } else if (this.state.MaskSize == "SS"){
-      await this.downloadmask(this.state.MaskColor, "l", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"l");
-    } else if (this.state.MaskSize == "S"){
-      await this.downloadmask(this.state.MaskColor, "m", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"m");
-    } else if (this.state.MaskSize == "M"){
-      await this.downloadmask(this.state.MaskColor, "s", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"s");
-    } else if (this.state.MaskSize == "L"){
-      await this.downloadmask(this.state.MaskColor, "ss", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"ss");
-    }
-
-
-    /*
     this.setState({MaskSize: "S"}, () => console.log(this.state.MaskSize));
 
-    if(this.state.MaskColor == "White"){
+    this.setState({MaskSizeClicked: true});
 
+    await this.downloadmask(this.state.MaskColor, "s", this);
+
+    this.onChangeEffect(this.state.MaskColor+"_"+"s");
+
+      /*
+    this.setState({MaskSize: "S"}, () => console.log(this.state.MaskSize));
+    if(this.state.MaskColor == "White"){
       if(this.state.MaskSize == "XS"){
           this.onChangeEffect(effectsData.wxl)
       } else if (this.state.MaskSize == "SS"){
@@ -599,7 +558,6 @@ class ArCameraView extends React.Component {
       }
   
       } else {
-
           if(this.state.MaskSize == "XS"){
               this.onChangeEffect(effectsData.bxl)
           } else if (this.state.MaskSize == "SS"){
@@ -612,39 +570,28 @@ class ArCameraView extends React.Component {
               this.onChangeEffect(effectsData.bxs)
           }
       }
-      */
+  */
 
   }
+
+
   async Mclicked(){
 
     //
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
+
+    this.setState({MaskSize: "M"}, () => console.log(this.state.MaskSize));
+
     this.setState({MaskSizeClicked: true});
 
-    if (this.state.MaskSize == "XS"){
-      await this.downloadmask(this.state.MaskColor, "2xl", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"2xl");
-    } else if (this.state.MaskSize == "SS"){
-      await this.downloadmask(this.state.MaskColor, "xl", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"xl");
-    } else if (this.state.MaskSize == "S"){
-      await this.downloadmask(this.state.MaskColor, "l", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"l");
-    } else if (this.state.MaskSize == "M"){
-      await this.downloadmask(this.state.MaskColor, "m", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"m");
-    } else if (this.state.MaskSize == "L"){
-      await this.downloadmask(this.state.MaskColor, "s", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"s");
-    }
+    await this.downloadmask(this.state.MaskColor, "m", this);
 
+    this.onChangeEffect(this.state.MaskColor+"_"+"m");
 
     /*
     this.setState({MaskSize: "M"}, () => console.log(this.state.MaskSize));
-
     if(this.state.MaskColor == "White"){
-
       if(this.state.MaskSize == "XS"){
           this.onChangeEffect(effectsData.wxxl)
       } else if (this.state.MaskSize == "SS"){
@@ -658,7 +605,6 @@ class ArCameraView extends React.Component {
       }
   
       } else {
-
           if(this.state.MaskSize == "XS"){
               this.onChangeEffect(effectsData.bxxl)
           } else if (this.state.MaskSize == "SS"){
@@ -673,38 +619,25 @@ class ArCameraView extends React.Component {
       }
       */
   }
-
-
+  
+  
   async Lclicked(){
 
     //
     //  밑에 사이즈 클릭시 MaskSize 를 바꿔줌
     //
 
+    this.setState({MaskSize: "L"}, () => console.log(this.state.MaskSize));
+
     this.setState({MaskSizeClicked: true});
 
-    if (this.state.MaskSize == "XS"){
-      await this.downloadmask(this.state.MaskColor, "2xl", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"2xl");
-    } else if (this.state.MaskSize == "SS"){
-      await this.downloadmask(this.state.MaskColor, "2xl", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"2xl");
-    } else if (this.state.MaskSize == "S"){
-      await this.downloadmask(this.state.MaskColor, "xl", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"xl");
-    } else if (this.state.MaskSize == "M"){
-      await this.downloadmask(this.state.MaskColor, "l", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"l");
-    } else if (this.state.MaskSize == "L"){
-      await this.downloadmask(this.state.MaskColor, "m", this);
-      this.onChangeEffect(this.state.MaskColor+"_"+"m");
-    }
+    await this.downloadmask(this.state.MaskColor, "l", this);
+
+    this.onChangeEffect(this.state.MaskColor+"_"+"l");
 
     /*
     this.setState({MaskSize: "L"}, () => console.log(this.state.MaskSize));
-
     if(this.state.MaskColor == "White"){
-
         if(this.state.MaskSize == "XS"){
             this.onChangeEffect(effectsData.wxxl)
         } else if (this.state.MaskSize == "SS"){
@@ -718,7 +651,6 @@ class ArCameraView extends React.Component {
         }
     
     } else {
-
         if(this.state.MaskSize == "XS"){
             this.onChangeEffect(effectsData.bxxl)
         } else if (this.state.MaskSize == "SS"){
@@ -739,15 +671,14 @@ class ArCameraView extends React.Component {
   render() {
 
     const { permissionsGranted, currentEffectIndex } = this.state
-    const { height, width } = Dimensions.get('window')
+    const { height, width } = Dimensions.get('window');
 
     const effect = effectsData[currentEffectIndex]
+
     return (
-
-
       <>
       <View style={styles.container}>
-        <View style={{flex:1}}>
+        <View style={{flex:1, backgroundColor:'#000'}}>
           <CustomBackButtonHeader2 backFunction={this.props.navigation.goBack} title={'가상착용'} />
           <DeepARView 
               onEventSent={this.onEventSent}
@@ -755,12 +686,12 @@ class ArCameraView extends React.Component {
               style={{width: width, height: '100%'}}
             />
         </View>
-      
+        
       </View>
 
       {this.state.MaskSizeClicked == false ?
       <View style={{position: "absolute", zIndex: 100, marginTop: height*0.20, marginLeft: "15%"}}>
-          <Text style={{color: "white", fontWeight: "bold"}}>※ 색상을 선택하고 아래 사이즈를 선택 해주세요.</Text>
+          <Text style={{color: "white", fontWeight: "bold"}}>      ※ 색상을 선택하고 아래 사이즈를 선택 해주세요.</Text>
       </View>
       :null}
 
@@ -770,96 +701,103 @@ class ArCameraView extends React.Component {
       </View>
       :null}
 
-        <View style={{position: "absolute", marginTop: height*0.65, width: width, height: height*0.2, flexDirection: "row", justifyContent: "space-between"}}>
-            
-            <TouchableOpacity onPress={() => this.pressLeft()}>
-              <View style={{marginTop: height*0.05, height: width*0.2, width: width*0.1, justifyContent: "center" }}>
-                <Image resizeMode="contain" style={{marginLeft: "25%"}} source={require(`./../../../assets/images/left_arrow_ar.png`)} />
-              </View>
-            </TouchableOpacity>
+      <View style={{position: "absolute", marginTop: height*0.55, width: width, height: height*0.2, flexDirection: "row", justifyContent: "space-between"}}>
+          
+          <TouchableOpacity onPress={() => this.pressLeft()}>
+            <View style={{marginTop: height*0.05, height: width*0.2, width: width*0.1, justifyContent: "center" }}>
+              <Image resizeMode="contain" style={{marginLeft: "25%"}} source={require(`./../../../assets/images/left_arrow_ar.png`)} />
+            </View>
+          </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => this.leftmaskclicked()}>
-              <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
-                
-                <Image resizeMode="contain" style={{marginLeft: "4%", marginTop: "5%"}} source={this.state.imglocs} />
+          <TouchableOpacity disable={this.state.checkDownload} onPress={() => this.leftmaskclicked()}>
+            <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
+              
+              <Image resizeMode="contain" style={{marginLeft: "4%", marginTop: "5%"}} source={this.state.imglocs} />
 
-                {this.state.imglocs == require("./../../../assets/images/masks/grey.png") ? 
-                  <Text style={{marginTop: "35%"}}>그레이</Text>
-                : null}
-                {this.state.imglocs == require("./../../../assets/images/masks/darkgrey.png") ? 
-                  <Text style={{marginTop: "23%"}}>   다크 {"\n"} 그레이</Text>
-                : null}
-                {this.state.imglocs == require("./../../../assets/images/masks/darkpink.png") ? 
-                  <Text style={{marginTop: "23%"}}>   다크 {"\n"}   핑크</Text>
-                : null}
-                {this.state.imglocs == require("./../../../assets/images/masks/lightgrey.png") ? 
-                  <Text style={{marginTop: "23%"}}>   라이트 {"\n"}   그레이</Text>
-                : null}
-                {this.state.imglocs == require("./../../../assets/images/masks/lightpink.png") ? 
-                  <Text style={{marginTop: "23%"}}>   라이트 {"\n"}   핑크</Text>
-                : null}
-                {this.state.imglocs == require("./../../../assets/images/masks/beige.png") ? 
-                  <Text style={{marginTop: "35%"}}>베이지</Text>
-                : null}
-                {this.state.imglocs == require("./../../../assets/images/masks/black.png") ? 
-                  <Text style={{marginTop: "35%"}}>블랙</Text>
-                : null}
-                {this.state.imglocs == require("./../../../assets/images/masks/khaki.png") ? 
-                  <Text style={{marginTop: "35%"}}>카키</Text>
-                : null}
-                {this.state.imglocs == require("./../../../assets/images/masks/white.png") ? 
-                  <Text style={{marginTop: "35%"}}>화이트</Text>
-                : null}
-
-              </View>
-            </TouchableOpacity>
-
-            <TouchableOpacity onPress={() => this.rightmaskclicked()}>
-              <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
-                
-                <Image resizeMode="contain" style={{marginLeft: "4%", marginTop: "5%"}} source={this.state.imglocs2} />
-
-                {this.state.imglocs2 == require("./../../../assets/images/masks/grey.png") ? 
-                  <Text style={{marginTop: "35%"}}>그레이</Text>
-                : null}
-                {this.state.imglocs2 == require("./../../../assets/images/masks/darkgrey.png") ? 
-                  <Text style={{marginTop: "23%"}}>   다크 {"\n"} 그레이</Text>
-                : null}
-                {this.state.imglocs2 == require("./../../../assets/images/masks/darkpink.png") ? 
-                  <Text style={{marginTop: "23%"}}>   다크 {"\n"}   핑크</Text>
-                : null}
-                {this.state.imglocs2 == require("./../../../assets/images/masks/lightgrey.png") ? 
-                  <Text style={{marginTop: "23%"}}>   라이트 {"\n"}   그레이</Text>
-                : null}
-                {this.state.imglocs2 == require("./../../../assets/images/masks/lightpink.png") ? 
-                  <Text style={{marginTop: "23%"}}>   라이트 {"\n"}   핑크</Text>
-                : null}
-                {this.state.imglocs2 == require("./../../../assets/images/masks/beige.png") ? 
-                  <Text style={{marginTop: "35%"}}>베이지</Text>
-                : null}
-                {this.state.imglocs2 == require("./../../../assets/images/masks/black.png") ? 
-                  <Text style={{marginTop: "35%"}}>블랙</Text>
-                : null}
-                {this.state.imglocs2 == require("./../../../assets/images/masks/khaki.png") ? 
-                  <Text style={{marginTop: "35%"}}>카키</Text>
-                : null}
-                {this.state.imglocs2 == require("./../../../assets/images/masks/white.png") ? 
-                  <Text style={{marginTop: "35%"}}>화이트</Text>
-                : null}
-
-              </View>
-
-            </TouchableOpacity>
+              {this.state.imglocs == require("./../../../assets/images/masks/grey.png") ? 
+                <Text style={{marginTop: "35%"}}>그레이</Text>
+              : null}
 
 
-            <TouchableOpacity onPress={() => this.pressRight()}>
-              <View style={{marginTop: height*0.05 , height: width*0.2, width: width*0.1, justifyContent: "center"  }}>
-                <Image resizeMode="contain" style={{marginLeft: "25%"}} source={require(`./../../../assets/images/right_arrow_ar.png`)} />
-              </View>
-            </TouchableOpacity>
+              {this.state.imglocs == require("./../../../assets/images/masks/darkgrey.png") ? 
+                <Text style={{marginTop: "23%"}}>   다크 {"\n"} 그레이</Text>
+              : null}
 
-          </View>
+              {this.state.imglocs == require("./../../../assets/images/masks/darkpink.png") ? 
+                <Text style={{marginTop: "23%"}}>   다크 {"\n"}   핑크</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/lightgrey.png") ? 
+                <Text style={{marginTop: "23%"}}>   라이트 {"\n"}   그레이</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/lightpink.png") ? 
+                <Text style={{marginTop: "23%"}}>   라이트 {"\n"}   핑크</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/beige.png") ? 
+                <Text style={{marginTop: "35%"}}>베이지</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/black.png") ? 
+                <Text style={{marginTop: "35%"}}>블랙</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/khaki.png") ? 
+                <Text style={{marginTop: "35%"}}>카키</Text>
+              : null}
+              {this.state.imglocs == require("./../../../assets/images/masks/white.png") ? 
+                <Text style={{marginTop: "35%"}}>화이트</Text>
+              : null}
 
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity disable={this.state.checkDownload} onPress={() => this.rightmaskclicked()}>
+            <View style={{width: width*0.36, height: width*0.2, backgroundColor: "white", marginTop: width*0.093, borderRadius: 10, flexDirection: "row"}}>
+              
+              <Image resizeMode="contain" style={{marginLeft: "4%", marginTop: "5%"}} source={this.state.imglocs2} />
+
+
+
+              {this.state.imglocs2 == require("./../../../assets/images/masks/grey.png") ? 
+                <Text style={{marginTop: "35%"}}>그레이</Text>
+              : null}
+
+
+
+              {this.state.imglocs2 == require("./../../../assets/images/masks/darkgrey.png") ? 
+                <Text style={{marginTop: "23%"}}>   다크 {"\n"} 그레이</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/darkpink.png") ? 
+                <Text style={{marginTop: "23%"}}>   다크 {"\n"}   핑크</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/lightgrey.png") ? 
+                <Text style={{marginTop: "23%"}}>   라이트 {"\n"}   그레이</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/lightpink.png") ? 
+                <Text style={{marginTop: "23%"}}>   라이트 {"\n"}   핑크</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/beige.png") ? 
+                <Text style={{marginTop: "35%"}}>베이지</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/black.png") ? 
+                <Text style={{marginTop: "35%"}}>블랙</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/khaki.png") ? 
+                <Text style={{marginTop: "35%"}}>카키</Text>
+              : null}
+              {this.state.imglocs2 == require("./../../../assets/images/masks/white.png") ? 
+                <Text style={{marginTop: "35%"}}>화이트</Text>
+              : null}
+
+            </View>
+
+          </TouchableOpacity>
+
+
+          <TouchableOpacity onPress={() => this.pressRight()}>
+            <View style={{marginTop: height*0.05 , height: width*0.2, width: width*0.1, justifyContent: "center"  }}>
+              <Image resizeMode="contain" style={{marginLeft: "25%"}} source={require(`./../../../assets/images/right_arrow_ar.png`)} />
+            </View>
+          </TouchableOpacity>
+
+        </View>
 
         {this.state.MaskColorClicked == true ?
           <View style={styles.bottomBtnContainer2}>
@@ -1070,7 +1008,7 @@ const styles = StyleSheet.create({
     width: '100%',
     bottom: 80,
     height: 50,
-    marginBottom: "-12.5%"
+    marginBottom: "-15.5%"
   },
 
   bottomBtnContainer21: {
@@ -1138,12 +1076,14 @@ const styles = StyleSheet.create({
   },
   buttonCont2: {
     borderRadius: 10,
+    //height: 50,
+    //width: 80,
     height: 40,
     width: 60,
     flexDirection: 'row',
     justifyContent: 'center',
-    padding: 2,
-    margin:10
+    marginHorizontal: 5,
+    marginTop:30
   },
   galleryImage1: {
     width: 47.75,
@@ -1151,12 +1091,12 @@ const styles = StyleSheet.create({
     marginBottom: 60,
   },
   prodText1: {
-    fontSize: 12,
+    fontSize: 10,
     height: 50,
     textAlignVertical: 'center'
   },
   prodText2: {
-    fontSize: 12,
+    fontSize: 10,
     height: 50,
     textAlignVertical: 'center',
     //backgroundColor: "black",
@@ -1176,13 +1116,3 @@ const styles = StyleSheet.create({
 })
 
 export default ArCameraView;
-
-
-
-
-
-
-
-
-
-

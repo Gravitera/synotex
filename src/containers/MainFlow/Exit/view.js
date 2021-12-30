@@ -16,6 +16,7 @@ import { Linking } from 'react-native';
 import { CustomBrandstoryHeader } from '../../../components/Header';
 //import { styles } from '../../../styles/styles';
 import {BackHandler} from "react-native";
+import RNExitApp from 'react-native-exit-app';
 
 const { height, width } = Dimensions.get('window');
 
@@ -23,7 +24,7 @@ const vh = height / 100;
 const vw = width / 100;
 
 const Appexit = (props) => {
-  BackHandler.exitApp();
+  RNExitApp.exitApp();
 
   return (
     <>

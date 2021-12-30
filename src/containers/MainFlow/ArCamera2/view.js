@@ -97,7 +97,6 @@ class ArCameraView extends React.Component {
         await this.delayss(this.state.maskcolors3[i],this);
         await this.delayxl(this.state.maskcolors3[i],this);
         await this.delayxs(this.state.maskcolors3[i],this);
-
         console.log("finish delay for loop")
       }
       */
@@ -273,7 +272,6 @@ class ArCameraView extends React.Component {
     /*    
     const {fs, fetch, wrap} = RNFetchBlob;
     console.log(" ======== root directory   ", fs.RNFetchBlob.fs.dirs.CacheDir);
-
     RNFetchBlob
     .config({
       path: fs.RNFetchBlob.fs.dirs.CacheDir
@@ -452,7 +450,6 @@ class ArCameraView extends React.Component {
     
     /*
     if(this.state.MaskColor == "White"){
-
       if(this.state.MaskSize == "XS"){
           this.onChangeEffect(effectsData.wm)
       } else if (this.state.MaskSize == "SS"){
@@ -466,7 +463,6 @@ class ArCameraView extends React.Component {
       }
   
     } else {
-
         if(this.state.MaskSize == "XS"){
             this.onChangeEffect(effectsData.bm)
         } else if (this.state.MaskSize == "SS"){
@@ -502,7 +498,6 @@ class ArCameraView extends React.Component {
     this.setState({MaskSize: "SS"}, () => console.log(this.state.MaskSize));
     
     if(this.state.MaskColor == "White"){
-
       if(this.state.MaskSize == "XS"){
           this.onChangeEffect(effectsData.wl)
       } else if (this.state.MaskSize == "SS"){
@@ -516,7 +511,6 @@ class ArCameraView extends React.Component {
       }
   
       } else {
-
           if(this.state.MaskSize == "XS"){
               this.onChangeEffect(effectsData.bl)
           } else if (this.state.MaskSize == "SS"){
@@ -550,9 +544,7 @@ class ArCameraView extends React.Component {
 
       /*
     this.setState({MaskSize: "S"}, () => console.log(this.state.MaskSize));
-
     if(this.state.MaskColor == "White"){
-
       if(this.state.MaskSize == "XS"){
           this.onChangeEffect(effectsData.wxl)
       } else if (this.state.MaskSize == "SS"){
@@ -566,7 +558,6 @@ class ArCameraView extends React.Component {
       }
   
       } else {
-
           if(this.state.MaskSize == "XS"){
               this.onChangeEffect(effectsData.bxl)
           } else if (this.state.MaskSize == "SS"){
@@ -600,9 +591,7 @@ class ArCameraView extends React.Component {
 
     /*
     this.setState({MaskSize: "M"}, () => console.log(this.state.MaskSize));
-
     if(this.state.MaskColor == "White"){
-
       if(this.state.MaskSize == "XS"){
           this.onChangeEffect(effectsData.wxxl)
       } else if (this.state.MaskSize == "SS"){
@@ -616,7 +605,6 @@ class ArCameraView extends React.Component {
       }
   
       } else {
-
           if(this.state.MaskSize == "XS"){
               this.onChangeEffect(effectsData.bxxl)
           } else if (this.state.MaskSize == "SS"){
@@ -648,11 +636,8 @@ class ArCameraView extends React.Component {
     this.onChangeEffect(this.state.MaskColor+"_"+"l");
 
     /*
-
     this.setState({MaskSize: "L"}, () => console.log(this.state.MaskSize));
-
     if(this.state.MaskColor == "White"){
-
         if(this.state.MaskSize == "XS"){
             this.onChangeEffect(effectsData.wxxl)
         } else if (this.state.MaskSize == "SS"){
@@ -666,7 +651,6 @@ class ArCameraView extends React.Component {
         }
     
     } else {
-
         if(this.state.MaskSize == "XS"){
             this.onChangeEffect(effectsData.bxxl)
         } else if (this.state.MaskSize == "SS"){
@@ -1132,9 +1116,3 @@ const styles = StyleSheet.create({
 })
 
 export default ArCameraView;
-
-
-
-
-
-

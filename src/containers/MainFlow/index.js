@@ -188,7 +188,7 @@ const MainFlow = (props) => {
         children={createHomeStack}
         options={{
           //tabBarLabel: "Home",
-          tabBarLabel: <Text style={{fontFamily : "pacifico", textAlign : "center", marginLeft: 17, fontWeight: "bold"}}>Home</Text>,
+          tabBarLabel: <Text style={{textAlign : "center", marginLeft: 17, fontWeight: "normal"}}>Home</Text>,
           tabBarIcon: ({ tintColor }) => (
             <Image
               source={require('./../../assets/images/round_chalet_black_36.png')}

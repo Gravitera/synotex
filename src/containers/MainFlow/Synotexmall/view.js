@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -24,18 +24,46 @@ const vw = width / 100;
 
 const Mallsynotex = (props) => {
 
-  /*
+  const [type, setType] = useState(0);
+  const [mallurl, setMallurl] = useState({});
+  
   useEffect(() => {
-    Linking.openURL("https://www.synotexmall.com")
-    return () => {
-      Linking.removeAllListeners();
-    };
+      const fetchFunc =  (async () =>{
+          fetch("http://synotex-load-balancer-237167545.ap-northeast-2.elb.amazonaws.com/offlinemarket", {
+      mode: 'no-cors',
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify(
+        {
+          "string": "string"
+        })
+    })
+    .then((res) => {
+      console.log(" ====== res  ", res);
+      setType(res.type)
+      setMallurl(res.url)
+    }).catch((error) => {
+        console.log("sssssss")
+      console.log(error);
+      setType(0)
+      setMallurl("")
+    })
+      })
+
+    fetchFunc();
+    
   }, []);
-  */
+  
   
 
   return (
     <>
+
+      {width < 1500? 
       <View style={styles.container}>
 
 
@@ -51,15 +79,41 @@ const Mallsynotex = (props) => {
           
         </View>
 
-        <TouchableOpacity onPress={() => props.navigation.navigate('Onlinemall')}>        
+        <TouchableOpacity onPress={() => props.navigation.navigate('Onlinemall',{type: type, url: mallurl})}>        
           <View style={{alignItems:"center", justifyContent: "center", marginBottom: height*0.17, backgroundColor: "white", width: width*0.5, height: width*0.1, borderRadius: 20}}>
-            <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 공식몰 바로가기</Text>
+            {type == 0 ? <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 공식몰 바로가기</Text> : <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 오프라인몰 바로가기</Text>}
           </View>
         </TouchableOpacity>
 
       </ImageBackground>
 
       </View>
+      :
+      <View style={styles.container}>
+
+
+      <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:width,height:height,alignItems: 'center',justifyContent: 'center'}}>
+        <View style={{ marginVertical: height / 10 }}>    
+        
+          <Image source={require("./../../../assets/images/intro_logo.png")} style={styles.logo}>
+          </Image>
+
+          <ImageBackground style={{width:248,height:264}}  source={require("./../../../assets/images/intro_back.png")} >
+            <Image style={{width:"100%", bottom:"10%"}} resizeMode="contain" source={require("./../../../assets/images/intro_mask.png")} />
+          </ImageBackground>
+          
+        </View>
+
+        <TouchableOpacity onPress={() => props.navigation.navigate('Onlinemall')}>        
+          <View style={{alignItems:"center", justifyContent: "center", marginBottom: height*0.17, backgroundColor: "white", width: width*0.5, height: width*0.1, borderRadius: 20}}>
+            {type == 0 ? <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 공식몰 바로가기</Text> : <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 오프라인몰 바로가기</Text>}
+          </View>
+        </TouchableOpacity>
+
+      </ImageBackground>
+
+      </View>
+      }
     </>
   )
 
@@ -112,7 +166,6 @@ const styles = StyleSheet.create({
     marginTop: -1*height*0.02,
     marginLeft: -1*width*0.00
   }
-
 });
 */
 
