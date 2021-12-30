@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -28,15 +28,15 @@ const Mallonline = (props) => {
   const [type, setType] = useState(0);
   const [mallurl, setMallurl] = useState({});
 
-  useEffect(() => {
-      Linking.openURL("https://www.synotexmall.com");
-      props.navigation.navigate("intro");
+//   useEffect(() => {
+//       Linking.openURL("https://www.synotexmall.com");
+//       props.navigation.navigate("intro");
   
-  }, []);
+//   }, []);
 
 
 
-  /*
+  
   useEffect(() => {
     setTimeout(() => {
         //url이 post결과값을 받아오지못했으면 바로 일반몰로 이동
@@ -57,7 +57,7 @@ const Mallonline = (props) => {
       
     },0);
   });
-  */
+  
 
   return (
     <>
