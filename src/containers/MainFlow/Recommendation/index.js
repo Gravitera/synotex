@@ -10,7 +10,8 @@ const Recommendation = (props) => {
 
     console.log(" =============== sendFeedback data    ", data);
     
-    fetch('http://52.79.235.238:3030/feedback', {
+    //fetch('http://52.79.235.238:3030/feedback', {
+    fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/feedback",{
       mode: 'no-cors',
       method: 'POST',
       headers: {

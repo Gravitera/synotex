@@ -24,39 +24,6 @@ const vw = width / 100;
 
 const Mallsynotex = (props) => {
 
-  const [type, setType] = useState(0);
-  const [mallurl, setMallurl] = useState({});
-  
-  useEffect(() => {
-      const fetchFunc =  (async () =>{
-          fetch("http://synotex-load-balancer-237167545.ap-northeast-2.elb.amazonaws.com/offlinemarket", {
-      mode: 'no-cors',
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        "Access-Control-Allow-Origin": "*"
-      },
-      body: JSON.stringify(
-        {
-          "string": "string"
-        })
-    })
-    .then((res) => {
-      console.log(" ====== res  ", res);
-      setType(res.type)
-      setMallurl(res.url)
-    }).catch((error) => {
-        console.log("sssssss")
-      console.log(error);
-      setType(0)
-      setMallurl("")
-    })
-      })
-
-    fetchFunc();
-    
-  }, []);
   
   
 
@@ -81,7 +48,7 @@ const Mallsynotex = (props) => {
 
         <TouchableOpacity onPress={() => props.navigation.navigate('Onlinemall',{type: type, url: mallurl})}>        
           <View style={{alignItems:"center", justifyContent: "center", marginBottom: height*0.17, backgroundColor: "white", width: width*0.5, height: width*0.1, borderRadius: 20}}>
-            {type == 0 ? <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 공식몰 바로가기</Text> : <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 오프라인몰 바로가기</Text>}
+            <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 공식몰 바로가기</Text>
           </View>
         </TouchableOpacity>
 
@@ -106,7 +73,7 @@ const Mallsynotex = (props) => {
 
         <TouchableOpacity onPress={() => props.navigation.navigate('Onlinemall')}>        
           <View style={{alignItems:"center", justifyContent: "center", marginBottom: height*0.17, backgroundColor: "white", width: width*0.5, height: width*0.1, borderRadius: 20}}>
-            {type == 0 ? <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 공식몰 바로가기</Text> : <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 오프라인몰 바로가기</Text>}
+            <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 공식몰 바로가기</Text>
           </View>
         </TouchableOpacity>
 

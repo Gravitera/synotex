@@ -25,10 +25,111 @@ const vw = width / 100;
 const Storeoffline = (props) => {
 
 
+  const [type, setType] = useState(0);
+  const [mallurl, setMallurl] = useState({});
+  
+  useEffect(() => {
+      const fetchFunc =  (async () =>{
+          fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/offlinemarket", {
+      mode: 'no-cors',
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        "Access-Control-Allow-Origin": "*"
+      },
+      body: JSON.stringify(
+        {
+          "string": "string"
+        })
+    })
+    .then((res) => {
+      console.log(" ====== res  ", res);
+      setType(res.type)
+      setMallurl(res.url)
+    }).catch((error) => {
+        console.log("sssssss")
+      console.log(error);
+      setType(0)
+      setMallurl("")
+    })
+      })
+
+    fetchFunc();
+    
+  }, []);
+
+
+  const openurl = (inputurl) => {
+    Linking.openURL(inputurl);
+    props.navigation.navigate("intro");
+  }
+
+
   return (
     <>
 
-      <WebView source={{ uri: 'https://town.daangn.com/bp/1041029' }} />
+      {type == 0 ?
+        <WebView source={{ uri: mallurl }} />
+
+      :
+
+        <>
+
+           {width < 1500? 
+            <View style={styles.container}>
+
+
+            <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:width,height:height,alignItems: 'center',justifyContent: 'center'}}>
+              <View style={{ marginVertical: height / 10 }}>    
+              
+                <Image source={require("./../../../assets/images/intro_logo.png")} style={styles.logo}>
+                </Image>
+
+                <ImageBackground style={{width:248,height:264}}  source={require("./../../../assets/images/intro_back.png")} >
+                  <Image style={{marginLeft:-1*width*0.086,marginTop:height*0.11,width:width*0.8,height:width*0.53}} resizeMode="contain" source={require("./../../../assets/images/intro_mask.png")} />
+                </ImageBackground>
+                
+              </View>
+
+              <TouchableOpacity onPress={() => openurl(mallurl)}>        
+                <View style={{alignItems:"center", justifyContent: "center", marginBottom: height*0.17, backgroundColor: "white", width: width*0.5, height: width*0.1, borderRadius: 20}}>
+                  <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 오프라인 매장 바로가기</Text>
+                </View>
+              </TouchableOpacity>
+
+            </ImageBackground>
+
+            </View>
+            :
+            <View style={styles.container}>
+
+
+            <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:width,height:height,alignItems: 'center',justifyContent: 'center'}}>
+              <View style={{ marginVertical: height / 10 }}>    
+              
+                <Image source={require("./../../../assets/images/intro_logo.png")} style={styles.logo}>
+                </Image>
+
+                <ImageBackground style={{width:248,height:264}}  source={require("./../../../assets/images/intro_back.png")} >
+                  <Image style={{width:"100%", bottom:"10%"}} resizeMode="contain" source={require("./../../../assets/images/intro_mask.png")} />
+                </ImageBackground>
+                
+              </View>
+
+              <TouchableOpacity onPress={() => openurl(mallurl)}>        
+                <View style={{alignItems:"center", justifyContent: "center", marginBottom: height*0.17, backgroundColor: "white", width: width*0.5, height: width*0.1, borderRadius: 20}}>
+                  <Text style={{color:"#0D3A71", fontWeight: "bold"}}>시노텍스 오프라인 매장 바로가기</Text>
+                </View>
+              </TouchableOpacity>
+
+            </ImageBackground>
+
+            </View>
+            }
+
+        </>
+      }
 
     </>
   );
