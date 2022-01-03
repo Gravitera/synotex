@@ -591,7 +591,7 @@ if (feedbacksent == 1){
 
 
 
-              <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.03, width:width*0.8, marginLeft: width*0.07, color:"yellow"}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
+              <Text style={{marginTop: height*0.02, color: theme.color.light, marginBottom: height*0.03, width:width*0.8, color:"yellow", textAlign: "center"}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
 
 
   

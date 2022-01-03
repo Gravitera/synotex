@@ -16,6 +16,7 @@ import { Linking } from 'react-native';
 import { CustomBrandstoryHeader } from '../../../components/Header';
 //import { styles } from '../../../styles/styles';
 import { WebView } from 'react-native-webview';
+import { PrivateValueStore } from '@react-navigation/core';
 
 const { height, width } = Dimensions.get('window');
 
@@ -25,8 +26,8 @@ const vw = width / 100;
 const Storeoffline = (props) => {
 
 
-  const [type, setType] = useState("");
-  const [mallurl, setMallurl] = useState("");
+  var [type, setType] = useState("");
+  var [mallurl, setMallurl] = useState("");
   
   useEffect(() => {
       const fetchFunc =  (async () =>{
@@ -44,14 +45,21 @@ const Storeoffline = (props) => {
         })
     })
     .then((res) => {
-      console.log(" ====== res  ", res);
-      setType(res.type)
-      setMallurl(res.url)
+      res.json().then((tempres) => {
+        console.log(" ====== tempres  ", tempres);
+        setType(tempres.type)
+        setMallurl(tempres.url)
+      }).catch((error) => {
+        console.log("sssssss")
+        console.log(error);
+        setType(1)
+        setMallurl("https://smartstore.naver.com/glocean/notice/list?cp=1")
+      });
     }).catch((error) => {
         console.log("sssssss")
       console.log(error);
-      setType(0)
-      setMallurl("")
+      setType(1)
+      setMallurl("https://smartstore.naver.com/glocean/notice/list?cp=1")
     })
       })
 
@@ -70,7 +78,7 @@ const Storeoffline = (props) => {
     <>
 
       {type == 0 ?
-        <WebView source={{ uri: mallurl }} />
+        <WebView source={{ uri: "https://town.daangn.com/bp/1041029" }} />
 
       :
 
