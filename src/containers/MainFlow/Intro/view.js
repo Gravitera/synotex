@@ -13,6 +13,7 @@ import { CustomDrawerButtonHeader } from '../../../components/Header';
 import Button from './../../../components/Button'
 import { TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 const { height, width } = Dimensions.get('window');
 

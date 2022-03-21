@@ -97,7 +97,7 @@ const Scanner = (props) => {
     console.log(" ============= sendFaceData activated =============", image.slice(0,20));
     
     //fetch('http://3.34.136.40:3030/submit', {
-    fetch("http://synotex-load-balancer-237167545.ap-northeast-2.elb.amazonaws.com/submit", {
+    fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/submit", {
       mode: 'no-cors',
       method: 'POST',
       headers: {
