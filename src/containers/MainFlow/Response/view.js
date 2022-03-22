@@ -13,6 +13,8 @@ import { Image } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useSelector, useDispatch } from 'react-redux';
 import { ImageBackground } from 'react-native';
+
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 const { height, width } = Dimensions.get('window');
 
 const Sound = require('react-native-sound');
@@ -48,12 +50,10 @@ const ResponseView = (props) => {
   return (
     <>
 
-      {width < 1500?
-
       <View style={{width: width, height: height}}>
-          <Image style={{width: width, height: "60%"}} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + storeData.attendanceReducer.res.FrontImage }} />
-          <View style={{width: width, height: "40%", flexDirection:"column"}}>
-            <View style={{width: width, height: "10%"}}/>
+          <Image style={{width: wp("100%"), height: hp("60%")}} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + storeData.attendanceReducer.res.FrontImage }} />
+          <View style={{width: wp("100%"), height: hp("40%"), flexDirection:"column"}}>
+            <View style={{width: width, height: "7%"}}/>
                 {condition == 0?
                 <>
                   <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>재측정을 원하시는경우는 재촬영 버튼을 눌러주시거나</Text>
@@ -75,7 +75,7 @@ const ResponseView = (props) => {
             <View style={{ flexDirection: 'row', justifyContent: 'center', width:width, height: "60%", alignItems:"center"}}>
               <TouchableOpacity onPress={() => props.navigation.navigate("input")}>
 
-                <View style={{ width: width*0.3, height: width*0.3, backgroundColor: "#0D3A71", borderRadius: 100, alignItems:"center", flexDirection:"column"}}>
+                <View style={{ width: hp("15%"), height:  hp("15%"), backgroundColor: "#0D3A71", borderRadius: 100, alignItems:"center", flexDirection:"column"}}>
                 <View style={{height: "5%"}}/>
                   <Image resizeMode="contain" style={{width:"70%", height:"70%"}}  source={require("./../../../assets/images/camera_image.png")} >
                   </Image>
@@ -89,7 +89,7 @@ const ResponseView = (props) => {
               <TouchableOpacity onPress={props.onNext}>
                 
 
-                  <View style={{ width: width*0.3, height: width*0.3, backgroundColor: "#0D3A71", borderRadius: 100, alignItems:"center", flexDirection:"column"}}>
+                  <View style={{ width:  hp("15%"), height:  hp("15%"), backgroundColor: "#0D3A71", borderRadius: 100, alignItems:"center", flexDirection:"column"}}>
                     <View style={{height: "10%"}}/>
                     <Image resizeMode="contain" style={{width:"70%", height:"70%"}}  source={require("./../../../assets/images/result_image.png")} >
                     </Image>
@@ -104,68 +104,6 @@ const ResponseView = (props) => {
 
 
       </View>
-
-
-      :
-
-
-      <View style={{width: width, height: height}}>
-          <Image style={{width: width, height: "60%"}} resizeMode="cover" source={{ uri: "data:image/jpg;base64," + storeData.attendanceReducer.res.FrontImage }} />
-          <View style={{width: width, height: "40%", flexDirection:"column"}}>
-            <View style={{width: width, height: "5%"}}/>
-                {condition == 0?
-                <>
-                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>재측정을 원하시는경우는 재촬영 버튼을 눌러주시거나</Text>
-                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>결과을 확인하시려면 측정결과 버튼을 눌러주세요</Text>
-                  </>
-                :null}
-                {condition == 1?
-                <>
-                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>인터넷 연결을 확인 해주세요.</Text>
-                </>
-                :null}
-                {condition == 2?
-                <>
-                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>측정을 못 하였습니다.</Text>
-                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>측정을 정확하게 다시 해주세요.</Text>
-                </>
-                :null}
-
-            <View style={{ flexDirection: 'row', justifyContent: 'center', width:width, height: "60%", alignItems:"center"}}>
-              <TouchableOpacity onPress={() => props.navigation.navigate("input")}>
-
-                <View style={{ width: width*0.2, height: width*0.2, backgroundColor: "#0D3A71", borderRadius: 100, alignItems:"center", flexDirection:"column"}}>
-                <View style={{height: "5%"}}/>
-                  <Image resizeMode="contain" style={{width:"70%", height:"70%"}}  source={require("./../../../assets/images/camera_image.png")} >
-                  </Image>
-                  <View style={{height: "5%"}}/>
-                  <Text style={{textAlign:"center", fontSize:13, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold, color:"white" }}>재촬영</Text>
-                </View>
-
-                
-              </TouchableOpacity>
-              <View style={{width: "10%"}}/>
-              <TouchableOpacity onPress={props.onNext}>
-                
-
-                  <View style={{ width: width*0.2, height: width*0.2, backgroundColor: "#0D3A71", borderRadius: 100, alignItems:"center", flexDirection:"column"}}>
-                    <View style={{height: "10%"}}/>
-                    <Image resizeMode="contain" style={{width:"70%", height:"70%"}}  source={require("./../../../assets/images/result_image.png")} >
-                    </Image>
-                    <Text style={{textAlign:"center", fontSize:13, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold, color:"white" }}>측정 결과</Text>
-                  </View>
-
-              </TouchableOpacity>
-            </View>
-
-
-          </View>
-
-
-      </View>
-
-
-      }
 
 
 

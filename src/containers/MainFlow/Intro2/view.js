@@ -16,6 +16,8 @@ import { Linking } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
 
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 const vh = height / 100;
 const vw = width / 100;
 

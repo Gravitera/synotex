@@ -40,6 +40,8 @@ import {
 import { SafeAreaView, StatusBar, useColorScheme } from 'react-native';
 import { Image, Platform } from "react-native";
 
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 
 const Stack = createStackNavigator();
 const MaterialBottomTabs = createMaterialBottomTabNavigator();
@@ -183,7 +185,7 @@ const MainFlow = (props) => {
       <MaterialBottomTabs.Navigator
         initialRouteName="Home"
         activeColor="#0D3A71"
-        barStyle={{ backgroundColor: "white", height: height*0.08}}
+        barStyle={{ backgroundColor: "white", height: hp("8%")}}
         shifting={false}
       >
         <MaterialBottomTabs.Screen
@@ -196,7 +198,7 @@ const MainFlow = (props) => {
               <Image
                 source={require('./../../assets/images/round_chalet_black_36.png')}
                 resizeMode="contain"
-                style={{width: width*0.1, height: height*0.05, marginTop: -1*height*0.015}}
+                style={{width: wp("10%"), height: hp("5%"), marginTop: -1*height*0.015}}
               />
             )
           }}
@@ -211,7 +213,7 @@ const MainFlow = (props) => {
               <Image
                 source={require('./../../assets/images/round_manage_search_black_36.png')}
                 resizeMode="contain"
-                style={{width: width*0.099, height: height*0.05, marginTop: -1*height*0.0175}}
+                style={{width: wp("9.99%"), height: hp("5%"), marginTop: -1*height*0.0175}}
               />
             )
           }}
@@ -226,7 +228,7 @@ const MainFlow = (props) => {
               <Image
                 source={require('./../../assets/images/round_storefront_black_36.png')}
                 resizeMode="contain"
-                style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.015}}
+                style={{width: wp("8%"), height: hp("5%"), marginTop: -1*height*0.015}}
                 onPress={() => Linking.openURL("https://synotexmall.com")}
               />
             )
@@ -241,7 +243,7 @@ const MainFlow = (props) => {
               <Image
                 source={require('./../../assets/images/round_map_black_36.png')}
                 resizeMode="contain"
-                style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.015}}
+                style={{width: wp("8%"), height: hp("5%"), marginTop: -1*height*0.015}}
               />
             )
           }}
@@ -255,7 +257,7 @@ const MainFlow = (props) => {
               <Image
                 source={require('./../../assets/images/round_settings_power_black_36.png')}
                 resizeMode="contain"
-                style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.016}}
+                style={{width: wp("8%"), height: hp("5%"), marginTop: -1*height*0.016}}
               />
             )
           }}
@@ -267,7 +269,7 @@ const MainFlow = (props) => {
       <MaterialBottomTabs.Navigator
         initialRouteName="Home"
         activeColor="#0D3A71"
-        barStyle={{ backgroundColor: "white", height: height*0.08}}
+        barStyle={{ backgroundColor: "white", height: hp("8%")}}
         shifting={false}
       >
         <MaterialBottomTabs.Screen

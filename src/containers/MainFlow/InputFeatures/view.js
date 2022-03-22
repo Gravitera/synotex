@@ -19,6 +19,8 @@ import * as Animatable from 'react-native-animatable';
 import { BackHandler } from 'react-native';
 import { Linking } from 'react-native';
 
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 const { width, height } = Dimensions.get("window")
 
 
@@ -147,31 +149,30 @@ const InputFeaturesView = (props) => {
 
   return (
     <>
-    {width < 1500?
+
       <View style={{width: width, height: height, backgroundColor: theme.color.bgLight}}>
         <CustomBackForwardButtonHeader title={'입력 정보'} backFunction={() => {navigation.navigate("intro")}} forwardFunction={props.onNext} />
         <ScrollView style={{ flex: 1, marginTop: 64, paddingTop: 0 }}>
-          
-          <View style={{backgroundColor: "#0D3A71", width: width, height: height*0.2, flexDirection: "row", alignItems:"center", justifyContent: "center"}}>
+          <View style={{backgroundColor: "#0D3A71", width: wp("100%"), height: hp("20%"), flexDirection: "row", alignItems:"center", justifyContent: "center"}}>
 
-            <View style={{width: width*0.4, height: height*0.2}}>
-              <ImageBackground resizeMode="contain" style={{width: width*0.4, height: height*0.2}} source={require("./../../../assets/images/input_privacy_notice.png")}>
-                <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/member/privacy.html")} style={{width: width*0.35, height: height*0.05, marginTop: "55%"}}/>
+            <View style={{width: wp("40%"), height: hp("20%")}}>
+              <ImageBackground resizeMode="contain" style={{width: wp("40%"), height: hp("20%")}} source={require("./../../../assets/images/input_privacy_notice.png")}>
+                <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/member/privacy.html")} style={{width: wp("35%"), height: hp("5%"), marginTop: "55%"}}/>
               </ImageBackground>
             </View>
 
-            <View style={{width: width*0.1}}/>
+            <View style={{width: wp("10%")}}/>
 
-            <Image resizeMode="contain" style={{width: width*0.2,  height: height*0.2}} source={require("./../../../assets/images/input_privacy_logo.png")}>
+            <Image resizeMode="contain" style={{width: wp("20%"),  height: hp("20%")}} source={require("./../../../assets/images/input_privacy_logo.png")}>
             </Image>
 
           </View>
 
-          <View style={{height: height*0.1}}/>
+          <View style={{height: hp("10%")}}/>
 
           <View style={{flexDirection: "column", alignItems: "center", justifyContent:"center"}}>
-            <View style={{width: width*0.8, height: height*0.1, borderRadius: 30, backgroundColor: "white", shadowColor: "#000", shadowOffset: {width: 3,height: 3}, shadowOpacity: 0.25, shadowRadius: 4.65, elevation: 5,}}>
-                <View style={{ height: "100%", width: width*0.2, alignItems:"center", position: "absolute", flexDirection:"column", justifyContent:"center"}}>
+            <View style={{width: wp("80%"), height: hp("10%"), borderRadius: 30, backgroundColor: "white", shadowColor: "#000", shadowOffset: {width: 3,height: 3}, shadowOpacity: 0.25, shadowRadius: 4.65, elevation: 5,}}>
+                <View style={{ height: "100%", width: wp("20%"), alignItems:"center", position: "absolute", flexDirection:"column", justifyContent:"center"}}>
                   <View style={{height: "33%"}}/>
                   <Text style={{fontSize: 15, fontWeight: "bold", color: "black", height: "33%"}}>나이 (필수)</Text>
                   <View style={{height: "33%"}}/>
@@ -190,10 +191,10 @@ const InputFeaturesView = (props) => {
                 />
             </View>
 
-            <View style={{height: height*0.05}}/>
+            <View style={{height: hp("5%")}}/>
 
-            <View style={{width: width*0.8, height: height*0.1, borderRadius: 30, backgroundColor: "white", shadowColor: "#000", shadowOffset: {width: 3,height: 3}, shadowOpacity: 0.25, shadowRadius: 4.65, elevation: 5,}}>
-                <View style={{ height: "100%", width: width*0.2, alignItems:"center", position: "absolute", flexDirection:"column", justifyContent:"center"}}>
+            <View style={{width: wp("80%"), height: hp("10%"), borderRadius: 30, backgroundColor: "white", shadowColor: "#000", shadowOffset: {width: 3,height: 3}, shadowOpacity: 0.25, shadowRadius: 4.65, elevation: 5,}}>
+                <View style={{ height: "100%", width: wp("20%"), alignItems:"center", position: "absolute", flexDirection:"column", justifyContent:"center"}}>
                   <View style={{height: "33%"}}/>
                   <Text style={{fontSize: 15, fontWeight: "bold", color: "black", height: "33%"}}>신장 (필수)</Text>
                   <View style={{height: "33%"}}/>
@@ -212,101 +213,18 @@ const InputFeaturesView = (props) => {
                   style={{fontSize: 15, position: "absolute", height: "100%", right: "5%"}}
                 />
             </View>
-            <View style={{height: height*0.05}}/>
+            <View style={{height: hp("5%")}}/>
 
           </View>
-
-
         </ScrollView>
 
-        <View style={{ position: 'absolute', bottom: height*0.08, width: '100%' }}>
-
+        <View style={{ position: 'absolute', width: wp("100%"), height: hp("9%"), bottom: hp("8%")}}>
           <Button style={{ width: '100%' }} onPress={props.onNext} label="측정 시작하기" />
         </View>
 
       </View>
 
 
-
-      :
-      <View style={{width: width, height: height, backgroundColor: theme.color.bgLight}}>
-        <CustomBackForwardButtonHeader title={'입력 정보'} backFunction={() => {navigation.navigate("intro")}} forwardFunction={props.onNext} />
-        <ScrollView style={{ flex: 1, marginTop: 64, paddingTop: 0 }}>
-          
-          <View style={{backgroundColor: "#0D3A71", width: width, height: height*0.2, flexDirection: "row", alignItems:"center", justifyContent: "center"}}>
-
-            <View style={{width: width*0.4, height: height*0.2}}>
-              <ImageBackground resizeMode="contain" style={{width: width*0.4, height: height*0.2}} source={require("./../../../assets/images/input_privacy_notice.png")}>
-                <TouchableOpacity onPress={() => Linking.openURL("http://synotexmall.com/member/privacy.html")} style={{width: width*0.35, height: height*0.05, marginTop: "45%"}}/>
-              </ImageBackground>
-            </View>
-
-            <View style={{width: width*0.1}}/>
-
-            <Image resizeMode="contain" style={{width: width*0.2,  height: height*0.2}} source={require("./../../../assets/images/input_privacy_logo.png")}>
-            </Image>
-
-          </View>
-
-          <View style={{height: height*0.1}}/>
-
-          <View style={{flexDirection: "column", alignItems: "center", justifyContent:"center"}}>
-            <View style={{width: width*0.8, height: height*0.1, borderRadius: 30, backgroundColor: "white", shadowColor: "#000", shadowOffset: {width: 3,height: 3}, shadowOpacity: 0.25, shadowRadius: 4.65, elevation: 5,}}>
-                <View style={{ height: "100%", width: width*0.2, alignItems:"center", position: "absolute", flexDirection:"column", justifyContent:"center"}}>
-                  <View style={{height: "33%"}}/>
-                  <Text style={{fontSize: 15, fontWeight: "bold", color: "black", height: "33%"}}>나이 (필수)</Text>
-                  <View style={{height: "33%"}}/>
-                </View>
-                <TextInput
-                  label="Age"
-                  errorText={props.ageError.message}
-                  error={props.ageError.error}
-                  onBlur={props.onBlur}
-                  value={props.age}
-                  onChangeText={text => onChange2({ text, name: "age" })}
-                  keyboardType="numeric"
-                  placeholder="예시: 30"
-                  placeholderTextColor="grey"
-                  style={{fontSize: 15, position: "absolute", height: "100%", right: "5%"}}
-                />
-            </View>
-
-            <View style={{height: height*0.05}}/>
-
-            <View style={{width: width*0.8, height: height*0.1, borderRadius: 30, backgroundColor: "white", shadowColor: "#000", shadowOffset: {width: 3,height: 3}, shadowOpacity: 0.25, shadowRadius: 4.65, elevation: 5,}}>
-                <View style={{ height: "100%", width: width*0.2, alignItems:"center", position: "absolute", flexDirection:"column", justifyContent:"center"}}>
-                  <View style={{height: "33%"}}/>
-                  <Text style={{fontSize: 15, fontWeight: "bold", color: "black", height: "33%"}}>신장 (필수)</Text>
-                  <View style={{height: "33%"}}/>
-                </View>
-                <TextInput
-                  // style={{width: '100%'}}
-                  label="Height"
-                  error={props.heightError.error}
-                  errorText={props.heightError.message}
-                  onBlur={props.onBlur}
-                  value={props.height}
-                  onChangeText={text => onChange2({ text, name: "height" })}
-                  keyboardType="numeric"
-                  placeholder="예시: 175"
-                  placeholderTextColor="grey"
-                  style={{fontSize: 15, position: "absolute", height: "100%", right: "5%"}}
-                />
-            </View>
-            <View style={{height: height*0.05}}/>
-
-          </View>
-
-
-        </ScrollView>
-
-        <View style={{ position: 'absolute', top: height*0.825, width: '100%', height:height*0.08}}>
-
-          <Button style={{ width: '100%' }} onPress={props.onNext} label="측정 시작하기" />
-        </View>
-
-      </View>
-      }
     </>
   );
 };

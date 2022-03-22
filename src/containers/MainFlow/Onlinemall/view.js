@@ -17,6 +17,9 @@ import { CustomBrandstoryHeader } from '../../../components/Header';
 //import { styles } from '../../../styles/styles';
 import { WebView } from 'react-native-webview';
 
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
+
 const { height, width } = Dimensions.get('window');
 
 const vh = height / 100;
@@ -37,6 +40,8 @@ const Mallonline = (props) => {
 
 
       <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:width,height:height,alignItems: 'center',justifyContent: 'center'}}>
+        
+        
         <View style={{ marginVertical: height / 10 }}>    
         
           <Image source={require("./../../../assets/images/intro_logo.png")} style={styles.logo}>

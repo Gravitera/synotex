@@ -16,6 +16,8 @@ import { Linking } from 'react-native';
 import { CustomBrandstoryHeader } from '../../../components/Header';
 //import { styles } from '../../../styles/styles';
 
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 const { height, width } = Dimensions.get('window');
 
 const vh = height / 100;
@@ -40,53 +42,23 @@ const Brandstory = (props) => {
             </TouchableOpacity>
           </View>
 
-        {width < 1500 ?
 
-        <ScrollView style={{ flex: 1, marginTop: height*0.08, paddingTop: 0, zIndex: 5}}>
+        <ScrollView style={{ flex: 1, marginTop: hp("8%"), paddingTop: 0, zIndex: 5}}>
           <View style={{flexDirection: "column", alignItems: "center", justifyContent:"center"}}>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopone.png")} style={styles.topimage}>
-              <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeimage.png")} style={styles.temptopimage}>
-              </ImageBackground>
-            </ImageBackground>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/blackimage.png")} style={styles.topblackimage}>
-            </ImageBackground>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytoptwo.png")} style={styles.topimagetwo}>
-            </ImageBackground>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopthreeimage.png")} style={styles.topimagethree}>
-            </ImageBackground>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopfourimage.png")} style={styles.topimagefour}>
-            </ImageBackground>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopfiveimage.png")} style={styles.topimagefive}>
-            </ImageBackground>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopsix.png")} style={styles.topimagesix}>
-            </ImageBackground>
+            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeTOP.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
+            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeimage.png")} style={{resizeMode: "contain",  width: wp("100%")}}/>
+            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeBOTTOM.png")} style={{resizeMode: "contain",  width: wp("100%")}}/>
+            <Image resizeMode="contain" source={require("./../../../assets/images/blackimage.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
+            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoptwo.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
+            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytopthreeimage.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
+            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytopfourimage.png")} style={{resizeMode: "contain",  width: wp("100%")}}/>
+            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytopfiveimage.png")} style={{resizeMode: "contain",  width: wp("100%")}}/>
+            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytopsix.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
+            <View style={{width: wp("100%"), height: 20}}/>
           </View>
         </ScrollView>
 
-        :
 
-        <ScrollView style={{ flex: 1, marginTop: height*0.08, paddingTop: 0, zIndex: 5}}>
-          <View style={{flexDirection: "column", alignItems: "center", justifyContent:"center"}}>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopone.png")} style={styles.topimage2}>
-              <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeimage.png")} style={styles.temptopimage2}>
-              </ImageBackground>
-            </ImageBackground>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/blackimage.png")} style={styles.topblackimage2}>
-            </ImageBackground>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytoptwo.png")} style={styles.topimagetwo2}>
-            </ImageBackground>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopthreeimage.png")} style={styles.topimagethree2}>
-            </ImageBackground>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopfourimage.png")} style={styles.topimagefour2}>
-            </ImageBackground>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopfiveimage.png")} style={styles.topimagefive2}>
-            </ImageBackground>
-            <ImageBackground resizeMode="contain" source={require("./../../../assets/images/brandstorytopsix.png")} style={styles.topimagesix2}>
-            </ImageBackground>
-          </View>
-        </ScrollView>
-
-        }
   
 
     </>
@@ -99,14 +71,14 @@ const styles = StyleSheet.create({
     height: 300,
   },
   topimage:{
-    width: width*0.95,
-    height: height*0.95,
-    marginTop: height*0.015,
-    marginLeft: width*0.03,
+    width: wp("95%"),
+    height: hp("10%"),
+    marginTop: hp("1.5%"),
+    marginLeft: wp("3%"),
     justifyContent: "center",
     alignItems:"center",
     zIndex: 10,
-
+    backgroundColor:"yellow"
   },
   topimage2:{
     width: width*0.95,
@@ -119,12 +91,13 @@ const styles = StyleSheet.create({
 
   },
   temptopimage:{
-    width: width*0.92,
-    height: height*0.75,
+    width: "75%",
+    height: "30%",
     justifyContent: "center",
-    marginTop: -1*height*0.295,
+    marginTop: "0%",
     marginLeft: width*0.0,
     zIndex: 10,
+    backgroundColor:"yellow"
 
   },
   temptopimage2:{

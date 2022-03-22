@@ -28,6 +28,8 @@ const Sound = require('react-native-sound')
 import { CustomDrawerButtonHeader, CustomHeader } from '../../../components/Header';
 import theme from '../../../../theme';
 
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 
 // import { SafeAreaView } from 'react-native-safe-area-context';
 // import { color, font } from '../../../../theme'
@@ -211,9 +213,9 @@ const ScannerView = (props) => {
 
   return (
     <>
-      {width < 1500 ?
-      <View style={{width: width, height: height}}>
-        <View style={{width: width, height: "60%", backgroundColor: "black", zIndex: -1}} onLayout={(event) => {console.log(" layout   ", event.nativeEvent.layout);}}>
+
+      <View style={{width: wp("100%"), height: hp("100%")}}>
+        <View style={{width: wp("100%"), height: "60%", backgroundColor: "black", zIndex: -1}} onLayout={(event) => {console.log(" layout   ", event.nativeEvent.layout);}}>
 
     
           <RNCamera
@@ -285,10 +287,10 @@ const ScannerView = (props) => {
 
           </View>
 
-          <View style={{height: "8%"}}>
+          <View style={{width: wp("100%"), position: "absolute", height: hp("7%"), bottom: hp("9%"), zIndex: 10000}}>
             <TouchableOpacity onPress={tempfunc}>
-              <ImageBackground source={require("./../../../assets/images/bottom_button.png")}  style={{width:width,height:"100%",alignItems: 'center',justifyContent: 'center'}}>
-                <Text style={{ fontWeight: "bold", color: "white"}}>사진 촬영 시작하기</Text>
+              <ImageBackground source={require("./../../../assets/images/bottom_button.png")} resizeMode="stretch" style={{resizeMode:"stretch", width:wp("100%"), height: hp("7%"), alignItems: 'center',justifyContent: 'center'}}>
+                <Text style={{ fontWeight: "bold", color: "white", marginBottom: 10}}>사진 촬영 시작하기</Text>
               </ImageBackground>
             </TouchableOpacity>
           </View>
@@ -443,240 +445,6 @@ const ScannerView = (props) => {
       </View>
       
 
-      :
-
-
-      <View style={{width: width, height: height}}>
-        <View style={{width: width, height: "60%"}} onLayout={(event) => {console.log(" layout   ", event.nativeEvent.layout);}}>
-
-    
-          <RNCamera
-            ref={cameraRef}
-            style={{width: width, height: "100%"}}
-            type={RNCamera.Constants.Type.front}
-            flashMode={RNCamera.Constants.FlashMode.off}
-            playSoundOnCapture={false}
-            useCamera2Api={true}
-            androidCameraPermissionOptions={{
-              title: 'Permission to use camera',
-              message: 'We need your permission to use your camera',
-              buttonPositive: 'Ok',
-              buttonNegative: 'Cancel',
-            }}
-
-          onFacesDetected={runFacemesh2}
-
-          faceDetectionClassifications={
-            RNCamera.Constants.FaceDetection.Classifications.all
-          }
-          faceDetectionLandmarks={RNCamera.Constants.FaceDetection.Landmarks.all }
-          faceDetectionMode={RNCamera.Constants.FaceDetection.Mode.accurate}
-
-          />
-
-            {state != 7 && state != 8 && state != 6?
-
-
-            /*<Image resizeMode={'contain'} style={{width: width*0.5, height: width*0.7, left: (width*0.5 - width*0.25), top: (height*0.3 - width*0.35), position:"absolute"}} source={frame} />*/
-            <Image resizeMode={'contain'} style={{tintColor: '#fff',width: 200, height: 400, left: (width*0.5 - 100), top: (height*0.3 - 200), position:"absolute"}} source={frame} />
-
-            :null}
-            {state == 6 ?
-            <Image resizeMode={'contain'} style={{tintColor: '#fff',width: 200, height: 400, left: (width*0.5 - 100), top: (height*0.3 - 200), position:"absolute"}} source={rotating_blue_mask} />
-            :
-            null}
-            {state == 7 ?
-
-            <Image resizeMode={'contain'} style={{tintColor: '#fff',width: 200, height: 400, left: (width*0.5 - 100), top: (height*0.3 - 200), position:"absolute"}} source={star_sparkling} />
-
-            :
-            null}
-            {state == 8?
-            <Image resizeMode={'contain'} style={{tintColor: '#fff',width: 200, height: 400, left: (width*0.5 - 100), top: (height*0.3 - 200), position:"absolute"}} source={blue_check_mark} />
-
-            :
-            null}
-         
-
-
-
-        </View>
-
-
-        {state == 0 ?
-        <>
-          <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
-
-            <View style={{height: "10%", width: width}}/>
-            <View style={{width: width, height: "10%"}}>
-              <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>팔을 쭉 뻗어서 가이드라인에 얼굴을 맞춰주세요.</Text>
-            </View>
-            <View style={{height: "10%", width: width}}/>
-            <View style={{ flexDirection: 'row', width: width, height: "70%", justifyContent:"space-around"}}>
-                <Image resizeMode="contain" style={{ height: "100%", marginRight: 0 }} source={require("./../../../assets/images/photo_selfie.png")} />
-                <Image resizeMode="contain" style={{ height: "100%", marginLeft: 0 }} source={require("./../../../assets/images/selfie2.png")} />
-            </View>
-
-          </View>
-
-          <View style={{height: "8%", position:"absolute", top: height*0.82}}>
-            <TouchableOpacity onPress={tempfunc}>
-              <ImageBackground source={require("./../../../assets/images/bottom_button.png")}  style={{width:width,height:"100%",alignItems: 'center',justifyContent: 'center'}}>
-                <Text style={{ fontWeight: "bold", color: "white"}}>사진 촬영 시작하기</Text>
-              </ImageBackground>
-            </TouchableOpacity>
-          </View>
-        </>
-        :null}
-        {state == 1 ?
-        <>
-        <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
-
-          <View style={{height: "10%", width: width}}/>
-          <View style={{width: width, height: "10%"}}>
-            <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>팔을 쭉 뻗어서 가이드라인에 얼굴을 맞춰주세요.</Text>
-          </View>
-          <View style={{height: "10%", width: width}}/>
-          <View style={{ flexDirection: 'row', width: width, height: "70%", justifyContent:"space-around"}}>
-              <Image resizeMode="contain" style={{ height: "100%", marginRight: 0 }} source={require("./../../../assets/images/photo_selfie.png")} />
-              <Image resizeMode="contain" style={{ height: "100%", marginLeft: 0 }} source={require("./../../../assets/images/selfie2.png")} />
-          </View>
-
-        </View>
-
-        <View style={{height: "8%", backgroundColor: theme.color.light}}>
-          
-        </View>
-      </>
-      :null}
-      {state == 2 ?
-      <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
-
-        <View style={{height: "10%", width: width}}/>
-        <View style={{width: width, height: "10%"}}>
-          <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>촬영이 시작되면 가이드라인을 따라</Text>
-        </View>
-        <View style={{height: "10%", width: width}}>
-        <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>얼굴을 돌려주세요.</Text>
-        </View>
-      </View>
-      <View style={{height: "8%", backgroundColor: theme.color.light}}>
-      </View>
-    </>
-    :null}
-    {state == 3 ?
-      <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
-
-        <View style={{height: "10%", width: width}}/>
-        <View style={{width: width, height: "10%"}}>
-          <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>촬영이 시작되면 가이드라인을 따라</Text>
-        </View>
-        <View style={{height: "10%", width: width}}>
-        <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>얼굴을 돌려주세요.</Text>
-        </View>
-        <View style={{ flexDirection: 'row', width: width, height: "70%", justifyContent:"center", alignItems:"center"}}>
-            <Image resizeMode="contain" style={{ height: "100%", marginRight: 0 }} source={require("./../../../assets/images/blue_three.png")} />
-              
-        </View>
-
-      </View>
-      <View style={{height: "8%", backgroundColor: theme.color.light, alignItems:"center"}}/>
-    </>
-    :null}
-    {state == 4 ?
-      <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
-
-        <View style={{height: "10%", width: width}}/>
-        <View style={{width: width, height: "10%"}}>
-          <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>촬영이 시작되면 가이드라인을 따라</Text>
-        </View>
-        <View style={{height: "10%", width: width}}>
-          <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>얼굴을 돌려주세요.</Text>
-        </View>
-        <View style={{ flexDirection: 'row', width: width, height: "70%", justifyContent:"center", alignItems:"center"}}>
-            <Image resizeMode="contain" style={{ height: "100%", marginRight: 0 }} source={require("./../../../assets/images/blue_two.png")} />
-              
-        </View>
-      </View>
-      <View style={{height: "8%", backgroundColor: theme.color.light, alignItems:"center"}}>
-      </View>
-    </>
-    :null}
-    {state == 5 ?
-      <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
-
-        <View style={{height: "10%", width: width}}/>
-        <View style={{width: width, height: "10%"}}>
-          <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>촬영이 곧 시작 됩니다.</Text>
-        </View>
-        <View style={{height: "10%", width: width}}>
-        <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>가이드라인을 따라 얼굴을 돌려주세요.</Text>
-        </View>
-        <View style={{ flexDirection: 'row', width: width, height: "70%", justifyContent:"center", alignItems:"center"}}>
-            <Image resizeMode="contain" style={{ height: "100%", marginRight: 0 }} source={require("./../../../assets/images/blue_one.png")} />
-              
-        </View>
-      </View>
-      <View style={{height: "8%", backgroundColor: theme.color.light, alignItems:"center"}}>
-      </View>
-    </>
-    :null}
-    {state == 6 ?
-      <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
-
-        <View style={{height: "10%", width: width}}/>
-        <View style={{width: width, height: "10%"}}>
-          <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>촬영이 시작 되었습니다</Text>
-        </View>
-        <View style={{height: "10%", width: width}}>
-        <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>가이드라인을 따라 얼굴을 돌려주세요.</Text>
-        </View>
-      </View>
-      <View style={{height: "8%", backgroundColor: theme.color.light}}>
-      </View>
-    </>
-    :null}
-
-    {state == 7 ?
-      <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
-
-        <View style={{height: "10%", width: width}}/>
-        <View style={{width: width, height: "10%"}}>
-          <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>인공지능이 분석 중입니다.</Text>
-        </View>
-        <View style={{height: "10%", width: width}}>
-        <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>잠시만 기다려 주세요.</Text>
-        </View>
-      </View>
-      <View style={{height: "8%", backgroundColor: theme.color.light}}>
-      </View> 
-    </>
-    :null}
-    {state == 8 ?
-      <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light}}>
-
-        <View style={{height: "10%", width: width}}/>
-        <View style={{width: width, height: "10%"}}>
-          <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>완료 되었습니다.</Text>
-        </View>
-        <View style={{height: "10%", width: width}}>
-        </View>
-      </View>
-      <View style={{height: "8%", backgroundColor: theme.color.light}}>
-      </View>
-    </>
-    :null}
-
-      </View>
-
-    }
 
     </>
   );

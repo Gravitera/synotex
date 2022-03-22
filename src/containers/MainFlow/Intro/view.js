@@ -32,73 +32,43 @@ const IntroView = (props) => {
   return (
     <>
 
-      {width < 1500.0 ?
       <View style={styles.container}>
 
-        <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:width,height:height,flexDirection: "column", alignItems:"center"}}>
-          <View style={{height: height*0.075}}/>            
-          <Image source={require("./../../../assets/images/intro_logo.png")} style={{width: width*0.5, height: height*0.2}} resizeMode="contain">
-          </Image>
-          <ImageBackground style={{width: width*0.75, height: width*0.75}} resizeMode="contain" source={require("./../../../assets/images/intro_back.png")} >
-            <Image style={{width: "105%", marginLeft: -10}} resizeMode="contain" source={require("./../../../assets/images/intro_mask.png")} />
-          </ImageBackground>
+        <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:wp("100%"),height:hp("100%"),flexDirection: "column", alignItems:"center"}}>
 
-          <View style={{height: height*0.1}}/>
+            <View style={{width: wp("100%"), height: hp("10%")}}/>
 
-          <View style={{alignItems:"center", flexDirection: "row"}}>
-            <TouchableOpacity style={{width:width*0.3, height:height*0.075, backgroundColor: "white", borderRadius: 10}} onPress={() => props.navigation.navigate('intro2')} >
-              <Image resizeMode="contain" style={{width:width*0.33,height:height*0.065,alignItems:'center',justifyContent:'center', marginLeft:-1*width*0.01, marginTop: height*0.005}}  source={require("./../../../assets/images/intro_button_inside1.png")} >
-              </Image>
-            </TouchableOpacity>
-
-            <View style={{width:width*0.05}}>
-            </View>
+            <Image source={require("./../../../assets/images/intro_logo.png")} style={{height: hp("7%")}} resizeMode="contain"/>
             
-            <TouchableOpacity style={{width:width*0.3,height:height*0.075, backgroundColor: "white", borderRadius: 10}} onPress={() => props.navigation.navigate('ArCamera2')} >
-              <Image resizeMode="contain" style={{width:width*0.35,height:height*0.05,alignItems:'center',justifyContent:'center', marginLeft:width*0.01, marginTop: height*0.008}}  source={require("./../../../assets/images/intro_button_inside2.png")} >
-              </Image>
-            </TouchableOpacity>
+            <View style={{width: wp("100%"), height: hp("5%")}}/>
 
-          </View>
+            <ImageBackground style={{width: hp("35%"), height: hp("35%")}} resizeMode="contain" source={require("./../../../assets/images/intro_back.png")} >
+              <Image style={{width: "105%", height: "100%", marginLeft: -10, marginTop: "20%"}} resizeMode="contain" source={require("./../../../assets/images/intro_mask.png")} />
+            </ImageBackground>
 
-        </ImageBackground>
-        
-      </View>
-      :
-      <View style={styles.container}>
+            <View style={{width: wp("100%"), height: hp("10%")}}/>
 
-        <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:width,height:height,flexDirection: "column", alignItems:"center"}}>
-          <View style={{height: height*0.075, }}/>            
-          <Image source={require("./../../../assets/images/intro_logo.png")} style={{width: width*0.4, height: height*0.15, }} resizeMode="contain">
-          </Image>
-          <ImageBackground style={{width: width*0.4, height: width*0.4, alignItems: "center", justifyContent:"center"}} resizeMode="contain" source={require("./../../../assets/images/intro_back.png")} >
-            <Image style={{width: "105%", marginLeft: -10, marginTop: "30%"}} resizeMode="contain" source={require("./../../../assets/images/intro_mask.png")} />
-          </ImageBackground>
+            <View style={{alignItems:"center", flexDirection: "row"}}>
+              
+              <TouchableOpacity style={{width: wp("30%"), height: hp("7.5%"), backgroundColor: "white", borderRadius: 10}} onPress={() => props.navigation.navigate('intro2')} >
+                <Image resizeMode="contain" style={{width:wp("33%"),height:hp("6.5%"),alignItems:'center',justifyContent:'center', marginLeft:-1*width*0.01, marginTop: height*0.005}}  source={require("./../../../assets/images/intro_button_inside1.png")} >
+                </Image>
+              </TouchableOpacity>
 
-          <View style={{height: height*0.1}}/>
+              <View style={{width:wp("5%")}}>
+              </View>
+              
+              <TouchableOpacity style={{width: wp("30%"), height: hp("7.5%"), backgroundColor: "white", borderRadius: 10}} onPress={() => props.navigation.navigate('ArCamera2')} >
+                <Image resizeMode="contain" style={{width:wp("35%"),height:hp("5%"),alignItems:'center',justifyContent:'center', marginLeft:width*0.01, marginTop: height*0.008}}  source={require("./../../../assets/images/intro_button_inside2.png")} >
+                </Image>
+              </TouchableOpacity>
 
-          <View style={{alignItems:"center", flexDirection: "row"}}>
-            <TouchableOpacity style={{width:width*0.3, height:height*0.075, backgroundColor: "white", borderRadius: 10}} onPress={() => props.navigation.navigate('intro2')} >
-              <Image resizeMode="contain" style={{width:width*0.33,height:height*0.065,alignItems:'center',justifyContent:'center', marginLeft:-1*width*0.01, marginTop: height*0.005}}  source={require("./../../../assets/images/intro_button_inside1.png")} >
-              </Image>
-            </TouchableOpacity>
-
-            <View style={{width:width*0.05}}>
             </View>
-            
-            <TouchableOpacity style={{width:width*0.3,height:height*0.075, backgroundColor: "white", borderRadius: 10}} onPress={() => props.navigation.navigate('ArCamera2')} >
-              <Image resizeMode="contain" style={{width:width*0.35,height:height*0.05,alignItems:'center',justifyContent:'center', marginLeft:width*0.01, marginTop: height*0.008}}  source={require("./../../../assets/images/intro_button_inside2.png")} >
-              </Image>
-            </TouchableOpacity>
-
-          </View>
 
         </ImageBackground>
         
       </View>
 
-
-      }
     </>
   );
 };
