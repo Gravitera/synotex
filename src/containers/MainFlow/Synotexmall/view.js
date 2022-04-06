@@ -6,6 +6,7 @@ import {
   Dimensions,
   Image,
   ImageBackground,
+  BackHandler
 } from 'react-native';
 import theme from '../../../../theme';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -39,21 +40,11 @@ const Mallsynotex = (props) => {
     <>
 
 
-      <View style={styles.container}>
+      {/*<View style={styles.container}>
 
 
       <ImageBackground source={require("./../../../assets/images/Intro2_background.png")}  style={{width:width,height:height,alignItems: 'center',justifyContent: 'center'}}>
         
-        {/*<View style={{ marginVertical: height / 10 }}>    
-        
-          <Image source={require("./../../../assets/images/intro_logo.png")} style={styles.logo}>
-          </Image>
-
-          <ImageBackground style={{width:248,height:264}}  source={require("./../../../assets/images/intro_back.png")} >
-            <Image style={{marginLeft:-1*width*0.086,marginTop:height*0.11,width:width*0.8,height:width*0.53}} resizeMode="contain" source={require("./../../../assets/images/intro_mask.png")} />
-          </ImageBackground>
-          
-        </View>*/}
         <View style={{width: wp("100%"), height: hp("10%")}}/>
 
         <Image source={require("./../../../assets/images/intro_logo.png")} style={{height: hp("10%")}} resizeMode="contain"/>
@@ -74,6 +65,58 @@ const Mallsynotex = (props) => {
 
       </ImageBackground>
 
+      </View>*/}
+
+      <View style={{zIndex:1, width: wp("100%"), height: hp("100%")}}>
+          <View style={{width: wp("100%"), height: hp("4.0%")}}></View>
+          <Image resizeMode="contain" style={{zIndex: 1, marginLeft: wp("10%"), resizeMode: "contain", width: "33%", height: "6%"}}  source={require("./../../../assets/images/newdesign/synotexmall_text_top.png")} />
+          <Image resizeMode="contain" style={{zIndex:1, marginLeft: wp("10%"), resizeMode: "contain", width: "45%", height: "3%"}}  source={require("./../../../assets/images/newdesign/synotexmall_text_last.png")} />
+          
+      </View>
+
+      <Image style={{zIndex:0, position:"absolute", resizeMode: "cover", width: wp("100%"), height: hp("100%")}}  source={require("./../../../assets/images/newdesign/synotexmall_youtuber.png")} />
+      
+      <View style={{zIndex:1, bottom: hp("10%"), position:"absolute", width: wp("100%"), height: hp("10%"), alignItems:"center", flexDirection: "row"}}>
+          <View style={{width: "25%", height: "100%"}}></View>
+          <TouchableOpacity onPress={() => Linking.openURL("https://www.synotexmall.com")} style={{width: "50%", height: "80%"}}>
+              <ImageBackground resizeMode="contain" style={{zIndex: 2,  resizeMode: "contain", width: "100%", height: "100%", alignItems:"center"}}  source={require("./../../../assets/images/newdesign/synotexmall_blue_box.png")} >
+                  <Image resizeMode="contain" style={{zIndex: 2,  resizeMode: "contain", width: "60%", height: "100%"}}  source={require("./../../../assets/images/newdesign/synotexmall_blue_text.png")} />
+              </ImageBackground>
+          </TouchableOpacity>
+          <View style={{width: "25%", height: "100%"}}></View>
+      </View>
+
+      <View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "white", flexDirection: "row", justifyContent: "space-evenly" }}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('intro')} style={{width: wp("20%"), height: "100%", flexDirection: "column", justifyContent: "space-between", alignItems:"center"}}>
+          <View style={{width: "100%", height: "10%"}}></View>
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_icon.png")} />
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_text.png")} />
+          <View style={{width: "100%", height: "10%"}}></View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Brandstory')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
+          <View style={{width: "100%", height: "10%"}}></View>
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_brandstory_icon.png")} />
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "80%", height: "25%"}}  source={require("./../../../assets/images/newdesign/bottomtab_brandstory_text.png")} />
+          <View style={{width: "100%", height: "10%"}}></View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Store')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
+          <View style={{width: "100%", height: "10%"}}></View>
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_store_icon_checked.png")} />
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_store_text_checked.png")} />
+          <View style={{width: "100%", height: "10%"}}></View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate('OfflineStore')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
+          <View style={{width: "100%", height: "10%"}}></View>
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_offline_icon.png")} />
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "80%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_offline_text.png")} />
+          <View style={{width: "100%", height: "10%"}}></View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {BackHandler.exitApp()}} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
+          <View style={{width: "100%", height: "10%"}}></View>
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_exit_icon.png")} />
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_exit_text.png")} />
+          <View style={{width: "100%", height: "10%"}}></View>
+        </TouchableOpacity>
       </View>
 
     </>

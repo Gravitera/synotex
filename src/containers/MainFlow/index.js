@@ -181,8 +181,32 @@ const MainFlow = (props) => {
   return (
 
     <>
-    {Platform.OS === 'android' ? 
-      <MaterialBottomTabs.Navigator
+
+      <Stack.Navigator
+        headerMode="none"
+        initialRouteName={'intro'}
+        drawerContent={(props) => (
+          <StackContent
+            {...props}
+            driverData={driverData}
+            logout={() => props.navigation.navigate('AuthFlow')}
+          />
+        )}>
+          <Stack.Screen name="intro" component={Intro} />
+          <Stack.Screen name="scanner" component={Scanner} />
+          <Stack.Screen name="input" component={InputFeatures} />
+          <Stack.Screen name="response" component={Response} />
+          <Stack.Screen name="recommendation" component={Recommendation} />
+          <Stack.Screen name="intro2" component={IntroView2} />
+          <Stack.Screen name="ArCamera" component={ArCamera} />
+          <Stack.Screen name="ArCamera2" component={ArCamera2} />
+          <Stack.Screen name="Onlinemall" component={Onlinemall} />
+          <Stack.Screen name="Brandstory" component={Storybrand} />
+          <Stack.Screen name="Store" component={Synotexmall} />
+          <Stack.Screen name="OfflineStore" component={Offlinestore} />
+      </Stack.Navigator>
+
+      {/*<MaterialBottomTabs.Navigator
         initialRouteName="Home"
         activeColor="#0D3A71"
         barStyle={{ backgroundColor: "white", height: hp("8%")}}
@@ -263,95 +287,8 @@ const MainFlow = (props) => {
           }}
         />
 
-      </MaterialBottomTabs.Navigator>
-      :
-
-      <MaterialBottomTabs.Navigator
-        initialRouteName="Home"
-        activeColor="#0D3A71"
-        barStyle={{ backgroundColor: "white", height: hp("8%")}}
-        shifting={false}
-      >
-        <MaterialBottomTabs.Screen
-          name="Home"
-          children={createHomeStack}
-          options={{
-            //tabBarLabel: "Home",
-            tabBarLabel: <Text style={{fontFamily : "Arial", textAlign : "center", marginLeft: 17, fontWeight: "bold"}}>Home</Text>,
-            tabBarIcon: ({ tintColor }) => (
-              <Image
-                source={require('./../../assets/images/round_chalet_black_36.png')}
-                resizeMode="contain"
-                style={{width: width*0.1, height: height*0.05, marginTop: -1*height*0.015}}
-              />
-            )
-          }}
-          
-        />
-        <MaterialBottomTabs.Screen
-          name="Brandstory"
-          component={Storybrand}
-          options={{
-            tabBarLabel: <Text style={{fontFamily : "Arial", textAlign : "center", fontWeight: "bold"}}>브랜드스토리</Text>,
-            tabBarIcon: ({ tintColor }) => (
-              <Image
-                source={require('./../../assets/images/round_manage_search_black_36.png')}
-                resizeMode="contain"
-                style={{width: width*0.099, height: height*0.05, marginTop: -1*height*0.0175}}
-              />
-            )
-          }}
-        />
-        <MaterialBottomTabs.Screen
-          name="Store"
-          component={Synotexmall}
-          
-          options={{
-            tabBarLabel: <Text style={{fontFamily : "Arial", textAlign : "center", fontWeight: "bold"}}>스토어</Text>,
-            tabBarIcon: ({ tintColor }) => (
-              <Image
-                source={require('./../../assets/images/round_storefront_black_36.png')}
-                resizeMode="contain"
-                style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.015}}
-                onPress={() => Linking.openURL("https://synotexmall.com")}
-              />
-            )
-          }}
-        />
-        <MaterialBottomTabs.Screen
-          name="OfflineStore"
-          component={Offlinestore}
-          options={{
-            tabBarLabel: <Text style={{fontFamily : "Arial", textAlign : "center", fontWeight: "bold"}}>오프라인매장</Text>,
-            tabBarIcon: ({ tintColor }) => (
-              <Image
-                source={require('./../../assets/images/round_map_black_36.png')}
-                resizeMode="contain"
-                style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.015}}
-              />
-            )
-          }}
-        />
-        <MaterialBottomTabs.Screen
-          name="Exit"
-          component={Exitapp}
-          options={{
-            tabBarLabel: <Text style={{fontFamily : "Arial", textAlign : "center", fontWeight: "bold"}}>종료</Text>,
-            tabBarIcon: ({ tintColor }) => (
-              <Image
-                source={require('./../../assets/images/round_settings_power_black_36.png')}
-                resizeMode="contain"
-                style={{width: width*0.08, height: height*0.05, marginTop: -1*height*0.016}}
-              />
-            )
-          }}
-        />
-
-      </MaterialBottomTabs.Navigator>
+      </MaterialBottomTabs.Navigator>*/}
       
-      
-      
-      }
     </>
   );
 
