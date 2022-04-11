@@ -28,7 +28,8 @@ import ArCamera2 from './ArCamera2';
 import Synotexmall from './Synotexmall';
 import Offlinestore from './Offlinestore';
 import Exitapp from './Exit';
-import Onlinemall from "./Onlinemall"
+import Onlinemall from "./Onlinemall";
+import Splash from "./Splash";
 // import { requestLocationPermission } from './../../utils'
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -184,7 +185,7 @@ const MainFlow = (props) => {
 
       <Stack.Navigator
         headerMode="none"
-        initialRouteName={'intro'}
+        initialRouteName={'splash'}
         drawerContent={(props) => (
           <StackContent
             {...props}
@@ -192,6 +193,7 @@ const MainFlow = (props) => {
             logout={() => props.navigation.navigate('AuthFlow')}
           />
         )}>
+          <Stack.Screen name="splash" component={Splash} />
           <Stack.Screen name="intro" component={Intro} />
           <Stack.Screen name="scanner" component={Scanner} />
           <Stack.Screen name="input" component={InputFeatures} />

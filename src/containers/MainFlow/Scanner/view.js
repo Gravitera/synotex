@@ -280,14 +280,14 @@ const ScannerView = (props) => {
               <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>팔을 쭉 뻗어서 가이드라인에 얼굴을 맞춰주세요.</Text>
             </View>
             <View style={{height: "10%", width: width}}/>
-            <View style={{ flexDirection: 'row', width: width, height: "70%", justifyContent:"space-around"}}>
+            <View style={{ flexDirection: 'row', width: width, height: "45%", justifyContent:"space-around"}}>
                 <Image resizeMode="contain" style={{ height: "100%", marginRight: 0 }} source={require("./../../../assets/images/photo_selfie.png")} />
                 <Image resizeMode="contain" style={{ height: "100%", marginLeft: 0 }} source={require("./../../../assets/images/selfie2.png")} />
             </View>
 
           </View>
 
-          <View style={{width: wp("100%"), position: "absolute", height: hp("7%"), bottom: hp("9%"), zIndex: 10000}}>
+          <View style={{backgroundColor: "purple", width: wp("100%"), position: "absolute", height: hp("7%"), bottom: hp("12.5%"), zIndex: 9}}>
             <TouchableOpacity onPress={tempfunc}>
               <ImageBackground source={require("./../../../assets/images/bottom_button.png")} resizeMode="stretch" style={{resizeMode:"stretch", width:wp("100%"), height: hp("7%"), alignItems: 'center',justifyContent: 'center'}}>
                 <Text style={{ fontWeight: "bold", color: "white", marginBottom: 10}}>사진 촬영 시작하기</Text>
@@ -442,6 +442,39 @@ const ScannerView = (props) => {
     </>
     :null}
 
+      </View>
+
+      <View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "#F2F4FA", flexDirection: "row", justifyContent: "space-evenly" }}>
+        <TouchableOpacity onPress={() => props.navigation.navigate('intro')} style={{width: wp("20%"), height: "100%", flexDirection: "column", justifyContent: "space-between", alignItems:"center"}}>
+          <View style={{width: "100%", height: "10%"}}></View>
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_icon.png")} />
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_text.png")} />
+          <View style={{width: "100%", height: "10%"}}></View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Brandstory')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
+          <View style={{width: "100%", height: "10%"}}></View>
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_brandstory_icon.png")} />
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "80%", height: "25%"}}  source={require("./../../../assets/images/newdesign/bottomtab_brandstory_text.png")} />
+          <View style={{width: "100%", height: "10%"}}></View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate('Store')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
+          <View style={{width: "100%", height: "10%"}}></View>
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_store_icon.png")} />
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_store_text.png")} />
+          <View style={{width: "100%", height: "10%"}}></View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => props.navigation.navigate('OfflineStore')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
+          <View style={{width: "100%", height: "10%"}}></View>
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_offline_icon.png")} />
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "80%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_offline_text.png")} />
+          <View style={{width: "100%", height: "10%"}}></View>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => {BackHandler.exitApp()}} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
+          <View style={{width: "100%", height: "10%"}}></View>
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_exit_icon.png")} />
+          <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_exit_text.png")} />
+          <View style={{width: "100%", height: "10%"}}></View>
+        </TouchableOpacity>
       </View>
       
 

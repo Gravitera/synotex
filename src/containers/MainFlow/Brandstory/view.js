@@ -31,7 +31,8 @@ const Brandstory = (props) => {
     <>
 
         {/*<CustomBrandstoryHeader title={"브랜드 스토리"}/>*/}
-          <View style={styles.headerContainerbrandstory}>
+          
+          {/*<View style={styles.headerContainerbrandstory}>
             <TouchableOpacity
               style={styles.drawerTrigger}
             >
@@ -41,7 +42,12 @@ const Brandstory = (props) => {
               style={styles.drawerTrigger}
             >
             </TouchableOpacity>
-          </View>
+          </View>*/}
+
+        <View style={{justifyContent: "center", alignItems: "center",width: wp("100%"), height: hp("8%"), backgroundColor: "#F2F4FA", position: "absolute", top: 0, zIndex: 7}}>
+            <Image resizeMode="contain" source={require("./../../../assets/images/newdesign/brandstory_header_text.png")} style={{resizeMode: "contain",  width: "35%", height: "80%"}}/>
+        </View>
+        
 
 
         <ScrollView style={{ flex: 1, marginTop: hp("8%"), paddingTop: 0, zIndex: 5}}>
@@ -59,7 +65,7 @@ const Brandstory = (props) => {
           </View>
         </ScrollView>
 
-        <View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "white", flexDirection: "row", justifyContent: "space-evenly" }}>
+        <View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "#F2F4FA", flexDirection: "row", justifyContent: "space-evenly" }}>
         <TouchableOpacity onPress={() => props.navigation.navigate('intro')} style={{width: wp("20%"), height: "100%", flexDirection: "column", justifyContent: "space-between", alignItems:"center"}}>
           <View style={{width: "100%", height: "10%"}}></View>
           <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_icon.png")} />

@@ -1,0 +1,145 @@
+import React from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  Image,
+  ImageBackground,
+  BackHandler,
+
+} from 'react-native';
+import theme from '../../../../theme';
+import { ScrollView } from 'react-native-gesture-handler';
+import { CustomDrawerButtonHeader } from '../../../components/Header';
+import Button from './../../../components/Button'
+import { TouchableOpacity } from 'react-native';
+import { Linking } from 'react-native';
+import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { useState, useEffect } from 'react';
+import { WebView } from 'react-native-webview';
+
+const { height, width } = Dimensions.get('window');
+
+const vh = height / 100;
+const vw = width / 100;
+
+
+
+const SplashView = (props) => {
+
+    const [typeval, setTypeval] = useState("");
+
+    const [image, setImage] = useState("");
+
+
+    const [backgroundImage, setBackgroundImage] = useState("");
+    const [backgroundimageWidth, setbackgroundImageWidth] = useState("");
+    const [backgroundimageHeight, setbackgroundImageHeight] = useState("");
+    const [backgroundimageMarginTop, setbackgroundImageMarginTop] = useState("");
+    const [backgroundimageMarginLeft, setbackgroundImageMarginLeft] = useState("");
+
+    const [mainImage, setMainImage] = useState("");
+    const [imageWidth, setImageWidth] = useState("");
+    const [imageHeight, setImageHeight] = useState("");
+    const [imageMarginTop, setImageMarginTop] = useState("");
+    const [imageMarginLeft, setImageMarginLeft] = useState("");
+
+
+    useEffect(() => {
+        fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/splash", {
+            mode: 'no-cors',
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                "Access-Control-Allow-Origin": "*"
+            },
+            
+            body: JSON.stringify(
+                {
+                    "temp": 1
+                })
+                
+            })
+            .then((res) => res.json())
+            .then((resdata) => {
+                console.log('splash RESPONSE SUCCESS =>', resdata);
+                console.log('splash RESPONSE SUCCESS  resdata.typeval   =>', resdata.typeval);
+                console.log('splash RESPONSE SUCCESS  resdata.backgroundImage   =>', resdata.backgroundImage);
+                console.log('splash RESPONSE SUCCESS  resdata.mainImage   =>', resdata.mainImage);
+
+                if (resdata.typeval === "Update App"){
+                    console.log(" res.typeval    Update App");
+                    setTypeval("Update App");
+                    setTimeout(() => {
+                        BackHandler.exitApp();
+                    }, 3000);
+                }
+                if (resdata.typeval === "None"){
+                    setTypeval("None");
+                    props.navigation.navigate("intro");
+                }
+                if (resdata.typeval === "Marketing"){
+                    console.log(" =========== typeval     marketing ")
+                    setTypeval("Marketing");
+
+                    setTimeout(() => {
+                        props.navigation.navigate("intro");
+                    }, 5000);
+            
+                }
+        }).catch((err) => {
+            props.navigation.navigate("intro");
+        })
+
+        /*.catch((err) => {
+            console.log(" ======= fetch error message     ", err);
+            setTypeval("Network Error");
+            setTimeout(() => {
+                BackHandler.exitApp();
+            }, 3000);
+
+        })
+        */
+
+    }, []);
+
+    return (
+        <>
+            {typeval === "Update App" ?
+                <View style={{width: wp("100%"), height: hp("100%"), backgroundColor: "#0380D8", flexDirection: "column", justifyContent: "center", alignItems:"center"}}>
+                        <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/update_app.png")} />
+                        <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/update_app_text.png")} />
+                </View>
+            :null}
+            {typeval === "Network Error" ?
+                <View style={{width: wp("100%"), height: hp("100%"), backgroundColor: "white", flexDirection: "column", justifyContent: "center", alignItems:"center"}}>
+                        <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/network_error.png")} />
+                        <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "10%"}}  source={require("./../../../assets/images/newdesign/network_error_text1.png")} />
+                        <View style={{width: "35%", height: "20%"}}></View>
+                        <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "10%"}}  source={require("./../../../assets/images/newdesign/network_error_text2.png")} />
+                </View>
+        
+            :null}
+            {typeval === "Marketing" ?
+                <>
+                {/*<View style={{width: wp("100%"), height: hp("100%"), backgroundColor: "yellow"}}></View>*/}
+                <WebView style={{width: wp("100%"), height: hp("100%")}} source={{ uri: 'https://a96d26d9839f933f1.awsglobalaccelerator.com/splashscreen' }}/>
+                {/*<View style={{width: wp("100%"), height: hp("100%"), justifyContent: "center", alignItems:"center"}}>
+                        <Image resizeMode="contain" style={{position: "absolute", resizeMode: "contain", width: wp(backgroundimageWidth), height: hp(backgroundimageHeight), marginTop: hp(backgroundimageMarginTop), marginLeft: wp(backgroundimageMarginLeft)}}  source={{uri: "https://synotexmasks.s3.ap-northeast-2.amazonaws.com/splash/splash_background.png"}} />
+                        <Image resizeMode="contain" style={{resizeMode: "contain", width: wp(imageWidth), height: hp(imageHeight), marginTop: hp(imageMarginTop), marginLeft: wp(imageMarginLeft)}}  source={{uri: "https://synotexmasks.s3.ap-northeast-2.amazonaws.com/splash/splash_main_image.png"}} />
+                </View>
+                */}
+              
+                </>
+            :null}
+        </>
+
+    );
+        
+
+
+}
+
+export default SplashView;

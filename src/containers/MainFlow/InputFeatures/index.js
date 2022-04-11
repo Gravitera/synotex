@@ -5,6 +5,7 @@ import { login } from '../../../store/actions/authActions';
 import { connect } from 'react-redux';
 import { onSnackbar } from '../../../store/actions/layoutActions';
 import { StackActions, useNavigation } from '@react-navigation/core';
+import { BackHandler } from 'react-native';
 
 const InputFeatures = (props) => {
 
@@ -99,75 +100,27 @@ const InputFeatures = (props) => {
     }
   }
 
-  // const onSubmit = () => {
-  //   try {
-  //     if (
-  //       email.trim() &&
-  //       !emailError.error &&
-  //       pin.trim() &&
-  //       !pinError.error
-  //     ) {
-  //       setLoading(true);
-  //       const LOGIN_DATA = {
-  //         email,
-  //         pin,
-  //       };
-  //       console.log("login data", LOGIN_DATA)
-  //       props.login(
-  //         LOGIN_DATA,
-  //         async (res) => {
-  //           console.log('res of Login -->', res);
-  //           // setStorageItem('Authorization', res.data.token);
-  //           // setStorageItem("UserID", res.data.user._id)
-  //           // setStorageItem("BusID", res.data.user.busId)
+  const toHome = () => {
+    props.navigation.navigate("intro", props);
+  }
 
-  //           setStorageItem("Token", res.data.token)
-  //           const asyncDivers = await getStorageItem("Drivers")
-  //           console.log("LOGIN DRIVERS", asyncDivers)
+  const toBrandstory = () => {
+    props.navigation.navigate("Brandstory", props);
+  }
 
-  //           const currentlyLoggedin = res.data.user.email
-  //           console.log("CUREENTLY LOGGED IN EMAIL", currentlyLoggedin)
+  const toSynotexmall = () => {
+    props.navigation.navigate("Store", props);
+  }
 
-  //           console.log("CUREENTLY LOGGED IN USER", res.data.user)
-  //           const beforeset = await getStorageItem("UserData")
-  //           console.log("BEFORE SEETING USER", beforeset)
-  //           setStorageItem("UserData", res.data.user)
-  //           console.log("CUREENTLY LOGGED IN USER 2", res.data.user)
+  const toOfflinestore = () => {
+    props.navigation.navigate("OfflineStore", props);
+  }
+
+  const toExit = () => {
+    BackHandler.exitApp();
+  }
 
 
-  //           if (asyncDivers) {
-  //             const filteredDrivers = asyncDivers.filter((driver) => driver.email === currentlyLoggedin)
-  //             console.log("FILTERE DRIVERS", filteredDrivers)
-  //             if (filteredDrivers.length == 0) {
-  //               asyncDivers.push(res.data.user)
-  //               setStorageItem("Drivers", asyncDivers)
-  //             }
-  //           } else {
-  //             setStorageItem("Drivers", [res.data.user])
-  //           }
-
-  //           setLoading(false);
-  //           // navigation.navigate('MainFlow', { screen: 'scanner' });
-  //           navigation.dispatch(
-  //             StackActions.replace('MainFlow', { screen: 'scanner' })
-  //           )
-
-  //           // props.toggleAuth(res.user);
-  //         },
-  //         (err) => {
-  //           props.showAlert('Invaild Email or pin, please try again.');
-  //           console.log('err of Login -->', err);
-  //           setLoading(false);
-  //         },
-  //       );
-  //     } else {
-  //       props.showAlert('Please fill all fields with valid data.');
-  //     }
-  //   } catch (e) {
-  //     console.log('e in Login -->', e);
-  //     setLoading(false);
-  //   }
-  // };
 
   const viewProps = {
     age,
@@ -186,7 +139,12 @@ const InputFeatures = (props) => {
     setHeightUnit,
     onChange,
     onBlur,
-    onNext
+    onNext,
+    toHome,
+    toBrandstory,
+    toSynotexmall,
+    toOfflinestore,
+    toExit
   };
 
   return <InputFeaturesView {...viewProps} />;

@@ -60,7 +60,7 @@ const CustomBackButtonHeader2 = (props) => {
       <TouchableOpacity
         style={styles.drawerTrigger}
         onPress={() => props.backFunction()}>
-        <IonIcon name="chevron-back" size={24} color="#fff" />
+        <IonIcon name="chevron-back" size={24} color="#0380D8" />
       </TouchableOpacity>
       <Text style={styles.heading}>{props.title}</Text>
       <View style={{ width: 66 }} />
@@ -116,7 +116,7 @@ const CustomBackForwardButtonHeader2 = (props) => {
       <TouchableOpacity
         style={styles.drawerTrigger}
         onPress={() => props.backFunction()}>
-        <IonIcon name="chevron-back" size={24} color="#fff" />
+        <IonIcon name="chevron-back" size={24} color="#0380D8" />
       </TouchableOpacity>
       <Text style={styles.heading2}>{props.title}</Text>
       <TouchableOpacity
@@ -134,7 +134,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: theme.color.bg,
+    backgroundColor: "#F2F4FA",
     alignItems: 'center',
     position: 'absolute',
     width: '100%',
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    color: theme.color.light
+    color: "#0380D8"
   },
   busNo: {
     padding: 20,
@@ -178,13 +178,13 @@ const styles = StyleSheet.create({
     fontFamily: theme.font.bold,
     fontSize: 18,
     fontWeight: '600',
-    color: theme.color.light,
+    color: "#0380D8",
   },
   heading2: {
     marginLeft: 35,
     fontFamily: theme.font.bold,
     fontSize: 18,
     fontWeight: '600',
-    color: theme.color.light,
+    color: "#0380D8",
   },
 });
