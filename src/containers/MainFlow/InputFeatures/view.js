@@ -43,7 +43,7 @@ const InputFeaturesView = (props) => {
   const [privacylink, setPrivacylink] = useState("");
 
   useEffect(() => {
-    fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/privacylink", {
+    fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/privacylink/privacylink.json", {
       mode: 'no-cors',
       method: 'GET',
       headers: {
@@ -165,7 +165,7 @@ const InputFeaturesView = (props) => {
 
   BackHandler.addEventListener("hardwareBackPress", () => {backbuttonhandler});
   
-
+  console.log(" ================  before return    privacylink     ", privacylink);
 
   return (
     <>

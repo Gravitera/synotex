@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -24,85 +24,141 @@ const { height, width } = Dimensions.get('window');
 const vh = height / 100;
 const vw = width / 100;
 
-const Brandstory = (props) => {
+class Brandstory extends React.Component {
+
+  constructor(props) {
+      super(props)
+  
+      this.state = {
+        imglinks: [],
+        imgheight: []
+      }
+  }
+
+  componentDidMount() {
+      fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/brandstory/brandstory.json",{
+        mode: 'no-cors',
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*"
+        },})
+        .then((res) => res.json())
+        .then((resdata) => {
+          console.log(" =========  imglinks from fetch      ", resdata);
+
+         this.setState({imglinks: resdata});
+
+         /*
+         var imglinksonly = [];
+         for (var i = 0; i < resdata.length; i++){
+            imglinksonly.push(resdata[i].url);
+         }
+         console.log(" ==========   imglinksonly    ", imglinksonly);
+
+         imglinksonly.map((data) => {
+          Image.getSize(data, (currwidth, currheight) => {
+              const scaleFactor = currheight/currwidth;
+              const screenWidth = wp("100%");
+              const newimgheight = screenWidth * scaleFactor;
+              this.state.imgheight.push(newimgheight);
+          })
+          */
+        });
+
+  }
+
+  render() {
 
 
-  return (
-    <>
 
-        {/*<CustomBrandstoryHeader title={"브랜드 스토리"}/>*/}
-          
-          {/*<View style={styles.headerContainerbrandstory}>
-            <TouchableOpacity
-              style={styles.drawerTrigger}
-            >
-            </TouchableOpacity>
-            <Text style={styles.heading}>브랜드 스토리</Text>
-            <TouchableOpacity
-              style={styles.drawerTrigger}
-            >
-            </TouchableOpacity>
-          </View>*/}
+    const { height, width } = Dimensions.get('window');
 
-        <View style={{justifyContent: "center", alignItems: "center",width: wp("100%"), height: hp("8%"), backgroundColor: "#F2F4FA", position: "absolute", top: 0, zIndex: 7}}>
-            <Image resizeMode="contain" source={require("./../../../assets/images/newdesign/brandstory_header_text.png")} style={{resizeMode: "contain",  width: "35%", height: "80%"}}/>
-        </View>
+    const vh = height / 100;
+    const vw = width / 100;
+
+    console.log(" =============  during render before return   imglinks    ", this.state.imglinks);
+
+    return (
+          <>
+
         
 
-
-        <ScrollView style={{ flex: 1, marginTop: hp("8%"), paddingTop: 0, zIndex: 5}}>
-          <View style={{flexDirection: "column", alignItems: "center", justifyContent:"center"}}>
-            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeTOP.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
-            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeimage.png")} style={{resizeMode: "contain",  width: wp("100%")}}/>
-            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeBOTTOM.png")} style={{resizeMode: "contain",  width: wp("100%")}}/>
-            <Image resizeMode="contain" source={require("./../../../assets/images/blackimage.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
-            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoptwo.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
-            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytopthreeimage.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
-            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytopfourimage.png")} style={{resizeMode: "contain",  width: wp("100%")}}/>
-            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytopfiveimage.png")} style={{resizeMode: "contain",  width: wp("100%")}}/>
-            <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytopsix.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
-            <View style={{width: wp("100%"), height: 20}}/>
+          <View style={{justifyContent: "center", alignItems: "center",width: wp("100%"), height: hp("8%"), backgroundColor: "#F2F4FA", position: "absolute", top: 0, zIndex: 7}}>
+              <Image resizeMode="contain" source={require("./../../../assets/images/newdesign/brandstory_header_text.png")} style={{resizeMode: "contain",  width: "35%", height: "80%"}}/>
           </View>
-        </ScrollView>
+          
 
-        <View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "#F2F4FA", flexDirection: "row", justifyContent: "space-evenly" }}>
-        <TouchableOpacity onPress={() => props.navigation.navigate('intro')} style={{width: wp("20%"), height: "100%", flexDirection: "column", justifyContent: "space-between", alignItems:"center"}}>
-          <View style={{width: "100%", height: "10%"}}></View>
-          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_icon.png")} />
-          <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_text.png")} />
-          <View style={{width: "100%", height: "10%"}}></View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => props.navigation.navigate('Brandstory')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
-          <View style={{width: "100%", height: "10%"}}></View>
-          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_brandstory_icon_checked.png")} />
-          <Image resizeMode="contain" style={{resizeMode: "contain", width: "80%", height: "25%"}}  source={require("./../../../assets/images/newdesign/bottomtab_brandstory_text_checked.png")} />
-          <View style={{width: "100%", height: "10%"}}></View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => props.navigation.navigate('Store')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
-          <View style={{width: "100%", height: "10%"}}></View>
-          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_store_icon.png")} />
-          <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_store_text.png")} />
-          <View style={{width: "100%", height: "10%"}}></View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => props.navigation.navigate('OfflineStore')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
-          <View style={{width: "100%", height: "10%"}}></View>
-          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_offline_icon.png")} />
-          <Image resizeMode="contain" style={{resizeMode: "contain", width: "80%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_offline_text.png")} />
-          <View style={{width: "100%", height: "10%"}}></View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {BackHandler.exitApp()}} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
-          <View style={{width: "100%", height: "10%"}}></View>
-          <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_exit_icon.png")} />
-          <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_exit_text.png")} />
-          <View style={{width: "100%", height: "10%"}}></View>
-        </TouchableOpacity>
-      </View>
 
-  
+          <ScrollView style={{ flex: 1, marginTop: hp("8%"), paddingTop: 0, zIndex: 5}}>
+            <View style={{flexDirection: "column", alignItems: "center", justifyContent:"center"}}>
+              {this.state.imglinks.map(data => (
+                  <Image resizeMode="contain" source={{uri: data.url}} style={{resizeMode: "contain",  width: wp("100%"), height: (data.height/data.width)*wp("100%"), marginTop: 20}}/>
+            
+              ))}
+              {/*<Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeTOP.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
+              <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeimage.png")} style={{resizeMode: "contain",  width: wp("100%")}}/>
+              <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeBOTTOM.png")} style={{resizeMode: "contain",  width: wp("100%")}}/>
+              <Image resizeMode="contain" source={require("./../../../assets/images/blackimage.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
+              <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoptwo.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
+              <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytopthreeimage.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
+              <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytopfourimage.png")} style={{resizeMode: "contain",  width: wp("100%")}}/>
+              <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytopfiveimage.png")} style={{resizeMode: "contain",  width: wp("100%")}}/>
+              <Image resizeMode="contain" source={require("./../../../assets/images/brandstorytopsix.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>
+              */}
+              
+              
+              <View style={{width: wp("100%"), height: hp("15%")}}/>
+            </View>
+          </ScrollView>
 
-    </>
-  );
-};
+          <View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "#F2F4FA", flexDirection: "row", justifyContent: "space-evenly" }}>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('intro')} style={{width: wp("20%"), height: "100%", flexDirection: "column", justifyContent: "space-between", alignItems:"center"}}>
+            <View style={{width: "100%", height: "10%"}}></View>
+            <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_icon.png")} />
+            <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_text.png")} />
+            <View style={{width: "100%", height: "10%"}}></View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Brandstory')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
+            <View style={{width: "100%", height: "10%"}}></View>
+            <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_brandstory_icon_checked.png")} />
+            <Image resizeMode="contain" style={{resizeMode: "contain", width: "80%", height: "25%"}}  source={require("./../../../assets/images/newdesign/bottomtab_brandstory_text_checked.png")} />
+            <View style={{width: "100%", height: "10%"}}></View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('Store')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
+            <View style={{width: "100%", height: "10%"}}></View>
+            <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_store_icon.png")} />
+            <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_store_text.png")} />
+            <View style={{width: "100%", height: "10%"}}></View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this.props.navigation.navigate('OfflineStore')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
+            <View style={{width: "100%", height: "10%"}}></View>
+            <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_offline_icon.png")} />
+            <Image resizeMode="contain" style={{resizeMode: "contain", width: "80%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_offline_text.png")} />
+            <View style={{width: "100%", height: "10%"}}></View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => {BackHandler.exitApp()}} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
+            <View style={{width: "100%", height: "10%"}}></View>
+            <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_exit_icon.png")} />
+            <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_exit_text.png")} />
+            <View style={{width: "100%", height: "10%"}}></View>
+          </TouchableOpacity>
+        </View>
+
+
+
+        </>
+
+    );
+
+
+  }
+
+
+}
+
+
 
 const styles = StyleSheet.create({ 
   logo:{

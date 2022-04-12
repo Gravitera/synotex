@@ -70,7 +70,7 @@ class SplashView extends React.Component {
                     this.setState({typeval: "Update App"});
                     setTimeout(() => {
                         BackHandler.exitApp();
-                    }, 3500);
+                    }, 2500);
                 }
                 if (resdata.typeval === "None"){
                     this.setState({typeval: "None"});
@@ -91,7 +91,7 @@ class SplashView extends React.Component {
    
                     setTimeout(() => {
                         this.props.navigation.navigate("intro");
-                    }, 5000);
+                    }, 2000);
     
             
                 }
@@ -100,7 +100,7 @@ class SplashView extends React.Component {
             this.setState({typeval: "Network Error"});
             setTimeout(() => {
                 BackHandler.exitApp();
-            }, 3500);
+            }, 2500);
         })
 
 
