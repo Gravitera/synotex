@@ -292,14 +292,14 @@ const InputFeaturesView = (props) => {
                   </View>
 
                   <View style = {{flexDirection: "row", alignItems: "center", justifyContent: "space-evenly", width: wp("90%"), height: hp("20%"), borderWidth: 1, borderRadius: 10, borderColor: "#E2E2E2"}}>
-                        <View style={{flexdirection: "column", width: wp("47%"), height: hp("20%")}}>
+                        <View style={{flexdirection: "column", width: "70%", height: "100%"}}>
                             <Image resizeMode="contain" style={{marginTop: 2, marginLeft: 8, width: hp("30%"),  height: hp("14%")}} source={require("./../../../assets/images/newdesign/inputfeature_bottom_square_text.png")}/>
                             <TouchableOpacity onPress={() => {Linking.openURL(privacylink)}}>
                                 <Image resizeMode="contain" style={{marginLeft: 8, width: hp("30%"),  height: hp("5%")}} source={require("./../../../assets/images/newdesign/inputfeature_disclaimer.png")}/>
                             </TouchableOpacity> 
                             
                         </View>
-                        <Image resizeMode="contain" style={{marginTop: 0, width: hp("19%"),  height: hp("20%")}} source={require("./../../../assets/images/newdesign/inputfeature_logo.png")}/>
+                        <Image resizeMode="contain" style={{ marginTop: 0, width: "30%",  height: "80%"}} source={require("./../../../assets/images/newdesign/inputfeature_logo.png")}/>
 
                     {/*<View style={{ flexdirection: "column", width: wp("55%"), height: hp("20%")}}>
                             <Image resizeMode="contain" style={{marginTop: 2, marginLeft: 8, width: hp("30%"),  height: hp("14%")}} source={require("./../../../assets/images/newdesign/inputfeature_bottom_square_text.png")}/>

@@ -186,13 +186,7 @@ const MainFlow = (props) => {
       <Stack.Navigator
         headerMode="none"
         initialRouteName={'splash'}
-        drawerContent={(props) => (
-          <StackContent
-            {...props}
-            driverData={driverData}
-            logout={() => props.navigation.navigate('AuthFlow')}
-          />
-        )}>
+        >
           <Stack.Screen name="splash" component={Splash} />
           <Stack.Screen name="intro" component={Intro} />
           <Stack.Screen name="scanner" component={Scanner} />
