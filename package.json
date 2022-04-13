@@ -1,11 +1,11 @@
 {
   "name": "frontOffice",
-  "version": "0.0.1",
+  "version": "24.0.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "react-native start",
+    "start": "npx react-native start",
     "test": "jest",
     "lint": "eslint ."
   },
@@ -34,6 +34,7 @@
     "react-native-charts-wrapper": "^0.5.7",
     "react-native-collapsible": "^1.5.3",
     "react-native-collapsible-list": "^2.2.2",
+    "react-native-device-info": "^4.0.1-rc.1",
     "react-native-exit-app": "^1.1.0",
     "react-native-expandable-listview": "^1.2.11",
     "react-native-fs": "^2.18.0",

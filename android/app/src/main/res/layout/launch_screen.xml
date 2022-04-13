@@ -1,10 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" android:orientation="vertical" android:layout_width="match_parent" android:layout_height="match_parent" android:background="#fff">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:layout_weight="1">
 
-  <ImageView
+  <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:scaleType="centerInside"
-      android:src="@drawable/launch_screen" />
+      android:background="#fff"
+      android:orientation="horizontal">
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+
+    <ImageView
+        app:layout_widthPercent="25%"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:src="@drawable/launch_screen"
+        tools:layout_weight="3" />
+
+    <Space
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1" />
+  </LinearLayout>
   <!-- <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="DIVERGENCE CAPITAL | FRONT OFFICE" android:textSize="20sp" android:layout_gravity="bottom" /> -->
 </RelativeLayout>

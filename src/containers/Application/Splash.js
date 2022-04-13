@@ -41,7 +41,8 @@ const Splash = (props) => {
     <>
     <View style={{width:width,height:height,alignItems: 'center',justifyContent: 'center', backgroundColor: "white"}}>
       <View style={{ flex: 1, justifyContent: 'center', resizeMode: "contain", alignItems: 'center', backgroundColor: "white"}}>
-        <Image style={{ width: 350, height: 350, flex:1, resizeMode: "contain"}} source={require("./../../assets/images/logo.png")} />
+        {/*<Image style={{ width: 350, height: 350, flex:1, resizeMode: "contain"}} source={require("./../../assets/images/logo.png")} />*/}
+        <Image style={{ width: width*0.65, height: height*0.3, resizeMode: "contain"}} resizeMode="contain" source={require("./../../assets/images/logo.png")} />
       </View>
     </View>
     </>

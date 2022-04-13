@@ -19,6 +19,8 @@ import { CustomBrandstoryHeader } from '../../../components/Header';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
+
+
 const { height, width } = Dimensions.get('window');
 
 const vh = height / 100;
@@ -35,6 +37,8 @@ class Brandstory extends React.Component {
       }
   }
 
+
+
   componentDidMount() {
       fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/brandstory/brandstory.json",{
         mode: 'no-cors',
@@ -47,7 +51,10 @@ class Brandstory extends React.Component {
         .then((res) => res.json())
         .then((resdata) => {
           console.log(" =========  imglinks from fetch      ", resdata);
-
+          console.log(" =========  imglinks from fetch      ", resdata);
+          console.log(" =========  imglinks from fetch      ", resdata);
+          console.log(" =========  imglinks from fetch      ", resdata);
+          console.log(" =========  imglinks from fetch      ", resdata);
          this.setState({imglinks: resdata});
 
          /*
@@ -93,8 +100,8 @@ class Brandstory extends React.Component {
 
           <ScrollView style={{ flex: 1, marginTop: hp("8%"), paddingTop: 0, zIndex: 5}}>
             <View style={{flexDirection: "column", alignItems: "center", justifyContent:"center"}}>
-              {this.state.imglinks.map(data => (
-                  <Image resizeMode="contain" source={{uri: data.url}} style={{resizeMode: "contain",  width: wp("100%"), height: (data.height/data.width)*wp("100%"), marginTop: 20}}/>
+              {this.state.imglinks.map((data, index) => (
+                  <Image key={index} resizeMode="contain" source={{uri: data.url}} style={{resizeMode: "contain",  width: wp("100%"), height: (data.height/data.width)*wp("100%"), marginTop: 20}}/>
             
               ))}
               {/*<Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeTOP.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>

@@ -18,6 +18,7 @@ import { Linking } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 import { useState, useEffect } from 'react';
 import { WebView } from 'react-native-webview';
+import {version} from "../../../../package.json";
 
 const { height, width } = Dimensions.get('window');
 
@@ -48,7 +49,7 @@ class SplashView extends React.Component {
         }
     }
 
-    componentDidMount() {
+    async componentDidMount() {
         //fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/splash", {
         fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/splash/splash.json",{
             mode: 'no-cors',
@@ -65,18 +66,18 @@ class SplashView extends React.Component {
                 console.log('splash RESPONSE SUCCESS  resdata.backgroundImage   =>', resdata.backgroundImage);
                 console.log('splash RESPONSE SUCCESS  resdata.mainImage   =>', resdata.mainImage);
 
-                if (resdata.typeval === "Update App"){
+                if (parseInt(version.substring(0,2)) < resdata.version){
                     console.log(" res.typeval    Update App");
                     this.setState({typeval: "Update App"});
                     setTimeout(() => {
                         BackHandler.exitApp();
                     }, 2500);
                 }
-                if (resdata.typeval === "None"){
+                else if (resdata.typeval === "None"){
                     this.setState({typeval: "None"});
                     this.props.navigation.navigate("intro");
                 }
-                if (resdata.typeval === "Marketing"){
+                else if (resdata.typeval === "Marketing"){
                     console.log(" =========== typeval     marketing ")
                     this.setState({
                         typeval: "Marketing",

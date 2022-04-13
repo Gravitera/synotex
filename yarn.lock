@@ -6381,6 +6381,11 @@
   dependencies:
     "prop-types" "^15.6.2"
 
+"react-native-device-info@^4.0.1-rc.1":
+  "integrity" "sha512-fBJ+wTBUzyEZ3jWsFr/w/GjHJ9L6peTg7oj9MFZUg0yt0uF6ftS1mULtOOWPXIIZplQl4BnnBuGoOGeTlY5vWg=="
+  "resolved" "https://registry.npmjs.org/react-native-device-info/-/react-native-device-info-4.0.1-rc.1.tgz"
+  "version" "4.0.1-rc.1"
+
 "react-native-exit-app@^1.1.0":
   "integrity" "sha512-Spne19zfMfJvnUTX909EHUqWMk69rATtLJq9XMBGpNSHhx0M7v5yetx2Z87egBhLOqQm+CWfD/oxWzDG8rbIQA=="
   "resolved" "https://registry.npmjs.org/react-native-exit-app/-/react-native-exit-app-1.1.0.tgz"

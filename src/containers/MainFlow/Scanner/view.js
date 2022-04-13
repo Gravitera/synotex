@@ -273,53 +273,51 @@ const ScannerView = (props) => {
 
         {state == 0 ?
         <>
-          <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
+          <View style={{width: width, height: "30%", flexDirection:"column", alignItems: "center", backgroundColor: "white", zIndex: 2}}>
 
             <View style={{height: "10%", width: width}}/>
             <View style={{width: width, height: "10%"}}>
               <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>팔을 쭉 뻗어서 가이드라인에 얼굴을 맞춰주세요.</Text>
             </View>
             <View style={{height: "10%", width: width}}/>
-            <View style={{ flexDirection: 'row', width: width, height: "45%", justifyContent:"space-around"}}>
-                <Image resizeMode="contain" style={{ height: "100%", marginRight: 0 }} source={require("./../../../assets/images/photo_selfie.png")} />
-                <Image resizeMode="contain" style={{ height: "100%", marginLeft: 0 }} source={require("./../../../assets/images/selfie2.png")} />
+            <View style={{ alignItems:"center", flexDirection: 'row', width: width, height: "45%", justifyContent:"space-evenly"}}>
+                <Image resizeMode="contain" style={{resizeMode:"contain", height: hp("11%"), width: hp("12.5%"), marginRight: 0 }} source={require("./../../../assets/images/newdesign/scanner_icon_left.png")} />
+                <Image resizeMode="contain" style={{resizeMode:"contain", height: hp("11%"), width: hp("12%"), marginLeft: 0 }} source={require("./../../../assets/images/newdesign/scanner_icon_right.png")} />
             </View>
-
-          </View>
-
-          <View style={{backgroundColor: "purple", width: wp("100%"), position: "absolute", height: hp("7%"), bottom: hp("12.5%"), zIndex: 9}}>
             <TouchableOpacity onPress={tempfunc}>
-              <ImageBackground source={require("./../../../assets/images/bottom_button.png")} resizeMode="stretch" style={{resizeMode:"stretch", width:wp("100%"), height: hp("7%"), alignItems: 'center',justifyContent: 'center'}}>
-                <Text style={{ fontWeight: "bold", color: "white", marginBottom: 10}}>사진 촬영 시작하기</Text>
-              </ImageBackground>
-            </TouchableOpacity>
+                <Image resizeMode="contain" style={{height: hp("7%"), width: wp("90%"), resizeMode:"contain"}} source={require("./../../../assets/images/newdesign/scanner_next.png")} />
+            </TouchableOpacity>  
           </View>
+
+
+          
+          
         </>
         :null}
         {state == 1 ?
         <>
-        <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
+        <View style={{width: width, height: "30%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
           <View style={{height: "10%", width: width}}/>
           <View style={{width: width, height: "10%"}}>
             <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>팔을 쭉 뻗어서 가이드라인에 얼굴을 맞춰주세요.</Text>
           </View>
           <View style={{height: "10%", width: width}}/>
-          <View style={{ flexDirection: 'row', width: width, height: "70%", justifyContent:"space-around"}}>
-              <Image resizeMode="contain" style={{ height: "100%", marginRight: 0 }} source={require("./../../../assets/images/photo_selfie.png")} />
-              <Image resizeMode="contain" style={{ height: "100%", marginLeft: 0 }} source={require("./../../../assets/images/selfie2.png")} />
+          <View style={{alignItems:"center", flexDirection: 'row', width: width, height: "45%", justifyContent:"space-evenly"}}>
+                <Image resizeMode="contain" style={{resizeMode:"contain", height: hp("11%"), width: hp("12.5%"), marginRight: 0 }} source={require("./../../../assets/images/newdesign/scanner_icon_left.png")} />
+                <Image resizeMode="contain" style={{resizeMode:"contain", height: hp("11%"), width: hp("12%"), marginLeft: 0 }} source={require("./../../../assets/images/newdesign/scanner_icon_right.png")} />
           </View>
 
         </View>
 
-        <View style={{height: "8%", backgroundColor: theme.color.light}}>
+        <View style={{height: "8%", backgroundColor: "white"}}>
           
         </View>
       </>
       :null}
       {state == 2 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
+      <View style={{width: width, height: "30%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -329,13 +327,13 @@ const ScannerView = (props) => {
         <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>얼굴을 돌려주세요.</Text>
         </View>
       </View>
-      <View style={{height: "8%", backgroundColor: theme.color.light}}>
+      <View style={{height: "8%", backgroundColor: "white"}}>
       </View>
     </>
     :null}
     {state == 3 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
+      <View style={{width: width, height: "30%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -350,12 +348,12 @@ const ScannerView = (props) => {
         </View>
 
       </View>
-      <View style={{height: "8%", backgroundColor: theme.color.light, alignItems:"center"}}/>
+      <View style={{height: "8%", backgroundColor: "white", alignItems:"center"}}/>
     </>
     :null}
     {state == 4 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
+      <View style={{width: width, height: "30%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -369,13 +367,13 @@ const ScannerView = (props) => {
               
         </View>
       </View>
-      <View style={{height: "8%", backgroundColor: theme.color.light, alignItems:"center"}}>
+      <View style={{height: "8%", backgroundColor: "white", alignItems:"center"}}>
       </View>
     </>
     :null}
     {state == 5 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
+      <View style={{width: width, height: "30%", flexDirection:"column", backgroundColor: "white", zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -395,7 +393,7 @@ const ScannerView = (props) => {
     :null}
     {state == 6 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
+      <View style={{width: width, height: "30%", flexDirection:"column", backgroundColor: "white", zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -405,14 +403,14 @@ const ScannerView = (props) => {
         <Text style={{fontFamily: theme.font.bold,color: 'black',textAlign: 'center',fontSize: 14,fontWeight: '600',textAlignVertical: 'center', width: width}}>가이드라인을 따라 얼굴을 돌려주세요.</Text>
         </View>
       </View>
-      <View style={{height: "8%", backgroundColor: theme.color.light}}>
+      <View style={{height: "8%", backgroundColor: "white"}}>
       </View>
     </>
     :null}
 
     {state == 7 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
+      <View style={{width: width, height: "30%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -428,7 +426,7 @@ const ScannerView = (props) => {
     :null}
     {state == 8 ?
       <>
-      <View style={{width: width, height: "24%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
+      <View style={{width: width, height: "30%", flexDirection:"column", backgroundColor: theme.color.light, zIndex: 2}}>
 
         <View style={{height: "10%", width: width}}/>
         <View style={{width: width, height: "10%"}}>
@@ -444,6 +442,8 @@ const ScannerView = (props) => {
 
       </View>
 
+
+      {state == 0 ?
       <View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "#F2F4FA", flexDirection: "row", justifyContent: "space-evenly" }}>
         <TouchableOpacity onPress={() => props.navigation.navigate('intro')} style={{width: wp("20%"), height: "100%", flexDirection: "column", justifyContent: "space-between", alignItems:"center"}}>
           <View style={{width: "100%", height: "10%"}}></View>
@@ -476,6 +476,7 @@ const ScannerView = (props) => {
           <View style={{width: "100%", height: "10%"}}></View>
         </TouchableOpacity>
       </View>
+      : null}
       
 
 

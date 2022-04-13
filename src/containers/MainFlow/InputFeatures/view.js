@@ -192,11 +192,11 @@ const InputFeaturesView = (props) => {
                   <Image resizeMode="contain" style={{width: wp("12%"),  height: hp("2%")}} source={require("./../../../assets/images/newdesign/inputfeature_age.png")}/>
                   <View style={{width: wp("90%"), height: hp("1%")}}></View>
                   
-                  <View style={{width: wp("90%"), height: hp("9%"), borderRadius: 50, borderColor: "#0380D8", borderWidth: 2}}>
+                  <View style={{width: wp("90%"), height: hp("7%"), borderRadius: 50, borderColor: "#0380D8", borderWidth: 2}}>
                         <View style={{marginTop: 2, height: "100%", width: wp("20%"), alignItems:"center", position: "absolute", flexDirection:"column", justifyContent:"center"}}>
-                            <View style={{height: "33%"}}/>
+                            {/*<View style={{height: "33%"}}/>
                             <Text style={{fontSize: 12, fontWeight: "bold", color: "black", height: "33%"}}>나이 (필수)</Text>
-                            <View style={{height: "33%"}}/>
+                            <View style={{height: "33%"}}/>*/}
                         </View>
                         <TextInput
                           label="Age"
@@ -232,15 +232,15 @@ const InputFeaturesView = (props) => {
                       />
                   </ImageBackground>*/}
                   
-                  <View style={{width: wp("90%"), height: hp("2%")}}></View>
+                  <View style={{width: wp("90%"), height: hp("4%")}}></View>
 
                   <Image resizeMode="contain" style={{ width: wp("12%"),  height: hp("2%")}} source={require("./../../../assets/images/newdesign/inputfeature_height.png")}/>
                   <View style={{width: wp("90%"), height: hp("1%")}}></View>
 
-                  <View style={{width: wp("90%"), height: hp("9%"), borderRadius: 50, borderColor: "#0380D8", borderWidth: 2}}>
+                  <View style={{width: wp("90%"), height: hp("7%"), borderRadius: 50, borderColor: "#0380D8", borderWidth: 2}}>
                       <View style={{marginTop: 2, height: "100%", width: wp("20%"), alignItems:"center", position: "absolute", flexDirection:"column", justifyContent:"center"}}>
-                          <View style={{height: "33%"}}/>
-                          <Text style={{fontSize: 12, fontWeight: "bold", color: "black", height: "33%"}}>신장 (필수)</Text>
+                          {/*<View style={{height: "33%"}}/>
+                          <Text style={{fontSize: 12, fontWeight: "bold", color: "black", height: "33%"}}>신장 (필수)</Text>*/}
                       <View style={{height: "33%"}}/>
                       </View>
                       <TextInput
@@ -287,7 +287,7 @@ const InputFeaturesView = (props) => {
                       </ImageBackground>
                   </TouchableOpacity>
 
-                  <View style={{ alignItems:"center", justifyContent: "center", flexDirection: "row", width: wp("90%"), height: hp("10%")}}>
+                  <View style={{ alignItems:"center", justifyContent: "center", flexDirection: "row", width: wp("90%"), height: hp("12%")}}>
                   <Image resizeMode="contain" style={{width: hp("40%"),  height: hp("10%")}} source={require("./../../../assets/images/newdesign/inputfeature_bottom_text.png")}/>
                   </View>
 
