@@ -70,6 +70,37 @@ const RecommendationView = (props) => {
 
   const [feedbacksent, setfeedbacksent] = useState(0);
 
+  var [baserecommendationtext, setbaseRecommendationtext] = useState([]);
+  var [Nrecommendationtext, setNRecommendationtext] = useState([]);
+  var [NNetworkrecommendationtext, setNNetworkRecommendationtext] = useState([]);
+  var [Unrecognizedrecommendationtext, setUnrecognizedRecommendationtext] = useState([]);
+
+  useEffect(() => {
+        fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/recommendationtext/recommendationtext.json",{
+          mode: 'no-cors',
+          method: 'GET',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              "Access-Control-Allow-Origin": "*"
+          },})
+          .then((res) => res.json())
+          .then((resdata) => {
+              console.log('recommendationtext RESPONSE SUCCESS =>', resdata);
+              console.log('recommendationtext RESPONSE SUCCESS =>', resdata);
+              setbaseRecommendationtext(resdata.base);
+              setNRecommendationtext(resdata.N);
+              setNNetworkRecommendationtext(resdata.NNetwork);
+              setUnrecognizedRecommendationtext(resdata.Unrecognized);
+              console.log( " =============   baserecommendationtext     ", baserecommendationtext);
+              console.log( " =============   Nrecommendationtext     ", Nrecommendationtext);
+              console.log( " =============   NNetworkrecommendationtext     ", NNetworkrecommendationtext);
+              console.log( " =============   Unrecognizedrecommendationtext     ", Unrecognizedrecommendationtext);
+              setTimeout(() => {
+                console.log(" data fetched all    ");
+              }, 500);
+        })
+  }, []);
 
 
   const storeData = useSelector((store) => store);
@@ -461,6 +492,11 @@ if (feedbacksent == 1){
   })
 }
 
+  console.log( " =============   baserecommendationtext     ", baserecommendationtext);
+  console.log( " =============   Nrecommendationtext     ", Nrecommendationtext);
+  console.log( " =============   NNetworkrecommendationtext     ", NNetworkrecommendationtext);
+  console.log( " =============   Unrecognizedrecommendationtext     ", Unrecognizedrecommendationtext);
+
 
   return (
     <>
@@ -486,10 +522,12 @@ if (feedbacksent == 1){
                 {(storeData.attendanceReducer.res.MaskSize.toLowerCase() == "xs" || storeData.attendanceReducer.res.MaskSize.toLowerCase() == "ss" || storeData.attendanceReducer.res.MaskSize.toLowerCase() == "s" || storeData.attendanceReducer.res.MaskSize.toLowerCase() == "m") && storeData.attendanceReducer.res.ID != "Unrecognized" && storeData.attendanceReducer.res.ID != "NNetwork"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
                     <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>시노텍스앱에서 측정한</Text>
-                    <Text style={{marginTop: -1*hp("1%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "yellow"}}>{overallsize}</Text> 입니다.</Text>
-                  
-                    <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
-                    <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>야외 및 레저활동 시 컬러 마스크 착용을 추천드립니다.</Text>
+                    <Text style={{marginTop: -1*hp("1%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>{overallsize}</Text> 입니다.</Text>
+                    {baserecommendationtext.map((data, index) => {
+                        <Text key={index} style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>{data}</Text>
+                    })}
+                    {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
+                    <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>야외 및 레저활동 시 컬러 마스크 착용을 추천드립니다.</Text>*/}
 
 
                     {/*
@@ -500,7 +538,7 @@ if (feedbacksent == 1){
                     <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>UV 화이트콜라보, 블랙, 그레이 마스크를 추천 드립니다.</Text>*/}
 
                     <Text style={{marginTop: hp("1%"), marginBottom: hp("1%")}}>  </Text>
-                    <Text style={{marginTop: hp("2%"), color: "#0380D8", marginBottom: hp("2%")}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
+                    <Text style={{marginTop: hp("2%"), color: "#0380D8", marginBottom: hp("2%"), fontWeight: "bold"}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
                     <Text style={{marginTop: hp("0.5%"), marginBottom: hp("0.5%")}}>  </Text>
                   </View>
                   :
@@ -511,11 +549,14 @@ if (feedbacksent == 1){
                 {storeData.attendanceReducer.res.MaskSize.toLowerCase() == "l"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
                     <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>시노텍스앱에서 측정한</Text>
-                    <Text style={{marginTop: -1*hp("1%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "yellow"}}>{overallsize}</Text> 입니다.</Text>
+                    <Text style={{marginTop: -1*hp("1%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>{overallsize}</Text> 입니다.</Text>
                     
-                    <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
+                    {baserecommendationtext.map((data, index) => {
+                        <Text key={index} style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>{data}</Text>
+                    })}
+                    {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
                     <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>야외 및 레저활동 시 컬러 마스크 착용을 추천드립니다.</Text>
-                    
+                      */}
                     {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: height*0.02 }}>여름철에는 자외선 차단 기능이 있는</Text>
                     <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>UV 화이트콜라보, 블랙, 그레이 마스크를 추천 드립니다.</Text>*/}
                     <Text style={{marginTop: hp("1%"), marginBottom: hp("1%")}}>  </Text>
@@ -528,11 +569,15 @@ if (feedbacksent == 1){
 
                   {storeData.attendanceReducer.res.MaskSize == "NS"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
-                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>얼굴이 작아 보이는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>키즈(XS)</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text> 사이즈를 추천드리며,</Text>
-                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>편한 호흡을 원하시면 <Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>소형(S)</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text> 사이즈를 추천드립니다.</Text>
+                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>얼굴이 작아 보이는 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>키즈(XS)</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text> 사이즈를 추천드리며,</Text>
+                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>편한 호흡을 원하시면 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>소형(S)</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text> 사이즈를 추천드립니다.</Text>
                     
-                    <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
+                    {baserecommendationtext.map((data, index) => {
+                        <Text key={index} style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>{data}</Text>
+                    })}
+                    {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
                     <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>야외 및 레저활동 시 컬러 마스크 착용을 추천드립니다.</Text>
+                    */}
                     {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: height*0.025 , marginTop: hp("2%")}}>여름철에는 자외선 차단 기능이 있는</Text>
                     <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>UV 화이트콜라보, 블랙, 그레이 색상 마스크도 좋습니다.</Text>*/}
                     <Text style={{marginTop: hp("1%"), marginBottom: hp("1%")}}>  </Text>
@@ -543,12 +588,15 @@ if (feedbacksent == 1){
                   null} 
                   {storeData.attendanceReducer.res.MaskSize == "NM"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
-                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>얼굴이 작아 보이는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>소형(S)</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text> 사이즈를 추천드리며,</Text>
-                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>편한 호흡을 원하시면 <Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>중형(M)</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text> 사이즈를 추천드립니다.</Text>
+                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>얼굴이 작아 보이는 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>소형(S)</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text> 사이즈를 추천드리며,</Text>
+                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>편한 호흡을 원하시면 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>중형(M)</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text> 사이즈를 추천드립니다.</Text>
                     
-                    <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
+                    {baserecommendationtext.map((data, index) => {
+                        <Text key={index} style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>{data}</Text>
+                    })}
+                    {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
                     <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>야외 및 레저활동 시 컬러 마스크 착용을 추천드립니다.</Text>
-
+                    */}
 
                     {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: height*0.025 , marginTop: hp("2%")}}>여름철에는 자외선 차단 기능이 있는</Text>
                     <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>UV 화이트콜라보, 블랙, 그레이 색상 마스크도 좋습니다.</Text>*/}
@@ -562,12 +610,15 @@ if (feedbacksent == 1){
 
                   {storeData.attendanceReducer.res.MaskSize == "NL"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
-                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>얼굴이 작아 보이는 <Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>중형(M)</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text> 사이즈를 추천드리며,</Text>
-                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>편한 호흡을 원하시면 <Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>대형(L)</Text><Text style={{fontSize: width*0.04, color: "yellow"}}>"</Text> 사이즈를 추천드립니다.</Text>
+                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>얼굴이 작아 보이는 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>중형(M)</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text> 사이즈를 추천드리며,</Text>
+                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>편한 호흡을 원하시면 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>대형(L)</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text> 사이즈를 추천드립니다.</Text>
                     
-                    <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
+                    {baserecommendationtext.map((data, index) => {
+                        <Text key={index} style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>{data}</Text>
+                    })}
+                    {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
                     <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>야외 및 레저활동 시 컬러 마스크 착용을 추천드립니다.</Text>
-
+                    */}
                     {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: height*0.025 , marginTop: hp("2%")}}>여름철에는 자외선 차단 기능이 있는</Text>
                     <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>UV 화이트콜라보, 블랙, 그레이 색상 마스크도 좋습니다.</Text>*/}
                     <Text style={{marginTop: hp("1%"), marginBottom: hp("1%")}}>  </Text>
@@ -579,9 +630,14 @@ if (feedbacksent == 1){
 
                   {storeData.attendanceReducer.res.MaskSize == "N" && storeData.attendanceReducer.res.ID != "NNetwork" && storeData.attendanceReducer.res.ID != "Unrecognized"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
-                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>정확한 측정을 위해 다시한번 시도해 주세요.</Text>
+
+                    {Nrecommendationtext.map((data, index) => {
+                        <Text key={index} style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>{data}</Text>
+                    })}
+                    
+                    {/*<Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>정확한 측정을 위해 다시한번 시도해 주세요.</Text>
                     <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>팔을 쭉 뻗어서 가이드 라인에 얼굴을 맞춰 측정하시면</Text>
-                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>정확한 측정결과를 확인 하실 수 있습니다.</Text>
+                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>정확한 측정결과를 확인 하실 수 있습니다.</Text>*/}
                   
                     <Text style={{marginTop: hp("1%"), marginBottom: hp("1%")}}>  </Text>
                     <Text style={{marginTop: hp("2%"), color: "#0380D8", marginBottom: hp("2%")}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
@@ -593,15 +649,23 @@ if (feedbacksent == 1){
                   null} 
                   {storeData.attendanceReducer.res.ID == "NNetwork"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
-                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>인터넷 연결을 확인 해주세요.</Text>
+                    {NNetworkrecommendationtext.map((data, index) => {
+                        <Text key={index} style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>{data}</Text>
+                    })}
+                    {/*<Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>인터넷 연결을 확인 해주세요.</Text>*/}
                   </View>
                   :
                   null} 
                   {storeData.attendanceReducer.res.ID == "Unrecognized"?
                   <View style={{flexDirection: "column", alignItems:'center'}}>
-                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>정확한 측정을 위해 다시한번 시도해 주세요.</Text>
+
+                    {Unrecognizedrecommendationtext.map((data, index) => {
+                        <Text key={index} style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>{data}</Text>
+                    })}
+                    
+                    {/*<Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>정확한 측정을 위해 다시한번 시도해 주세요.</Text>
                     <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>팔을 쭉 뻗어서 가이드 라인에 얼굴을 맞춰 측정하시면</Text>
-                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>정확한 측정결과를 확인 하실 수 있습니다.</Text>
+                    <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>정확한 측정결과를 확인 하실 수 있습니다.</Text>*/}
                  
                     <Text style={{marginTop: hp("1%"), marginBottom: hp("1%")}}>  </Text>
                     <Text style={{marginTop: hp("2%"), color: "#0380D8", marginBottom: hp("2%")}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
@@ -1022,6 +1086,7 @@ if (feedbacksent == 1){
 
     </>
   );
+
 };
 
 const styles = StyleSheet.create({

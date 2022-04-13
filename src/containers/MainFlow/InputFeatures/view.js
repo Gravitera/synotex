@@ -40,7 +40,7 @@ const InputFeaturesView = (props) => {
   const [initialage, setInitialage] = useState(30);
   const [initialheight, setInitialheight] = useState(175);
 
-  const [privacylink, setPrivacylink] = useState("");
+  var [privacylink, setPrivacylink] = useState("");
 
   useEffect(() => {
     fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/privacylink/privacylink.json", {
