@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRef } from 'react';
 import {
   StyleSheet,
   View,
@@ -25,6 +26,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Platform } from 'react-native';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+
 
 
 const Sound = require('react-native-sound');
@@ -69,9 +71,14 @@ const unrecognized = new Sound('unrecognized.mp3', Sound.MAIN_BUNDLE);
 
 const RecommendationView = (props) => {
 
+  const scrollRef = useRef();
+
   const [feedbacksent, setfeedbacksent] = useState(0);
 
   var [recommtext, setRecommtext] = useState({});
+
+  var [recomm, setRecomm] = useState([]);
+
 
   useEffect(() => {
         fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/recommendationtext/recommendationtext.json",{
@@ -88,12 +95,29 @@ const RecommendationView = (props) => {
               console.log('recommendationtext RESPONSE SUCCESS =>', resdata);
               setRecommtext(resdata);
 
-              /*
-              console.log( " =============   baserecommendationtext     ", baserecommendationtext);
-              console.log( " =============   Nrecommendationtext     ", Nrecommendationtext);
-              console.log( " =============   NNetworkrecommendationtext     ", NNetworkrecommendationtext);
-              console.log( " =============   Unrecognizedrecommendationtext     ", Unrecognizedrecommendationtext);
-              */
+              fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/recommendation/recommendation.json",{
+                mode: 'no-cors',
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    "Access-Control-Allow-Origin": "*"
+                },})
+                .then((res) => res.json())
+                .then((resdata) => {
+                    console.log('recommendation RESPONSE SUCCESS =>', resdata);
+                    console.log('recommendation RESPONSE SUCCESS =>', resdata);
+                    setRecomm(resdata);
+
+                    /*
+                    console.log( " =============   baserecommendationtext     ", baserecommendationtext);
+                    console.log( " =============   Nrecommendationtext     ", Nrecommendationtext);
+                    console.log( " =============   NNetworkrecommendationtext     ", NNetworkrecommendationtext);
+                    console.log( " =============   Unrecognizedrecommendationtext     ", Unrecognizedrecommendationtext);
+                    */
+                  
+              })
+
         })
   }, []);
 
@@ -424,11 +448,17 @@ if (feedbacksent == 1){
 }
 
 
+  const onPressLeft = () => {
+    scrollRef.current?.scrollTo({
+      x: 0,
+      animated: true,
+    });
+  }
 
 
-  if (Object.keys(recommtext).length != 0){
 
-
+  //if (Object.keys(recommtext).length != 0){
+    if (recomm.length != 0){
 
 
 
@@ -504,6 +534,7 @@ if (feedbacksent == 1){
 
     console.log( " ================================================================= ");
     console.log( " =============   recommtext     ", recommtext);
+    console.log( " =============   recomm     ", recomm);
     console.log( " =============   overallsize     ", overallsize);
     console.log( " =============   storeData.attendanceReducer.res.MaskSize     ", storeData.attendanceReducer.res.MaskSize);
     console.log( " =============   storeData.attendanceReducer.res.ID     ", storeData.attendanceReducer.res.ID);
@@ -689,39 +720,54 @@ if (feedbacksent == 1){
 
 
 
-          <View style={{width: "100%", height: hp("30%")}}>
-                          
-              <ScrollView 
-                horizontal={true} 
+          <View style={{ width: wp("100%"), height: hp("12.5%"), flexDirection: "row"}}>
+
+            <TouchableOpacity style={{flex:1}} onPress={onPressLeft}>
+              <View style={{flex:1, alignItems:"center", justifyContent: "center"}}>
+                  
+                <Image resizeMode="contain" style={{resizeMode:"contain", height: "35%", width: "35%"}} source={require(`./../../../assets/images/newdesign/left_arrow_ar.png`)} />
+              </View>
+            </TouchableOpacity>
+
+
+            
+            <View style={{flex:6}}>
+
+              <ScrollView
+                horizontal={true}
                 showsVerticalScrollIndicator={false}
                 showsHorizontalScrollIndicator={false}
-                style={{ flex: 1, paddingTop: 0}}
+                ref={scrollRef}
               >
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
+                  {recomm.map((data, index) => (
+                    <>
+                      <View style={{width: 3, height: 5}}></View>
+                      <TouchableOpacity key={index} onPress={() => Linking.openURL(recomm.url)}>
+                          <View style={{width: hp("12.5%"), height: hp("12.5%"), borderRadius:150, backgroundColor: "white", flexDirection: "column", alignItems: "center", justifyContent:"center", shadowColor: "#000", shadowOffset: {width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5, shadowColor: "#000", shadowOffset: {width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5}}>
+                              <View style={{width: 1, height: 3.5}}></View>
+                              <Text style={{fontSize: 12, fontWeight: "bold", textAlign:"center"}}>{data.name}</Text>
+                              <Image style={{width: "80%",height: "80%"}} resizeMode="contain" source={{uri: data.imgurl}} />
+                            
+                          </View>
+                      </TouchableOpacity>
+                      <View style={{width: 3, height: 5}}></View>
+                    </>
+
+                  ))}
+                  
 
               </ScrollView>
 
+
+            </View>
+
+
+
+            <View style={{flex:1, alignItems:"center", justifyContent: "center"}}>
+                
+              <Image resizeMode="contain" style={{resizeMode:"contain", height: "35%", width: "35%"}} source={require(`./../../../assets/images/newdesign/right_arrow_ar.png`)} />
+            </View>
+                          
 
 
           </View>
@@ -1157,7 +1203,7 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     marginTop: 68,
-    paddingHorizontal: 20
+    paddingHorizontal: 0
   },
   heading: {
     fontFamily: theme.font.bold,
