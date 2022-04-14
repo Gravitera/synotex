@@ -39,7 +39,7 @@ class Brandstory extends React.Component {
 
 
 
-  componentDidMount() {
+  async componentDidMount() {
       fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/brandstory/brandstory.json",{
         mode: 'no-cors',
         method: 'GET',
@@ -87,7 +87,7 @@ class Brandstory extends React.Component {
 
     console.log(" =============  during render before return   imglinks    ", this.state.imglinks);
 
-    return (
+    return this.state.imglinks.length != 0 ? (
           <>
 
         
@@ -157,7 +157,8 @@ class Brandstory extends React.Component {
 
         </>
 
-    );
+    )
+    : null
 
 
   }

@@ -1,6 +1,6 @@
 {
   "name": "frontOffice",
-  "version": "24.0.1",
+  "version": "25.0.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -50,6 +50,7 @@
     "react-native-sound": "^0.11.0",
     "react-native-splash-screen": "^3.2.0",
     "react-native-star-rating": "^1.1.0",
+    "react-native-swiper": "^1.6.0",
     "react-native-tab-view": "^2.14.4",
     "react-native-table-component": "^1.2.1",
     "react-native-vector-icons": "^6.6.0",

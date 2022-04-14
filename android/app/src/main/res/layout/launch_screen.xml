@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
-    android:orientation="vertical"
-    tools:layout_weight="1">
+    android:orientation="vertical">
 
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:background="#fff"
-      android:orientation="horizontal">
+      android:orientation="horizontal"
+      xmlns:tools="http://schemas.android.com/tools" >
 
     <Space
         android:layout_width="0dp"
@@ -19,12 +19,12 @@
         android:layout_weight="1" />
 
     <ImageView
-        app:layout_widthPercent="25%"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:scaleType="centerInside"
         android:src="@drawable/launch_screen"
-        tools:layout_weight="3" />
+        tools:layout_weight="3"
+        android:contentDescription="TODO" />
 
     <Space
         android:layout_width="0dp"

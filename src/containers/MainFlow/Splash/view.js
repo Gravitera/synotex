@@ -120,7 +120,7 @@ class SplashView extends React.Component {
         console.log(" ========== during render this.typeval,   this.state.mainImageStyle     ", this.state.mainImageStyle, "     ", this.state.mainImageStyle);
 
 
-        return (
+        return this.state.typeval.length != 0 ? (
             <>
                 {this.state.typeval === "Update App" ?
                     <View style={{width: wp("100%"), height: hp("100%"), backgroundColor: "#0380D8", flexDirection: "column", justifyContent: "center", alignItems:"center"}}>
@@ -150,7 +150,8 @@ class SplashView extends React.Component {
                 :null}
             </>
 
-        );
+        )
+        : null
 
     };
 

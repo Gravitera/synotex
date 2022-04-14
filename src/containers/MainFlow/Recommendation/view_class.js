@@ -26,7 +26,6 @@ import { Platform } from 'react-native';
 
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
-
 const Sound = require('react-native-sound');
 
 const { height, width } = Dimensions.get('window');
@@ -67,11 +66,80 @@ const nonesizelarge = new Sound("nonesizelarge.mp3", Sound.MAIN_BUNDLE);
 
 const unrecognized = new Sound('unrecognized.mp3', Sound.MAIN_BUNDLE);
 
+class RecommendationView extends React.Component{
+    constructor(props) {
+        super(props)
+
+        this.state = {
+          feedbacksent : 0,
+          baserecommendationtext : [],
+          Nrecommendationtext : [],
+          NNetworkrecommendationtext : [],
+          Unrecognizedrecommendationtext : [],
+          legend : {
+            enabled: false,
+            textSize: 28,
+            form: 'CIRCLE',
+            wordWrapEnabled: true
+          },
+          xAxis : {
+            valueFormatter: ['얼굴수직길이 (%)', '머리수직길이 (%)', '머리너비 (%)', '아래턱사이너비 (%)', '머리둘레 (%)']
+          },
+          storeData : useSelector((store) => store),
+          data : {
+            dataSets: [{
+              values: [{ value: this.state.storeData.attendanceReducer.res.Pentagram.FaceHeight }, { value: this.state.storeData.attendanceReducer.res.Pentagram.HeadHeight }, { value: this.state.storeData.attendanceReducer.res.Pentagram.HeadWidth }, { value: this.state.storeData.attendanceReducer.res.Pentagram.ChinWidth }, { value: this.state.storeData.attendanceReducer.res.Pentagram.HeadRound }],
+              label: 'DS 1',
+              config: {
+                color: processColor('#FF8C9D'),
+        
+                drawFilled: true,
+                fillColor: processColor('#FF8C9D'),
+                fillAlpha: 100,
+                lineWidth: 2
+              }
+            }]
+          }
+
+
+
+        }
+    }
+
+    async componentDidMount() {
+
+    }
+
+    handleSelect(event){
+      let entry = event.nativeEvent
+      if (entry == null) {
+        setSelectedEntry(null)
+      } else {
+        setSelectedEntry(JSON.stringify(entry))
+      }
+      console.log(event.nativeEvent)
+    }
+    
+
+
+
+
+
+
+
+}
+
+
+
+
 const RecommendationView = (props) => {
 
   const [feedbacksent, setfeedbacksent] = useState(0);
 
-  var [recommtext, setRecommtext] = useState({});
+  var [baserecommendationtext, setbaseRecommendationtext] = useState([]);
+  var [Nrecommendationtext, setNRecommendationtext] = useState([]);
+  var [NNetworkrecommendationtext, setNNetworkRecommendationtext] = useState([]);
+  var [Unrecognizedrecommendationtext, setUnrecognizedRecommendationtext] = useState([]);
 
   useEffect(() => {
         fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/recommendationtext/recommendationtext.json",{
@@ -86,70 +154,85 @@ const RecommendationView = (props) => {
           .then((resdata) => {
               console.log('recommendationtext RESPONSE SUCCESS =>', resdata);
               console.log('recommendationtext RESPONSE SUCCESS =>', resdata);
-              setRecommtext(resdata);
-
-              /*
+              setbaseRecommendationtext(resdata.base);
+              setNRecommendationtext(resdata.N);
+              setNNetworkRecommendationtext(resdata.NNetwork);
+              setUnrecognizedRecommendationtext(resdata.Unrecognized);
               console.log( " =============   baserecommendationtext     ", baserecommendationtext);
               console.log( " =============   Nrecommendationtext     ", Nrecommendationtext);
               console.log( " =============   NNetworkrecommendationtext     ", NNetworkrecommendationtext);
               console.log( " =============   Unrecognizedrecommendationtext     ", Unrecognizedrecommendationtext);
-              */
+              setTimeout(() => {
+                console.log(" data fetched all    ");
+              }, 500);
         })
   }, []);
 
 
-  const storeData = useSelector((store) => store);
-/*
-  var maskImage = "M";
-  */
-  //  console.log("reco props",props)
-  const [data, setData] = useState({
-    dataSets: [{
-      values: [{ value: storeData.attendanceReducer.res.Pentagram.FaceHeight }, { value: storeData.attendanceReducer.res.Pentagram.HeadHeight }, { value: storeData.attendanceReducer.res.Pentagram.HeadWidth }, { value: storeData.attendanceReducer.res.Pentagram.ChinWidth }, { value: storeData.attendanceReducer.res.Pentagram.HeadRound }],
-      label: 'DS 1',
-      config: {
-        color: processColor('#FF8C9D'),
-
-        drawFilled: true,
-        fillColor: processColor('#FF8C9D'),
-        fillAlpha: 100,
-        lineWidth: 2
-      }
-    },
 
 
-    ],
-  });
-  const [legend, setLegend] = useState({
-    enabled: false,
-    textSize: 28,
-    form: 'CIRCLE',
-    wordWrapEnabled: true
-  })
-  const [selectedEntry, setSelectedEntry] = useState(null)
-  const [xAxis, setXAxis] = useState({
-    valueFormatter: ['얼굴수직길이 (%)', '머리수직길이 (%)', '머리너비 (%)', '아래턱사이너비 (%)', '머리둘레 (%)']
-  })
-
-
-
-  const handleSelect = (event) => {
-    let entry = event.nativeEvent
-    if (entry == null) {
-      setSelectedEntry(null)
-    } else {
-      setSelectedEntry(JSON.stringify(entry))
-    }
-
-    //console.log(event.nativeEvent)
-  }
 
   let MaskSize_Korean = "키즈(XS)";
   let whitemasktext = "화이트키즈(XS)";
   let blackmasktext = "블랙키즈(XS)";
   let overallsize = "키즈(XS)";
   let maskImage = "XS";
-  
+  if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "s"){
+    MaskSize_Korean = "소형(S)";
+    whitemasktext = "화이트소형(S)";
+    blackmasktext = "블랙소형(S)";
+    overallsize = "소형(S)";
+    maskImage = "S";
+  }
+  if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "ss"){
+    MaskSize_Korean = "초등학생용(SS)";
+    whitemasktext = "화이트초등학생용(SS)";
+    blackmasktext = "블랙초등학생용(SS)";
+    overallsize = "초등학생용(SS)";
+    maskImage = "S";
+  }
+  if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "m"){
+    MaskSize_Korean = "중형(M)";
+    whitemasktext = "화이트중형(M)";
+    blackmasktext = "블랙중형(M)";
+    overallsize = "중형(M)";
+    maskImage = "M";
+  }
+  if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "l"){
+    MaskSize_Korean = "대형(L)";
+    whitemasktext = "화이트대형(L)";
+    blackmasktext = "블랙대형(L)";
+    overallsize = "대형(L)";
+    maskImage = "L";
+  }
+  if (storeData.attendanceReducer.res.MaskSize == "NS"){
+    MaskSize_Korean = "소형(S)";
+    whitemasktext = "화이트소형(S)";
+    blackmasktext = "블랙소형(S)";
+    overallsize = "소형(S)";
+    maskImage = "S";
+  }
+  if (storeData.attendanceReducer.res.MaskSize == "NM"){
+    MaskSize_Korean = "중형(M)";
+    whitemasktext = "화이트중형(M)";
+    blackmasktext = "블랙중형(M)";
+    overallsize = "중형(M)";
+    maskImage = "M";
+  }
+  if (storeData.attendanceReducer.res.MaskSize == "NL"){
+    MaskSize_Korean = "대형(L)";
+    whitemasktext = "화이트대형(L)";
+    blackmasktext = "블랙대형(L)";
+    overallsize = "대형(L)";
+    maskImage = "L";
+  }
+  if (storeData.attendanceReducer.res.MaskSize == "N"){
+    MaskSize_Korean = "재측청";
+    whitemasktext = "화이트";
+    blackmasktext = "블랙";
+    overallsize = "";
+    maskImage = "L";
+  }
 
 
 
@@ -285,7 +368,16 @@ const RecommendationView = (props) => {
   let FaceHeight_pst = String(storeData.attendanceReducer.res.Pentagram.FaceHeight)+"%";
   let ChinWidth_pst = String(storeData.attendanceReducer.res.Pentagram.ChinWidth)+"%";
   let HeadRound_pst = String(storeData.attendanceReducer.res.Pentagram.HeadRound)+"%";
+  tableData = [
+    ['얼굴길이(mm)', FaceHeightPercent_str, FaceHeight_str, MaskSize_Korean],
+    ['얼굴넓이(mm)', FaceWidthPercent_str, FaceWidth_str, MaskSize_Korean]
+  ];
 
+  tableData2 = [
+    ['평균', FaceWidthPercent_str,FaceHeightPercent_str, ChinWidthAverage_str, HeadRoundAverage_str, MaskSize_Korean],
+    ['당신', FaceWidth_str, FaceHeight_str, ChinWidthPredicted_str, HeadRoundPredicted_str, MaskSize_Korean],
+    ['%', FaceWidth_pst, FaceHeight_pst, ChinWidth_pst, HeadRound_pst, MaskSize_Korean],
+  ]
 
   const sendFeedbackXS = () => {
     const data = {
@@ -339,7 +431,7 @@ const RecommendationView = (props) => {
   }
 
 
-  //console.log(" =================================== MaskSize in Recomm =============== ", storeData.attendanceReducer.res.MaskSize);
+  console.log(" =================================== MaskSize in Recomm =============== ", storeData.attendanceReducer.res.MaskSize);
 
   if (storeData.attendanceReducer.res.MaskSize == "XS" && feedbacksent == 0){
     AI_kids.play((success) => {
@@ -422,92 +514,16 @@ if (feedbacksent == 1){
     console.log("success");
   })
 }
+  console.log( " =============   storeData.attendanceReducer.res.MaskSize     ", storeData.attendanceReducer.res.MaskSize);
+  console.log( " =============   baserecommendationtext     ", baserecommendationtext);
+  console.log( " =============   Nrecommendationtext     ", Nrecommendationtext);
+  console.log( " =============   NNetworkrecommendationtext     ", NNetworkrecommendationtext);
+  console.log( " =============   Unrecognizedrecommendationtext     ", Unrecognizedrecommendationtext);
 
 
-
-
-  if (Object.keys(recommtext).length != 0){
-
-
-
-
-
-    if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "s"){
-      MaskSize_Korean = "소형(S)";
-      whitemasktext = "화이트소형(S)";
-      blackmasktext = "블랙소형(S)";
-      overallsize = "소형(S)";
-      maskImage = "S";
-    }
-    if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "ss"){
-      MaskSize_Korean = "초등학생용(SS)";
-      whitemasktext = "화이트초등학생용(SS)";
-      blackmasktext = "블랙초등학생용(SS)";
-      overallsize = "초등학생용(SS)";
-      maskImage = "S";
-    }
-    if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "m"){
-      MaskSize_Korean = "중형(M)";
-      whitemasktext = "화이트중형(M)";
-      blackmasktext = "블랙중형(M)";
-      overallsize = "중형(M)";
-      maskImage = "M";
-    }
-    if (storeData.attendanceReducer.res.MaskSize.toLowerCase() == "l"){
-      MaskSize_Korean = "대형(L)";
-      whitemasktext = "화이트대형(L)";
-      blackmasktext = "블랙대형(L)";
-      overallsize = "대형(L)";
-      maskImage = "L";
-    }
-    if (storeData.attendanceReducer.res.MaskSize == "NS"){
-      MaskSize_Korean = "소형(S)";
-      whitemasktext = "화이트소형(S)";
-      blackmasktext = "블랙소형(S)";
-      overallsize = "소형(S)";
-      maskImage = "S";
-    }
-    if (storeData.attendanceReducer.res.MaskSize == "NM"){
-      MaskSize_Korean = "중형(M)";
-      whitemasktext = "화이트중형(M)";
-      blackmasktext = "블랙중형(M)";
-      overallsize = "중형(M)";
-      maskImage = "M";
-    }
-    if (storeData.attendanceReducer.res.MaskSize == "NL"){
-      MaskSize_Korean = "대형(L)";
-      whitemasktext = "화이트대형(L)";
-      blackmasktext = "블랙대형(L)";
-      overallsize = "대형(L)";
-      maskImage = "L";
-    }
-    if (storeData.attendanceReducer.res.MaskSize == "N"){
-      MaskSize_Korean = "재측청";
-      whitemasktext = "화이트";
-      blackmasktext = "블랙";
-      overallsize = "";
-      maskImage = "L";
-    }
-
-
-    tableData = [
-      ['얼굴길이(mm)', FaceHeightPercent_str, FaceHeight_str, MaskSize_Korean],
-      ['얼굴넓이(mm)', FaceWidthPercent_str, FaceWidth_str, MaskSize_Korean]
-    ];
-  
-    tableData2 = [
-      ['평균', FaceWidthPercent_str,FaceHeightPercent_str, ChinWidthAverage_str, HeadRoundAverage_str, MaskSize_Korean],
-      ['당신', FaceWidth_str, FaceHeight_str, ChinWidthPredicted_str, HeadRoundPredicted_str, MaskSize_Korean],
-      ['%', FaceWidth_pst, FaceHeight_pst, ChinWidth_pst, HeadRound_pst, MaskSize_Korean],
-    ]
-
-
-    console.log( " ================================================================= ");
-    console.log( " =============   recommtext     ", recommtext);
-    console.log( " =============   overallsize     ", overallsize);
-    console.log( " =============   storeData.attendanceReducer.res.MaskSize     ", storeData.attendanceReducer.res.MaskSize);
-    console.log( " =============   storeData.attendanceReducer.res.ID     ", storeData.attendanceReducer.res.ID);
-    console.log( " ================================================================= ");
+  if (baserecommendationtext.length == 0){
+      return null
+  }else{
       
     return (
       <>
@@ -527,19 +543,16 @@ if (feedbacksent == 1){
           <Animatable.View animation="slideInUp" direction="alternate">
               <View style={{justifyContent: 'center', flexDirection: "column"}}>
 
-
-
-
+                {/*<Image style={{ marginRight: 10 }} resizeMode="contain" source={require(`./../../../assets/images/user.png`)} />*/}
 
       
                   {(storeData.attendanceReducer.res.MaskSize.toLowerCase() == "xs" || storeData.attendanceReducer.res.MaskSize.toLowerCase() == "ss" || storeData.attendanceReducer.res.MaskSize.toLowerCase() == "s" || storeData.attendanceReducer.res.MaskSize.toLowerCase() == "m") && storeData.attendanceReducer.res.ID != "Unrecognized" && storeData.attendanceReducer.res.ID != "NNetwork"?
                     <View style={{flexDirection: "column", alignItems:'center'}}>
                       <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>시노텍스앱에서 측정한</Text>
                       <Text style={{marginTop: -1*hp("1%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>{overallsize}</Text> 입니다.</Text>
-                      
-                      {recommtext.base.map((data, index) => 
+                      {baserecommendationtext.map((data, index) => {
                           <Text key={index} style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>{data}</Text>
-                      )}
+                      })}
                       {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
                       <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>야외 및 레저활동 시 컬러 마스크 착용을 추천드립니다.</Text>*/}
 
@@ -565,9 +578,9 @@ if (feedbacksent == 1){
                       <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>시노텍스앱에서 측정한</Text>
                       <Text style={{marginTop: -1*hp("1%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>당신의 추천 사이즈는 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>{overallsize}</Text> 입니다.</Text>
                       
-                      {recommtext.base.map((data, index) => 
+                      {baserecommendationtext.map((data, index) => {
                           <Text key={index} style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>{data}</Text>
-                      )}
+                      })}
                       {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
                       <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>야외 및 레저활동 시 컬러 마스크 착용을 추천드립니다.</Text>
                         */}
@@ -586,9 +599,9 @@ if (feedbacksent == 1){
                       <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>얼굴이 작아 보이는 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>키즈(XS)</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text> 사이즈를 추천드리며,</Text>
                       <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>편한 호흡을 원하시면 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>소형(S)</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text> 사이즈를 추천드립니다.</Text>
                       
-                      {recommtext.base.map((data, index) => 
+                      {baserecommendationtext.map((data, index) => {
                           <Text key={index} style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>{data}</Text>
-                      )}
+                      })}
                       {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
                       <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>야외 및 레저활동 시 컬러 마스크 착용을 추천드립니다.</Text>
                       */}
@@ -605,9 +618,9 @@ if (feedbacksent == 1){
                       <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>얼굴이 작아 보이는 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>소형(S)</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text> 사이즈를 추천드리며,</Text>
                       <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>편한 호흡을 원하시면 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>중형(M)</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text> 사이즈를 추천드립니다.</Text>
                       
-                      {recommtext.base.map((data, index) => 
+                      {baserecommendationtext.map((data, index) => {
                           <Text key={index} style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>{data}</Text>
-                      )}
+                      })}
                       {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
                       <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>야외 및 레저활동 시 컬러 마스크 착용을 추천드립니다.</Text>
                       */}
@@ -627,9 +640,9 @@ if (feedbacksent == 1){
                       <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>얼굴이 작아 보이는 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>중형(M)</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text> 사이즈를 추천드리며,</Text>
                       <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>편한 호흡을 원하시면 <Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>대형(L)</Text><Text style={{fontSize: width*0.04, color: "#0380D8", fontWeight: "bold"}}>"</Text> 사이즈를 추천드립니다.</Text>
                       
-                      {recommtext.base.map((data, index) => 
+                      {baserecommendationtext.map((data, index) => {
                           <Text key={index} style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>{data}</Text>
-                      )}
+                      })}
                       {/*<Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%"), marginTop: hp("2%")}}>컬러마스크는 90% 이상 자외선 차단이 가능한 제품입니다.</Text>
                       <Text style={{marginTop: -1*hp("1%"),color: "black", fontWeight: "bold",marginBottom: hp("2.5%") }}>야외 및 레저활동 시 컬러 마스크 착용을 추천드립니다.</Text>
                       */}
@@ -645,9 +658,9 @@ if (feedbacksent == 1){
                     {storeData.attendanceReducer.res.MaskSize == "N" && storeData.attendanceReducer.res.ID != "NNetwork" && storeData.attendanceReducer.res.ID != "Unrecognized"?
                     <View style={{flexDirection: "column", alignItems:'center'}}>
 
-                      {recommtext.N.map((data, index) => 
+                      {Nrecommendationtext.map((data, index) => {
                           <Text key={index} style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>{data}</Text>
-                      )}
+                      })}
                       
                       {/*<Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>정확한 측정을 위해 다시한번 시도해 주세요.</Text>
                       <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>팔을 쭉 뻗어서 가이드 라인에 얼굴을 맞춰 측정하시면</Text>
@@ -663,76 +676,33 @@ if (feedbacksent == 1){
                     null} 
                     {storeData.attendanceReducer.res.ID == "NNetwork"?
                     <View style={{flexDirection: "column", alignItems:'center'}}>
-                      {recommtext.NNetwork.map((data, index) => 
+                      {NNetworkrecommendationtext.map((data, index) => {
                           <Text key={index} style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>{data}</Text>
-                      )}
+                      })}
                       {/*<Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>인터넷 연결을 확인 해주세요.</Text>*/}
                     </View>
                     :
                     null} 
                     {storeData.attendanceReducer.res.ID == "Unrecognized"?
-                      <View style={{flexDirection: "column", alignItems:'center'}}>
+                    <View style={{flexDirection: "column", alignItems:'center'}}>
 
-                        {recommtext.Unrecognized.map((data, index) => 
-                            <Text key={index} style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>{data}</Text>
-                        )}
-                        
-                        <Text style={{marginTop: hp("1%"), marginBottom: hp("1%")}}>  </Text>
-                        <Text style={{marginTop: hp("2%"), color: "#0380D8", marginBottom: hp("2%")}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
-                        <Text style={{marginTop: hp("0.5%"), marginBottom: hp("0.5%")}}>  </Text>
-                      </View>
+                      {Unrecognizedrecommendationtext.map((data, index) => {
+                          <Text key={index} style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>{data}</Text>
+                      })}
+                      
+                      {/*<Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>정확한 측정을 위해 다시한번 시도해 주세요.</Text>
+                      <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>팔을 쭉 뻗어서 가이드 라인에 얼굴을 맞춰 측정하시면</Text>
+                      <Text style={{marginTop: hp("2%"), color: "black", fontWeight: "bold", marginBottom: hp("2%")}}>정확한 측정결과를 확인 하실 수 있습니다.</Text>*/}
+                  
+                      <Text style={{marginTop: hp("1%"), marginBottom: hp("1%")}}>  </Text>
+                      <Text style={{marginTop: hp("2%"), color: "#0380D8", marginBottom: hp("2%")}}>※ 아래 원하는 색상을 선택한후 바로 구매를 해보세요!</Text>
+                      <Text style={{marginTop: hp("0.5%"), marginBottom: hp("0.5%")}}>  </Text>
+                    </View>
                     :
                     null}
     
               </View>
           </Animatable.View>
-
-
-
-          <View style={{width: "100%", height: hp("30%")}}>
-                          
-              <ScrollView 
-                horizontal={true} 
-                showsVerticalScrollIndicator={false}
-                showsHorizontalScrollIndicator={false}
-                style={{ flex: 1, paddingTop: 0}}
-              >
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-                  <View style={{width: wp("10%"), height: hp("10%"), backgroundColor:"yellow"}}></View>
-                  <View style={{width: wp("2%"), height: hp("10%")}}></View>
-
-              </ScrollView>
-
-
-
-          </View>
-
-
-
-
-
-
-
-
 
           <View style={{ width: wp("90%"), height: wp("20%"), flexDirection: "row", justifyContent: "space-between"}}>
             
@@ -976,7 +946,7 @@ if (feedbacksent == 1){
             <Animatable.View animation="slideInUp" direction="alternate">
                 <TouchableOpacity style={{backgroudColor: "purple", flexDirection:"row", alignItems:"center", justifyContent: "center", marginTop: height*0.05, width: wp("100%"), height: hp("10%")}} onPress={() => props.navigation.navigate('ArCamera',{MaskSize: storeData.attendanceReducer.res.MaskSize})} > 
                   
-                    <Image resizeMode="contain" style={{resizeMode: "contain", width: "75%",height: "70%",alignItems:'center',justifyContent:'center', marginLeft: -1*width*0.08}}  source={require("./../../../assets/images/newdesign/recommendation_ar_button.png")} />
+                    <Image resizeMode="contain" style={{resizeMode: "contain", width: "60%",height: "70%",alignItems:'center',justifyContent:'center', marginLeft: -1*width*0.08}}  source={require("./../../../assets/images/newdesign/recommendation_ar_button.png")} />
                 </TouchableOpacity>
 
             </Animatable.View> 
@@ -1111,8 +1081,6 @@ if (feedbacksent == 1){
       </>
     )
   }
-
-  return null;
 
 };
 

@@ -285,7 +285,7 @@ const ScannerView = (props) => {
                 <Image resizeMode="contain" style={{resizeMode:"contain", height: hp("11%"), width: hp("12%"), marginLeft: 0 }} source={require("./../../../assets/images/newdesign/scanner_icon_right.png")} />
             </View>
             <TouchableOpacity onPress={tempfunc}>
-                <Image resizeMode="contain" style={{height: hp("7%"), width: wp("90%"), resizeMode:"contain"}} source={require("./../../../assets/images/newdesign/scanner_next.png")} />
+                <Image resizeMode="contain" style={{height: hp("7%"), width: wp("90%"), resizeMode:"contain", marginTop: -5}} source={require("./../../../assets/images/newdesign/scanner_next.png")} />
             </TouchableOpacity>  
           </View>
 
