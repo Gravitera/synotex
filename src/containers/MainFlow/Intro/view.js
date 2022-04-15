@@ -82,7 +82,7 @@ class IntroView extends React.Component{
     return (
       <>
   
-        <View style={{zIndex: 0, width: wp("100%"), height: hp("100%"), backgroundColor: "#0380D8", flexDirection: "column", alignItems:"center"}}>
+        {/*<View style={{zIndex: 0, width: wp("100%"), height: hp("100%"), backgroundColor: "#0380D8", flexDirection: "column", alignItems:"center"}}>
             <View style={{zIndex: 1, position: "absolute", height: hp("38%"), width: hp("38%"), maxHeight: 354, maxWidth: 354, backgroundColor: "#76B7F2", borderRadius: 500, top: hp("5.3%"), left: wp("-27.3%")}}></View>
             <View style={{zIndex: 2, position: "absolute", height: hp("61.6%"), width: hp("61.6%"), maxHeight: 571, maxWidth: 571, backgroundColor: "#5498D7", borderRadius: 500, top: hp("11.87%"), left: wp("3.97%")}}></View>
             <Image resizeMode="contain" style={{position: "absolute", zIndex: 3, resizeMode: "contain", width: wp("38.31%"), height: hp("12.9%"), maxHeight: 164, maxWidth: 120, top: hp("63.79%"), left: wp("59.63%")}}  source={require("./../../../assets/images/newdesign/intro_cleaning.png")} />
@@ -107,7 +107,48 @@ class IntroView extends React.Component{
   
             </View>
             
+        </View>*/}
+
+        <Image resizeMode="cover" style={{position:"absolute", resizeMode: "cover", zIndex:1, width: "100%", height: "100%"}} source={require("./../../../assets/images/newdesign/intro_background.png")} />    
+        <View style={{width: wp("100%"), height: hp("20%"), zIndex: 1}}>
+            
+            
+            <View style={{width: 50, height: hp("15%")}}></View>
+            <Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp("25%"), height: hp("5%"), marginLeft: wp("10%")}}  source={require("./../../../assets/images/newdesign/intro_synotex.png")} />
+            <Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp("35%"), height: hp("5%"), marginLeft: wp("10%")}}  source={require("./../../../assets/images/newdesign/intro_firstever.png")} />
+          
+            {/*<Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp("25%"), height: hp("5%"), marginLeft: wp("-60%"), marginTop: hp("12%")}}  source={require("./../../../assets/images/newdesign/intro_synotex.png")} />
+            <Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp("35%"), height: hp("5%"), marginLeft: wp("-50%")}}  source={require("./../../../assets/images/newdesign/intro_firstever.png")} />
+            <Image resizeMode="contain" style={{resizeMode: "contain", zIndex:4, width: hp("65%"), height: hp("65%"), marginTop: hp("-10%")}}  source={require("./../../../assets/images/newdesign/intro_mask.png")} />
+            */}
+
+
         </View>
+
+          
+        <View style={{flexDirection: "column", justifyContent: "center", alignItems: "center", width: wp("100%"), height: hp("50%"), zIndex:1}}>
+
+            <View style={{width: wp("80%"), height: hp("45%"), justifyContent: "center", alignItems:"center", flexDirection: "column"}}>
+                <Image resizeMode="contain" style={{resizeMode: "contain", zIndex:4, width: "120%", height: "120%"}}  source={require("./../../../assets/images/newdesign/intro_mask.png")} />
+
+            </View>
+        </View>
+
+        <View style={{flexDirection: "row", alignItems:"center", justifyContent: "center",  width: wp("100%"), bottom: hp("15%"), zIndex: 4, position: "absolute"}}>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('intro2')} >
+                    <ImageBackground resizeMode="contain" style={{width: wp("40%"), height: hp("10%"), maxWidth: 250, maxHeight: 100, resizeMode: "contain", justifyContent: "center", alignItems: "center"}}  source={require("./../../../assets/images/newdesign/intro_startmeasure.png")} >
+                        <Text style={{fontWeight: "bold", fontSize: 14}}>마스크 사이즈 측정</Text>
+                    </ImageBackground>
+                </TouchableOpacity>
+                <View style={{width: wp("10%"), height: hp("5%")}}></View>
+                <TouchableOpacity onPress={() => this.props.navigation.navigate('ArCamera2')}>
+                    <ImageBackground resizeMode="contain" style={{width: wp("40%"), height: hp("10%"), maxWidth: 250, maxHeight: 100, resizeMode: "contain", justifyContent: "center", alignItems: "center"}}  source={require("./../../../assets/images/newdesign/intro_startmeasure.png")} >
+                        <Text style={{fontWeight: "bold", fontSize: 14}}>마스크 착용 해보기</Text>
+                    </ImageBackground>
+                </TouchableOpacity>
+  
+            </View>
+
   
   
   
