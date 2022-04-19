@@ -31,6 +31,13 @@ import theme from '../../../../theme';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
 
 
+import {
+  studentsOfSingleBus,
+  markAttendance,
+  addRes,
+} from '../../../store/actions/attendanceActions';
+import { useSelector, useDispatch } from 'react-redux';
+
 // import { SafeAreaView } from 'react-native-safe-area-context';
 // import { color, font } from '../../../../theme'
 const { height, width } = Dimensions.get('window');
@@ -82,6 +89,8 @@ const ScannerView = (props) => {
 
   const [selfie, setSelfie] = useState('');
 
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
   const cameraRef = useRef(null);
 
@@ -92,14 +101,216 @@ const ScannerView = (props) => {
     if (cameraRef.current) {
       console.log("camera 2", camera)
       const options = { quality: 0.5, base64: true };
-      const data = await cameraRef.current.takePictureAsync(options);
+      //const data = await cameraRef.current.takePictureAsync(options);
+      cameraRef.current.takePictureAsync(options)
+      .then((data) => {
 
+        var currbody = JSON.stringify({
+          ...props.route.params,
+          "FrontImage": data.base64
+        })
+        console.log(" ======================= body before fetch ======================= ");
+        console.log(" ======================= body before fetch ======================= ");
+        console.log(" ======================= body before fetch ======================= ");
+        console.log(currbody);
+        console.log(" ======================= body before fetch ======================= ");
+        console.log(" ======================= body before fetch ======================= ");
+        console.log(" ======================= body before fetch ======================= ");
+        fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/submit", {
+          mode: 'no-cors',
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*"
+          },
+          body: currbody
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            console.log('SCANNER RESPONSE SUCCESS =>', res);
+            setLoading(false);
+    
+            setResp({"frontImage":res.FrontImage})
+    
+            dispatch(addRes(res))
+            console.log("finish res")
+            setSelfie(data.base64);
+            setState(8);
+            setTimeout(() => {
 
-      setSelfie(data.base64);
+              props.onNext(props.resp);
+            },1000);
+            return;
+          })
+          .catch((err) => {
+            setLoading(false);
+            
+            /*
+            props.showAlert(
+              err.message
+            );
+            */
+            
+            console.log(" ====== error message ", typeof err.message);
+            console.log(" ===/",err.message,"/===");
+            if (err.message === " JSON Parse error: Unrecognized token '<' "){
+              console.log(" ===========  JSON Parse error    triggered    ");
+              console.log(" ===========  JSON Parse error    triggered    ");
+              console.log(" ===========  JSON Parse error    triggered    ");
+            }
+            
+            console.log('SCANNER RESPONSE ERROR =>', err);
+            var temp = {
+              FrontImage: data.base64,
+              FaceWidth: 0,
+              FaceHeight: 0,
+              FaceWidthPercent: 0,
+              FaceHeightPercent: 0,
+              MaskSize: "N",
+              Pentagram: {
+                FaceHeight: 0,
+                HeadHeight: 0,
+                HeadWidth: 0,
+                ChinWidth: 0,
+                HeadRound: 0,
+              },
+              PentagramAverage: {
+                FaceHeight: 0,
+                HeadHeight: 0,
+                HeadWidth: 0,
+                ChinWidth: 0,
+                HeadRound: 0,
+              },
+              PentagramPredicted: {
+                FaceHeight: 0,
+                HeadHeight: 0,
+                HeadWidth: 0,
+                ChinWidth: 0,
+                HeadRound: 0,
+              },
+              ID: 100
+            }
+            if (err.message == "Network request failed"){
+              temp.ID = "NNetwork";
+            }
+            //if (err.message == " JSON Parse error: Unrecognized token '<' "){
+              temp.ID = "Unrecognized";
+              console.log(" ===========  JSON Parse error    triggered    ");
+              console.log(" ===========  JSON Parse error    triggered    ");
+              console.log(" ===========  JSON Parse error    triggered    ");
+              var currbody = JSON.stringify({
+                ...props.route.params,
+                "FrontImage": data.base64
+              })
+              console.log(" ======================= body before fetch ======================= ");
+              console.log(" ======================= body before fetch ======================= ");
+              console.log(" ======================= body before fetch ======================= ");
+              console.log(currbody);
+              console.log(" ======================= body before fetch ======================= ");
+              console.log(" ======================= body before fetch ======================= ");
+              console.log(" ======================= body before fetch ======================= ");
+              fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/submit", {
+                mode: 'no-cors',
+                method: 'POST',
+                headers: {
+                  'Accept': 'application/json',
+                  'Content-Type': 'application/json',
+                  "Access-Control-Allow-Origin": "*"
+                },
+                body: currbody
+              })
+                .then((res2) => res2.json())
+                .then((res2) => {
+                  console.log('SCANNER RESPONSE SUCCESS =>', res2);
+                  setLoading(false);
+          
+                  setResp({"frontImage":res2.FrontImage})
+          
+                  dispatch(addRes(res2))
+                  console.log("finish res")
+                  setSelfie(data.base64);
+                  setState(8);
+                  setTimeout(() => {
+
+                    props.onNext(props.resp);
+                  },1000);
+                  return;
+                })
+                .catch((err) => {
+                  setLoading(false);
+                  
+                  /*
+                  props.showAlert(
+                    err.message
+                  );
+                  */
+                  
+                  console.log(" ====== error message ", typeof err.message);
+                  console.log(err.message);
+                  
+                  console.log('SCANNER RESPONSE ERROR =>', err);
+                  var temp = {
+                    FrontImage: data.base64,
+                    FaceWidth: 0,
+                    FaceHeight: 0,
+                    FaceWidthPercent: 0,
+                    FaceHeightPercent: 0,
+                    MaskSize: "N",
+                    Pentagram: {
+                      FaceHeight: 0,
+                      HeadHeight: 0,
+                      HeadWidth: 0,
+                      ChinWidth: 0,
+                      HeadRound: 0,
+                    },
+                    PentagramAverage: {
+                      FaceHeight: 0,
+                      HeadHeight: 0,
+                      HeadWidth: 0,
+                      ChinWidth: 0,
+                      HeadRound: 0,
+                    },
+                    PentagramPredicted: {
+                      FaceHeight: 0,
+                      HeadHeight: 0,
+                      HeadWidth: 0,
+                      ChinWidth: 0,
+                      HeadRound: 0,
+                    },
+                    ID: 100
+                  }
+                  if (err.message == "Network request failed"){
+                    temp.ID = "NNetwork";
+                  }
+                  if (err.message == " JSON Parse error: Unrecognized token '<' "){
+                    console.log(" ===========  JSON Parse error    triggered    ");
+                    console.log(" ===========  JSON Parse error    triggered    ");
+                    console.log(" ===========  JSON Parse error    triggered    ");
+                    temp.ID = "Unrecognized";
+                  }
+          
+          
+          
+                  console.log(" ============= dispatch temp   ", temp);
+                  dispatch(addRes(temp));
+                  return;
+                });
+            //}
+    
+    
+    
+            console.log(" ============= dispatch temp   ", temp);
+            dispatch(addRes(temp));
+            return;
+          });
+      })
 
 
       // console.log(data.base64)
-      await props.sendFaceData(data.base64)
+      //await props.sendFaceData(data.base64)
+      
+      return;
       // setPicture(data.uri);
     }
   };
@@ -189,6 +400,7 @@ const ScannerView = (props) => {
       })
     }, 8000);
 
+
     setTimeout(() => {
       setState(7);
       AI_measurement_sound.play((success) => {
@@ -196,6 +408,8 @@ const ScannerView = (props) => {
       })
       //console.log(" ========= current state   after wait  show star-like sparkling ", state);
     },13000);
+
+    /*
     setTimeout(() => {
       setState(8);
       //console.log(" ========= current state   after wait  show blue-check-mark ", state);
@@ -205,6 +419,7 @@ const ScannerView = (props) => {
 
       props.onNext(props.resp);
     },16000);
+    */
 
   };
 

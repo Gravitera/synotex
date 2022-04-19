@@ -70,7 +70,7 @@ const Scanner = (props) => {
 
   }
 
-  const sendFaceData = async(image) => {
+  const sendFaceData = (image) => {
     setLoading(false);
 
     /*
@@ -88,14 +88,14 @@ const Scanner = (props) => {
           "FrontImage": image
         })
     });
+
     setLoading(false);
     setResponse(res);
     */
 
     console.log(" ============= sendFaceData activated =========== ", typeof image);
     console.log(" ============= sendFaceData activated =============", image.slice(0,20));
-    
-    //fetch('http://3.34.136.40:3030/submit', {
+
     fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/submit", {
       mode: 'no-cors',
       method: 'POST',
@@ -112,22 +112,16 @@ const Scanner = (props) => {
     })
       .then((res) => res.json())
       .then((res) => {
-        console.log('SCANNER RESPONSE SUCCESS =>', res);
+        console.log('SCANNER RESPONSE SUCCESS =>', res.ID, "    ", res.MaskSize);
         setLoading(false);
 
-        setResp({"frontImage":res.FrontImage})
+        //setResp({"frontImage":res.FrontImage})
 
         dispatch(addRes(res))
         console.log("finish res")
       })
       .catch((err) => {
         setLoading(false);
-        
-        /*
-        props.showAlert(
-          err.message
-        );
-        */
         
         console.log(" ====== error message ", typeof err.message);
         console.log(err.message);
@@ -172,9 +166,10 @@ const Scanner = (props) => {
 
 
 
-        console.log(" ============= dispatch temp   ", temp);
+        //console.log(" ============= dispatch temp   ", temp);
         dispatch(addRes(temp));
       });
+
     
   };
 
