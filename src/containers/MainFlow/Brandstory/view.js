@@ -40,7 +40,7 @@ class Brandstory extends React.Component {
 
 
   async componentDidMount() {
-      fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/brandstory/brandstory.json",{
+      fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/brandstory/brandstory.json"  + '?time=' + Date.now().toString().substring(0,10) + "000",{
         mode: 'no-cors',
         method: 'GET',
         headers: {
@@ -101,7 +101,7 @@ class Brandstory extends React.Component {
           <ScrollView style={{ flex: 1, marginTop: hp("8%"), paddingTop: 0, zIndex: 5}}>
             <View style={{flexDirection: "column", alignItems: "center", justifyContent:"center"}}>
               {this.state.imglinks.map((data, index) => (
-                  <Image key={index} resizeMode="contain" source={{uri: data.url}} style={{resizeMode: "contain",  width: wp("100%"), height: (data.height/data.width)*wp("100%"), marginTop: 20}}/>
+                  <Image key={index} resizeMode="contain" source={{uri: data.url + '?time=' + Date.now().toString().substring(0,10) + "000", cache: 'reload'}} style={{resizeMode: "contain",  width: wp("100%"), height: (data.height/data.width)*wp("100%"), marginTop: 20}}/>
             
               ))}
               {/*<Image resizeMode="contain" source={require("./../../../assets/images/brandstorytoponeTOP.png")} style={{resizeMode: "contain",  width: wp("100%"), marginTop: 20}}/>

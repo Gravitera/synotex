@@ -142,7 +142,7 @@ const RecommendationView = (props) => {
   var [Unrecognizedrecommendationtext, setUnrecognizedRecommendationtext] = useState([]);
 
   useEffect(() => {
-        fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/recommendationtext/recommendationtext.json",{
+        fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/recommendationtext/recommendationtext.json"  + '?time=' + Date.now().toString().substring(0,10) + "000",{
           mode: 'no-cors',
           method: 'GET',
           headers: {

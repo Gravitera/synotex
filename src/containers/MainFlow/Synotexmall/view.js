@@ -34,7 +34,7 @@ class Mallsynotex extends React.Component {
 
   componentDidMount() {
       //fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/splash", {
-      fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/mallurl/mallurl.json",{
+      fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/mallurl/mallurl.json"  + '?time=' + Date.now().toString().substring(0,10) + "000",{
           mode: 'no-cors',
           method: 'GET',
           headers: {
@@ -73,7 +73,7 @@ class Mallsynotex extends React.Component {
         
         <View style={{zIndex:1, bottom: hp("10%"), position:"absolute", width: wp("100%"), height: hp("10%"), alignItems:"center", flexDirection: "row"}}>
             <View style={{width: "25%", height: "100%"}}></View>
-            <TouchableOpacity onPress={() => Linking.openURL(this.state.onlineurl)} style={{width: "50%", height: "80%"}}>
+            <TouchableOpacity onPress={() => Linking.openURL(this.state.onlineurl  + '?time=' + Date.now().toString().substring(0,10) + "000")} style={{width: "50%", height: "80%"}}>
                 <ImageBackground resizeMode="contain" style={{zIndex: 2,  resizeMode: "contain", width: "100%", height: "100%", alignItems:"center"}}  source={require("./../../../assets/images/newdesign/synotexmall_blue_box.png")} >
                     <Image resizeMode="contain" style={{zIndex: 2,  resizeMode: "contain", width: "60%", height: "100%"}}  source={require("./../../../assets/images/newdesign/synotexmall_blue_text.png")} />
                 </ImageBackground>

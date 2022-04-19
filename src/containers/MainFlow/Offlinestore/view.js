@@ -34,7 +34,7 @@ class Storeoffline extends React.Component {
 
   componentDidMount() {
       //fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/splash", {
-      fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/mallurl/mallurl.json",{
+      fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/mallurl/mallurl.json"  + '?time=' + Date.now().toString().substring(0,10) + "000",{
           mode: 'no-cors',
           method: 'GET',
           headers: {
@@ -62,7 +62,7 @@ class Storeoffline extends React.Component {
       return (
         <>
 
-        <WebView source={{ uri: this.state.offlineurl }} style={{width: wp("100%"), height: hp("100%")}}/>
+        <WebView source={{ uri: this.state.offlineurl + '?time=' + Date.now().toString().substring(0,10) + "000", cache: 'reload'}} style={{width: wp("100%"), height: hp("100%")}}/>
         <View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "#F2F4FA", flexDirection: "row", justifyContent: "space-evenly" }}>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('intro')} style={{width: wp("20%"), height: "100%", flexDirection: "column", justifyContent: "space-between", alignItems:"center"}}>
             <View style={{width: "100%", height: "10%"}}></View>

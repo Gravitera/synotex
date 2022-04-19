@@ -43,7 +43,7 @@ const InputFeaturesView = (props) => {
   var [privacylink, setPrivacylink] = useState("");
 
   useEffect(() => {
-    fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/privacylink/privacylink.json", {
+    fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/privacylink/privacylink.json"  + '?time=' + Date.now().toString().substring(0,10) + "000", {
       mode: 'no-cors',
       method: 'GET',
       headers: {
@@ -208,7 +208,7 @@ const InputFeaturesView = (props) => {
                           keyboardType="numeric"
                           placeholder="예시: 30"
                           placeholderTextColor="grey"
-                          style={{fontSize: 15, position: "absolute", height: "100%", right: "5%"}}
+                          style={{width: "85%", textAlign: "right", fontSize: 15, position: "absolute", height: "100%", right: "5%"}}
                         />
                   </View>
                   
@@ -254,7 +254,7 @@ const InputFeaturesView = (props) => {
                         keyboardType="numeric"
                         placeholder="예시: 175"
                         placeholderTextColor="grey"
-                        style={{fontSize: 15, position: "absolute", height: "100%", right: "5%"}}
+                        style={{width: "85%", textAlign:"right", fontSize: 15, position: "absolute", height: "100%", right: "5%"}}
                       />
                   </View>
                   

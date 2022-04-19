@@ -81,7 +81,7 @@ const RecommendationView = (props) => {
 
 
   useEffect(() => {
-        fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/recommendationtext/recommendationtext.json",{
+        fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/recommendationtext/recommendationtext.json"  + '?time=' + Date.now().toString().substring(0,10) + "000",{
           mode: 'no-cors',
           method: 'GET',
           headers: {
@@ -95,7 +95,7 @@ const RecommendationView = (props) => {
               console.log('recommendationtext RESPONSE SUCCESS =>', resdata);
               setRecommtext(resdata);
 
-              fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/recommendation/recommendation.json",{
+              fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/recommendation/recommendation.json" + '?time=' + Date.now().toString().substring(0,10) + "000",{
                 mode: 'no-cors',
                 method: 'GET',
                 headers: {
@@ -749,7 +749,7 @@ if (feedbacksent == 1){
                           <View style={{width: hp("12.5%"), height: hp("12.5%"), borderRadius:150, backgroundColor: "white", flexDirection: "column", alignItems: "center", justifyContent:"center", shadowColor: "#000", shadowOffset: {width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5, shadowColor: "#000", shadowOffset: {width: 0, height: 2,}, shadowOpacity: 0.25, shadowRadius: 3.84, elevation: 5}}>
                               <View style={{width: 1, height: 3.5}}></View>
                               <Text style={{fontSize: 12, fontWeight: "bold", textAlign:"center"}}>{data.name}</Text>
-                              <Image style={{width: "80%",height: "80%"}} resizeMode="contain" source={{uri: data.imgurl}} />
+                              <Image style={{width: "80%",height: "80%"}} resizeMode="contain" source={{uri: data.imgurl + '?time=' + Date.now().toString().substring(0,10) + "000", cache: 'reload'}} />
                             
                           </View>
                       </TouchableOpacity>

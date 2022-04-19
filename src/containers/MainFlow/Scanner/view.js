@@ -98,10 +98,127 @@ const ScannerView = (props) => {
     console.log("taking picture")
     console.log("camera", camera)
     console.log("camera ref", cameraRef)
-    if (cameraRef.current) {
+    //if (cameraRef.current) {
       console.log("camera 2", camera)
       const options = { quality: 0.5, base64: true };
       //const data = await cameraRef.current.takePictureAsync(options);
+      var data = await cameraRef.current.takePictureAsync(options);
+      var temp = {
+        FrontImage: data.base64,
+        FaceWidth: 0,
+        FaceHeight: 0,
+        FaceWidthPercent: 0,
+        FaceHeightPercent: 0,
+        MaskSize: "N",
+        Pentagram: {
+          FaceHeight: 0,
+          HeadHeight: 0,
+          HeadWidth: 0,
+          ChinWidth: 0,
+          HeadRound: 0,
+        },
+        PentagramAverage: {
+          FaceHeight: 0,
+          HeadHeight: 0,
+          HeadWidth: 0,
+          ChinWidth: 0,
+          HeadRound: 0,
+        },
+        PentagramPredicted: {
+          FaceHeight: 0,
+          HeadHeight: 0,
+          HeadWidth: 0,
+          ChinWidth: 0,
+          HeadRound: 0,
+        },
+        ID: 100
+      }
+      var currbody = JSON.stringify({
+        ...props.route.params,
+        "FrontImage": data.base64
+      });
+      try{
+        var res = await fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/submit"  + '?time=' + Date.now().toString().substring(0,10) + "000", {
+          mode: 'no-cors',
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            "Access-Control-Allow-Origin": "*"
+          },
+          body: currbody
+        });
+        var resjson = await res.json();
+        setLoading(false);
+        setResp({"FrontImage": resjson.FrontImage});
+        dispatch(addRes(resjson));
+        console.log("finish res");
+        setSelfie(data.base64);
+        setState(8);
+        setTimeout(() => {
+          props.onNext(props.resp);
+        }, 1000)
+        return;
+      } catch(err){
+        setLoading(false);
+        if (err.message == "Network request failed"){
+          temp.ID = "NNetwork";
+        }
+        
+        console.log(" ====== error message ", typeof err.message);
+        console.log(" ===/",err.message,"/===");
+        if (err.message === " JSON Parse error: Unrecognized token '<' "){
+          console.log(" ===========  JSON Parse error    triggered    ");
+          console.log(" ===========  JSON Parse error    triggered    ");
+          console.log(" ===========  JSON Parse error    triggered    ");
+        };
+        temp.ID = "Unrecognized";
+        try{
+          var res2 = await fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/submit", {
+            mode: 'no-cors',
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              "Access-Control-Allow-Origin": "*"
+            },
+            body: currbody
+          });
+          var resjson2 = await res2.json();
+          setLoading(false);
+          setResp({"FrontImage": resjson2.FrontImage});
+          dispatch(addRes(resjson2));
+          console.log("finish res");
+          setSelfie(data.base64);
+          setState(8);
+          setTimeout(() => {
+            props.onNext(props.resp);
+          }, 1000)
+          return;
+        } catch(err){
+          setLoading(false);
+          if (err.message == "Network request failed"){
+            temp.ID = "NNetwork";
+          }
+          
+          console.log(" ====== error message ", typeof err.message);
+          console.log(" ===/",err.message,"/===");
+          if (err.message === " JSON Parse error: Unrecognized token '<' "){
+            console.log(" ===========  JSON Parse error    triggered    ");
+            console.log(" ===========  JSON Parse error    triggered    ");
+            console.log(" ===========  JSON Parse error    triggered    ");
+          };
+          temp.ID = "Unrecognized";
+          console.log(" ============= dispatch temp   ", temp);
+          dispatch(addRes(temp));
+          return;
+  
+        }
+
+
+      }
+
+      /*
       cameraRef.current.takePictureAsync(options)
       .then((data) => {
 
@@ -146,11 +263,10 @@ const ScannerView = (props) => {
           .catch((err) => {
             setLoading(false);
             
-            /*
-            props.showAlert(
-              err.message
-            );
-            */
+
+            if (err.message == "Network request failed"){
+              temp.ID = "NNetwork";
+            }
             
             console.log(" ====== error message ", typeof err.message);
             console.log(" ===/",err.message,"/===");
@@ -159,7 +275,7 @@ const ScannerView = (props) => {
               console.log(" ===========  JSON Parse error    triggered    ");
               console.log(" ===========  JSON Parse error    triggered    ");
             }
-            
+              
             console.log('SCANNER RESPONSE ERROR =>', err);
             var temp = {
               FrontImage: data.base64,
@@ -191,9 +307,7 @@ const ScannerView = (props) => {
               },
               ID: 100
             }
-            if (err.message == "Network request failed"){
-              temp.ID = "NNetwork";
-            }
+
             //if (err.message == " JSON Parse error: Unrecognized token '<' "){
               temp.ID = "Unrecognized";
               console.log(" ===========  JSON Parse error    triggered    ");
@@ -240,11 +354,6 @@ const ScannerView = (props) => {
                 .catch((err) => {
                   setLoading(false);
                   
-                  /*
-                  props.showAlert(
-                    err.message
-                  );
-                  */
                   
                   console.log(" ====== error message ", typeof err.message);
                   console.log(err.message);
@@ -296,9 +405,9 @@ const ScannerView = (props) => {
                   dispatch(addRes(temp));
                   return;
                 });
-            //}
-    
-    
+   
+      
+      
     
             console.log(" ============= dispatch temp   ", temp);
             dispatch(addRes(temp));
@@ -312,7 +421,7 @@ const ScannerView = (props) => {
       
       return;
       // setPicture(data.uri);
-    }
+    */
   };
 
   const runFacemesh = async (e) => {

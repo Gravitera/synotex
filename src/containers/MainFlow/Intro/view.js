@@ -78,7 +78,22 @@ class IntroView extends React.Component{
     console.log("=============================== ");
     console.log("=============================== ");
     console.log("=============================== ");
+    /*
     console.log(" ===   ");
+    var currtime = Date.now().toString();
+    var newcurrtime = currtime.substring(0, 10);
+    var newcurrtime2 = newcurrtime + "000";
+    console.log("=============================== ");
+    console.log("=============================== ");
+    console.log("=============================== ");
+    console.log(currtime);
+    console.log(newcurrtime);
+    // Date.now().toString().substring(0,10) + "000"
+    console.log(newcurrtime2);
+    */
+    console.log("=============================== ");
+    console.log("=============================== ");
+
     return (
       <>
   
@@ -137,13 +152,13 @@ class IntroView extends React.Component{
         <View style={{flexDirection: "row", alignItems:"center", justifyContent: "center",  width: wp("100%"), bottom: hp("15%"), zIndex: 4, position: "absolute"}}>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('intro2')} >
                     <ImageBackground resizeMode="contain" style={{width: wp("40%"), height: hp("10%"), maxWidth: 250, maxHeight: 100, resizeMode: "contain", justifyContent: "center", alignItems: "center"}}  source={require("./../../../assets/images/newdesign/intro_startmeasure.png")} >
-                        <Text style={{fontWeight: "bold", fontSize: 14}}>마스크 사이즈 측정</Text>
+                        <Text style={{fontWeight: "bold", fontSize: 14}}></Text>
                     </ImageBackground>
                 </TouchableOpacity>
-                <View style={{width: wp("10%"), height: hp("5%")}}></View>
+                <View style={{width: wp("3%"), height: hp("5%")}}></View>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('ArCamera2')}>
-                    <ImageBackground resizeMode="contain" style={{width: wp("40%"), height: hp("10%"), maxWidth: 250, maxHeight: 100, resizeMode: "contain", justifyContent: "center", alignItems: "center"}}  source={require("./../../../assets/images/newdesign/intro_startmeasure.png")} >
-                        <Text style={{fontWeight: "bold", fontSize: 14}}>마스크 착용 해보기</Text>
+                    <ImageBackground resizeMode="contain" style={{ width: wp("40%"), height: hp("10%"), maxWidth: 250, maxHeight: 100, resizeMode: "contain", justifyContent: "center", alignItems: "center"}}  source={require("./../../../assets/images/newdesign/intro_ar.png")} >
+                        <Text style={{fontWeight: "bold", fontSize: 14}}></Text>
                     </ImageBackground>
                 </TouchableOpacity>
   

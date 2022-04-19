@@ -56,8 +56,8 @@ const ResponseView = (props) => {
             <View style={{width: width, height: "7%"}}/>
                 {condition == 0?
                 <>
-                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>재측정을 원하시는경우는 재촬영 버튼을 눌러주시거나</Text>
                   <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>결과을 확인하시려면 측정결과 버튼을 눌러주세요</Text>
+                  <Text style={{textAlign:"center", fontSize:12, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold}}>재측정을 원하시는경우는 재촬영 버튼을 눌러주세요</Text>
                   </>
                 :null}
                 {condition == 1?
@@ -73,23 +73,6 @@ const ResponseView = (props) => {
                 :null}
 
             <View style={{ flexDirection: 'row', justifyContent: 'center', width:width, height: "60%", alignItems:"center"}}>
-              <TouchableOpacity onPress={() => props.navigation.navigate("input")}>
-              <Image resizeMode="contain" style={{width: hp("15%"), height: hp("15%")}}  source={require("./../../../assets/images/newdesign/response_rephoto.png")} />
-                {/*<View style={{ width: hp("15%"), height:  hp("15%"), backgroundColor: "#0D3A71", borderRadius: 100, alignItems:"center", flexDirection:"column"}}>
-                <View style={{height: "5%"}}/>
-                  <Image resizeMode="contain" style={{width:"70%", height:"70%"}}  source={require("./../../../assets/images/camera_image.png")} >
-                  </Image>
-                  <View style={{height: "5%"}}/>
-                  <Text style={{textAlign:"center", fontSize:13, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold, color:"white" }}>재촬영</Text>
-                </View>*/}
-
-                
-              </TouchableOpacity>
-
-              
-              <View style={{width: "12.5%"}}/>
-
-
               <TouchableOpacity onPress={props.onNext}>
                 <Image resizeMode="contain" style={{width: hp("15%"), height: hp("15%")}}  source={require("./../../../assets/images/newdesign/response_next.png")} />
 
@@ -107,6 +90,23 @@ const ResponseView = (props) => {
 
 
               </TouchableOpacity>
+
+              <View style={{width: "12.5%"}}/>
+              
+              <TouchableOpacity onPress={() => props.navigation.navigate("input")}>
+                <Image resizeMode="contain" style={{width: hp("15%"), height: hp("15%")}}  source={require("./../../../assets/images/newdesign/response_rephoto.png")} />
+                {/*<View style={{ width: hp("15%"), height:  hp("15%"), backgroundColor: "#0D3A71", borderRadius: 100, alignItems:"center", flexDirection:"column"}}>
+                <View style={{height: "5%"}}/>
+                  <Image resizeMode="contain" style={{width:"70%", height:"70%"}}  source={require("./../../../assets/images/camera_image.png")} >
+                  </Image>
+                  <View style={{height: "5%"}}/>
+                  <Text style={{textAlign:"center", fontSize:13, fontWeight:"600",textAlignVertical:"center", fontFamily: theme.font.bold, color:"white" }}>재촬영</Text>
+                </View>*/}
+
+                
+              </TouchableOpacity>
+
+
             </View>
 
 
