@@ -111,9 +111,11 @@ class SplashView extends React.Component {
                 if (parseInt(version.substring(0,2)) < resdata2.version){
                     console.log(" res.typeval    Update App");
                     this.setState({typeval: "Update App"});
+                    
                     setTimeout(() => {
                         BackHandler.exitApp();
                     }, 2500);
+                    
                 }
                 else if (resdata2.typeval === "None"){
                     this.setState({typeval: "None"});
@@ -226,13 +228,13 @@ class SplashView extends React.Component {
                 {this.state.typeval === "Update App" ?
                     <View style={{width: wp("100%"), height: hp("100%"), backgroundColor: "#0380D8", flexDirection: "column", justifyContent: "center", alignItems:"center"}}>
                             <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/update_app.png")} />
-                            <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/update_app_text.png")} />
+                            <Image resizeMode="contain" style={{ resizeMode: "contain", width: "70%", height: "20%"}}  source={require("./../../../assets/images/newdesign/update_app_text.png")} />
                     </View>
                 :null}
                 {this.state.typeval === "Network Error" ?
                     <View style={{width: wp("100%"), height: hp("100%"), backgroundColor: "white", flexDirection: "column", justifyContent: "center", alignItems:"center"}}>
                             <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/network_error.png")} />
-                            <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "10%"}}  source={require("./../../../assets/images/newdesign/network_error_text1.png")} />
+                            <Image resizeMode="contain" style={{ resizeMode: "contain", width: "65%", height: "20%"}}  source={require("./../../../assets/images/newdesign/network_error_text1.png")} />
                             <View style={{width: "35%", height: "20%"}}></View>
                             <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "10%"}}  source={require("./../../../assets/images/newdesign/network_error_text2.png")} />
                     </View>
