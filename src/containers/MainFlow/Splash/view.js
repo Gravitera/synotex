@@ -89,7 +89,7 @@ class SplashView extends React.Component {
                     console.log(" current typeval and backgroundImage      ", this.state.typeval, "     ", this.state.backgroundImage);
                 })
                 setTimeout(() => {
-                    this.props.navigation.navigate("intro");
+                    this.props.navigation.navigate("tabflow");
                 }, 3000);
             }        
         }catch(err){

@@ -176,7 +176,7 @@ const InputFeaturesView = (props) => {
 
           <View style={{width: wp("100%"), height: hp("8%"), backgroundColor: "#F2F4FA", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
               <TouchableOpacity onPress={() => navigation.navigate("intro")}>
-                  <Image resizeMode="contain" style={{width: hp("3%"),  height: hp("3%"), marginLeft: 15}} source={require("./../../../assets/images/newdesign/left_arrow.png")}/>
+                  <Image resizeMode="contain" style={{width: hp("1.8%"),  height: hp("1.8%"), marginLeft: 15}} source={require("./../../../assets/images/newdesign/left_arrow.png")}/>
               </TouchableOpacity>
               <Image resizeMode="contain" style={{ width: hp("11%"),  height: hp("8%"), marginLeft: -15}} source={require("./../../../assets/images/newdesign/inputfeature_header_text.png")}/>
               <View style={{width: hp("3%"), height: hp("3%")}}></View>
@@ -293,9 +293,9 @@ const InputFeaturesView = (props) => {
 
                   <View style = {{flexDirection: "row", alignItems: "center", justifyContent: "space-evenly", width: wp("90%"), height: hp("20%"), borderWidth: 1, borderRadius: 10, borderColor: "#E2E2E2"}}>
                         <View style={{flexdirection: "column", width: "70%", height: "100%"}}>
-                            <Image resizeMode="contain" style={{marginTop: 2, marginLeft: 8, width: hp("30%"),  height: hp("14%")}} source={require("./../../../assets/images/newdesign/inputfeature_bottom_square_text.png")}/>
+                            <Image resizeMode="contain" style={{resizeMode: "contain", marginTop: 2, marginLeft: 8, width: hp("28%"),  height: hp("14%")}} source={require("./../../../assets/images/newdesign/inputfeature_bottom_square_text.png")}/>
                             <TouchableOpacity onPress={() => {Linking.openURL(privacylink)}}>
-                                <Image resizeMode="contain" style={{marginLeft: 8, width: hp("30%"),  height: hp("5%")}} source={require("./../../../assets/images/newdesign/inputfeature_disclaimer.png")}/>
+                                <Image resizeMode="contain" style={{marginLeft: 8, width: hp("28%"),  height: hp("5%")}} source={require("./../../../assets/images/newdesign/inputfeature_disclaimer.png")}/>
                             </TouchableOpacity> 
                             
                         </View>
@@ -411,7 +411,7 @@ const InputFeaturesView = (props) => {
       </View>
       */}
 
-      <View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "#F2F4FA", flexDirection: "row", justifyContent: "space-evenly" }}>
+      {/*<View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "#F2F4FA", flexDirection: "row", justifyContent: "space-evenly" }}>
         <TouchableOpacity onPress={props.toHome} style={{width: wp("20%"), height: "100%", flexDirection: "column", justifyContent: "space-between", alignItems:"center"}}>
           <View style={{width: "100%", height: "10%"}}></View>
           <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_icon.png")} />
@@ -442,7 +442,7 @@ const InputFeaturesView = (props) => {
           <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_exit_text.png")} />
           <View style={{width: "100%", height: "10%"}}></View>
         </TouchableOpacity>
-      </View>
+      </View>*/}
 
 
     </>

@@ -63,7 +63,7 @@ class Storeoffline extends React.Component {
         <>
 
         <WebView source={{ uri: this.state.offlineurl + '?time=' + Date.now().toString().substring(0,10) + "000", cache: 'reload'}} style={{width: wp("100%"), height: hp("100%")}}/>
-        <View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "#F2F4FA", flexDirection: "row", justifyContent: "space-evenly" }}>
+       {/* <View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "#F2F4FA", flexDirection: "row", justifyContent: "space-evenly" }}>
           <TouchableOpacity onPress={() => this.props.navigation.navigate('intro')} style={{width: wp("20%"), height: "100%", flexDirection: "column", justifyContent: "space-between", alignItems:"center"}}>
             <View style={{width: "100%", height: "10%"}}></View>
             <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_icon.png")} />
@@ -94,7 +94,7 @@ class Storeoffline extends React.Component {
             <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_exit_text.png")} />
             <View style={{width: "100%", height: "10%"}}></View>
           </TouchableOpacity>
-        </View>
+        </View>*/}
       </>
 
 
