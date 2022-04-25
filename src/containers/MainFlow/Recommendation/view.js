@@ -300,6 +300,9 @@ const RecommendationView = (props) => {
   let FaceHeightPercent_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeightPercent))) + "mm";
   let FaceHeight_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceHeight))) + "mm";
   let FaceWidthPercent_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidthPercent)-60)) + "mm";
+  if (storeData.attendanceReducer.res.FaceWidthPercent == 0 || storeData.attendanceReducer.res.ID == "Unrecognized"){
+    FaceWidthPercent_str = "0mm";
+  }
   let FaceWidth_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.FaceWidth))) + "mm";
   let ChinWidthAverage_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.PentagramAverage.ChinWidth))) + "mm";
   let HeadRoundAverage_str = String(parseInt(parseFloat(storeData.attendanceReducer.res.PentagramAverage.HeadRound))) + "mm";
@@ -554,7 +557,8 @@ if (feedbacksent == 1){
           )} title={'측정결과'} />
           */}
 
-          <CustomBackForwardButtonHeader2 title={"측정결과"} backFunction={() => props.navigation.dispatch(StackActions.pop(3))} forwardFunction={() => props.navigation.navigate('intro')} />
+          {/*<CustomBackForwardButtonHeader2 title={"측정결과"} backFunction={() => props.navigation.dispatch(StackActions.pop(2))} forwardFunction={() => props.navigation.navigate('intro')} />*/}
+          <CustomBackForwardButtonHeader2 title={"측정결과"} backFunction={() => props.navigation.navigate("input")} forwardFunction={() => props.navigation.navigate('intro')} />
           <ScrollView style={styles.cardContainer}>
 
 

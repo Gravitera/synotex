@@ -66,8 +66,13 @@ const Scanner = (props) => {
     console.log(" =================================================================== ");
     console.log(" =================================================================== ");
     console.log(" =================================================================== ", resp);
-    props.navigation.navigate("response", resp)
+    //props.navigation.navigate("response", resp)
+    props.navigation.navigate("recommendation", props.route.params);
 
+  }
+
+  const onNextResp = () => {
+    props.navigation.navigate("response", resp);
   }
 
   const sendFaceData = async(image) => {
@@ -300,6 +305,7 @@ const Scanner = (props) => {
     sendFaceData,
     sendLocation,
     onNext,
+    onNextResp,
     loading,
     onboardStudents,
     action,

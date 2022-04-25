@@ -155,9 +155,18 @@ const ScannerView = (props) => {
         console.log("finish res");
         setSelfie(data.base64);
         setState(8);
-        setTimeout(() => {
-          props.onNext(props.resp);
-        }, 1000)
+        if (resjson.ID != "Unrecognized"){
+          setTimeout(() => {
+            props.onNext(props.resp);
+          }, 1750);
+          return;
+        }
+        if (resjson.ID == "Unrecognized"){
+          setTimeout(() => {
+            props.onNextResp(props.resp);
+          }, 1750)
+          return;
+        }
         return;
       } catch(err){
         setLoading(false);
@@ -191,9 +200,18 @@ const ScannerView = (props) => {
           console.log("finish res");
           setSelfie(data.base64);
           setState(8);
-          setTimeout(() => {
-            props.onNext(props.resp);
-          }, 1000)
+          if (resjson2.ID != "Unrecognized"){
+            setTimeout(() => {
+              props.onNext(props.resp);
+            }, 1750);
+            return;
+          }
+          if (resjson2.ID == "Unrecognized"){
+            setTimeout(() => {
+              props.onNextResp(props.resp);
+            }, 1750)
+            return;
+          }
           return;
         } catch(err){
           setLoading(false);
@@ -211,6 +229,11 @@ const ScannerView = (props) => {
           temp.ID = "Unrecognized";
           console.log(" ============= dispatch temp   ", temp);
           dispatch(addRes(temp));
+          setState(8);
+          setTimeout(() => {
+            props.onNextResp(props.resp);
+          }, 1750);
+
           return;
   
         }
