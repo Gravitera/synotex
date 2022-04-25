@@ -1064,9 +1064,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    bottom: hp("10%"),
+    bottom: hp("8%"),
     height: 50,
-    marginBottom: "-12.5%"
   },
 
   bottomBtnContainer21: {

@@ -1017,9 +1017,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    bottom: hp("18.5%"),
+    bottom: hp("8%"),
     height: 50,
-    marginBottom: "-15.5%"
+
   },
 
   bottomBtnContainer21: {
