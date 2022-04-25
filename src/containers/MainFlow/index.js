@@ -131,7 +131,8 @@ const TabFlow = (props) => {
           tabBarStyle: {height: 500, position: 'absolute' },
         }}
         tabBarOptions={{
-          style: {height: hp("8%"), position: "absolute"}
+          style: {height: hp("8%"), position: "absolute"},
+          labelStyle: {fontSize: 12, marginBottom: 8}
         }}
       >
         <Tab.Screen
@@ -230,9 +231,10 @@ export default MainFlow;
 
 const styles = StyleSheet.create({
   icon: {
-    width: "50%",
-    height: "50%",
-    resizeMode: "contain"
+    width: "55%",
+    height: "55%",
+    resizeMode: "contain",
+    marginTop: 7,
   },
 });
 

@@ -178,7 +178,7 @@ const InputFeaturesView = (props) => {
               <TouchableOpacity onPress={() => navigation.navigate("intro")}>
                   <Image resizeMode="contain" style={{width: hp("1.8%"),  height: hp("1.8%"), marginLeft: 15}} source={require("./../../../assets/images/newdesign/left_arrow.png")}/>
               </TouchableOpacity>
-              <Image resizeMode="contain" style={{ width: hp("11%"),  height: hp("8%"), marginLeft: -15}} source={require("./../../../assets/images/newdesign/inputfeature_header_text.png")}/>
+              <Image resizeMode="contain" style={{width: hp("9%"),  height: hp("8%"), marginLeft: -15}} source={require("./../../../assets/images/newdesign/inputfeature_header_text.png")}/>
               <View style={{width: hp("3%"), height: hp("3%")}}></View>
           </View>
 
@@ -293,9 +293,9 @@ const InputFeaturesView = (props) => {
 
                   <View style = {{flexDirection: "row", alignItems: "center", justifyContent: "space-evenly", width: wp("90%"), height: hp("20%"), borderWidth: 1, borderRadius: 10, borderColor: "#E2E2E2"}}>
                         <View style={{flexdirection: "column", width: "70%", height: "100%"}}>
-                            <Image resizeMode="contain" style={{resizeMode: "contain", marginTop: 2, marginLeft: 8, width: hp("28%"),  height: hp("14%")}} source={require("./../../../assets/images/newdesign/inputfeature_bottom_square_text.png")}/>
+                            <Image resizeMode="contain" style={{resizeMode: "contain", marginTop: 2, marginLeft: 8, width: hp("25%"),  height: hp("14%")}} source={require("./../../../assets/images/newdesign/inputfeature_bottom_square_text.png")}/>
                             <TouchableOpacity onPress={() => {Linking.openURL(privacylink)}}>
-                                <Image resizeMode="contain" style={{marginLeft: 8, width: hp("28%"),  height: hp("5%")}} source={require("./../../../assets/images/newdesign/inputfeature_disclaimer.png")}/>
+                                <Image resizeMode="contain" style={{marginLeft: 8, width: hp("25%"),  height: hp("5%")}} source={require("./../../../assets/images/newdesign/inputfeature_disclaimer.png")}/>
                             </TouchableOpacity> 
                             
                         </View>

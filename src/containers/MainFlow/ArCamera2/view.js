@@ -1017,7 +1017,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     width: '100%',
-    bottom: hp("12%"),
+    bottom: hp("18.5%"),
     height: 50,
     marginBottom: "-15.5%"
   },
