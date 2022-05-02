@@ -738,7 +738,8 @@ if (feedbacksent == 1){
 
 
             
-            <View style={{borderWidth: 2, borderRadius:8,  borderColor: "#0380D8",flex:6}}>
+            {/*<View style={{borderWidth: 2, borderRadius:8,  borderColor: "#0380D8",flex:6}}>*/}
+            <View style={{flex:6}}>
 
               <ScrollView
                 horizontal={true}
