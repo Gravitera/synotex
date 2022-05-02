@@ -17,6 +17,7 @@ import Button from './../../../components/Button'
 import { TouchableOpacity } from 'react-native';
 import { Linking } from 'react-native';
 import {widthPercentageToDP as wp, heightPercentageToDP as hp} from 'react-native-responsive-screen';
+import { ThemeProvider } from 'react-native-paper';
 
 const { height, width } = Dimensions.get('window');
 
@@ -32,13 +33,78 @@ class IntroView extends React.Component{
     this.state = {
       permissionsGranted: false,
       showPermsAlert: false,
+      typeval: "", 
+      backgroundImage: "",
+      logoLocation: "",
+      logo1width: "",
+      logo1height: "",
+      logo2width: "",
+      logo2height: ""
       }
   }
 
-  componentDidMount(){
+  async componentDidMount(){
+      try{
+        var res = await fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/home/home.json"  + '?time=' + Date.now().toString().substring(0,10) + "000",{
+                            mode: 'no-cors',
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                                "Access-Control-Allow-Origin": "*"
+                            },
+                        });
+        var resdata = await res.json();
+        this.setState({
+          typeval: resdata.typeval,
+          backgroundImage: resdata.backgroundImage,
+          logoLocation: resdata.logoLocation,
+          logo1width: resdata.logo1width,
+          logo1height: resdata.logo1height,
+          logo2width: resdata.logo2width,
+          logo2height: resdata.logo2height
+        })   
+      }catch(err){
+          try{
+              var res2 = await fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/home/home.json"  + '?time=' + Date.now().toString().substring(0,10) + "000",{
+                                  mode: 'no-cors',
+                                  method: 'GET',
+                                  headers: {
+                                      'Accept': 'application/json',
+                                      'Content-Type': 'application/json',
+                                      "Access-Control-Allow-Origin": "*"
+                                  },
+                              });
+              var resdata2 = await res2.json();
+              this.setState({
+                typeval: resdata2.typeval,
+                backgroundImage: resdata2.backgroundImage,
+                logoLocation: resdata2.logoLocation,
+                logo1width: resdata.logo1width,
+                logo1height: resdata.logo1height,
+                logo2width: resdata.logo2width,
+                logo2height: resdata.logo2height
+              })      
+          }catch(err){
+              console.log(" ============  fetch error      ", err.message);
+              console.log(" ============  fetch error      ", err.message);
+              console.log(" ============  fetch error      ", err.message);
+              this.setState({
+                typeval: "Icon", 
+                logoLocation: "top",
+                logo1width: "25%",
+                logo1height: "5%",
+                logo2width: "5%",
+                logo2height: "35%"
+              });
+          }
+      }
+
+
     this.requestPermission().then(() => {
       console.log(" =========== permissions     ", this.state.permissionsGranted);
     });
+
   }
 
 
@@ -94,62 +160,52 @@ class IntroView extends React.Component{
     console.log("=============================== ");
     console.log("=============================== ");
 
-    return (
+    return this.state.logo2height.length != 0 ? (
       <>
   
-        {/*<View style={{zIndex: 0, width: wp("100%"), height: hp("100%"), backgroundColor: "#0380D8", flexDirection: "column", alignItems:"center"}}>
-            <View style={{zIndex: 1, position: "absolute", height: hp("38%"), width: hp("38%"), maxHeight: 354, maxWidth: 354, backgroundColor: "#76B7F2", borderRadius: 500, top: hp("5.3%"), left: wp("-27.3%")}}></View>
-            <View style={{zIndex: 2, position: "absolute", height: hp("61.6%"), width: hp("61.6%"), maxHeight: 571, maxWidth: 571, backgroundColor: "#5498D7", borderRadius: 500, top: hp("11.87%"), left: wp("3.97%")}}></View>
-            <Image resizeMode="contain" style={{position: "absolute", zIndex: 3, resizeMode: "contain", width: wp("38.31%"), height: hp("12.9%"), maxHeight: 164, maxWidth: 120, top: hp("63.79%"), left: wp("59.63%")}}  source={require("./../../../assets/images/newdesign/intro_cleaning.png")} />
-  
-  
-            <Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp("25%"), height: hp("5%"), marginLeft: wp("-60%"), marginTop: hp("12%")}}  source={require("./../../../assets/images/newdesign/intro_synotex.png")} />
-            <Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp("35%"), height: hp("5%"), marginLeft: wp("-50%")}}  source={require("./../../../assets/images/newdesign/intro_firstever.png")} />
-            <Image resizeMode="contain" style={{resizeMode: "contain", zIndex:4, width: hp("65%"), height: hp("65%"), marginTop: hp("-10%")}}  source={require("./../../../assets/images/newdesign/intro_mask.png")} />
-            
-            <View style={{flexDirection: "row", alignItems:"center", justifyContent: "center",  width: wp("100%"), bottom: hp("15%"), zIndex: 4, position: "absolute"}}>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('intro2')} >
-                    <ImageBackground resizeMode="contain" style={{width: wp("40%"), height: hp("10%"), maxWidth: 250, maxHeight: 100, resizeMode: "contain", justifyContent: "center", alignItems: "center"}}  source={require("./../../../assets/images/newdesign/intro_startmeasure.png")} >
-                        <Text style={{fontWeight: "bold", fontSize: 14}}>마스크 사이즈 측정</Text>
-                    </ImageBackground>
-                </TouchableOpacity>
-                <View style={{width: wp("10%"), height: hp("5%")}}></View>
-                <TouchableOpacity onPress={() => this.props.navigation.navigate('ArCamera2')}>
-                    <ImageBackground resizeMode="contain" style={{width: wp("40%"), height: hp("10%"), maxWidth: 250, maxHeight: 100, resizeMode: "contain", justifyContent: "center", alignItems: "center"}}  source={require("./../../../assets/images/newdesign/intro_startmeasure.png")} >
-                        <Text style={{fontWeight: "bold", fontSize: 14}}>마스크 착용 해보기</Text>
-                    </ImageBackground>
-                </TouchableOpacity>
-  
-            </View>
-            
-        </View>*/}
 
-        <Image resizeMode="cover" style={{position:"absolute", resizeMode: "cover", zIndex:1, width: "100%", height: "100%"}} source={require("./../../../assets/images/newdesign/intro_background.png")} />    
-        <View style={{width: wp("100%"), height: hp("20%"), zIndex: 1}}>
+            {this.state.typeval == "Icon" ? 
+              <Image resizeMode="cover" style={{position:"absolute", resizeMode: "cover", zIndex:1, width: "100%", height: "100%"}} source={require("./../../../assets/images/newdesign/intro_background.png")} />    
+            :
+              <Image resizeMode="cover" style={{position:"absolute", resizeMode: "cover", zIndex:1, width: "100%", height: "100%"}} source={{uri: this.state.backgroundImage + '?time=' + Date.now().toString().substring(0,10) + "000", cache: 'reload'}}  />
+            }
             
-            
-            <View style={{width: 50, height: hp("15%")}}></View>
-            <Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp("25%"), height: hp("5%"), marginLeft: wp("10%")}}  source={require("./../../../assets/images/newdesign/intro_synotex.png")} />
-            <Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp("35%"), height: hp("5%"), marginLeft: wp("10%")}}  source={require("./../../../assets/images/newdesign/intro_firstever.png")} />
+            {this.state.logoLocation == "top" ?
+              <View style={{width: wp("100%"), height: hp("20%"), zIndex: 1}}>
+                  
+                  
+                  <View style={{width: 50, height: hp("15%")}}></View>
+                  <Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp(this.state.logo1width), height: hp(this.state.logo1height), marginLeft: wp("10%")}}  source={require("./../../../assets/images/newdesign/intro_synotex.png")} />
+                  <Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp(this.state.logo2width), height: hp(this.state.logo2height), marginLeft: wp("10%")}}  source={require("./../../../assets/images/newdesign/intro_firstever.png")} />
+
+
+              </View>
+            : null }
           
-            {/*<Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp("25%"), height: hp("5%"), marginLeft: wp("-60%"), marginTop: hp("12%")}}  source={require("./../../../assets/images/newdesign/intro_synotex.png")} />
-            <Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp("35%"), height: hp("5%"), marginLeft: wp("-50%")}}  source={require("./../../../assets/images/newdesign/intro_firstever.png")} />
-            <Image resizeMode="contain" style={{resizeMode: "contain", zIndex:4, width: hp("65%"), height: hp("65%"), marginTop: hp("-10%")}}  source={require("./../../../assets/images/newdesign/intro_mask.png")} />
-            */}
+            <View style={{flexDirection: "column", justifyContent: "center", alignItems: "center", width: wp("100%"), height: hp("50%"), zIndex:1}}>
 
-
-        </View>
-
-          
-        <View style={{flexDirection: "column", justifyContent: "center", alignItems: "center", width: wp("100%"), height: hp("50%"), zIndex:1}}>
-
-            <View style={{width: wp("80%"), height: hp("45%"), justifyContent: "center", alignItems:"center", flexDirection: "column"}}>
-                <Image resizeMode="contain" style={{resizeMode: "contain", zIndex:4, width: "120%", height: "120%"}}  source={require("./../../../assets/images/newdesign/intro_mask.png")} />
+                {this.state.typeval == "Icon" ? 
+                  <View style={{width: wp("80%"), height: hp("45%"), justifyContent: "center", alignItems:"center", flexDirection: "column"}}>
+                      <Image resizeMode="contain" style={{resizeMode: "contain", zIndex:4, width: "120%", height: "120%"}}  source={require("./../../../assets/images/newdesign/intro_mask.png")} />
+                  </View>
+                :null}
 
             </View>
-        </View>
 
-        <View style={{flexDirection: "row", alignItems:"center", justifyContent: "center",  width: wp("100%"), bottom: hp("15%"), zIndex: 4, position: "absolute"}}>
+
+            {this.state.logoLocation == "bottom" ?
+              <>
+                <View style={{width: wp("100%"), height: hp("20%"), zIndex: 1}}>
+                    
+                    <View style={{width: 50, height: hp("15%")}}></View>
+                    <Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp(this.state.logo1width), height: hp(this.state.logo1height), marginLeft: wp("10%")}}  source={require("./../../../assets/images/newdesign/intro_synotex.png")} />
+                    <Image resizeMode="contain" style={{resizeMode: "contain", zIndex: 3, width: wp(this.state.logo2width), height: hp(this.state.logo2height), marginLeft: wp("10%")}}  source={require("./../../../assets/images/newdesign/intro_firstever.png")} />
+
+                </View>
+              </>
+            :null}
+
+            <View style={{flexDirection: "row", alignItems:"center", justifyContent: "center",  width: wp("100%"), bottom: hp("13.5%"), zIndex: 4, position: "absolute"}}>
                 <TouchableOpacity onPress={() => this.props.navigation.navigate('intro2')} >
                     <ImageBackground resizeMode="contain" style={{width: wp("40%"), height: hp("10%"), maxWidth: 250, maxHeight: 100, resizeMode: "contain", justifyContent: "center", alignItems: "center"}}  source={require("./../../../assets/images/newdesign/intro_startmeasure.png")} >
                         <Text style={{fontWeight: "bold", fontSize: 14}}></Text>
@@ -166,43 +222,10 @@ class IntroView extends React.Component{
 
   
   
-  
-        {/*<View style={{zIndex: 10, position: "absolute", bottom: 0, width: wp("100%"), height: hp("10%"), maxHeight: 80, backgroundColor: "#F2F4FA", flexDirection: "row", justifyContent: "space-evenly" }}>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('intro')} style={{width: wp("20%"), height: "100%", flexDirection: "column", justifyContent: "space-between", alignItems:"center"}}>
-            <View style={{width: "100%", height: "10%"}}></View>
-            <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_icon_checked.png")} />
-            <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_home_text_checked.png")} />
-            <View style={{width: "100%", height: "10%"}}></View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Brandstory')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
-            <View style={{width: "100%", height: "10%"}}></View>
-            <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_brandstory_icon.png")} />
-            <Image resizeMode="contain" style={{resizeMode: "contain", width: "80%", height: "25%"}}  source={require("./../../../assets/images/newdesign/bottomtab_brandstory_text.png")} />
-            <View style={{width: "100%", height: "10%"}}></View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('Store')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
-            <View style={{width: "100%", height: "10%"}}></View>
-            <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_store_icon.png")} />
-            <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_store_text.png")} />
-            <View style={{width: "100%", height: "10%"}}></View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this.props.navigation.navigate('OfflineStore')} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
-            <View style={{width: "100%", height: "10%"}}></View>
-            <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_offline_icon.png")} />
-            <Image resizeMode="contain" style={{resizeMode: "contain", width: "80%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_offline_text.png")} />
-            <View style={{width: "100%", height: "10%"}}></View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {BackHandler.exitApp()}} style={{width: wp("20%"), height: "100%", justifyContent: "space-between", alignItems:"center"}}>
-            <View style={{width: "100%", height: "10%"}}></View>
-            <Image resizeMode="contain" style={{resizeMode: "contain", width: "35%", height: "35%"}}  source={require("./../../../assets/images/newdesign/bottomtab_exit_icon.png")} />
-            <Image resizeMode="contain" style={{resizeMode: "contain", width: "45%", height: "20%"}}  source={require("./../../../assets/images/newdesign/bottomtab_exit_text.png")} />
-            <View style={{width: "100%", height: "10%"}}></View>
-          </TouchableOpacity>
-        </View>*/}
-  
         
       </>
-    );
+    ) :
+    null
 
 
 

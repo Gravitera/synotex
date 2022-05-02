@@ -147,65 +147,7 @@ class SplashView extends React.Component {
             }
         }
 
-        
-
-        /*
-        //fetch("https://a96d26d9839f933f1.awsglobalaccelerator.com/splash", {
-        fetch("https://synotexmasks.s3.ap-northeast-2.amazonaws.com/splash/splash.json",{
-            mode: 'no-cors',
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                "Access-Control-Allow-Origin": "*"
-            },})
-            .then((res) => res.json())
-            .then((resdata) => {
-                console.log('splash RESPONSE SUCCESS =>', resdata);
-                console.log('splash RESPONSE SUCCESS  resdata.typeval   =>', resdata.typeval);
-                console.log('splash RESPONSE SUCCESS  resdata.backgroundImage   =>', resdata.backgroundImage);
-                console.log('splash RESPONSE SUCCESS  resdata.mainImage   =>', resdata.mainImage);
-
-                if (parseInt(version.substring(0,2)) < resdata.version){
-                    console.log(" res.typeval    Update App");
-                    this.setState({typeval: "Update App"});
-                    setTimeout(() => {
-                        BackHandler.exitApp();
-                    }, 2500);
-                }
-                else if (resdata.typeval === "None"){
-                    this.setState({typeval: "None"});
-                    this.props.navigation.navigate("intro");
-                }
-                else if (resdata.typeval === "Marketing"){
-                    console.log(" =========== typeval     marketing ")
-                    this.setState({
-                        typeval: "Marketing",
-                        backgroundImage: resdata.backgroundImage,
-                        backgroundImageStyle: resdata.backgroundImageStyle,
-                        mainImage: resdata.mainImage,
-                        mainImageStyle: resdata.mainImageStyle
-                    }, () => {
-                        console.log(" current typeval and backgroundImage      ", this.state.typeval, "     ", this.state.backgroundImage);
-                    })
-
-   
-                    setTimeout(() => {
-                        this.props.navigation.navigate("intro");
-                    }, 2000);
     
-            
-                }
-        }).catch((err) => {
-            console.log(" ============  fetch error      ", err.message);
-            console.log(" ============  fetch error      ", err.message);
-            console.log(" ============  fetch error      ", err.message);
-            this.setState({typeval: "Network Error"});
-            setTimeout(() => {
-                BackHandler.exitApp();
-            }, 2500);
-        })
-        */
 
 
     }
