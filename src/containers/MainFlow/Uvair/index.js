@@ -20,7 +20,8 @@ import io from 'socket.io-client';
 import Geolocation from 'react-native-geolocation-service';
 // import { requestLocationPermission } from './../../utils'
 import { createStackNavigator } from '@react-navigation/stack';
-import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import {
   NavigationContainer,
   DarkTheme,
@@ -40,6 +41,7 @@ import Uvairview from "./view";
 
 const Stack = createStackNavigator();
 const MaterialBottomTabs = createMaterialBottomTabNavigator();
+const MaterialTopTabs = createMaterialTopTabNavigator();
 
 let socket;
 

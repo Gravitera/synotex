@@ -114,13 +114,15 @@ class IntroView extends React.Component{
         [
           PermissionsAndroid.PERMISSIONS.CAMERA,
           PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-          PermissionsAndroid.PERMISSIONS.RECORD_AUDIO
+          PermissionsAndroid.PERMISSIONS.RECORD_AUDIO,
+          PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION,
         ]
       ).then(result => {
         if (
           result['android.permission.CAMERA'] === 'granted' &&  
           result['android.permission.WRITE_EXTERNAL_STORAGE'] === 'granted' && 
-          result['android.permission.RECORD_AUDIO'] === 'granted') {
+          result['android.permission.RECORD_AUDIO'] === 'granted' &&
+          result['android.permission.ACCESS_FINE_LOCATION'] === 'granted') {
             this.setState({ permissionsGranted: true, showPermsAlert: false });
 
         } else {

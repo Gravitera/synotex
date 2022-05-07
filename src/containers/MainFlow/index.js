@@ -52,6 +52,16 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import Bottomtab from "./bottomtab";
 
+
+
+
+import Uvairtotal from "./Uvairtotal";
+
+
+
+
+
+
 const Stack = createStackNavigator();
 const MaterialBottomTabs = createMaterialBottomTabNavigator();
 
@@ -198,7 +208,7 @@ const TabFlow = (props) => {
         />*/}
         <Tab.Screen
           name='Uvair'
-          component={Uvair}
+          component={Uvairtotal}
           options={{
             headerShown: false,
             tabBarLabel: 'UV & Air',
