@@ -128,7 +128,25 @@ const CustomBackForwardButtonHeader2 = (props) => {
   );
 };
 
-export { CustomBrandstoryHeader, CustomDrawerButtonHeader, CustomBackButtonHeader, CustomBackForwardButtonHeader, CustomHeader, CustomBackButtonHeader2, CustomBackForwardButtonHeader2};
+const CustomBackForwardButtonHeader3 = (props) => {
+  return (
+    <View style={styles.headerContainer}>
+      <TouchableOpacity
+        style={styles.drawerTrigger}
+        onPress={() => props.backFunction()}>
+        <IonIcon name="chevron-back" size={24} color="#0380D8" />
+      </TouchableOpacity>
+      <Text style={styles.heading2}>{props.title}</Text>
+      <TouchableOpacity
+        style={styles.drawerTrigger}
+      >
+        <Text style={styles.heading}>        </Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export { CustomBrandstoryHeader, CustomDrawerButtonHeader, CustomBackButtonHeader, CustomBackForwardButtonHeader, CustomHeader, CustomBackButtonHeader2, CustomBackForwardButtonHeader2, CustomBackForwardButtonHeader3};
 
 const styles = StyleSheet.create({
   headerContainer: {

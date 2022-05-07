@@ -32,6 +32,7 @@ import Offlinestore from './Offlinestore';
 import Exitapp from './Exit';
 import Onlinemall from "./Onlinemall";
 import Splash from "./Splash";
+import Uvair from "./Uvair";
 // import { requestLocationPermission } from './../../utils'
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
@@ -180,7 +181,7 @@ const TabFlow = (props) => {
             ),
           }}
         />
-        <Tab.Screen
+        {/*<Tab.Screen
           name='Offlinestore'
           component={Offlinestore}
           options={{
@@ -191,6 +192,21 @@ const TabFlow = (props) => {
                 isFocus={focused}
                 focusImage={require('./../../assets/images/newdesign/bottomtab_offline_icon_checked.png')}
                 unFocusImage={require('./../../assets/images/newdesign/bottomtab_offline_icon.png')}
+              />
+            ),
+          }}
+        />*/}
+        <Tab.Screen
+          name='Uvair'
+          component={Uvair}
+          options={{
+            headerShown: false,
+            tabBarLabel: 'UV & Air',
+            tabBarIcon: ({ focused }) => (
+              <TabBarIcon
+                isFocus={focused}
+                focusImage={require('./../../assets/images/newdesign/bottomtab_uvair_checked.png')}
+                unFocusImage={require('./../../assets/images/newdesign/bottomtab_uvair.png')}
               />
             ),
           }}
